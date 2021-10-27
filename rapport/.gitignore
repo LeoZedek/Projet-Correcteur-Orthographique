@@ -18,6 +18,8 @@
 *.cb2
 .*.lb
 
+*.out
+
 ## Intermediate documents:
 *.dvi
 *.xdv
@@ -51,7 +53,6 @@
 
 ## Build tool directories for auxiliary files
 # latexrun
-latex.out/
 
 ## Auxiliary and intermediate files from other packages:
 # algorithms
