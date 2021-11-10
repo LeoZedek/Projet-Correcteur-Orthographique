@@ -6,7 +6,7 @@
 
 \PageDeGarde	
 {rien.png} % image sur la page de garde
-{Power} % titre principal
+{Titre principal} % titre principal
 {Sous-titre} % sous-titre
 {Prénom \textsc{Nom}} % nom
 {Module - GM - année} % bas de page
