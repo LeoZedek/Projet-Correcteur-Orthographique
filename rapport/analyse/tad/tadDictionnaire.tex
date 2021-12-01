@@ -12,24 +12,18 @@
 		\tadOperationAvecPreconditions{ajouterMot}%
 			{\tadDeuxParams{Dictionnaire}{Mot}}%
 			{\tadUnParam{Dictionnaire}}
-		\tadOperation{ajouterListeMots}% %Revoir le type liste Mot => ajouter dans Mot?%
-			{\tadDeuxParams{Dictionnaire}{ListeMots}}%
-			{\tadUnParam{Dictionnaire}}
 		\tadOperationAvecPreconditions{ajouterFichier}%
 			{\tadDeuxParams{Dictionnaire}{FichierTexte}}%
 			{\tadUnParam{Dictionnaire}}
-		\tadOperation{chargerDico}%
+		\tadOperation{chargerDictionnaire}%
 			{\tadUnParam{\chaine}}%
 			{\tadUnParam{Dictionnaire}}
-		\tadOperation{enregistrerDico}%
+		\tadOperation{sauvegarderDictionnaire}%
 			{\tadUnParam{Dictionnaire}}%
 			{\tadUnParam{\booleen}}
 		\tadOperation{estPresent}%
 			{\tadDeuxParams{Dictionnaire}{Mot}}%
 			{\tadUnParam{\booleen}}
-		\tadOperationAvecPreconditions{supprimerMot}%
-			{\tadDeuxParams{Dictionnaire}{Mot}}%
-			{\tadUnParam{Dictionnaire}}
 	\end{tadOperations}
 	
 	\begin{tadSemantiques}{Dictionnaire}
@@ -39,18 +33,14 @@
 			{v\'erifie si un dictionnaire est vide}
 		\tadSemantique{ajouterMot}%
 			{ajoute un mot dans le dictionnaire}
-		\tadSemantique{ajouterListeMots}%
-			{ajoute une liste de mot dans le dictionnaire}
 		\tadSemantique{ajouterFichier}%
 			{ajoute les mots d’un fichier texte dans le dictionnaire}
-		\tadSemantique{chargerDico}%
-			{charge un dico \`a partir d’un fichier}
-		\tadSemantique{enregistrerDico}%
+		\tadSemantique{chargerDictionnaire}%
+			{charge un dictionnaire \`a partir d’un fichier}
+		\tadSemantique{sauvegarderDictionnaire}%
 			{cr\'e\'e un fichier texte contenant tous les mots du dictionnaire mis en paramètre.}
 		\tadSemantique{estPresent}%
 			{indique si un mot est pr\'esent dans le dictionnaire}
-		\tadSemantique{supprimerMot}%
-			{supprime un mot du dictionnaire}
 	\end{tadSemantiques}
 	
 	\begin{tadPreconditions}{Dictionnaire}
