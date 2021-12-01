@@ -1,29 +1,24 @@
 \begin{tad}
 	\tadNom{CorrecteurOrthographique}
 	%\tadParametres{}
-	\tadDependances{Mot, Dictionnaire, \booleen, NaturelNonNul}
+	\tadDependances{Mot, Dictionnaire, \booleen, \NaturelNonNul}
 	\begin{tadOperations}{CorrecteurOrthographique}
-		\tadOperation{chaineEstUnePhrase}%
-			{\tadDeuxParams{\chaine}}%
-			{\tadUnParam{\booleen}}
 		\tadOperation{chainesEnMots}%
 			{\tadUnParam{\chaine}}%
-			{\tadDeuxParams{Liste Mot}{Liste Naturel}}
+			{\tadDeuxParams{Liste <Mot>}{Liste <Naturel>}}
 		\tadOperation{sontPresents}%
-			{\tadDeuxParams{Liste Mot}{Dictionnaire}}%
-			{\tadUnParam{Liste \booleen}}
-		\tadOperationAvecPreconditions{proposerMots}%
+			{\tadDeuxParams{Liste <Mot>}{Dictionnaire}}%
+			{\tadUnParam{Liste <\booleen>}}
+		\tadOperation{proposerMots}%
 			{\tadUnParam{Mot}}%
-			{\tadUnParam{Ensemble Mot}}
+			{\tadUnParam{Ensemble <Mot>}}
 		\tadOperation{proposerMotsListe}%
-			{\tadDeuxParams{Liste Mot}{Dictionnaire}}%
-			{\tadDeuxParams{Liste <Ensemble Mot>}{Liste \booleen}}
+			{\tadDeuxParams{Liste <Mot>}{Dictionnaire}}%
+			{\tadDeuxParams{Liste <Ensemble <Mot>>}{Liste <\booleen>}}
 	\end{tadOperations}
 		
 	\begin{tadSemantiques}{CorrecteurOrthographique}
-		\tadSemantique{dictionnaire}%
-			{v\'erifie si une cha\^ine de caract\`eres est une phrase (contient des mots)}
-		\tadSemantique{estVide}%
+		\tadSemantique{chainesEnMots}%
 			{transforme une cha\^ine de caract\`eres en une liste de Mot et renvoie aussi une liste de la position de chaque mot}
 		\tadSemantique{sontPresents}%
 			{renvoie une liste de Booleen indiquant la présence ou non des mots de la liste}
@@ -37,8 +32,4 @@
 			%\tadAxiome{CorrecteurOrthographique}
 		%\end{tadAxiomes}
 		
-	\begin{tadPreconditions}{CorrecteurOrthographique}
-		\tadPrecondition{proposerMots(m)}%
-			{}
-	\end{tadPreconditions}
 \end{tad}
