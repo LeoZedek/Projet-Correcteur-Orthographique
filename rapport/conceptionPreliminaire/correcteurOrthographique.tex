@@ -1,13 +1,18 @@
 \begin{algorithme}
-	%Création de signature de focntion : 1 : nom de la focntion ou signatureFonctionAvecPreconditions avec un paramètre précondition en plus
-	\signatureFonction{Nom}%
+	%Création de signature de focntion : 1 : nom de la fonction ou signatureFonctionAvecPreconditions avec un paramètre précondition en plus
+	\signatureFonction{chaineEnMots}%
 		%2 Les paramètres
-		{param}%
+		{c : \caractere}%
 		%3 Le type de retour
-		{typeRetour}
-
+		{Liste<Mot>, Liste<\naturel>}
+	\signatureFonction{sontPresents}%
+		{mots : Liste<Mot>, d : Dictionnaire}%
+		{Liste<\booleen>}
+	\signatureFonction{proposerMot}%
+		{m : Mot}%
+		{Ensemble<Mot>}%
 	%Création de signature de procédure 1 : nom de la procédure
-	\signatureProcedure{Nom}%
-		%2 Les paramètres avec les commandes \paramEntree \paramSortie et \paramEntreeSortie
-		{\paramEntreeSortie{param}}%
+	\signatureFonction{proposerMotListe}%
+		{liste : Liste<Mot>, d : Dictionnaire}%
+		{Liste<Ensemble<Mot>>, Liste<Booleen>}%
 \end{algorithme}
