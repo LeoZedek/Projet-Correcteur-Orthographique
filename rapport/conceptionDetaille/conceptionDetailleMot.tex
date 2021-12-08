@@ -8,3 +8,23 @@
             {\retourner{faux}}%
         }%
  \end{algorithme}
+
+ \begin{algorithme}%
+    \fonction{estUnMot}
+        {m : \chaine}%
+        {\booleen}%
+        {longueur(m)>1 ET estUneLettre(m[i]) $\forall 1\leq i \leq longueur(m)$}
+        {i: \entier,res : \booleen, c: \caractere}
+         {\sialorssinon{longueur(m) $\leq$ 1}%
+            {\retourner{vrai}}%
+         \pour{i}{1}{longueur(m)}{}
+           {
+            \affecter{c}{m[i]}
+                {\sialorssinon{estUneLettre(c)}%
+                  \affecter{res}{vrai}%
+                  \affecter{res}{faux}%
+                }
+            }%
+            {\retourner{res}}%
+        }
+ \end{algorithme}
