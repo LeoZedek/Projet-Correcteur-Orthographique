@@ -1,40 +1,55 @@
-all : bin/tri tests/testTris
+SRCDIR=src
+LIBDIR=lib
+BINDIR=bin
+INCLUDEDIR=include
+TESTDIR=tests
+CC = gcc
+AR = ar
+CFLAGS=-Wall -pedantic -g -std=c99  -I$(INCLUDEDIR)  
+LDFLAGS=-L$(LIBDIR) -I$(INCLUDEDIR)
+EXEC=asispell
+DOCDIR=doc
 
-bin/tri : lib/libtris.a lib/libechanger.a src/main.o
-	gcc -o bin/tri src/main.o -Llib -ltris -lechanger
 
-lib/libechanger.a : src/echanger.o
-	ar -r lib/libechanger.a src/echanger.o
+all : dossier $(BINDIR)/$(EXEC) $(TESTDIR)/testsCorrecteurOrthographique $(TESTDIR)/testsDictionnaire $(TESTDIR)/testsMot
+
+tests : $(TESTDIR)/testsCorrecteurOrthographique $(TESTDIR)/testsDictionnaire $(TESTDIR)/testsMot
+
+doc :
+	doxygen
+
+dossier :
+	mkdir  $(BINDIR) $(LIBDIR) $(TESTDIR)
+
+$(BINDIR)/$(EXEC) : $(SRCDIR)/main.o $(LIBDIR)/libmot.a $(LIBDIR)/libdictionnaire.a $(LIBDIR)/libcorrecteurOrthographique.a
+	$(CC)  -o $@ $^ -lmot -ldictionnaire -lcorrecteurOrthographique $(LDFLAGS)
+
+$(LIBDIR)/libmot.a : $(SRCDIR)/mot.o
+	$(AR) -r $@ $^
 	
-lib/libtris.a : lib/libechanger.a src/triParMinSuccessif.o src/triRapide.o src/triFusion.o src/triParInsertion.o
-	ar -r lib/libtris.a src/triParMinSuccessif.o src/triRapide.o src/triFusion.o src/triParInsertion.o 
-
-src/echanger.o : src/echanger.c
-	gcc -o src/echanger.o -c -Wall -pedantic -Iinclude src/echanger.c
-
-src/triParMinSuccessif.o : src/triParMinSuccessif.c
-	gcc -o src/triParMinSuccessif.o -c -Wall -pedantic -Iinclude src/triParMinSuccessif.c
-
-src/triRapide.o : src/triRapide.c
-	gcc -o src/triRapide.o -c -Wall -pedantic -Iinclude src/triRapide.c
+$(LIBDIR)/libdictionnaire.a : $(SRCDIR)/dictionnaire.o
+	$(AR) -r $@ $^
 	
-src/triFusion.o : src/triFusion.c
-	gcc -o src/triFusion.o -c -Wall -pedantic -Iinclude src/triFusion.c
+$(LIBDIR)/libcorrecteurOrthographique.a : $(SRCDIR)/correcteurOrthographique.o
+	$(AR) -r $@ $^
 	
-src/triParInsertion.o : src/triParInsertion.c
-	gcc -o src/triParInsertion.o -c -Wall -pedantic -Iinclude src/triParInsertion.c
+$(SRCDIR)/%.o : $(SRCDIR)/%.c
+	$(CC) -o $@ -c $^ $(CFLAGS)
+	
+	
+$(TESTDIR)/testsCorrecteurOrthographique : $(SRCDIR)/testsCorrecteurOrthographique.o 
+	$(CC) -o $@ $^ -Llib -lcorrecteurOrthographique -ldictionnaire -lmot -lcunit -L${HOME}/local/lib
+	
+$(TESTDIR)/testsDictionnaire : $(SRCDIR)/testsDictionnaire.o $(LIBDIR)/libmot.a $(LIBDIR)/libdictionnaire.a $(LIBDIR)/libcorrecteurOrthographique.a
+	$(CC) -o $@ $^ -Llib -lcorrecteurOrthographique -ldictionnaire -lmot -lcunit -L${HOME}/local/lib
+	
+$(TESTDIR)/testsMot : $(SRCDIR)/testsMot.o $(LIBDIR)/libmot.a $(LIBDIR)/libdictionnaire.a $(LIBDIR)/libcorrecteurOrthographique.a
+	$(CC) -o $@ $^ -Llib -lcorrecteurOrthographique -ldictionnaire -lmot -lcunit -L${HOME}/local/lib
+	
 
-src/main.o : src/main.c
-	gcc -o src/main.o -c -Wall -pedantic -Iinclude src/main.c
-	
-src/testTris.o : src/testTris.c
-	gcc -o src/testTris.o -c -Wall -pedantic -Iinclude src/testTris.c
-
-tests/testTris : lib/libtris.a lib/libechanger.a src/testTris.o
-	gcc -o tests/testTris src/testTris.o -Llib -ltris -lechanger -lcunit
-	
 clean :
-	rm -f bin/*
-	rm -f src/*.o
-	rm -f lib/*.a
-	rm -f tests/*
+	rm -rf $(BINDIR)
+	rm -rf $(LIBDIR)
+	rm -rf $(SRCDIR)/*.o
+	rm -rf $(TESTDIR)
+	rm -rf $(DOCDIR)
