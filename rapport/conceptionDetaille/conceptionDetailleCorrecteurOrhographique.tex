@@ -1,0 +1,63 @@
+\begin{algorithme}
+
+\constante{alphabet}%
+	{'abcdefghijklmnopqrstuvwxyzéèêëàâäùüûôöïîÿç'}\\
+
+\fonction{sontPresents}%
+	{mots : Liste<Mot>, d : Dictionnaire}%
+	{Liste<Booleen>}%
+	{i : \naturel, resultat : Liste<Booleen>}%
+	{%
+	\pour{i}{1}{Liste.longueur(mots)}{}%
+		{\instruction{ajouter(resultat, estPresent(Liste.obtenirElement(mots, i), d))}}%
+	\retourner{resultat}%
+	}\\
+	
+\fonction{proposerMots}%
+	{m : Mot, d : Dictionnaire}%
+	{Ensemble<Mot>}%
+	{motCorrige, motCorrige2 : Mot, resultat : Ensemble<Mot>}%
+	{%
+	\pour{k}{1}{Chaine.longueur(alphabet)}{}%
+		{\pour{i}{1}{Mot.longeur(m)}{}%
+			{\instruction{motCorrige <- remplacerLettre(m, alphabet[k], i)}\\
+			\sialors{Dictionnaire.estPresent(motCorrige, d)}%
+				{\instruction{ajouter(resultat, motCorrige)}}
+			}
+		\pour{i}{1}{Mot.longeur(m) + 1}{}%
+			{\instruction{motCorrige <- insererLettre(m, alphabet[k], i)}\\
+			\sialors{Dictionnaire.estPresent(motCorrige, d)}%
+				{\instruction{ajouter(resultat, motCorrige)}}
+			}
+		}
+	\pour{i}{1}{Mot.longeur(m)}{}%
+		{\instruction{motCorrige <- supprimerLettre(m, i)}\\
+		\sialors{Dictionnaire.estPresent(motCorrige, d)}%
+			{\instruction{ajouter(resultat, motCorrige)}}
+		}
+		
+	\pour{i}{2}{Mot.longeur(m) - 1}{}%
+		{\instruction{motCorrige, motCorrige2 <- decomposerMot(m, i)}\\
+		\sialors{Dictionnaire.estPresent(motCorrige, d)}%
+			{\instruction{ajouter(resultat, motCorrige)}}
+		\sialors{Dictionnaire.estPresent(motCorrige2, d)}%
+			{\instruction{ajouter(resultat, motCorrige2)}}
+		}
+
+			
+		
+	\retourner{resultat}%
+	}\\
+
+\fonction{proposerMotsListe}%
+	{mots : Liste<Mot>, d : Dictionnaire}%
+	{Liste< Ensemble<Mot> >}%
+	{resultat : Liste< Ensemble<Mot> >}%
+	{%
+	\pour{i}{1}{Liste.longeur(mots)}{}%
+		{%
+		\instruction{ajouter(resultat, proposerMots(obtenirElements(mots, i), d))}
+		}
+	}
+
+\end{algorithme}
