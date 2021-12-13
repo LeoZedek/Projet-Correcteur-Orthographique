@@ -1,4 +1,4 @@
-\begin{algorithme}%
+ \begin{algorithme}%
     \fonction{estUneLettre}
         {c : \caractere}%
         {\booleen}%
@@ -8,6 +8,7 @@
             {\retourner{faux}}%
         }%
  \end{algorithme}
+
 
  \begin{algorithme}%
     \fonction{estUnMot}
@@ -27,12 +28,12 @@
             }%
             {\retourner{res}}%
         }
- \end{algorithme}
+  \end{algorithme}
+
 
   \begin{algorithme}%
     \procédure
      {créerMot}
-     {m : \chaine}%
      {\paramEntree {chaine : \chaine}, paramSortie {mot : \Mot} }%
      {i : \entier, longueur : \entier, lettre : \caractere }%
      \affecter{i}{1}%
@@ -42,6 +43,121 @@
        \affecter{mot[i]}{lettre}%
        \affecter{i}{i+1}%
        \affecter{longueur}{longueur+1}%
- \end{algorithme}}
+  \end{algorithme}
+
+
+  \begin{algorithme}%
+    \fonction{estEgale}
+        {mot1,mot2 : \chaine}%
+        {\booleen}%
+        {Res : \booleen }%
+         {\sialorssinon{longueur(mot1)$\neq$ longueur(mot2) }%
+                  \affecter{res}{faux}%
+                   \pour{i}{1}{longueur(mot1)}{}%
+                   {
+                     {\sialorssinon{mot1[i] = mot2[i] }%
+                       \affecter{res}{vrai}%
+                       \affecter{res}{faux}%
+                     }
+                   }
+                   {\retourner{Res}}%
+  \end{algorithme}
+
+  \begin{algorithme}%
+      \fonction{longueur}
+         {mot : \Mot}%
+         {\entier}%
+         {long : \entier }%
+         \affecter{res}{0}%
+         \tantque{mot(long) $\neq$ '\0'}%
+           \affecter{long}{long+1}%
+         {\retourner{Res}}%
+ \end{algorithme}
+
+
+
+ \begin{algorithme}%
+      \procédure
+       {SupprimerLettre}
+       {\paramEntree {pos : \entier}, paramEntreeSortie {mot : \Mot} }%
+       {pos : \entier, mot: \Mot }%
+       {\si{pos $\leq$ longueur(mot)}%
+            \tantque{mot[pos]$\neq$'\0'}%
+               \affecter{mot[pos]}{mot[pos+1]}%
+               \affecter{pos}{pos+1}%
+            
+       }
+  \end{algorithme}
+
+
+  \begin{algorithme}%
+      \procédure
+       {InsérerLettre}
+       {\paramEntree {pos : \entier,c : \caractere}, paramEntreeSortie {mot : \Mot} }%
+       {pos : \entier, mot: \Mot, c:caractere }%
+         {\si{pos $\leq$ longueur(mot) et estUneLettre(c)}%
+               \affecter{mot[pos]}{c}%
+               \tantque{mot[pos]$\neq$'\0'}%
+                 \affecter{mot[pos+1]}{mot[pos]}%
+                 \affecter{pos}{pos+1}%
+         }
+   \end{algorithme}
+
+
+   \begin{algorithme}%
+      \procédure
+       {RemplacerLettre}
+       {\paramEntree {position : \entier,c : \caractere}, paramEntreeSortie {mot : \Mot} }%
+         supprimerLettre(position,mot)%
+         insérerLettre(position,c,mot)%
+   \end{algorithme}
+
+
+    \begin{algorithme}%
+      \procédure
+       {inverserDeuxLettresConsecutives}
+       {\paramEntree {position : \entier}, paramEntreeSortie {unMot : \Mot} }%
+          echanger(pos, unMot)
+     \end{algorithme}
+
+
+    \begin{algorithme}%
+         \procédure
+         {décomposerMot}
+         {\paramEntree {pos : \entier,unMot : \Mot}, paramSortie {mot1,mot2 : \Mot} }%
+          {i : \entier, mot1,mot2: \Mot}%
+           {\si{ 1$\leq$ pos $\leq$ longueur(unMot)}%
+               \pour{i}{1}{pos}{}%
+               {
+                \affecter{mot1[i]}{unMot[i]}%
+               }
+               \pour{i}{pos+1}{longueur(unMot)}{}%
+               {
+                \affecter{mot2[i]}{unMot[i]}%
+               }
+     \end{algorithme
+
+
+     \begin{algorithme}%
+         \procédure
+         {echanger}
+         {\paramEntree {pos : \entier}, paramEntreeSortie {unMot : \Mot} }%
+         {a: \caractere }%
+          \affecter{a}{mot[pos]}%
+          \affecter{mot[pos]}{mot[pos+1]}%
+          \affecter{mot[pos+1]}{a}%
+     \end{algorithme}
+
+
+     
+
+
+
+  
+
+       
+
+
+
 
  
