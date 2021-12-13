@@ -83,6 +83,16 @@ Mot creerMot(char *chaine);
 int sontEgaux(Mot m1, Mot m2);
 
 /**
+ *\fn char *motEnChaine(m : Mot)
+ *\brief Transforme une variable de type Mot en une chaine de caractère.
+ *
+ *\param m : Le Mot qui sera transformé en chaine
+ *\return La chaine de caractère correspondant au mot.
+*/
+
+char *motEnChaine(m : Mot);
+
+/**
  *\fn Mot remplacerLettre(m : Mot, pos : int, c : char);
  *\brief Renvoie une variable de type Mot avec une seule lettre remplacer
  *\attention precondition : pos < longueur(m) et estUneLettre(c) et pos > 0
