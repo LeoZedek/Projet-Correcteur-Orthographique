@@ -79,7 +79,7 @@
  \begin{algorithme}%
       \procédure
        {SupprimerLettre}
-       {\paramEntree {pos : \entier}, paramEntreeSortie {mot : \Mot} }%
+       {\paramEntree {pos : \entier}, paramEntree {mot : \Mot}, paramSortie {mot : \Mot}}%
        {pos : \entier, mot: \Mot }%
        {\si{pos $\leq$ longueur(mot)}%
             \tantque{mot[pos]$\neq$'\0'}%
@@ -93,7 +93,7 @@
   \begin{algorithme}%
       \procédure
        {InsérerLettre}
-       {\paramEntree {pos : \entier,c : \caractere}, paramEntreeSortie {mot : \Mot} }%
+       {\paramEntree {pos : \entier, c : \caractere, mot : \Mot}, paramSortie {mot : \Mot} }%
        {pos : \entier, mot: \Mot, c:caractere }%
          {\si{pos $\leq$ longueur(mot) et estUneLettre(c)}%
                \affecter{mot[pos]}{c}%
@@ -107,7 +107,7 @@
    \begin{algorithme}%
       \procédure
        {RemplacerLettre}
-       {\paramEntree {position : \entier,c : \caractere}, paramEntreeSortie {mot : \Mot} }%
+       {\paramEntree {position : \entier,c : \caractere, mot : \Mot}, paramSortie {mot : \Mot} }%
          supprimerLettre(position,mot)%
          insérerLettre(position,c,mot)%
    \end{algorithme}
