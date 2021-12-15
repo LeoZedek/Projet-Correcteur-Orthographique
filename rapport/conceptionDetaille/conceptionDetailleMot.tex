@@ -3,38 +3,39 @@
         {c : \caractere}%
         {\booleen}%
         {}
-         {\sialorssinon{('a' $\geq$ c $\leq$ 'z' ) ou ('A' $\geq$ c $\leq$ 'Z')}%
+        {\sialorssinon{('a' $\geq$ c $\leq$ 'z' ) ou ('A' $\geq$ c $\leq$ 'Z')}%
             {\retourner{vrai}}%
             {\retourner{faux}}%
         }%
  \end{algorithme}
 
 
- \begin{algorithme}%
-    \fonctionAvecPreconditions{estUnMot}
+ \begin{algorithme}
+    \fonctionAvecPreconditions{estUnMot}%
         {m : \chaine}%
         {\booleen}%
-        {longueur(m)>1 ET estUneLettre(m[i]) $\forall 1\leq i \leq longueur(m)$}%
+        {longueur(m)>1 ET estUneLettre(m[i]) $\forall 1\leq i \leq$ longueur(m)$}%
         {i: \entier,res : \booleen, c: \caractere}%
-        {\sialorssinon{longueur(m) $\leq$ 1}%
-        	{\retourner{vrai}}%
+        {\sialorssinon{longueur(m) $\leq 1$}%
+        	{
+        		\retourner{vrai}
+        	}%
         	{
 		    	\pour{i}{1}{longueur(m)}{}%
 				   {
 				    \affecter{c}{m[i]}%
-				        {\sialorssinon{estUneLettre(c)}%
+				    \sialorssinon{estUneLettre(c)}%
 				          {
 				          	\affecter{res}{vrai}%
 				          }
 				          {
 				          	\affecter{res}{faux}%
 				          }
-				        }
 				    }
             }
         
-            {\retourner{res}}%
-        }
+            \retourner{res}
+       }
   \end{algorithme}
 
 
