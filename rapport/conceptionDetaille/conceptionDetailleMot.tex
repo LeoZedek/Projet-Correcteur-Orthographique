@@ -11,38 +11,50 @@
 
 
  \begin{algorithme}%
-    \fonction{estUnMot}
+    \fonctionAvecPreconditions{estUnMot}
         {m : \chaine}%
         {\booleen}%
         {longueur(m)>1 ET estUneLettre(m[i]) $\forall 1\leq i \leq longueur(m)$}%
         {i: \entier,res : \booleen, c: \caractere}%
-         {\sialorssinon{longueur(m) $\leq$ 1}%
-            {\retourner{vrai}}%
-         \pour{i}{1}{longueur(m)}{}%
-           {
-            \affecter{c}{m[i]}%
-                {\sialorssinon{estUneLettre(c)}%
-                  \affecter{res}{vrai}%
-                  \affecter{res}{faux}%
-                }
-            }%
+        {\sialorssinon{longueur(m) $\leq$ 1}%
+        	{\retourner{vrai}}%
+        	{
+		    	\pour{i}{1}{longueur(m)}{}%
+				   {
+				    \affecter{c}{m[i]}%
+				        {\sialorssinon{estUneLettre(c)}%
+				          {
+				          	\affecter{res}{vrai}%
+				          }
+				          {
+				          	\affecter{res}{faux}%
+				          }
+				        }
+				    }
+            }
+        
             {\retourner{res}}%
         }
   \end{algorithme}
 
 
   \begin{algorithme}%
-    \procédure
-     {créerMot}
-     {\paramEntree {chaine : \chaine}, paramSortie {mot : \Mot} }%
-     {i : \entier, longueur : \entier, lettre : \caractere }%
-     \affecter{i}{1}%
-     \affecter{longueur}{0}% 
-     \lire{lettre}
-     \tantque{estUneLettre(lettre)}%
-       \affecter{mot[i]}{lettre}%
-       \affecter{i}{i+1}%
-       \affecter{longueur}{longueur+1}%
+    \fonction{créerMot}
+     	{chaine : \chaine}%
+     	{m : Mot}%
+		{i : \entier, longueur : \entier, lettre : \caractere }%
+		{
+			\affecter{i}{1}%
+			\affecter{longueur}{0}% 
+			\lire{lettre}
+			\tantque{estUneLettre(lettre)}%
+			{
+			   \affecter{m[i]}{lettre}%
+			   \affecter{i}{i+1}%
+			   \affecter{longueur}{longueur+1}%
+			}
+		\retourner{m}
+		}
   \end{algorithme}
 
 
