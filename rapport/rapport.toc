@@ -1,0 +1,18 @@
+\babel@toc {french}{}
+\contentsline {section}{\numberline {1}Analyse}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Présentation des TAD}{3}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}TAD FichierTexte}{3}{subsubsection.1.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.2}TAD Mot}{3}{subsubsection.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.3}TAD Dictionnaire}{4}{subsubsection.1.1.3}%
+\contentsline {subsubsection}{\numberline {1.1.4}TAD CorrecteurOrthographique}{5}{subsubsection.1.1.4}%
+\contentsline {subsection}{\numberline {1.2}Analyse Descendante}{5}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Conception Préliminaire}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Signature FichierTexte}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Signature Mot}{6}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Signature Dictionnaire}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Signature CorrecteurOrhographique}{7}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Conception Détaillé}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Conception Détaillé du TAD Fichier Texte}{8}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Conception Détaillé du TAD mot}{8}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Conception Détaillé du TAD Dictionnaire}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Conception Détaillé du TAD Correcteur Orhographique}{10}{subsection.3.4}%
