@@ -1,0 +1,133 @@
+\begin{algorithme}
+	\type{ArbreBinaire}%
+	{\typePointeur{Noeud}}\\
+
+
+	\begin{enregistrement}{Noeud}%
+		\champEnregistrement{mot}{Mot}%
+		\champEnregistrement{filsG}{ArbreBinaire}%
+		\champEnregistrement{filsD}{ArbreBinaire}
+	\end{enregistrement}\\
+
+	\type{Dictionnaire}%
+	{ArbreBinaire<Mot>}\\
+\end{algorithme}
+
+\begin{algorithme}
+	\fonction{dictionnaire}%
+	{m : Mot}%
+	{Dictionnaire}%
+	{resultat : Dictionnaire}%  %Déjà alloué ici
+	{
+	\affecter{resultat.mot}{m}
+	\affecter{resultat.filsG}{\pointeurNULL}
+	\affecter{resultat.filsD}{\pointeurNULL}
+	\retourner{resultat}
+	}\\
+\end{algorithme}
+
+
+\begin{algorithme}
+	\fonction{estPresent}%
+	{d : Dictionnaire, m : Mot}%
+	{\booleen}%
+	{}%
+	{\sialorssinon{estVide(d)}%
+		{\retourner{estPresent(obtenirFilsGauche(d),m)}}%
+		{\retourner{estPresent(obtenirFilsDroite(d),m)}}%
+	}
+\end{algorithme}
+
+\begin{algorithme}
+	\procedureAvecPreconditions{faireSimpleRotationDroite}%
+	{\paramEntreeSortie{d : Dictionnaire}}%
+	{non(estVide(obtenirFilsGauche(d)))}%
+	{fg, fd, fgg, fdg : Dictionnaire}%
+	{
+	\affecter{fg}{obtenirFilsGauche(d)}
+	\affecter{fd}{obtenirFilsDroit(d)}
+	\affecter{fgg}{obtenirFilsGauche(fg)}
+	\affecter{fdg}{obtenirFilsDroit(fg)}
+	
+	\affecter{d}{fixerRacine(fgg, fixerRacine(fdg, fd, obtenirMot(d)), obtenirMot(fg))}
+	}
+\end{algorithme}
+
+\begin{algorithme}
+	\procedureAvecPreconditions{faireSimpleRotationGauche}%
+	{\paramEntreeSortie{d : Dictionnaire}}%
+	{non(estVide(obtenirFilsDroit(d)))}%
+	{fg, fd, fgd, fdd : Dictionnaire}%
+	{
+	\affecter{fg}{obtenirFilsGauche(d)}
+	\affecter{fd}{obtenirFilsDroit(d)}
+	\affecter{fgd}{obtenirFilsGauche(fd)}
+	\affecter{fdd}{obtenirFilsDroit(fd)}
+	
+	\affecter{d}{fixerRacine(fixerRacine(fg, fgd, obtenirElement(d)), fdd, obtenirElement(fd))}
+	}
+\end{algorithme}
+
+
+\begin{algorithme}
+	\procedureAvecPreconditions{faireDoubleRotationDroite}%
+	{\paramEntreeSortie{d : Dictionnaire}}%
+	{non(estVide(obtenirFilsGauche(d))) ET\\ non(estVide(obtenirFilsDroit(obtenirFilsGauche(d))))}%
+	{fg : Dictionnaire}%
+	{
+	\affecter{fg}{obtenirFilsGauche(d)}\\
+	faireSimpleRotationGauche(fg)\\
+	fixerFilsGauche(d, fg)\\
+	faireSimpleRotationDroite(d)\\
+	}
+\end{algorithme}
+
+\begin{algorithme}
+	\procedureAvecPreconditions{faireDoubleRotationGauche}%
+	{\paramEntreeSortie{d : Dictionnaire}}%
+	{non(estVide(obtenirFilsDroit(d))) ET\\ non(estVide(obtenirFilsGauche(obtenirFilsDroit(d))))}%
+	{fd: Dictionnaire}%
+	{
+	\affecter{fd}{obtenirFilsDroit(d)}\\
+	faireSimpleRotationDroite(fd)\\
+	fixerFilsDroit(d, fd)\\
+	faireSimpleRotationGauche(d)\\
+	}
+\end{algorithme}
+
+
+\begin{algorithme}
+	\procedureAvecPreconditions{ajouterMot}%
+	{\paramEntreeSortie{d : Dictionnaire}, \paramEntree{m : Mot}}%
+	{non(estPresent(d,m))}%
+	{temp : Dictionnaire}%
+	{
+		\sialorssinon{estPlusPetit(m, obtenirMot(d))}
+			{
+			\affecter{temp}{obtenirFilsGauche(d)}
+			\instruction{inserer(temp, m)}
+			\instruction{fixerFilsGauche(d, temp)}
+			\sialors{hauteur(obtenirFilsGauche(d)) > hauteur(obtenirFilsDroit(d))+1}	{\sialorssinon{hauteur(hauteur(obtenirFilsGauche(obtenirFilsGauche(d)))$\geq$ \\hauteur(obtenirFilsDroit(obtenirFilsGauche(d)))}
+			{\instruction{faireSimpleRotationDroite(d)}}
+			{\instruction{faireDoubleRotationDroite(d)}}
+			}
+			}%
+			{\affecter{temp}{obtenirFilsDroit(d)}
+			\instruction{inserer(temp, m)}
+			\instruction{fixerFilsDroit(d, temp)}
+			\sialors{hauteur(obtenirFilsDroit(d)) > hauteur(obtenirFilsGauche(d))+1}
+						{\sialorssinon{hauteur(obtenirFilsGauche(obtenirFilsDroit(d))) $\leq$ \\hauteur(obtenirFilsDroit(obtenirFilsDroit(d)))}
+				{\instruction{faireSimpleRotationGauche(d)}}%
+				{\instruction{faireDoubleRotaionGauche(d)}}
+				}
+			}
+		
+		
+	
+	}
+\end{algorithme}
+
+
+
+
+
