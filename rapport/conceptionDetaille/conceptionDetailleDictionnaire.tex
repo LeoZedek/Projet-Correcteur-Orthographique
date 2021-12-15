@@ -11,7 +11,7 @@
 
 	\type{Dictionnaire}%
 	{ArbreBinaire<Mot>}\\
-\end{algorithme}
+\end{algorithme}\\
 
 \begin{algorithme}
 	\fonction{dictionnaire}%
@@ -36,7 +36,7 @@
 		{\retourner{estPresent(obtenirFilsGauche(d),m)}}%
 		{\retourner{estPresent(obtenirFilsDroite(d),m)}}%
 	}
-\end{algorithme}
+\end{algorithme}\\
 
 \begin{algorithme}
 	\procedureAvecPreconditions{faireSimpleRotationDroite}%
@@ -66,7 +66,7 @@
 	
 	\affecter{d}{fixerRacine(fixerRacine(fg, fgd, obtenirElement(d)), fdd, obtenirElement(fd))}
 	}
-\end{algorithme}
+\end{algorithme}\\
 
 
 \begin{algorithme}
@@ -93,7 +93,7 @@
 	fixerFilsDroit(d, fd)\\
 	faireSimpleRotationGauche(d)\\
 	}
-\end{algorithme}
+\end{algorithme}\\
 
 
 \begin{algorithme}
@@ -125,6 +125,34 @@
 		
 	
 	}
+\end{algorithme}\\
+
+\begin{algorithme}
+
+	\procedureAvecPreconditions{enregistrerDicoR}%
+	{\paramEntreeSortie{f : fichierTexte}, \paramEntree{d : Dictionnaire}}%
+	{mode(f) = ecriture}%
+	{fg, fd : Dictionnaire}%
+	{
+	
+		\sialorssinon{estVide(d)}%
+			{
+			
+				\affecter{f}{ecrireChaine(f, "")}
+			
+			}%
+			{
+			
+				\affecter{f}{ecrireChaine(f, motEnChaine(obtenirElement(d)))}\\
+				\affecter{fg}{obtenirFilsGauche(d)}
+				\instruction{enregistreerDicoR(f, fg)}\\
+				\affecter{fd}{obtenirFilsDroit(d)}
+				\instruction{enregistrerDicoR(f, fd)}
+			
+			}
+	
+	}
+
 \end{algorithme}
 
 
