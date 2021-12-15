@@ -47,7 +47,7 @@ int estUneLettre(char charactere);
  *\return La longueur du mot
  */
 
-unsigned int longueur(m : Mot);
+unsigned int longueur(Mot m);
 
 /**
  *\fn int estUnMot(char *chaine)
@@ -83,17 +83,17 @@ Mot creerMot(char *chaine);
 int sontEgaux(Mot m1, Mot m2);
 
 /**
- *\fn char *motEnChaine(m : Mot)
+ *\fn char *motEnChaine(Mot m)
  *\brief Transforme une variable de type Mot en une chaine de caractère.
  *
  *\param m : Le Mot qui sera transformé en chaine
  *\return La chaine de caractère correspondant au mot.
 */
 
-char *motEnChaine(m : Mot);
+char *motEnChaine(Mot m);
 
 /**
- *\fn Mot remplacerLettre(m : Mot, pos : int, c : char);
+ *\fn Mot remplacerLettre(Mot m, int pos, char c);
  *\brief Renvoie une variable de type Mot avec une seule lettre remplacer
  *\attention precondition : pos < longueur(m) et estUneLettre(c) et pos > 0
  *
@@ -103,10 +103,10 @@ char *motEnChaine(m : Mot);
  *\return Une copie du Mot qui sera modifié
 */
 
-Mot remplacerLettre(m : Mot, pos : int, c : char);
+Mot remplacerLettre(Mot m, int pos, char c);
 
 /**
- *\fn Mot supprimerLettre(m : Mot, pos : int);
+ *\fn Mot supprimerLettre(Mot m, int pos);
  *\brief renvoie une variable de type Mot avec une seule lettre supprimer
  *\attention precondition : pos < longueur(m) et pos > 0
  *
@@ -115,10 +115,10 @@ Mot remplacerLettre(m : Mot, pos : int, c : char);
  *\return Une copie du Mot qui sera modifié
 */
 
-Mot supprimerLettre(m : Mot, pos : int);
+Mot supprimerLettre(Mot m, int pos);
 
 /**
- *\fn Mot insererLettre(m : Mot, pos : int, c : char);
+ *\fn Mot insererLettre(Mot m, int pos, char c);
  *\brief renvoie une variable de type Mot avec une seule lettre inserer
  *\attention precondition : pos < longueur(m) et pos > 0 + 1 et estUneLettre(c)
  *
@@ -127,10 +127,10 @@ Mot supprimerLettre(m : Mot, pos : int);
  *\return Une copie du Mot qui sera modifié
 */
 
-Mot insererLettre(m : Mot, pos : int, c : char);
+Mot insererLettre(Mot m, int pos, char c);
 
 /**
- *\fn Mot inverserLettre(m : Mot, pos : int);
+ *\fn Mot inverserLettre(Mot m, int pos);
  *\brief Renvoie une variable de type Mot avec une deux lettres consécutive inverser.
  *\attention Precondition : pos < longueur(m) - 1 et pos > 0
  *
@@ -139,10 +139,10 @@ Mot insererLettre(m : Mot, pos : int, c : char);
  *\return Une copie du Mot qui sera modifié
 */
 
-Mot inverserLettre(m : Mot, pos : int);
+Mot inverserLettre(Mot m, int pos);
 
 /**
- *\fn DeuxMots decomposerMot(m : Mot, pos : int);
+ *\fn DeuxMots decomposerMot(Mot m, int pos);
  *\brief Renvoie deux mots issus de la décomposition d'un seul mot.
  *\attention Precondition : pos < longueur(m) - 1 et pos > 0
  *
@@ -151,6 +151,6 @@ Mot inverserLettre(m : Mot, pos : int);
  *\return Une valeur de type DeuxMots qui contient les deux mots décomposer. Le premier mot est composé des lettre de l'indice 0 à l'indice pos et le seconde des lettres de l'indice pos + 1 à l'indice longueur(m) - 1
 */
 
-DeuxMots decomposerMot(m : Mot, pos : int);
+DeuxMots decomposerMot(Mot m, int pos);
 
 #endif
