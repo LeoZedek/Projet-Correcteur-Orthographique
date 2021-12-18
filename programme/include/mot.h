@@ -30,7 +30,7 @@ typedef struct {
 } DeuxMots;
 
 /**
- *\fn int estUneLettre(char c)
+ *\fn int estUneLettre(char charactere)
  *\brief Fonction booléenne qui teste si un charactère est une lettre
  *
  *\param charactere : caractère qui subit le test
