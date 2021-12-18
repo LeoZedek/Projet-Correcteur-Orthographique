@@ -155,3 +155,100 @@
 
 \end{algorithme}
 
+\begin{algorithme}
+
+	\procedureAvecPreconditions{enregistrerDico}%
+		{\paramEntree{d : Dictionnaire, nomFichier : ChaineDeCaractere}}%
+		{nomFichier != ""}%
+		{f : fichierTexte}%
+		{
+		
+			\affecter{f}{fichierTexte(nomFichier)}
+			\affecter{f}{ouvrir(f, ecriture)}
+			
+			\instruction{enregistrerDicoR(f, d)}
+		
+		}
+
+\end{algorithme}
+
+
+\begin{algorithme}
+
+	\procedureAvecPreconditions{chargerDicoR}%
+		{\paramEntreeSortie{d : Dictionnaire, f : FichierTexte}}%
+		{mode(f) = lecture}%
+		{temp, fd, fg : Dictionnaire\\ nvChaine : Chaine}%
+		{
+		
+			\affecter{f, nbChaine}{lireChaine(f)}\\
+			
+			\sialors{Chaine.longueur(nvChaine) != 0}%
+				{
+				
+					\affecter{d}{ajouterRacine(arbreBinaire(), arbreBinaire(), creerMot(chaine))}\\
+					
+					\sialors{non(finFichier(f)}%
+						{
+						
+							\affecter{fg}{obtenirFilsGauche(d)}
+							\instruction{chargerDicoR(fg, f)}
+							\instruction{fixerFilsGauche(d, fg)}
+						
+						}\\
+						
+					\sialors{non(finFichier(f))}%
+						{
+						
+							\affecter{fd}{obtenirFilsDroit(d)}
+							\instruction{chargerDicoR(fd, f)}
+							\instruction{fixerFilsDroit(d, fd)}
+						
+						}	
+				}
+		}
+		
+
+\end{algorithme}
+
+\begin{algorithme}
+
+	\fonctionAvecPreconditions{chargerDico}%
+		{nomFichier : ChaineDeCaractere}%
+		{Dicitonnaire}%
+		{nomFichier != ""}%
+		{resultat : Dicitonnaire\\ f : FichierTexte\\ chaine : ChaineDeCaractere}%
+		{
+		
+			\affecter{resultat}{dictionnaire()}
+			\affecter{f}{fichierTexte(nomFichier)}
+			\affecter{f}{ouvrir(f, lecture)}\\
+			
+			\sialors{non(finFichier(f))}%
+				{
+					\affecter{f, chaine}{lireChaine(f)}
+					\instruction{chargerDicoR(resultat, f, chaine)}	
+				}%
+			
+			\affecter{f}{fermer(f)}
+			\retourner{resultat}
+		
+		}
+
+\end{algorithme}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
