@@ -6,7 +6,8 @@
 	*
 */
 
-
+#include "mot.h"
+#include "dictionnaire.h"
 #ifndef __CORRECTEURORTHOGRAPHIQUE__
 #define __CORRECTEURORTHOGRAPHIQUE__
 
@@ -15,7 +16,24 @@
  *
  */
 
-enum CORRECTEURORTHOGRAPHIQUE_ALPHABET = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'é', 'è', 'ê', 'ë', 'à', 'â', 'ä', 'ù', 'ü', 'û', 'ô', 'ö', 'ï', 'î', 'ÿ', 'ç', '-'};
+enum CO_ALPHABET = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'é', 'è', 'ê', 'ë', 'à', 'â', 'ä', 'ù', 'ü', 'û', 'ô', 'ö', 'ï', 'î', 'ÿ', 'ç', '-'};
+
+
+/**
+ * \brief La constante CORRECTEURORTHOGRAPHIQUE_TailleMax définie la taille maximale du tableau de booléens.
+ *
+ */
+ 
+const CO_TailleMax = 1000;
+
+
+/**
+ * \brief Le type CORRECTEURORTHOGRAPHIQUE_TableauBooleens permet de représenter un tableau de booléens.
+ *
+ */
+ 
+typedef int CO_TableauBooleens[CO_TailleMax];
+
 
 /**
  * \fn void sontPresents(int tableauBooleens[], Mot mots[], Dictionnaire d)
@@ -26,7 +44,8 @@ enum CORRECTEURORTHOGRAPHIQUE_ALPHABET = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'
  * \param d : le dictionnaire
  */
 
-void sontPresents(int tableauBooleens[], Mot mots[], Dictionnaire d); 
+CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots[], DICTIONNAIRE_Dictionnaire dictionnaire); 
+
 
 
 /**
@@ -38,7 +57,7 @@ void sontPresents(int tableauBooleens[], Mot mots[], Dictionnaire d);
  * \param d : le dictionnaire
  */
 
-void proposerMots(Mot mots[], Mot m, Dictionnaire d);
+MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionnaire);
 
 
 
