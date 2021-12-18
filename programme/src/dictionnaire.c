@@ -39,6 +39,16 @@ MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire){
 	return dictionnaire->mot ;
 }
 
+void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){}
+
+
+void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){}
+
+
+void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){}
+
+
+void DICTIONNAIRE_doubleRotationgauche(DICTIONNAIRE_Dictionnaire *dictionnaire){}
 
 
 /*--------------Fonction Publique--------------------------*/
