@@ -2,8 +2,10 @@
 
 \usepackage{classeRapport}
 \usepackage{algorithmeUTF8}
-
+\usepackage{listings}
 \usepackage{lscape}
+
+\lstset{extendedchars=true, breaklines=true,numbers=left,language=C, frame=single}
 
 \begin{document}
 
@@ -23,7 +25,10 @@ Léo \textsc{Zedek}}
 
 \tableofcontents
 \newpage
+\include{introduction}
 \include{analyse/analyse}
 \include{conceptionPreliminaire/conceptionPreliminaire}
 \include{conceptionDetaille/conceptionDetaille}
+\include{code/code}
+\include{conclusion/conclusion}
 \end{document}
