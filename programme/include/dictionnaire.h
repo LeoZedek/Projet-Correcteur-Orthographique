@@ -13,10 +13,10 @@
  * \brief Le type noeuds est représenté par un mot (type mot définie dans le fichier mot.h) et de deux pointeur filsGauche et filsDroit qui représente la suite de l'arbre que constitue le dictionnaire
  *
  */
-typedef struct {
+typedef struct DICTIONNAIRE_Noeuds{
 	Mot mot ;
-	DICTIONNAIRE_Noeuds *filsGauche ;
-	DICTIONNAIRE_Noeuds *filsDroit ;
+	struct DICTIONNAIRE_Noeuds *filsGauche ;
+	struct DICTIONNAIRE_Noeuds *filsDroit ;
 } DICTIONNAIRE_Noeuds ;
 
 
@@ -49,23 +49,23 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionaire dictionnaire, Mot mot) ;
 
 
 /**
- *\fn DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsGauche(Dictionnaire dictionnaire)
+ *\fn DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionaire dictionnaire)
  *\brief Renvoie le fils gauche du dictionnaire "dictionnaire"
  *
  *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
  *\return Le sous arbre gauche de la racine du dictionnaire passé en paramètre
 */
-DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsGauche(Dictionnaire dictionnaire) ;
+DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionaire dictionnaire) ;
 
 
 /**
- *\fn DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsDroit(Dictionnaire dictionnaire)
+ *\fn DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionaire dictionnaire)
  *\brief Renvoie le fils droit du dictionnaire "dictionnaire"
  *
  *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
  *\return Le sous arbre droit de la racine du dictionnaire passé en paramètre
 */
-DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsDroit(Dictionnaire dictionnaire) ;
+DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionaire dictionnaire) ;
 
 
 /**
