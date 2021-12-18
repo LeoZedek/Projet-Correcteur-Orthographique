@@ -9,6 +9,9 @@
 #include"dictionnaire.h"
 #include"mot.h"
 /*--------------Fonction Privé--------------------------*/
+//Qui ne sont ni dans la conception ni dans le .h
+
+
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(){
 	return NULL ;
 }
@@ -32,6 +35,8 @@ MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire){
 	assert(!(DICTIONNAIRE_estVide(dictionnaire))) ;
 	
 }
+
+
 
 /*--------------Fonction Publique--------------------------*/
 
