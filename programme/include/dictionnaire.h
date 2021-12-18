@@ -49,6 +49,26 @@ int DICTIONNAIRE_estPresent(Dictionaire dictionnaire, Mot mot) ;
 
 
 /**
+ *\fn Dictionaire DICTIONNAIRE_obtenirFilsGauche(Dictionnaire dictionnaire)
+ *\brief Renvoie le fils gauche du dictionnaire "dictionnaire"
+ *
+ *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
+ *\return Le sous arbre gauche de la racine du dictionnaire passé en paramètre
+*/
+Dictionaire DICTIONNAIRE_obtenirFilsGauche(Dictionnaire dictionnaire) ;
+
+
+/**
+ *\fn Dictionaire DICTIONNAIRE_obtenirFilsDroit(Dictionnaire dictionnaire)
+ *\brief Renvoie le fils droit du dictionnaire "dictionnaire"
+ *
+ *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
+ *\return Le sous arbre droit de la racine du dictionnaire passé en paramètre
+*/
+Dictionaire DICTIONNAIRE_obtenirFilsDroit(Dictionnaire dictionnaire) ;
+
+
+/**
  *\fn void DICTIONNAIRE_ajouterMot(Dictionaire *dictionnaire, Mot mot)
  *\brief Ajoute un mot au dictionnaire
  *\attention precondition : non(DICTIONNAIRE_estPresent(dictionnaire,mot))
