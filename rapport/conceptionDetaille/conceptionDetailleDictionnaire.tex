@@ -1,0 +1,254 @@
+\begin{algorithme}
+	\type{ArbreBinaire}%
+	{\typePointeur{Noeud}}\\
+
+
+	\begin{enregistrement}{Noeud}%
+		\champEnregistrement{mot}{Mot}%
+		\champEnregistrement{filsG}{ArbreBinaire}%
+		\champEnregistrement{filsD}{ArbreBinaire}
+	\end{enregistrement}
+
+	\type{Dictionnaire}%
+	{ArbreBinaire<Mot>}
+\end{algorithme}
+
+\begin{algorithme}
+	\fonction{dictionnaire}%
+	{m : Mot}%
+	{Dictionnaire}%
+	{resultat : Dictionnaire}%  %Déjà alloué ici
+	{
+	\affecter{resultat.mot}{m}
+	\affecter{resultat.filsG}{\pointeurNULL}
+	\affecter{resultat.filsD}{\pointeurNULL}
+	\retourner{resultat}
+	}\\
+\end{algorithme}
+
+
+\begin{algorithme}
+	\fonction{estPresent}%
+	{d : Dictionnaire, m : Mot}%
+	{\booleen}%
+	{}%
+	{\sialorssinon{estVide(d)}%
+		{\retourner{estPresent(obtenirFilsGauche(d),m)}}%
+		{\retourner{estPresent(obtenirFilsDroite(d),m)}}%
+	}
+\end{algorithme}
+
+\begin{algorithme}
+	\procedureAvecPreconditions{faireSimpleRotationDroite}%
+	{\paramEntreeSortie{d : Dictionnaire}}%
+	{non(estVide(obtenirFilsGauche(d)))}%
+	{fg, fd, fgg, fdg : Dictionnaire}%
+	{
+	\affecter{fg}{obtenirFilsGauche(d)}
+	\affecter{fd}{obtenirFilsDroit(d)}
+	\affecter{fgg}{obtenirFilsGauche(fg)}
+	\affecter{fdg}{obtenirFilsDroit(fg)}
+	
+	\affecter{d}{fixerRacine(fgg, fixerRacine(fdg, fd, obtenirMot(d)), obtenirMot(fg))}
+	}
+\end{algorithme}
+
+\begin{algorithme}
+	\procedureAvecPreconditions{faireSimpleRotationGauche}%
+	{\paramEntreeSortie{d : Dictionnaire}}%
+	{non(estVide(obtenirFilsDroit(d)))}%
+	{fg, fd, fgd, fdd : Dictionnaire}%
+	{
+	\affecter{fg}{obtenirFilsGauche(d)}
+	\affecter{fd}{obtenirFilsDroit(d)}
+	\affecter{fgd}{obtenirFilsGauche(fd)}
+	\affecter{fdd}{obtenirFilsDroit(fd)}
+	
+	\affecter{d}{fixerRacine(fixerRacine(fg, fgd, obtenirElement(d)), fdd, obtenirElement(fd))}
+	}
+\end{algorithme}
+
+
+\begin{algorithme}
+	\procedureAvecPreconditions{faireDoubleRotationDroite}%
+	{\paramEntreeSortie{d : Dictionnaire}}%
+	{non(estVide(obtenirFilsGauche(d))) ET\\ non(estVide(obtenirFilsDroit(obtenirFilsGauche(d))))}%
+	{fg : Dictionnaire}%
+	{
+	\affecter{fg}{obtenirFilsGauche(d)}\\
+	faireSimpleRotationGauche(fg)\\
+	fixerFilsGauche(d, fg)\\
+	faireSimpleRotationDroite(d)\\
+	}
+\end{algorithme}
+
+\begin{algorithme}
+	\procedureAvecPreconditions{faireDoubleRotationGauche}%
+	{\paramEntreeSortie{d : Dictionnaire}}%
+	{non(estVide(obtenirFilsDroit(d))) ET\\ non(estVide(obtenirFilsGauche(obtenirFilsDroit(d))))}%
+	{fd: Dictionnaire}%
+	{
+	\affecter{fd}{obtenirFilsDroit(d)}\\
+	faireSimpleRotationDroite(fd)\\
+	fixerFilsDroit(d, fd)\\
+	faireSimpleRotationGauche(d)\\
+	}
+\end{algorithme}
+
+
+\begin{algorithme}
+	\procedureAvecPreconditions{ajouterMot}%
+	{\paramEntreeSortie{d : Dictionnaire}, \paramEntree{m : Mot}}%
+	{non(estPresent(d,m))}%
+	{temp : Dictionnaire}%
+	{
+		\sialorssinon{estPlusPetit(m, obtenirMot(d))}
+			{
+			\affecter{temp}{obtenirFilsGauche(d)}
+			\instruction{inserer(temp, m)}
+			\instruction{fixerFilsGauche(d, temp)}
+			\sialors{hauteur(obtenirFilsGauche(d)) > hauteur(obtenirFilsDroit(d))+1}	{\sialorssinon{hauteur(hauteur(obtenirFilsGauche(obtenirFilsGauche(d)))$\geq$ \\hauteur(obtenirFilsDroit(obtenirFilsGauche(d)))}
+			{\instruction{faireSimpleRotationDroite(d)}}
+			{\instruction{faireDoubleRotationDroite(d)}}
+			}
+			}%
+			{\affecter{temp}{obtenirFilsDroit(d)}
+			\instruction{inserer(temp, m)}
+			\instruction{fixerFilsDroit(d, temp)}
+			\sialors{hauteur(obtenirFilsDroit(d)) > hauteur(obtenirFilsGauche(d))+1}
+						{\sialorssinon{hauteur(obtenirFilsGauche(obtenirFilsDroit(d))) $\leq$ \\hauteur(obtenirFilsDroit(obtenirFilsDroit(d)))}
+				{\instruction{faireSimpleRotationGauche(d)}}%
+				{\instruction{faireDoubleRotaionGauche(d)}}
+				}
+			}
+		
+		
+	
+	}
+\end{algorithme}
+
+\begin{algorithme}
+
+	\procedureAvecPreconditions{enregistrerDicoR}%
+	{\paramEntreeSortie{f : fichierTexte}, \paramEntree{d : Dictionnaire}}%
+	{mode(f) = ecriture}%
+	{fg, fd : Dictionnaire}%
+	{
+	
+		\sialorssinon{estVide(d)}%
+			{
+			
+				\affecter{f}{ecrireChaine(f, "")}
+			
+			}%
+			{
+			
+				\affecter{f}{ecrireChaine(f, motEnChaine(obtenirElement(d)))}\\
+				\affecter{fg}{obtenirFilsGauche(d)}
+				\instruction{enregistreerDicoR(f, fg)}\\
+				\affecter{fd}{obtenirFilsDroit(d)}
+				\instruction{enregistrerDicoR(f, fd)}
+			
+			}
+	
+	}
+
+\end{algorithme}
+
+\begin{algorithme}
+
+	\procedureAvecPreconditions{enregistrerDico}%
+		{\paramEntree{d : Dictionnaire, nomFichier : ChaineDeCaractere}}%
+		{nomFichier != ""}%
+		{f : fichierTexte}%
+		{
+		
+			\affecter{f}{fichierTexte(nomFichier)}
+			\affecter{f}{ouvrir(f, ecriture)}
+			
+			\instruction{enregistrerDicoR(f, d)}
+		
+		}
+
+\end{algorithme}
+
+
+\begin{algorithme}
+
+	\procedureAvecPreconditions{chargerDicoR}%
+		{\paramEntreeSortie{d : Dictionnaire, f : FichierTexte}}%
+		{mode(f) = lecture}%
+		{temp, fd, fg : Dictionnaire\\ nvChaine : Chaine}%
+		{
+		
+			\affecter{f, nbChaine}{lireChaine(f)}\\
+			
+			\sialors{Chaine.longueur(nvChaine) != 0}%
+				{
+				
+					\affecter{d}{ajouterRacine(arbreBinaire(), arbreBinaire(), creerMot(chaine))}\\
+					
+					\sialors{non(finFichier(f)}%
+						{
+						
+							\affecter{fg}{obtenirFilsGauche(d)}
+							\instruction{chargerDicoR(fg, f)}
+							\instruction{fixerFilsGauche(d, fg)}
+						
+						}\\
+						
+					\sialors{non(finFichier(f))}%
+						{
+						
+							\affecter{fd}{obtenirFilsDroit(d)}
+							\instruction{chargerDicoR(fd, f)}
+							\instruction{fixerFilsDroit(d, fd)}
+						
+						}	
+				}
+		}
+		
+
+\end{algorithme}
+
+\begin{algorithme}
+
+	\fonctionAvecPreconditions{chargerDico}%
+		{nomFichier : ChaineDeCaractere}%
+		{Dicitonnaire}%
+		{nomFichier != ""}%
+		{resultat : Dicitonnaire\\ f : FichierTexte\\ chaine : ChaineDeCaractere}%
+		{
+		
+			\affecter{resultat}{dictionnaire()}
+			\affecter{f}{fichierTexte(nomFichier)}
+			\affecter{f}{ouvrir(f, lecture)}\\
+			
+			\sialors{non(finFichier(f))}%
+				{
+					\affecter{f, chaine}{lireChaine(f)}
+					\instruction{chargerDicoR(resultat, f, chaine)}	
+				}%
+			
+			\affecter{f}{fermer(f)}
+			\retourner{resultat}
+		
+		}
+
+\end{algorithme}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
