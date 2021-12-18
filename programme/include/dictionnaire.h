@@ -10,11 +10,11 @@
 #define __DICTIONNAIRE__
 
 /**
- * \brief Le type noeuds est représenté par un mot (type mot définie dans le fichier mot.h) et de deux pointeur filsGauche et filsDroit qui représente la suite de l'arbre que constitue le dictionnaire
+ * \brief Le type noeuds est représenté par un mot (type MOT_Mot définie dans le fichier mot.h) et de deux pointeur filsGauche et filsDroit qui représente la suite de l'arbre que constitue le dictionnaire
  *
  */
 typedef struct DICTIONNAIRE_Noeuds{
-	Mot mot ;
+	MOT_Mot mot ;
 	struct DICTIONNAIRE_Noeuds *filsGauche ;
 	struct DICTIONNAIRE_Noeuds *filsDroit ;
 } DICTIONNAIRE_Noeuds ;
@@ -38,14 +38,14 @@ int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire) ;
 
 
 /**
- *\fn int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, Mot mot)
+ *\fn int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
  *\brief Test si un mot est présent dans un dictionnaire
  *
  *\param dictionnaire : Le dictionnaire dans lequelle on vérifi si le mot est présent
  *\param mot : Le mot que dont on veut vérifier la présence dans le dictionnaire
  *\return Un booleen : 1 (Vrai) si le mot est présent dans le dictionnaire
 */
-int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, Mot mot) ;
+int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot) ;
 
 
 /**
@@ -69,7 +69,7 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnair
 
 
 /**
- *\fn void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, Mot mot)
+ *\fn void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot)
  *\brief Ajoute un mot au dictionnaire
  *\attention precondition : non(DICTIONNAIRE_estPresent(dictionnaire,mot))
  *
@@ -77,7 +77,7 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnair
  *\param mot : Le mot que l'on insère
  *\return Ne renvoye rien mais modifie l'etat du dicctionnaire
 */
-void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, Mot mot);
+void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot);
 
 
 /**
