@@ -22,18 +22,20 @@ int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire){
 }
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire dictionnaire){
-
+	assert(!(DICTIONNAIRE_estVide(dictionnaire))) ;
+	return dictionnaire->filsGauche ;
 }
 
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire dictionnaire){
-
+	assert(!(DICTIONNAIRE_estVide(dictionnaire))) ;
+	return dictionnaire->filsDroit ;
 }
 
 
 MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire){
 	assert(!(DICTIONNAIRE_estVide(dictionnaire))) ;
-	
+	return dictionnaire->mot ;
 }
 
 
