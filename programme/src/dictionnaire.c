@@ -6,6 +6,7 @@
  *
  */
 #include <string.h>
+#include<assert.h>
 #include"dictionnaire.h"
 #include"mot.h"
 /*--------------Fonction Privé--------------------------*/
@@ -46,17 +47,17 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
 	MOT_Mot motDico ;
 	char *chaineAtester ;
 	char *chaineDico ;
-	if DICTIONNAIRE_estVide(dictionnaire){
+	if (DICTIONNAIRE_estVide(dictionnaire)){
 		return 0 ;
 	}
 	else{
-		motDico = DICTIONNAIRE_obtenirMot(dictionnaire)
-		if MOT_sontEgaux(mot,motDico){
+		motDico = DICTIONNAIRE_obtenirMot(dictionnaire);
+		if (MOT_sontEgaux(mot,motDico)){
 			return 1;
 		}
 		else{
-			chaineAtester = mot.chaine //A changer avec la nouvelle fonction
-			chaineDico = motDico.chaine //A changer aussi
+			chaineAtester = mot.chaine; //A changer avec la nouvelle fonction
+			chaineDico = motDico.chaine; //A changer aussi
 			if (strcmp(chaineAtester, chaineDico)<0){
 				return DICTIONNAIRE_estPresent(DICTIONNAIRE_obtenirFilsGauche(dictionnaire), mot) ;
 			}
@@ -76,7 +77,12 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char nomFichier){}
 
 
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine){}
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine){
+	return DICTIONNAIRE_dictionnaire();//Temporaire pour compilation
+}
 
 
-char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire){}
+char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire){
+	char *tmp=NULL ;//Temporaire pour compilation
+	return tmp ;
+}
