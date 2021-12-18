@@ -21,55 +21,55 @@ typedef struct DICTIONNAIRE_Noeuds{
 
 
 /**
- * \brief Le type  Dictionaire qui représentent un dictionnaire à partir d'un noeuds
+ * \brief Le type  Dictionnaire qui représentent un dictionnaire à partir d'un noeuds
  * 
  */
-typedef *DICTIONNAIRE_Noeuds DICTIONNAIRE_Dictionaire;
+typedef DICTIONNAIRE_Noeuds *DICTIONNAIRE_Dictionnaire;
 
 
 /**
- *\fn int DICTIONNAIRE_estVide(Dictionnaire dictionnaire)
+ *\fn int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire)
  *\brief renvoie le booleen vrai (1) si le dictionnaire est vide 
  *
  *\param dictionnaire : Le dictionnaire qui serra teste
  *\return Un boolen vrai si le dictionnaire est vide
 */
-int DICTIONNAIRE_estVide(Dictionnaire dictionnaire) ;
+int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire) ;
 
 
 /**
- *\fn int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionaire dictionnaire, Mot mot)
+ *\fn int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, Mot mot)
  *\brief Test si un mot est présent dans un dictionnaire
  *
  *\param dictionnaire : Le dictionnaire dans lequelle on vérifi si le mot est présent
  *\param mot : Le mot que dont on veut vérifier la présence dans le dictionnaire
  *\return Un booleen : 1 (Vrai) si le mot est présent dans le dictionnaire
 */
-int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionaire dictionnaire, Mot mot) ;
+int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, Mot mot) ;
 
 
 /**
- *\fn DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionaire dictionnaire)
+ *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire dictionnaire)
  *\brief Renvoie le fils gauche du dictionnaire "dictionnaire"
  *
  *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
  *\return Le sous arbre gauche de la racine du dictionnaire passé en paramètre
 */
-DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionaire dictionnaire) ;
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire dictionnaire) ;
 
 
 /**
- *\fn DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionaire dictionnaire)
+ *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire dictionnaire)
  *\brief Renvoie le fils droit du dictionnaire "dictionnaire"
  *
  *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
  *\return Le sous arbre droit de la racine du dictionnaire passé en paramètre
 */
-DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionaire dictionnaire) ;
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire dictionnaire) ;
 
 
 /**
- *\fn void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionaire *dictionnaire, Mot mot)
+ *\fn void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, Mot mot)
  *\brief Ajoute un mot au dictionnaire
  *\attention precondition : non(DICTIONNAIRE_estPresent(dictionnaire,mot))
  *
@@ -77,11 +77,11 @@ DICTIONNAIRE_Dictionaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionaire 
  *\param mot : Le mot que l'on insère
  *\return Ne renvoye rien mais modifie l'etat du dicctionnaire
 */
-void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionaire *dictionnaire, Mot mot);
+void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, Mot mot);
 
 
 /**
- *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionaire *dictionnaire, fichier)
+ *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, fichier)
  *\brief ajoute le contenue d'un fichier dans le dictionnaire
  *\attention precondition : Le fichier doit être accessible en lecture
  *
@@ -89,28 +89,28 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionaire *dictionnaire, Mot mot);
  *\param nomFichier : Le nom du fichier qui contient tous les mots à insérer
  *\return Ne renvoie rien, modifie juste le contenue du dictionnaire
 */
-void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionaire *dictionnaire, char nomFichier);
+void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char nomFichier);
 
 
 /**
- *\fn DICTIONNAIRE_Dictionaire DICTIONNAIRE_chargerDictionnaire(char nomDuDictionnaire)
+ *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char nomDuDictionnaire)
  *\brief Charge le dictionnaire du nom chaine 
  *\attention precondition : Le fichier doit être accessible en lecture
  *
  *\param nomDuDictionnaire : Le nom du fichier du dictionnaire à charger
  *\return Retourne le dictionnaire créé
 */
-DICTIONNAIRE_Dictionaire DICTIONNAIRE_chargerDictionnaire(char chaine);
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine);
 
 
 /**
- *\fn void DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionaire dictionnaire)
+ *\fn void DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire)
  *\brief Enregistre le dictionnaire en paramètre dans un fichier dont il renvoie le nom
  *\attention precondition : Le fichier doit être accessible en lecture
  *
  *\param dictionnaire : Le dictionnaire que l'on enregistre dans le fichier
  *\return Le nom du fichier enregistré
 */
-char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionaire dictionnaire);
+char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire);
 
 #endif
