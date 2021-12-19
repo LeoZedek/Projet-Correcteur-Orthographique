@@ -20,6 +20,15 @@ int max(int a, int b){
 	}
 }
 
+int abs(int a){
+	if (a>0){
+		return a;
+	}
+	else{
+		return -a;
+	}
+}
+
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(){
 	return NULL ;
 }
@@ -115,6 +124,27 @@ int DICTIONNAIRE_hauteur(DICTIONNAIRE_Dictionnaire dictionnaire){
 	}
 	else{
 		return max(DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire)), DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsDroit(&dictionnaire)));
+	}
+}
+
+void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire){
+	assert( !(DICTIONNAIRE_estVide(*dictionnaire)) && (abs(DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsGauche(dictionnaire))-DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsDroit(dictionnaire))) == 2));
+	
+	if (DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsGauche(dictionnaire)) > DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsDroit(dictionnaire))){
+		if (DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_obtenirFilsGauche(dictionnaire))) > DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_obtenirFilsGauche(dictionnaire))) ){
+			DICTIONNAIRE_simpleRotationDroite(dictionnaire);
+		}
+		else{
+			DICTIONNAIRE_doubleRotationDroite(dictionnaire);
+		}
+	}
+	else{
+		if (DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_obtenirFilsDroit(dictionnaire))) > DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_obtenirFilsDroit(dictionnaire)))){
+			DICTIONNAIRE_simpleRotationGauche(dictionnaire);
+		}
+		else{
+			DICTIONNAIRE_doubleRotationGauche(dictionnaire);
+		}
 	}
 }
 /*--------------Fonction Publique--------------------------*/
