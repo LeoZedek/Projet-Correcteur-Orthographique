@@ -12,27 +12,27 @@
 #define __CORRECTEURORTHOGRAPHIQUE__
 
 /**
- * \brief Le type énumération CORRECTEURORTHOGRAPHIQUE_ALPHABET permet de représenter l'ensemble des caractères de l'alphabet ainsi que le tiret.
- *
- */
-
-enum CO_ALPHABET = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'é', 'è', 'ê', 'ë', 'à', 'â', 'ä', 'ù', 'ü', 'û', 'ô', 'ö', 'ï', 'î', 'ÿ', 'ç', '-'};
-
-
-/**
- * \brief La constante CORRECTEURORTHOGRAPHIQUE_TailleMax définie la taille maximale des tableaux utilisés.
+ * \brief La constante CO_TailleMax définie la taille maximale des tableaux utilisés.
  *
  */
  
-const CO_TailleMax = 1000;
+const int CO_TailleMax = 1000;
 
 
 /**
- * \brief Le type CORRECTEURORTHOGRAPHIQUE_TableauBooleens permet de représenter un tableau de booléens.
+ * \brief Le type CO_TableauBooleens permet de représenter un tableau de booléens.
  *
  */
  
-typedef int CO_TableauBooleens[CO_TailleMax];
+typedef int* CO_TableauBooleens;
+
+/**
+ * \brief Le type CO_TableauPositions permet de représenter un tableau d'entiers qui correspond à des positions.
+ *
+ */
+
+
+typedef int* CO_TableauPositions;
 
 /**
  * \brief Le type structure CO_MotsDansPhrase permet de renvoyer un tableau de mots ainsi que leur position dans la phrase.
@@ -40,8 +40,8 @@ typedef int CO_TableauBooleens[CO_TailleMax];
  */
  
 typedef struct {
-	MOT_mot mot[CO_TailleMax];
-	int position[CO_TailleMax];
+	MOT_TableauDeMots mots;
+	CO_TableauPositions positions;
 } CO_MotsDansPhrase;
 
 /**
@@ -54,9 +54,7 @@ typedef struct {
  * \return CO_TableauBooleens, c'est-à-dire les booléens précisant si les mots sont présents ou non dans le dictionnaire.
  */
 
-CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots[], DICTIONNAIRE_Dictionnaire dictionnaire); 
-
-
+CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionnaire dictionnaire); 
 
 /**
  * \fn MOT_TableauDeMots proposerMots(Mot m, Dictionnaire dictionnaire)

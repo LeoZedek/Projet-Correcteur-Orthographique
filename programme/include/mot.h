@@ -29,6 +29,13 @@ typedef struct {
 	MOT_Mot mot2;
 } MOT_DeuxMots;
 
+/**
+ * \brief Le Type MOT_TableauDeMots est un pointeur sur un Mot. Cela représente un tableau de mot.
+ *
+ */
+
+typedef MOT_Mot* MOT_TableauDeMots;
+
 
 /**
  *\fn int MOT_estUneLettre(char charactere)
@@ -57,8 +64,17 @@ unsigned int MOT_longueur(MOT_Mot mot);
  *\param chaine : est la chaine qui subit le test
  *\return Le booleen qui teste si la chaine est composé de lettre de l'alphabet
 */
+
 int MOT_estUnMot(char *chaine);
 
+/**
+ *\fn int MOT_fixerLongeur(unsigned int longeur)
+ *\brief fixe la longeur d'un mot
+ *
+ *\param longeur : la nouvelle longeur du mot
+*/
+
+void MOT_fixerLongeur(unsigned int longeur);
 
 /**
  *\fn MOT_Mot MOT_creerMot(char *chaine)
