@@ -47,27 +47,6 @@ int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire) ;
 */
 int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot) ;
 
-
-/**
- *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief Renvoie le fils gauche du dictionnaire "dictionnaire"
- *
- *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
- *\return Le sous arbre gauche de la racine du dictionnaire passé en paramètre
-*/
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire dictionnaire) ;
-
-
-/**
- *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief Renvoie le fils droit du dictionnaire "dictionnaire"
- *
- *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
- *\return Le sous arbre droit de la racine du dictionnaire passé en paramètre
-*/
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire dictionnaire) ;
-
-
 /**
  *\fn void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot)
  *\brief Ajoute un mot au dictionnaire
