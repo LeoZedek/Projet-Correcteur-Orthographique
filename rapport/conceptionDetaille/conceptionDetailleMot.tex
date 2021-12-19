@@ -86,26 +86,30 @@
     \fonction{sontEgaux}
      {mot1,mot2 : \Mot}%
      {\booleen}%
-     {Res : \booleen }%
+     {res : \booleen, i : \entier }%
      {
           \sialorssinon{longueur(mot1)$\neq$ longueur(mot2)}%
                   {
                    \affecter{res}{faux}
                   }%
                   {
-                   \pour{i}{1}{longueur(mot1)}{}%
-                   {
+                   \affecter{res}{vrai}
+                   \affecter{i}{0}
+                   \tantque{(res = vrai) \land \& (i $\leq$ longueur(mot1))}%
+                    {
                      \sialorssinon{mot1[i] = mot2[i]}%
                        {
                         \affecter{res}{vrai}%
+                        \affecter{i}{i+1}%
                        }
                        {
                         \affecter{res}{faux}%
                        }
-                   }
+                    }
                    }%
-      }
+      
          \retourner{Res}
+      }
 \end{algorithme}
 
 
@@ -114,13 +118,13 @@
        {pos : \entier, mot : \Mot}%
        {\Mot}%
        {pos $\leq$ longueur(mot)}%
-            {\tantque{mot[pos]$\neq$'\0'}%
+       { \tantque{mot[pos]$\neq$'\0'}%
              {
                \affecter{mot[pos]}{mot[pos+1]}%
                \affecter{pos}{pos+1}%
              }
             
-            }
+        }
        \retourner{mot}%
 \end{algorithme}
 
@@ -130,15 +134,17 @@
        {pos : \entier, c : \caractere, mot : \Mot}%
        {\Mot}%
        {(pos $\leq$ longueur(mot)+1)) \land \& (estUneLettre(c))}%
-         {
+       {
                \affecter{mot[pos]}{c}%
-               \tantque{mot[pos]$\neq$'\0'}%
+               \tantque{mot[pos] $\neq$ '\0'}%
                 {
                  \affecter{mot[pos+1]}{mot[pos]}%
                  \affecter{pos}{pos+1}%
                 }
-         }
-          \retourner{mot}%
+       
+              \retourner{mot}%
+       }
+          
 \end{algorithme}
 
 
@@ -146,49 +152,48 @@
       \fonction{RemplacerLettre}
        {position : \entier,c : \caractere, mot : \Mot}%
        {\Mot}%
-         {
+       {
           \instruction{supprimerLettre(position,mot)}
           \instruction{insérerLettre(position,c,mot)}
-         }%
-         \retourner{mot}%
+       
+          \retourner{mot}
+       }
 \end{algorithme}
 
-\begin{algorithme}
-         \procédure
-         {echanger}
-         {\paramEntree {pos : \entier}, \paramEntreeSortie {unMot : \Mot} }%
-         {a: \caractere }%
-         {
+
+\begin{algorithme}%
+      \fonctionAvecPreconditions{inverserDeuxLettresConsecutives}
+      {position : \entier}%
+      {mot : \Mot}%
+      {pos $<$ longueur(mot)}%
+      {a: \caractere }%
+      {
           \affecter{a}{mot[pos]}%
           \affecter{mot[pos]}{mot[pos+1]}%
           \affecter{mot[pos+1]}{a}%
-         }
-\end{algorithme}
-
-\begin{algorithme}%
-      \procédure
-       {inverserDeuxLettresConsecutives}
-       {\paramEntree {position : \entier}, \paramEntreeSortie {unMot : \Mot} }%
-          {
-          \instruction{echanger(pos, unMot)}
-          }%
+         
+      }
 \end{algorithme}
 
 
 \begin{algorithme}
-         \procédure
-         {décomposerMot}
-         {\paramEntree {pos : \entier,unMot : \Mot}, paramSortie {mot1,mot2 : \Mot} }%
-          {i : \entier, mot1,mot2: \Mot}%
-           {\si{ 1 $\leq$ pos $\leq$ longueur(unMot)}%
+         \fonctionAvecPreconditions{décomposerMot}
+         {pos : \entier,unMot : \Mot}%
+         {\Mot, \Mot}%
+         {(pos $<$ longueur(unMot)) \land \& (pos $>$ 1)}%
+         {i : \entier, mot1,mot2: \Mot}%
+         {
                \pour{i}{1}{pos}{}%
-               {
-                \affecter{mot1[i]}{unMot[i]}%
-               }
+                {
+                 \affecter{mot1[i]}{unMot[i]}%
+                }
                \pour{i}{pos+1}{longueur(unMot)}{}%
-               {
-                \affecter{mot2[i]}{unMot[i]}%
-               }
+                {
+                 \affecter{mot2[i]}{unMot[i]}%
+                }
+               \retourner{mot1}%  
+               \retourner{mot2}%
+          }
 \end{algorithme}
      
 
