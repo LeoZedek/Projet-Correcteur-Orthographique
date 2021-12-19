@@ -1,78 +1,97 @@
 \begin{algorithme}
      \fonction{estUneLettre}
-        {c : \caractere}%
-        {\booleen}%
-        {}
-        {
-         \sialorssinon{('a' $\geq$ c $\leq$ 'z' ) OU ('A' $\geq$ c $\leq$ 'Z')}%
-            {\retourner{vrai}}%
-            {\retourner{faux}}%
-        }%
+      {c : \caractere}%
+      {\booleen}%
+      {res : \booleen}%
+      {
+          \sialorssinon{('a' $\geq$ c $\leq$ 'z' ) \lor ('A' $\geq$ c $\leq$ 'Z')}%
+           {\affecter{res}{vrai}}%
+           {\affecter{res}{faux}}%
+            
+          \retourner{res} 
+      }
+\end{algorithme}
+
+
+\begin{algorithme}
+      \fonction{longueur}
+       {mot : \Mot}%
+       {\entier}%
+       {long : \entier }%
+       {
+         \affecter{long}{0}%
+         \tantque{mot[long] $\neq$ '\0'}%
+           {
+            \affecter{long}{long+1}%
+           }
+           
+         \retourner{long}%
+         
+        }
 \end{algorithme}
 
 
 \begin{algorithme}
     \fonctionAvecPreconditions{estUnMot}%
-        {m : \chaine}%
-        {\booleen}%
-        {(longueur(m)>1) ET (estUneLettre(m[i]))}%
-        {i: \entier,res : \booleen, c: \caractere}%
-        {
+     {m : \chaine}%
+     {\booleen}%
+     {(longueur(m)>1) ET (estUneLettre(m[i]))}%
+     {i: \entier,res : \booleen, c: \caractere}%
+     {
          \sialorssinon{longueur(m) $\leq 1$}%
         	{
         		\retourner{vrai}
         	}%
         	{
 		    	\pour{i}{1}{longueur(m)}{}%
-				   {
-				    \affecter{c}{m[i]}%
-				    \sialorssinon{estUneLettre(c)}%
-				          {
-				          	\affecter{res}{vrai}%
-				          }
-				          {
-				          	\affecter{res}{faux}%
-				          }
-				    }
-             }
+			   {
+			      \affecter{c}{m[i]}%
+			      \sialorssinon{estUneLettre(c)}%
+				  {
+				     \affecter{res}{vrai}
+				  }%
+				  {
+				     \affecter{res}{faux}
+				  }%
+		           }%
+                }%
         
-            \retourner{res}
-       }
-  
+           \retourner{res}
+      }
   
 \end{algorithme}
 
 
 \begin{algorithme}
     \fonction{créerMot}
-     	{chaine : \chaine}%
-     	{m : Mot}%
-		{i : \entier, longueur : \entier, lettre : \caractere }%
-		{
-			\affecter{i}{1}%
-			\affecter{longueur}{0}% 
-			\lire{lettre}
-			\tantque{estUneLettre(lettre)}%
-			{
-			   \affecter{m[i]}{lettre}%
-			   \affecter{i}{i+1}%
-			   \affecter{longueur}{longueur+1}%
-			}
-		\retourner{m}
-		}
+     {chaine : \chaine}%
+     {m : \Mot}%
+     {i : \entier, longueur : \entier, lettre : \caractere }%
+     {
+	\affecter{i}{1}%
+	\affecter{longueur}{0}% 
+	\lire{lettre}
+	\tantque{estUneLettre(lettre)}%
+	  {
+	    \affecter{m[i]}{lettre}%
+            \affecter{i}{i+1}%
+	    \affecter{longueur}{longueur+1}%
+	  }
+	\retourner{m}
+     }
 \end{algorithme}
 
 
 \begin{algorithme}
     \fonction{sontEgaux}
-        {mot1,mot2 : \chaine}%
-        {\booleen}%
-        {Res : \booleen }%
-         {
-         \sialorssinon{longueur(mot1)$\neq$ longueur(mot2)}%
+     {mot1,mot2 : \Mot}%
+     {\booleen}%
+     {Res : \booleen }%
+     {
+          \sialorssinon{longueur(mot1)$\neq$ longueur(mot2)}%
                   {
-                   \affecter{res}{faux}%
-                  }
+                   \affecter{res}{faux}
+                  }%
                   {
                    \pour{i}{1}{longueur(mot1)}{}%
                    {
@@ -84,25 +103,10 @@
                         \affecter{res}{faux}%
                        }
                    }
-                   }
-          }
-          \retourner{Res}%
+                   }%
+      }
+         \retourner{Res}
 \end{algorithme}
-
-\begin{algorithme}
-      \fonction{longueur}
-         {mot : \Mot}%
-         {\entier}%
-         {long : \entier }%
-         {
-         \affecter{long}{0}%
-         \tantque{mot[long] $\neq$ '\0'}%
-           {
-            \affecter{long}{long+1}%
-           }
-         \retourner{long}%}
-\end{algorithme}
-
 
 
 \begin{algorithme}
@@ -125,7 +129,7 @@
       \fonctionAvecPreconditions{InsérerLettre}
        {pos : \entier, c : \caractere, mot : \Mot}%
        {\Mot}%
-       {(pos $\leq$ longueur(mot)+1)) et (estUneLettre(c))}%
+       {(pos $\leq$ longueur(mot)+1)) \land \& (estUneLettre(c))}%
          {
                \affecter{mot[pos]}{c}%
                \tantque{mot[pos]$\neq$'\0'}%
@@ -176,7 +180,7 @@
          {décomposerMot}
          {\paramEntree {pos : \entier,unMot : \Mot}, paramSortie {mot1,mot2 : \Mot} }%
           {i : \entier, mot1,mot2: \Mot}%
-           {\si{ 1$\leq$ pos $\leq$ longueur(unMot)}%
+           {\si{ 1 $\leq$ pos $\leq$ longueur(unMot)}%
                \pour{i}{1}{pos}{}%
                {
                 \affecter{mot1[i]}{unMot[i]}%
