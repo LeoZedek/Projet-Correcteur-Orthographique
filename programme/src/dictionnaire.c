@@ -22,15 +22,15 @@ int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire){
 	return (dictionnaire==NULL);
 }
 
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire dictionnaire){
+DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	assert(!(DICTIONNAIRE_estVide(dictionnaire))) ;
-	return dictionnaire->filsGauche ;
+	return &(dictionnaire->filsGauche) ;
 }
 
 
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire dictionnaire){
+DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	assert(!(DICTIONNAIRE_estVide(dictionnaire))) ;
-	return dictionnaire->filsDroit ;
+	return &(dictionnaire->filsDroit) ;
 }
 
 
@@ -39,10 +39,36 @@ MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire){
 	return dictionnaire->mot ;
 }
 
-void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){}
+void DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsGauche){
+	dictionnaire->filsGauche=filsGauche ;
+}
+
+void DICTIONNAIRE_fixerFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsDroit){
+	dictionnaire->filsDroit = filsDroit ;
+}
+
+void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){
+	assert(!(DICTIONNAIRE_estVide(*dictionnaire)) && !(DICTIONNAIRE_estVide(DICTIONNAIRE_obtenirFilsGauche(dictionnaire))));
+	DICTIONNAIRE_Dictionnaire *racine, *filsGauche, *filsDroitGauche;
+	racine = dictionnaire ;
+	filsGauche = DICTIONNAIRE_obtenirFilsGauche(dictionnaire) ;
+	filsDroitGauche = DICTIONNAIRE_obtenirFilsDroit(filsGauche) ;
+	DICTIONNAIRE_fixerFilsGauche(racine, *filsDroitGauche) ;
+	DICTIONNAIRE_fixerFilsDroit(filsGauche, *racine) ;
+	dictionnaire = filsGauche ;
+}
 
 
-void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){}
+void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
+	assert(!(DICTIONNAIRE_estVide(*dictionnaire)) && !(DICTIONNAIRE_estVide(DICTIONNAIRE_obtenirFilsDroit(dictionnaire))));
+	DICTIONNAIRE_Dictionnaire *racine, *filsDroit, *filsGaucheDroit;
+	racine = dictionnaire ;
+	filsDroit = DICTIONNAIRE_obtenirFilsDroit(dictionnaire) ;
+	filsGaucheDroit = DICTIONNAIRE_obtenirFilsGauche(filsDroit) ;
+	DICTIONNAIRE_fixerFilsGauche(filsDroit, *racine) ;
+	DICTIONNAIRE_fixerFilsDroit(racine, *filsGaucheDroit) ;
+	dictionnaire = filsDroit ;
+}
 
 
 void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){}
