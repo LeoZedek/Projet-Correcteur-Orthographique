@@ -32,7 +32,9 @@ int abs(int a){
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(){
 	return NULL ;
 }
-
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_ajouterRacine(MOT_Mot mot, DICTIONNAIRE_Dictionnaire filsGauche, DICTIONNAIRE_Dictionnaire filsDroit){
+	return DICTIONNAIRE_dictionnaire() ;//A COMPLETER
+}
 
 int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire){
 	return (dictionnaire==NULL);
@@ -162,8 +164,8 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
 			return 1;
 		}
 		else{
-			chaineAtester = mot.chaine; //A changer avec la nouvelle fonction
-			chaineDico = motDico.chaine; //A changer aussi
+			chaineAtester = MOT_motEnChaine(mot);
+			chaineDico = MOT_motEnChaine(motDico);
 			if (strcmp(chaineAtester, chaineDico)<0){
 				return DICTIONNAIRE_estPresent(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot) ;
 			}
@@ -177,7 +179,36 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
 
 
 
-void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot){}
+void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot){
+	DICTIONNAIRE_Dictionnaire *filsGauche, *filsDroit ;
+	char *chaineAInserer;
+	char *chaineTest;
+	MOT_Mot motDico;
+	
+	if (DICTIONNAIRE_estVide(*dictionnaire)){
+		*dictionnaire = DICTIONNAIRE_ajouterRacine(mot,DICTIONNAIRE_dictionnaire(),DICTIONNAIRE_dictionnaire());
+	}
+	else{
+		chaineAInserer = MOT_motEnChaine(mot) ;
+		motDico = DICTIONNAIRE_obtenirMot(*dictionnaire);
+		chaineTest = MOT_motEnChaine(motDico) ; 
+		if (strcmp(chaineAInserer, chaineTest)<0){
+			filsGauche = DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
+			DICTIONNAIRE_ajouterMot(filsGauche,mot);
+			DICTIONNAIRE_fixerFilsGauche(dictionnaire, *filsGauche);
+		}
+		else{
+			if (strcmp(chaineAInserer,chaineTest)>0){
+				filsDroit = DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
+				DICTIONNAIRE_ajouterMot(filsDroit, mot);
+				DICTIONNAIRE_fixerFilsDroit(dictionnaire,*filsDroit);
+			}//else c'est les meme chaine donc pas besoin d'inserer
+		}
+		if (abs(DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsGauche(dictionnaire))-DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsDroit(dictionnaire))) == 2){
+			DICTIONNAIRE_reequilibrer(dictionnaire);
+		}
+	}
+}
 
 
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char nomFichier){}
