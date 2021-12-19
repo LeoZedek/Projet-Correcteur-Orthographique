@@ -11,7 +11,14 @@
 #include"mot.h"
 /*--------------Fonction Privé--------------------------*/
 //Qui ne sont ni dans la conception ni dans le .h
-
+int max(int a, int b){
+	if (a>b){
+		return a;
+	}
+	else{
+		return b;
+	}
+}
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(){
 	return NULL ;
@@ -24,13 +31,13 @@ int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire){
 
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	assert(!(DICTIONNAIRE_estVide(*dictionnaire))) ;
-	return &(dictionnaire->filsGauche) ;
+	return &((*dictionnaire)->filsGauche) ;
 }
 
 
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire){
-	assert(!(DICTIONNAIRE_estVide(dictionnaire))) ;
-	return &(dictionnaire->filsDroit) ;
+	assert(!(DICTIONNAIRE_estVide(*dictionnaire))) ;
+	return &((*dictionnaire)->filsDroit) ;
 }
 
 
@@ -40,15 +47,16 @@ MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire){
 }
 
 void DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsGauche){
-	dictionnaire->filsGauche=filsGauche ;
+	(*dictionnaire)->filsGauche=filsGauche ;
 }
 
 void DICTIONNAIRE_fixerFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsDroit){
-	dictionnaire->filsDroit = filsDroit ;
+	(*dictionnaire)->filsDroit = filsDroit ;
 }
 
 void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){
-	assert(!(DICTIONNAIRE_estVide(*dictionnaire)) && !(DICTIONNAIRE_estVide(DICTIONNAIRE_obtenirFilsGauche(dictionnaire))));
+	assert(!(DICTIONNAIRE_estVide(*dictionnaire)) 
+		&& !(DICTIONNAIRE_estVide(*DICTIONNAIRE_obtenirFilsGauche(dictionnaire))));
 	DICTIONNAIRE_Dictionnaire *racine, *filsGauche, *filsDroitGauche;
 	racine = dictionnaire ;
 	filsGauche = DICTIONNAIRE_obtenirFilsGauche(dictionnaire) ;
@@ -77,13 +85,13 @@ void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	assert( !(DICTIONNAIRE_estVide(*dictionnaire)) 
 		&& !(DICTIONNAIRE_estVide(*DICTIONNAIRE_obtenirFilsGauche(dictionnaire))) 
-		&& !(DICTIONNAIRE_estVide(*DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_obtenirFilsGauche(dictionnaire)))) )
+		&& !(DICTIONNAIRE_estVide(*DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_obtenirFilsGauche(dictionnaire)))) );
 	
 	DICTIONNAIRE_Dictionnaire *filsGauche;
 	
 	filsGauche = DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
 	DICTIONNAIRE_simpleRotationGauche(filsGauche);
-	DICTIONNAIRE_fixerFilsGauche(dictionnaire, filsGauche);
+	DICTIONNAIRE_fixerFilsGauche(dictionnaire, *filsGauche);
 	DICTIONNAIRE_simpleRotationDroite(dictionnaire);
 }
 
@@ -91,7 +99,7 @@ void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){
 void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	assert( !(DICTIONNAIRE_estVide(*dictionnaire)) 
 		&& !(DICTIONNAIRE_estVide(*DICTIONNAIRE_obtenirFilsDroit(dictionnaire))) 
-		&& !(DICTIONNAIRE_estVide(*DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_obtenirFilsDroit(dictionnaire)))) )
+		&& !(DICTIONNAIRE_estVide(*DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_obtenirFilsDroit(dictionnaire)))) );
 	
 	DICTIONNAIRE_Dictionnaire *filsDroit;
 	
@@ -101,7 +109,14 @@ void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	DICTIONNAIRE_simpleRotationGauche(dictionnaire);
 }
 
-
+int DICTIONNAIRE_hauteur(DICTIONNAIRE_Dictionnaire dictionnaire){
+	if (!(dictionnaire)){
+		return 0;
+	}
+	else{
+		return max(DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire)), DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsDroit(&dictionnaire)));
+	}
+}
 /*--------------Fonction Publique--------------------------*/
 
 int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot){
@@ -120,10 +135,10 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
 			chaineAtester = mot.chaine; //A changer avec la nouvelle fonction
 			chaineDico = motDico.chaine; //A changer aussi
 			if (strcmp(chaineAtester, chaineDico)<0){
-				return DICTIONNAIRE_estPresent(DICTIONNAIRE_obtenirFilsGauche(dictionnaire), mot) ;
+				return DICTIONNAIRE_estPresent(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot) ;
 			}
 			else{
-				return DICTIONNAIRE_estPresent(DICTIONNAIRE_obtenirFilsDroit(dictionnaire), mot) ;
+				return DICTIONNAIRE_estPresent(*DICTIONNAIRE_obtenirFilsDroit(&dictionnaire), mot) ;
 			}
 		}
 	}

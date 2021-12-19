@@ -54,7 +54,7 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
  *
  *\param *dictionnaire : Le pointeur vers le dictionnaire dans lequelle on insère le mot
  *\param mot : Le mot que l'on insère
- *\return Ne renvoye rien mais modifie l'etat du dicctionnaire
+ *\return Ne renvoye rien mais modifie l'etat du dictionnaire
 */
 void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot);
 
