@@ -1,0 +1,58 @@
+\begin{tad}
+	\tadNom{Dictionnaire}
+	%\tadParametres{}
+	\tadDependances{fichierTexte, Dictionnaire, Mot, \booleen, mode}
+	\begin{tadOperations}{Dictionnaire}
+		\tadOperation{dictionnaire}%
+			{}%
+			{\tadUnParam{Dictionnaire}}
+		\tadOperation{estVide}%
+			{\tadUnParam{Dictionnaire}}%
+			{\tadUnParam{\booleen}}
+		\tadOperationAvecPreconditions{ajouterMot}%
+			{\tadDeuxParams{Dictionnaire}{Mot}}%
+			{\tadUnParam{Dictionnaire}}
+		\tadOperationAvecPreconditions{ajouterFichier}%
+			{\tadDeuxParams{Dictionnaire}{FichierTexte}}%
+			{\tadUnParam{Dictionnaire}}
+		\tadOperation{chargerDictionnaire}%
+			{\tadUnParam{\chaine}}%
+			{\tadUnParam{Dictionnaire}}
+		\tadOperation{sauvegarderDictionnaire}%
+			{\tadUnParam{Dictionnaire}}%
+			{\tadUnParam{\booleen}}
+		\tadOperation{estPresent}%
+			{\tadDeuxParams{Dictionnaire}{Mot}}%
+			{\tadUnParam{\booleen}}
+	\end{tadOperations}
+	
+	\begin{tadSemantiques}{Dictionnaire}
+		\tadSemantique{dictionnaire}%
+			{Cr\'e\'e un dictionnaire vide}
+		\tadSemantique{estVide}%
+			{v\'erifie si un dictionnaire est vide}
+		\tadSemantique{ajouterMot}%
+			{ajoute un mot dans le dictionnaire}
+		\tadSemantique{ajouterFichier}%
+			{ajoute les mots d’un fichier texte dans le dictionnaire}
+		\tadSemantique{chargerDictionnaire}%
+			{charge un dictionnaire \`a partir d’un fichier}
+		\tadSemantique{sauvegarderDictionnaire}%
+			{cr\'e\'e un fichier texte contenant tous les mots du dictionnaire mis en paramètre.}
+		\tadSemantique{estPresent}%
+			{indique si un mot est pr\'esent dans le dictionnaire}
+	\end{tadSemantiques}
+	
+	\begin{tadPreconditions}{Dictionnaire}
+		\tadPrecondition{ajouterFichier(f)}%
+			{mode(fichierTexte) = lecture}
+		\tadPrecondition{ajouterMot(m)}%
+			{non(estPresent(m))}
+		\tadPrecondition{supprimerMot(m)}%
+			{estPresent(m)}
+	\end{tadPreconditions}
+	
+	%\begin{tadAxiomes}
+		%\tadAxiome{dictionnaire()}
+	%\end{tadAxiomes}
+\end{tad}

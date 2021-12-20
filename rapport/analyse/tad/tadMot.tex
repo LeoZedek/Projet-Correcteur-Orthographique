@@ -1,0 +1,86 @@
+\begin{tad}
+	\tadNom{mot}
+	%\tadParametres{Element,Clef}
+	\tadDependances{\chaine, NaturelNonNul, \caractere, \booleen}
+	\begin{tadOperations}{Mot}
+		\tadOperation{estUneLettre}%
+			{\tadUnParam{\caractere}}%
+			{\tadUnParam{\booleen}}
+		\tadOperationAvecPreconditions{estUnMot}%
+			{\tadUnParam{\chaine}}%
+			{\tadUnParam{\booleen}}
+		\tadOperationAvecPreconditions{creerMot}%
+			{\tadUnParam{\chaine}}%
+			{\tadUnParam{Mot}}
+		\tadOperation{estEgal}%
+			{\tadDeuxParams{Mot}{Mot}}%
+			{\tadUnParam{\booleen}}
+		\tadOperation{longueur}%
+			{\tadUnParam{Mot}}%
+			{\tadUnParam{NaturelNonNul}}
+		\tadOperation{motEnChaine}%
+			{\tadUnParam{Mot}}%
+			{\tadUnParam{\chaine}}
+		\tadOperationAvecPreconditions{remplacerLettre}%
+			{\tadTroisParams{NaturelNonNul}{\caractere}{Mot}}%
+			{\tadUnParam{Mot}}
+		\tadOperationAvecPreconditions{supprimerLettre}%
+			{\tadDeuxParams{NaturelNonNul}{Mot}}%
+			{\tadUnParam{Mot}}
+		\tadOperationAvecPreconditions{insererLettre}%
+			{\tadTroisParams{\caractere}{Mot}{NaturelNonNul}}%
+			{\tadUnParam{Mot}}
+		\tadOperationAvecPreconditions{inverserLettre}%
+			{\tadDeuxParams{NaturelNonNul}{Mot}}%
+			{\tadUnParam{Mot}}
+		\tadOperationAvecPreconditions{decomposerMot}%
+			{\tadDeuxParams{Mot}{NaturelNonNul}}%
+			{\tadDeuxParams{Mot}{Mot}}
+	\end{tadOperations}
+	
+	\begin{tadSemantiques}{Mot}
+		\tadSemantique{estUneLettre}%
+			{renvoie vrai si l'\'el\'ement pris en entr\'e est une lettre (minuscule ou majuscule)}
+		\tadSemantique{estUnMot}%
+			{v\'erifie que c’est un mot}
+		\tadSemantique{creerUnMot}%
+			{Cr\'e\'e un mot \`a partir d’une cha\^ine de caract\`eres.}
+		\tadSemantique{estEgal}%
+			{retourne vrai si les mots sont identiques (non sensible à la casse)}
+		\tadSemantique{longueur}%
+			{calcule la longueur d'un mot}
+		\tadSemantique{motEnChaine}%
+			{transforme un mot en cha\^ine de caract\`eres}
+		\tadSemantique{remplacerLettre}%
+			{remplace une lettre \`a un certain indice du mot}
+		\tadSemantique{supprimerLettre}%
+			{supprime une lettre \`a un certain indice du mot}
+		\tadSemantique{insererLettre}%
+			{ins\`ere une lettre \`a un certain indice du mot}
+		\tadSemantique{inverserLettre}%
+			{inverse deux lettres cons\'ecutifs du mot}
+		\tadSemantique{decomposerMot}%
+			{dcompose un mot en deux mots}
+	\end{tadSemantiques}
+	
+	\begin{tadPreconditions}{Mot}
+		\tadPrecondition{estUnMot(mot)}%
+			{longueur(mot)>1 ET estUneLettre(mot[i]) $\forall$ 1$\leq$i$\leq$longueur(mot)}
+		\tadPrecondition{creerMot(c)}%
+			{estUnMot(c)}
+		\tadPrecondition{remplacerLettre(i, car, mot)}%
+			{i$\leq$longueur(mot)}
+		\tadPrecondition{supprimerLettre(i, mot)}%
+			{i$\leq$longueur(mot)}
+		\tadPrecondition{insererLettre(c, mot, i)}%
+			{i<longueur(mot)}
+		\tadPrecondition{inverserLettre(i, mot)}%
+			{estOuvert(f) et mode(f)=lecture et non finFichier(f)}
+		\tadPrecondition{decomposerMot(mot, i)}%
+			{1 < i < longueur(mot)}
+	\end{tadPreconditions}
+	
+	%\begin{tadAxiomes}
+		%\tadAxiome{dictionnaire()}
+	%\end{tadAxiomes}
+\end{tad}

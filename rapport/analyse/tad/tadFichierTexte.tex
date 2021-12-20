@@ -1,0 +1,69 @@
+\begin{tad}
+	\tadNom{FichierTexte}
+	%\tadParametres{Element,Clef}
+	\tadDependances{\chaine, Mode, \caractere, \booleen}
+	\begin{tadOperations}{ecrireCaractere}
+		\tadOperation{fichierTexte}%
+			{\tadUnParam{\chaine}}%
+			{\tadUnParam{FichierTexte}}
+		\tadOperationAvecPreconditions{ouvrir}%
+			{\tadDeuxParams{FichierTexte}{Mode}}%
+			{\tadUnParam{FichierTexte}}
+		\tadOperationAvecPreconditions{fermer}%
+			{\tadUnParam{FichierTexte}}%
+			{\tadUnParam{FichierTexte}}
+		\tadOperation{estOuvert}%
+			{\tadUnParam{FichierTexte}}%
+			{\tadUnParam{\booleen}}
+		\tadOperationAvecPreconditions{Mode}%
+			{\tadUnParam{FichierTexte}}%
+			{\tadUnParam{Mode}}
+		\tadOperationAvecPreconditions{finFichier}%
+			{\tadUnParam{FichierTexte}}%
+			{\tadUnParam{\booleen}}
+		\tadOperationAvecPreconditions{ecrireChaine}%
+			{\tadDeuxParams{FichierTexte}{\chaine}}%
+			{\tadUnParam{FichierTexte}}
+		\tadOperationAvecPreconditions{lireChaine}%
+			{\tadUnParam{FichierTexte}}%
+			{\tadDeuxParams{FichierTexte}{\chaine}}
+		\tadOperationAvecPreconditions{ecrireCaractere}%
+			{\tadDeuxParams{FichierTexte}{\caractere}}%
+			{\tadUnParam{FichierTexte}}
+		\tadOperationAvecPreconditions{lireCaractere}%
+			{\tadUnParam{FichierTexte}}%
+			{\tadDeuxParams{FichierTexte}{\caractere}}
+	\end{tadOperations}
+	\begin{tadSemantiques}{ecrireCaractere}
+		\tadSemantique{FichierTexte}%
+			{creation d’un fichier texte à partir d’un fichier identifié par son nom}
+		\tadSemantique{ouvrir}%
+			{ouvre un fichier texte en lecteur ou ecriture. Si le mode est ecriture et que le fichier existe, alors ce dernier est écrasé}
+		\tadSemantique{fermer}%
+			{ferme un fichier texte}
+		\tadSemantique{lireCaractere}%
+			{lit un caractère à partir de la position courante du fichier}
+		\tadSemantique{lireChaine}%
+			{lit une chaine (jusqu’à un retour à la ligne ou la fin de fichier) à partir de la position courante du fichier}
+		\tadSemantique{ecrireCaractere}%
+			{écrit un caractère à partir de la position courante du fichier}
+		\tadSemantique{ecrireChaine}%
+		{écrit une chaine suivie d’un retour à la ligne à partir de la position courante du fichier}
+	\end{tadSemantiques}
+	
+	\begin{tadPreconditions}{ecrireCaractere}
+		\tadPrecondition{ouvrir(f)}%
+			{non estOuvert(f)}
+		\tadPrecondition{fermer(f)}%
+			{estOuvert(f)}
+		\tadPrecondition{finFichier(f)}%
+			{mode(f)=lecture}
+		\tadPrecondition{lireXX}%
+			{estOuvert(f) et mode(f)=lecture et non finFichier(f)}
+		\tadPrecondition{ecrireXX}%
+			{estOuvert(f) et mode(f)=ecriture}
+	\end{tadPreconditions}
+%	\begin{tadAxiomes}
+%		\tadAxiome{dictionnaire()}
+%	\end{tadAxiomes}
+\end{tad}

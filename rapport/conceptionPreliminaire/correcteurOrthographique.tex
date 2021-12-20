@@ -1,0 +1,18 @@
+\begin{algorithme}
+	%Création de signature de focntion : 1 : nom de la fonction ou signatureFonctionAvecPreconditions avec un paramètre précondition en plus
+	\signatureFonction{chaineEnMots}%
+		%2 Les paramètres
+		{c : \caractere}%
+		%3 Le type de retour
+		{Liste<Mot>, Liste<\naturel>}
+	\signatureFonction{sontPresents}%
+		{mots : Liste<Mot>, d : Dictionnaire}%
+		{Liste<\booleen>}
+	\signatureFonction{proposerMot}%
+		{m : Mot, d : Dictionnaire}%
+		{Ensemble<Mot>}%
+	%Création de signature de procédure 1 : nom de la procédure
+	\signatureFonction{proposerMotListe}%
+		{liste : Liste<Mot>, d : Dictionnaire}%
+		{Liste<Ensemble<Mot>>, Liste<Booleen>}%
+\end{algorithme}

@@ -1,0 +1,30 @@
+\begin{algorithme}
+	%Création de signature de focntion : 1 : nom de la focntion ou signatureFonctionAvecPreconditions avec un paramètre précondition en plus
+	\signatureFonction{Dictionnaire}%
+		%2 Les paramètres
+		{}%
+		%3 Le type de retour
+		{Dictionnaire}
+	
+	\signatureFonction{estVide}%
+		{dictionnaire : Dictionnaire}%
+		{\booleen}
+	
+	\signatureFonction{estPrésent}%
+		{dictionnaire : Dictionnaire, motChercher : mot}%
+		{\booleen}
+	
+	%Création de signature de procédure 1 : nom de la procédure
+	\signatureProcedureAvecPreconditions{ajouterMot}%
+		%2 Les paramètres avec les commandes \paramEntree \paramSortie et \paramEntreeSortie
+		{\paramEntreeSortie{dictionnaire : Dictionnaire},\paramEntree{mot : Mot}}
+		{non(estPrésent(mot))}
+	\signatureProcedureAvecPreconditions{ajouterFichier}%
+		{\paramEntreeSortie{dictionnaire : Dictionnaire}, \paramEntree{fichier : FichierTexte}}%
+		{mode(fichierTexte) = lecture}
+	\signatureProcedure{chargerDictionnaire}%
+		{\paramEntree{ chaine : \chaine}, \paramSortie{dictionnaire : Dictionnaire}}
+	\signatureFonction{enregistrerDictionnaire}%
+		{dictionnaire : Dictionnaire}%
+		{FichierTexte}
+\end{algorithme}
