@@ -59,7 +59,7 @@ void CO_fixerLongeurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int n
  *\return L'entier extrait
  */
 
-int CO_obteniriIemeEntier(CO_TableauDEntiers tableauEntiers, int position);
+int CO_obtenirIemeEntier(CO_TableauDEntiers tableauEntiers, int position);
 
 /**
  *\fn int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers);

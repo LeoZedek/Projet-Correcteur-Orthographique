@@ -69,7 +69,7 @@ void MOT_fixerLongeurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvell
  *\return Le mot extrait
  */
 
-MOT_Mot MOT_obteniriIemeMot(MOT_TableauDeMots tableauMots, int position);
+MOT_Mot MOT_obtenirIemeMot(MOT_TableauDeMots tableauMots, int position);
 
 /**
  *\fn MOT_Mot *MOT_obtenirLesMots(MOT_TableauDeMots tableauMots);
