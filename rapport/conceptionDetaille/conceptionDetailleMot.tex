@@ -4,33 +4,33 @@
       {\booleen}%
       {res : \booleen}%
       {
-          \sialorssinon{('a' $\geq$ c $\leq$ 'z' ) \lor ('A' $\geq$ c $\leq$ 'Z')}%
-           {\affecter{res}{vrai}}%
-           {\affecter{res}{faux}}%
+          \sialorssinon{$('a' \geq c \leq 'z' ) \lor ('A' \geq c \leq 'Z')$}
+           {\affecter{res}{vrai}}
+           {\affecter{res}{faux}}
             
-          \retourner{res} 
+          \retourner{res}
       }
 \end{algorithme}
 
-
+/***********************************************************************************/
 \begin{algorithme}
       \fonction{longueur}
-       {mot : \Mot}%
+       {mot : Mot}%
        {\entier}%
        {long : \entier }%
        {
          \affecter{long}{0}%
-         \tantque{mot[long] $\neq$ '\0'}%
+         \tantque{mot[long] $\neq$ '0'}%
            {
-            \affecter{long}{long+1}%
+            \affecter{long}{long+1}
            }
            
-         \retourner{long}%
+         \retourner{long}
          
         }
 \end{algorithme}
 
-
+/***********************************************************************************/
 \begin{algorithme}
     \fonctionAvecPreconditions{estUnMot}%
      {m : \chaine}%
@@ -61,11 +61,11 @@
   
 \end{algorithme}
 
-
+/***********************************************************************************/
 \begin{algorithme}
     \fonction{créerMot}
      {chaine : \chaine}%
-     {m : \Mot}%
+     {m : Mot}%
      {i : \entier, longueur : \entier, lettre : \caractere }%
      {
 	\affecter{i}{1}%
@@ -81,10 +81,10 @@
      }
 \end{algorithme}
 
-
+/***********************************************************************************/
 \begin{algorithme}
     \fonction{sontEgaux}
-     {mot1,mot2 : \Mot}%
+     {mot1,mot2 : Mot}%
      {\booleen}%
      {res : \booleen, i : \entier }%
      {
@@ -95,7 +95,7 @@
                   {
                    \affecter{res}{vrai}
                    \affecter{i}{0}
-                   \tantque{(res = vrai) \land \& (i $\leq$ longueur(mot1))}%
+                   \tantque{(res = vrai) $\land$ \& (i $\leq$ longueur(mot1))}%
                     {
                      \sialorssinon{mot1[i] = mot2[i]}%
                        {
@@ -112,46 +112,48 @@
       }
 \end{algorithme}
 
-
+/***********************************************************************************/
 \begin{algorithme}
       \fonctionAvecPreconditions{SupprimerLettre}
-       {pos : \entier, mot : \Mot}%
-       {\Mot}%
-       {pos $\leq$ longueur(mot)}%
-       { \tantque{mot[pos]$\neq$'\0'}%
+       {pos : \entier, mot : Mot}
+       {Mot}
+       {pos $\leq$ longueur(mot)}
+       {}
+       {
+       	\tantque{mot[pos]$\neq$'0'}
              {
-               \affecter{mot[pos]}{mot[pos+1]}%
-               \affecter{pos}{pos+1}%
+               \affecter{mot[pos]}{mot[pos+1]}
+               \affecter{pos}{pos+1}
              }
             
         }
        \retourner{mot}%
 \end{algorithme}
 
-
+/***********************************************************************************/
 \begin{algorithme}
-      \fonctionAvecPreconditions{InsérerLettre}
-       {pos : \entier, c : \caractere, mot : \Mot}%
-       {\Mot}%
-       {(pos $\leq$ longueur(mot)+1)) \land \& (estUneLettre(c))}%
+      \fonctionAvecPreconditions{InsérerLettre}%
+       {pos : \entier, c : \caractere, mot : Mot}%
+       {Mot}%
+       {(pos $\leq$ longueur(mot)+1)) $\land$ \& (estUneLettre(c))}%
+       {}
        {
-               \affecter{mot[pos]}{c}%
-               \tantque{mot[pos] $\neq$ '\0'}%
+               \affecter{mot[pos]}{c}
+               \tantque{mot[pos] $\neq$ '0'}%
                 {
-                 \affecter{mot[pos+1]}{mot[pos]}%
-                 \affecter{pos}{pos+1}%
+                 \affecter{mot[pos+1]}{mot[pos]}
+                 \affecter{pos}{pos+1}
                 }
-       
-              \retourner{mot}%
+              \retourner{mot}
        }
-          
 \end{algorithme}
 
-
+/***********************************************************************************/
 \begin{algorithme}%
       \fonction{RemplacerLettre}
-       {position : \entier,c : \caractere, mot : \Mot}%
-       {\Mot}%
+       {position : \entier,c : \caractere, mot : Mot}%
+       {Mot}%
+       {}
        {
           \instruction{supprimerLettre(position,mot)}
           \instruction{insérerLettre(position,c,mot)}
@@ -160,11 +162,11 @@
        }
 \end{algorithme}
 
-
+/***********************************************************************************/
 \begin{algorithme}%
       \fonctionAvecPreconditions{inverserDeuxLettresConsecutives}
       {position : \entier}%
-      {mot : \Mot}%
+      {mot : Mot}%
       {pos $<$ longueur(mot)}%
       {a: \caractere }%
       {
@@ -175,13 +177,13 @@
       }
 \end{algorithme}
 
-
+/***********************************************************************************/
 \begin{algorithme}
          \fonctionAvecPreconditions{décomposerMot}
-         {pos : \entier,unMot : \Mot}%
-         {\Mot, \Mot}%
-         {(pos $<$ longueur(unMot)) \land \& (pos $>$ 1)}%
-         {i : \entier, mot1,mot2: \Mot}%
+         {pos : \entier,unMot : Mot}%
+         {Mot, Mot}%
+         {(pos $<$ longueur(unMot)) $\land$ \& (pos $>$ 1)}%
+         {i : \entier, mot1,mot2: Mot}%
          {
                \pour{i}{1}{pos}{}%
                 {
@@ -195,20 +197,3 @@
                \retourner{mot2}%
           }
 \end{algorithme}
-     
-
-
-    
-
-     
-
-
-
-  
-
-       
-
-
-
-
- 
