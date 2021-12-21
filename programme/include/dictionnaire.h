@@ -5,9 +5,10 @@
  * \date 03/01/2022
  *
  */
-#include"mot.h"
+
 #ifndef __DICTIONNAIRE__
 #define __DICTIONNAIRE__
+#include"mot.h"
 
 /**
  * \brief Le type noeuds est représenté par un mot (type MOT_Mot définie dans le fichier mot.h) et de deux pointeur filsGauche et filsDroit qui représente la suite de l'arbre que constitue le dictionnaire

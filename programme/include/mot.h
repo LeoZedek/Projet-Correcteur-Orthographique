@@ -29,6 +29,86 @@ typedef struct {
 	MOT_Mot mot2;
 } MOT_DeuxMots;
 
+/**
+ * \brief Le Type MOT_TableauDeMots est un pointeur sur un Mot. Cela représente un tableau de mot.
+ *
+ */
+
+typedef struct {
+    MOT_Mot *lesMots;
+    int longueur;
+} MOT_TableauDeMots;
+
+/**
+ *\fn MOT_TableauDeMots MOT_tableauDeMotsVide()
+ *\brief Fonction qui permet d'obtenir un tableau de mot vide. Sa longeur est fixé à 0 et le pointeur sera allouer sur CO_TailleMax
+ *
+ *\return Le tableau vide.
+ */
+
+MOT_TableauDeMots MOT_tableauDeMotsVide();
+
+/**
+ *\fn int MOT_obtenirLongeurTabMots(MOT_TableauDeMots tableauMots)
+ *\brief Fonction qui permet d'obtenir la longeur d'un tableau de mot
+ *
+ *\param tableauMots : Est le tableau dont la longeur sera retourner
+ *\return La longeur du tableau
+ */
+
+int MOT_obtenirLongeurTabMots(MOT_TableauDeMots tableauMots);
+
+/**
+ *\fn void MOT_fixerLongeurTabMots(MOT_TableauDeMots *tableauMots, int nouvelleLongeur)
+ *\brief Fonction qui permet de fixer la longeur d'un tableau de mots
+ *
+ *\param pointeurTableauMots : Est le poiteur du tableau dont la longeur sera modifé
+ *\param nouvelleLongeur : La nouvelle longeur du tableau
+ *
+ */
+
+void MOT_fixerLongeurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvelleLongeur);
+
+/**
+ *\fn MOT_Mot MOT_obteniriIemeMot(MOT_TableauDeMots tableauMots, int position);
+ *\brief Fonction qui permet d'obtenir le mot à une certaine position du tableau
+ *
+ *\param tableauMots : Est le tableau dont le mot sera extrait
+ *\param position : La position du mot extrait
+ *\return Le mot extrait
+ */
+
+MOT_Mot MOT_obtenirIemeMot(MOT_TableauDeMots tableauMots, int position);
+
+/**
+ *\fn MOT_Mot *MOT_obtenirLesMots(MOT_TableauDeMots tableauMots);
+ *\brief Permet d'obtenir le pointeur sur le premier mot du tableau
+ *
+ *\param tableauMots : Le tableau de mot
+ *\return Le pointeur sur le premier mot du tableau
+ */
+
+MOT_Mot *MOT_obtenirLesMots(MOT_TableauDeMots tableauMots);
+
+/**
+ *\fn void MOT_ajouterMot(MOT_TableauDeMots *tableauMots);
+ *\brief Ajoute un mot à la fin du tableau et augmente sa longeur de 1.
+ *
+ *\param tableauMots : Le pointeur sur le tableau de mot.
+ *\param m : Le mot qui sera ajouté à la fin du tableau
+ */
+
+void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m);
+
+/**
+ *\fn void MOT_supprimerTableauMots(MOT_TableauDeMots tableau)
+ *\brief Permet de désallouer le pointeur du tableau et fixe la longeur à -1. Le tableau n'est plus à vocation d'être utilisé.
+ *
+ *\param tableau : le tableau qui sera supprimer.
+ */
+
+
+void MOT_supprimerTableauMots(MOT_TableauDeMots tableau);
 
 /**
  *\fn int MOT_estUneLettre(char charactere)
@@ -37,18 +117,19 @@ typedef struct {
  *\param charactere : caractère qui subit le test
  *\return Le boléen qui teste si caractère est une lettre de l'alphabet
  */
+
 int MOT_estUneLettre(char charactere);
 
 
 /**
- *\fn unsigned int MOT_longeur(MOT_Mot mot)
+ *\fn unsigned int MOT_longeurMot(MOT_Mot mot)
  *\brief Renvoie la longueur d'un mot
  *
  *\param mot : est le mot de type Mot
  *\return La longueur du mot
  */
 
-unsigned int MOT_longueur(MOT_Mot mot);
+unsigned int MOT_longueurMot(MOT_Mot mot);
 
 /**
  *\fn int MOT_estUnMot(char *chaine)
@@ -57,8 +138,18 @@ unsigned int MOT_longueur(MOT_Mot mot);
  *\param chaine : est la chaine qui subit le test
  *\return Le booleen qui teste si la chaine est composé de lettre de l'alphabet
 */
+
 int MOT_estUnMot(char *chaine);
 
+/**
+ *\fn int MOT_fixerLongeurMot(MOT_Mot *m, unsigned int longeur)
+ *\brief fixe la longeur d'un mot
+ *
+ *\param m : le poiteur du mot
+ *\param longeur : la nouvelle longeur du mot
+*/
+
+void MOT_fixerLongeurMot(MOT_Mot *m, unsigned int longeur);
 
 /**
  *\fn MOT_Mot MOT_creerMot(char *chaine)

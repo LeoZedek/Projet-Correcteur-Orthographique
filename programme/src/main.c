@@ -7,8 +7,7 @@ void afficherAide(){
 	printf("Affichage de l'aide");
 }
 
-int main(int argc, char **argv){
-	int i=0 ;
+int main(int argc, char **argv){	
 	
 	if (argc == 1){
 		afficherAide(); //Affichage de l'aide dans le cas ou il n'y a pas de paramètre à l'appelle de la fonction
