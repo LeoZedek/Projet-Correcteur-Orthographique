@@ -40,6 +40,15 @@ typedef struct {
 } MOT_TableauDeMots;
 
 /**
+ *\fn MOT_TableauDeMots MOT_tableauDeMotsVide()
+ *\brief Fonction qui permet d'obtenir un tableau de mot vide. Sa longeur est fixé à 0 et le pointeur sera allouer sur CO_TailleMax
+ *
+ *\return Le tableau vide.
+ */
+
+MOT_TableauDeMots MOT_tableauDeMotsVide();
+
+/**
  *\fn int MOT_obtenirLongeurTabMots(MOT_TableauDeMots tableauMots)
  *\brief Fonction qui permet d'obtenir la longeur d'un tableau de mot
  *
@@ -90,6 +99,16 @@ MOT_Mot *MOT_obtenirLesMots(MOT_TableauDeMots tableauMots);
  */
 
 void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m);
+
+/**
+ *\fn void MOT_supprimerTableauMots(MOT_TableauDeMots tableau)
+ *\brief Permet de désallouer le pointeur du tableau et fixe la longeur à -1. Le tableau n'est plus à vocation d'être utilisé.
+ *
+ *\param tableau : le tableau qui sera supprimer.
+ */
+
+
+void MOT_supprimerTableauMots(MOT_TableauDeMots tableau);
 
 /**
  *\fn int MOT_estUneLettre(char charactere)
