@@ -30,6 +30,15 @@ typedef struct {
 } CO_TableauDEntiers;
 
 /**
+ *\fn CO_TableauDEntiers CO_tableauDEntiersVide();
+ *\brief Fonction qui permet de construire un tableau vide. Sa longeur est fixé à 0 et le pointeur sera allouer avec la taille CO_TailleMax
+ *
+ *\return Un tableau d'entiers vide
+ */
+
+CO_TableauDEntiers CO_tableauDEntiersVide();
+
+/**
  *\fn int CO_obtenirLongeurTabEntiers(CO_TableauDEntiers tableauEntiers);
  *\brief Fonction qui permet d'obtenir la longeur d'un tableau d'Entiers
  *
@@ -59,7 +68,7 @@ void CO_fixerLongeurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int n
  *\return L'entier extrait
  */
 
-int CO_obteniriIemeEntier(CO_TableauDEntiers tableauEntiers, int position);
+int CO_obtenirIemeEntier(CO_TableauDEntiers tableauEntiers, int position);
 
 /**
  *\fn int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers);
@@ -80,6 +89,16 @@ int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers);
  */
 
 void CO_ajouterEntier(CO_TableauDEntiers *tableauEntiers, int entierAAjouter);
+
+/**
+ *\fn void CO_supprimerTableauEntiers(CO_TableauDEntiers tableau);
+ *\brief Permet de désallouer le pointeur du tableau et fixe la longeur à -1. Le tableau n'est plus à vocation d'être utilisé.
+ *
+ *\param tableau : le tableau qui sera supprimer.
+ */
+
+
+void CO_supprimerTableauEntiers(CO_TableauDEntiers tableau);
 
 /**
  * \brief Le type CO_TableauPositions permet de représenter un tableau d'entiers qui correspond à des positions.
