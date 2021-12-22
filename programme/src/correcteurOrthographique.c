@@ -23,4 +23,9 @@ int CO_obtenirIemeEntier(CO_TableauDEntiers tableauEntiers, int position){
 	return tableauEntiers.lesEntiers[position];
 }
 
+int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers){
+	return &tableauEntiers.lesEntiers;
+}
+
+
 
