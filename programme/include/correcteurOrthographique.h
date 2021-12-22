@@ -46,7 +46,7 @@ CO_TableauDEntiers CO_tableauDEntiersVide();
  *\return La longeur du tableau
  */
 
-int CO_obtenirLongeurTabEntiers(CO_TableauDEntiers tableauEntiers);
+int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers);
 
 /**
  *\fn void CO_fixerLongeurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongeur);
@@ -57,7 +57,7 @@ int CO_obtenirLongeurTabEntiers(CO_TableauDEntiers tableauEntiers);
  *
  */
 
-void CO_fixerLongeurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongeur);
+void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongeur);
 
 /**
  *\fn int CO_obteniriIemeEntier(CO_TableauDEntiers tableauEntiers, int position);
