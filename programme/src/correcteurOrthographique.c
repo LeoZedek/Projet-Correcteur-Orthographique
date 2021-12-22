@@ -6,15 +6,15 @@
 CO_TableauDEntiers CO_tableauDEntiersVide(){
 	CO_TableauDEntiers tab;
 	tab.lesEntiers = NULL;
-	tab.longeur = 0;
+	tab.longueur = 0;
 	return tab;
 }
 
 int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers){
-	return tableauEntiers.longeur;
+	return tableauEntiers.longueur;
 }
 
-void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongeur){
-	(*pointeurTableauEntiers).longeur = nouvelleLongeur;
+void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongueur){
+	(*pointeurTableauEntiers).longueur = nouvelleLongueur;
 }
 
