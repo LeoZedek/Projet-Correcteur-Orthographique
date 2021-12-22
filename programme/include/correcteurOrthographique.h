@@ -94,11 +94,11 @@ void CO_ajouterEntier(CO_TableauDEntiers *tableauEntiers, int entierAAjouter);
  *\fn void CO_supprimerTableauEntiers(CO_TableauDEntiers tableau);
  *\brief Permet de désallouer le pointeur du tableau et fixe la longeur à -1. Le tableau n'est plus à vocation d'être utilisé.
  *
- *\param tableau : le tableau qui sera supprimer.
+ *\param *tableau : Le pointeur sur tableau qui sera supprimer.
  */
 
 
-void CO_supprimerTableauEntiers(CO_TableauDEntiers tableau);
+void CO_supprimerTableauEntiers(CO_TableauDEntiers *tableau);
 
 /**
  * \brief Le type CO_TableauPositions permet de représenter un tableau d'entiers qui correspond à des positions.
@@ -124,6 +124,40 @@ typedef struct {
 	MOT_TableauDeMots mots;
 	CO_TableauPositions positions;
 } CO_MotsDansPhrase;
+
+/**
+ * \fn CO_MotsDansPhrase CO_motsEtPositionsVide();
+ * \brief Fonction qui créer une variable de type CO_MotsDansPhrase avec des tableaux vide.
+ *
+ * \return La structure avec des tableaux vides.
+ */
+
+CO_MotsDansPhrase CO_motsEtPositionsVide();
+
+
+/**
+ * \fn MOT_TableauDeMots CO_obtenirTabMots(CO_MotsDansPhrase motsEtPosition);
+ * \brief Fonction getter pour avoir le tableau de Mots.
+ * \param motsEtPosition : La structure dont on prends le tableau de mots.
+ */
+
+MOT_TableauDeMots CO_obtenirTabMots(CO_MotsDansPhrase motsEtPosition);
+
+/**
+ * \fn CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition);
+ * \brief Fonction getter pour avoir le tableau de Positions.
+ * \param motsEtPosition : La structure dont on prends le tableau de positions.
+ */
+
+CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition);
+
+/**
+ * \fn void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition);
+ * \brief Fonction qui supprime et désalloue la structure CO_MotsDansPhrase.
+ * \param *motsEtPosition : Le pointeur sur la structure à déallouer.
+ */
+
+void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition);
 
 /**
  * \fn CO_TableauBooleens sontPresents(Mot mots[], Dictionnaire dictionnaire)
