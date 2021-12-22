@@ -39,11 +39,7 @@ $(SRCDIR)/%.o : $(SRCDIR)/%.c
 
 	
 $(TESTDIR)/testsCorrecteurOrthographique : $(SRCDIR)/testsCorrecteurOrthographique.o $(LIBDIR)/libmot.a $(LIBDIR)/libdictionnaire.a $(LIBDIR)/libcorrecteurOrthographique.a
-<<<<<<< HEAD
-	$(CC) -o $@ $^ -Llib -lcorrecteurOrthographique -ldictionnaire -lmot -lcunit -L${HOME}/local/lib
-=======
 	$(CC) -o $@ $^ -lmot -ldictionnaire -lcorrecteurOrthographique $(LDFLAGS) -lcunit -L${HOME}/local/lib
->>>>>>> 32-implementer-correcteurorthographique
 	
 $(TESTDIR)/testsDictionnaire : $(SRCDIR)/testsDictionnaire.o $(LIBDIR)/libmot.a $(LIBDIR)/libdictionnaire.a $(LIBDIR)/libcorrecteurOrthographique.a
 	$(CC) -o $@ $^ -lcorrecteurOrthographique -ldictionnaire -lmot $(LDFLAGS) -lcunit -L${HOME}/local/lib

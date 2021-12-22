@@ -31,7 +31,7 @@ int DICTIONNAIRE_hauteur(DICTIONNAIRE_Dictionnaire dictionnaire);
 void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire);
 int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot);
 void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot);
-void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char nomFichier);
+void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier);
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine);
 char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire);
 
@@ -241,7 +241,7 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 	char chaine[30];//taille max du mot
 	MOT_Mot mot ;
 	FILE* fichier ;
-	fichier = fopen(nomFichier, "w")
+	fichier = fopen(nomFichier, "w");
 	while(EOF){
 		fgets(chaine,50,fichier);
 		mot = MOT_creerMot(chaine);

@@ -17,7 +17,7 @@
 typedef struct {
 	char *chaine; /**< la chaine de charactère du mot */
 	unsigned int longueur; /**< la longueur du mot */
-} MOT_Mot;
+} MOT_Mot ;
 
 
 /**

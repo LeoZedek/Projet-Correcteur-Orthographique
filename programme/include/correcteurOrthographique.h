@@ -16,7 +16,7 @@
  *
  */
  
-const int CO_TailleMax = 1000;
+// const int CO_TailleMax = 1000; /*pb avec cette ligne*/
 
 
 /**

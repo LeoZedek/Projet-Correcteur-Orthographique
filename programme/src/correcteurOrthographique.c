@@ -41,3 +41,39 @@ void CO_supprimerTableauEntiers(CO_TableauDEntiers *tableau){
 	free((*tableau).lesEntiers);
 	CO_fixerLongueurTabEntiers(tableau, -1);
 }
+
+/*TEMPORAIRE MAIS PEUT ETRE COMPLETER ET ADAPTER !*/
+
+CO_MotsDansPhrase CO_motsEtPositionsVide(){
+	CO_MotsDansPhrase tmp ; //A changer -> pour la compilation
+	return tmp ; //A changer -> pour la compilation
+}
+
+MOT_TableauDeMots CO_obtenirTabMots(CO_MotsDansPhrase motsEtPosition){
+	MOT_TableauDeMots tmp ; //A changer -> pour la compilation
+	return tmp ; //A changer -> pour la compilation
+}
+
+CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition){
+	CO_TableauPositions tmp ; //A changer -> pour la compilation
+	return tmp ; //A changer -> pour la compilation
+}
+
+void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
+
+}
+
+CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionnaire dictionnaire){
+	CO_TableauBooleens tmp ; //A changer -> pour la compilation
+	return tmp; //A changer -> pour la compilation
+} 
+
+MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionnaire){
+	MOT_TableauDeMots tmp; //A changer -> pour la compilation
+	return tmp ; //A changer -> pour la compilation
+}
+
+CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
+	CO_MotsDansPhrase tmp ; //A changer -> pour la compilation
+	return tmp; //A changer -> pour la compilation
+}
