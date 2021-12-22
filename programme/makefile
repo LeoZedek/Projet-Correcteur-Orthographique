@@ -6,12 +6,12 @@ TESTDIR=tests
 CC = gcc
 AR = ar
 CFLAGS=-Wall -pedantic -g -std=c99  -I$(INCLUDEDIR)  
-LDFLAGS=-L$(LIBDIR) -I$(INCLUDEDIR)
+LDFLAGS=-L$(LIBDIR)
 EXEC=asispell
 DOCDIR=doc
 
 
-all : clean dossier $(BINDIR)/$(EXEC) $(TESTDIR)/testsCorrecteurOrthographique $(TESTDIR)/testsDictionnaire $(TESTDIR)/testsMot doc
+all : clean dossier $(BINDIR)/$(EXEC) tests
 
 tests : $(TESTDIR)/testsCorrecteurOrthographique $(TESTDIR)/testsDictionnaire $(TESTDIR)/testsMot
 
@@ -37,19 +37,19 @@ $(SRCDIR)/%.o : $(SRCDIR)/%.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 	
 	
-$(TESTDIR)/testsCorrecteurOrthographique : $(SRCDIR)/testsCorrecteurOrthographique.o 
-	$(CC) -o $@ $^ -Llib -lcorrecteurOrthographique -ldictionnaire -lmot -lcunit -L${HOME}/local/lib
+$(TESTDIR)/testsCorrecteurOrthographique : $(SRCDIR)/testsCorrecteurOrthographique.o $(LIBDIR)/libmot.a $(LIBDIR)/libdictionnaire.a $(LIBDIR)/libcorrecteurOrthographique.a
+	$(CC) -o $@ $^ -lmot -ldictionnaire -lcorrecteurOrthographique $(LDFLAGS) -lcunit -L${HOME}/local/lib
 	
 $(TESTDIR)/testsDictionnaire : $(SRCDIR)/testsDictionnaire.o $(LIBDIR)/libmot.a $(LIBDIR)/libdictionnaire.a $(LIBDIR)/libcorrecteurOrthographique.a
-	$(CC) -o $@ $^ -Llib -lcorrecteurOrthographique -ldictionnaire -lmot -lcunit -L${HOME}/local/lib
+	$(CC) -o $@ $^ -lcorrecteurOrthographique -ldictionnaire -lmot $(LDFLAGS) -lcunit -L${HOME}/local/lib
 	
 $(TESTDIR)/testsMot : $(SRCDIR)/testsMot.o $(LIBDIR)/libmot.a $(LIBDIR)/libdictionnaire.a $(LIBDIR)/libcorrecteurOrthographique.a
-	$(CC) -o $@ $^ -Llib -lcorrecteurOrthographique -ldictionnaire -lmot -lcunit -L${HOME}/local/lib
+	$(CC) -o $@ $^ -lcorrecteurOrthographique -ldictionnaire -lmot $(LDFLAGS) -lcunit -L${HOME}/local/lib
 	
 
 clean :
 	rm -rf $(BINDIR)
 	rm -rf $(LIBDIR)
-	rm -rf $(SRCDIR)/*.o
+	rm -f $(SRCDIR)/*.o
 	rm -rf $(TESTDIR)
 	rm -rf $(DOCDIR)

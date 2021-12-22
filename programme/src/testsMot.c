@@ -40,7 +40,7 @@ void test_MOT_ajouterMot(void){
 	MOT_TableauDeMots tabMotsTest = MOT_tableauDeMotsVide();
 	MOT_ajouterMot(&tabMotsTest,m);
 	CU_ASSERT_TRUE(sontEgauxMots(tabMots, tabMotsTest));
-	MOT_supprimerTableauMots(tabMots);
+	MOT_supprimerTableauMots(&tabMots);
 }
 
 
