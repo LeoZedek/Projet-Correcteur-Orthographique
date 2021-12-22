@@ -36,8 +36,9 @@ $(LIBDIR)/libcorrecteurOrthographique.a : $(SRCDIR)/correcteurOrthographique.o
 $(SRCDIR)/%.o : $(SRCDIR)/%.c
 	$(CC) -o $@ -c $^ $(CFLAGS)
 	
+
 	
-$(TESTDIR)/testsCorrecteurOrthographique : $(SRCDIR)/testsCorrecteurOrthographique.o 
+$(TESTDIR)/testsCorrecteurOrthographique : $(SRCDIR)/testsCorrecteurOrthographique.o $(LIBDIR)/libmot.a $(LIBDIR)/libdictionnaire.a $(LIBDIR)/libcorrecteurOrthographique.a
 	$(CC) -o $@ $^ -Llib -lcorrecteurOrthographique -ldictionnaire -lmot -lcunit -L${HOME}/local/lib
 	
 $(TESTDIR)/testsDictionnaire : $(SRCDIR)/testsDictionnaire.o $(LIBDIR)/libmot.a $(LIBDIR)/libdictionnaire.a $(LIBDIR)/libcorrecteurOrthographique.a

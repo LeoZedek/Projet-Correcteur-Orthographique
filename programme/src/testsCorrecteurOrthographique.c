@@ -1,8 +1,8 @@
-  #include<stdlib.h>
+#include<stdlib.h>
 #include<CUnit/Basic.h>
-#include "correcteurOrthographique.h"
-#include "mot.h"
-#include "dictionnaire.h"
+#include"mot.h"
+#include"dictionnaire.h"
+#include"correcteurOrthographique.h"
 #define TRUE 1
 #define FALSE 0
 
