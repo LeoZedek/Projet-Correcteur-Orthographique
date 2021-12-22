@@ -24,8 +24,12 @@ int CO_obtenirIemeEntier(CO_TableauDEntiers tableauEntiers, int position){
 }
 
 int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers){
-	return &tableauEntiers.lesEntiers;
+	return tableauEntiers.lesEntiers;
 }
 
+void CO_ajouterEntier(CO_TableauDEntiers *tableauEntiers, int entierAAjouter){
+	CO_fixerLongueurTabEntiers(&tableauEntiers, CO_obtenirLongueurTabEntiers(*tableauEntiers)+1);
+	(*tableauEntiers).lesEntiers[CO_obtenirLongueurTabEntiers(*tableauEntiers)] = entierAAjouter;
 
+}
 
