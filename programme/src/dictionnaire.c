@@ -52,6 +52,10 @@ int abs(int a){
 	}
 }
 
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide(){
+	return NULL ;
+}
+
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot){
 	DICTIONNAIRE_Dictionnaire dictionnaire ;
 	dictionnaire = (DICTIONNAIRE_Dictionnaire)malloc(DICTIONNAIRE_Noeuds);
@@ -239,3 +243,4 @@ char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnair
 	char *tmp=NULL ;//Temporaire pour compilation
 	return tmp ;
 }
+void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){}
