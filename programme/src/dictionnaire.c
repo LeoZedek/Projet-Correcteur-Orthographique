@@ -8,6 +8,7 @@
 #include <string.h>
 #include<assert.h>
 #include<stdlib.h>
+#include<stdio.h>
 #include"dictionnaire.h"
 #include"mot.h"
 
@@ -236,7 +237,18 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 	}
 }
 
-void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char nomFichier){}
+void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier){
+	char chaine[30];//taille max du mot
+	MOT_Mot mot ;
+	FILE* fichier ;
+	fichier = fopen(nomFichier, "w")
+	while(EOF){
+		fgets(chaine,50,fichier);
+		mot = MOT_creerMot(chaine);
+		DICTIONNAIRE_ajouterMot(dictionnaire, mot);
+	}
+	fclose(fichier);
+}
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine){
 	return DICTIONNAIRE_dictionnaireVide();//Temporaire pour compilation
@@ -246,4 +258,6 @@ char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnair
 	char *tmp=NULL ;//Temporaire pour compilation
 	return tmp ;
 }
-void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){}
+void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){
+
+}

@@ -69,7 +69,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 
 
 /**
- *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, fichier)
+ *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier)
  *\brief ajoute le contenue d'un fichier dans le dictionnaire
  *\attention precondition : Le fichier doit être accessible en lecture
  *
@@ -77,7 +77,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
  *\param nomFichier : Le nom du fichier qui contient tous les mots à insérer
  *\return Ne renvoie rien, modifie juste le contenue du dictionnaire
 */
-void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char nomFichier);
+void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier);
 
 
 /**
