@@ -108,7 +108,7 @@ void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m);
  */
 
 
-void MOT_supprimerTableauMots(MOT_TableauDeMots tableau);
+void MOT_supprimerTableauMots(MOT_TableauDeMots *tableau);
 
 /**
  *\fn int MOT_estUneLettre(char charactere)
@@ -159,7 +159,7 @@ void MOT_fixerLongeurMot(MOT_Mot *m, unsigned int longeur);
  *\param chaine : la chaine utiliser pour construire la variable de type Mot
  *\return La variable de type Mot construit à partir du paramètre d'entrée
 */
-MOT_Mot creerMot(char *chaine);
+MOT_Mot MOT_creerMot(char *chaine);
 
 
 /**
