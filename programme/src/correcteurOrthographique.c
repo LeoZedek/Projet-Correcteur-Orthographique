@@ -14,3 +14,7 @@ int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers){
 	return tableauEntiers.longeur;
 }
 
+void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongeur){
+	(*pointeurTableauEntiers).longeur = nouvelleLongeur;
+}
+
