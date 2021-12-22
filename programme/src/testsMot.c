@@ -69,8 +69,6 @@ void test_MOT_sontEgaux(void){
 }
 
 
-
-
 void test_MOT_remplacerLettre(void){
 	MOT_Mot mot1 = MOT_creerMot("papillon");
 	MOT_Mot mot2 = MOT_creerMot("papellon");
