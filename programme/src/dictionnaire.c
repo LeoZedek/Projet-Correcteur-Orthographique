@@ -9,6 +9,29 @@
 #include<assert.h>
 #include"dictionnaire.h"
 #include"mot.h"
+/*------------Signatures------------------------------*/
+int max(int a, int b);
+int abs(int a);
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire();
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_ajouterRacine(MOT_Mot mot, DICTIONNAIRE_Dictionnaire filsGauche, DICTIONNAIRE_Dictionnaire filsDroit);
+int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire);
+DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
+DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire);
+MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire);
+void DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsGauche);
+void DICTIONNAIRE_fixerFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsDroit);
+void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire);
+void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
+void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire);
+void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
+int DICTIONNAIRE_hauteur(DICTIONNAIRE_Dictionnaire dictionnaire);
+void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire);
+int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot);
+void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot);
+void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char nomFichier);
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine);
+char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire);
+
 /*--------------Fonction Privé--------------------------*/
 //Qui ne sont ni dans la conception ni dans le .h
 int max(int a, int b){
@@ -32,6 +55,7 @@ int abs(int a){
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(){
 	return NULL ;
 }
+
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_ajouterRacine(MOT_Mot mot, DICTIONNAIRE_Dictionnaire filsGauche, DICTIONNAIRE_Dictionnaire filsDroit){
 	return DICTIONNAIRE_dictionnaire() ;//A COMPLETER
 }
@@ -45,12 +69,10 @@ DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionna
 	return &((*dictionnaire)->filsGauche) ;
 }
 
-
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	assert(!(DICTIONNAIRE_estVide(*dictionnaire))) ;
 	return &((*dictionnaire)->filsDroit) ;
 }
-
 
 MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire){
 	assert(!(DICTIONNAIRE_estVide(dictionnaire))) ;
@@ -77,7 +99,6 @@ void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	dictionnaire = filsGauche ;
 }
 
-
 void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	assert(!(DICTIONNAIRE_estVide(*dictionnaire))
 		&& !(DICTIONNAIRE_estVide(*DICTIONNAIRE_obtenirFilsDroit(dictionnaire))));
@@ -92,7 +113,6 @@ void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	dictionnaire = filsDroit ;
 }
 
-
 void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	assert( !(DICTIONNAIRE_estVide(*dictionnaire)) 
 		&& !(DICTIONNAIRE_estVide(*DICTIONNAIRE_obtenirFilsGauche(dictionnaire))) 
@@ -105,7 +125,6 @@ void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	DICTIONNAIRE_fixerFilsGauche(dictionnaire, *filsGauche);
 	DICTIONNAIRE_simpleRotationDroite(dictionnaire);
 }
-
 
 void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	assert( !(DICTIONNAIRE_estVide(*dictionnaire)) 
@@ -149,6 +168,8 @@ void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire){
 		}
 	}
 }
+
+
 /*--------------Fonction Publique--------------------------*/
 
 int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot){
@@ -175,9 +196,6 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
 		}
 	}
 }
-
-
-
 
 void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot){
 	DICTIONNAIRE_Dictionnaire *filsGauche, *filsDroit ;
@@ -210,14 +228,11 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 	}
 }
 
-
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char nomFichier){}
-
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine){
 	return DICTIONNAIRE_dictionnaire();//Temporaire pour compilation
 }
-
 
 char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire){
 	char *tmp=NULL ;//Temporaire pour compilation
