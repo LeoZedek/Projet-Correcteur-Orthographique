@@ -56,7 +56,7 @@ MOT_TableauDeMots MOT_tableauDeMotsVide();
  *\return La longeur du tableau
  */
 
-int MOT_obtenirLongeurTabMots(MOT_TableauDeMots tableauMots);
+int MOT_obtenirLongueurTabMots(MOT_TableauDeMots tableauMots);
 
 /**
  *\fn void MOT_fixerLongeurTabMots(MOT_TableauDeMots *tableauMots, int nouvelleLongeur)
@@ -67,7 +67,7 @@ int MOT_obtenirLongeurTabMots(MOT_TableauDeMots tableauMots);
  *
  */
 
-void MOT_fixerLongeurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvelleLongeur);
+void MOT_fixerLongueurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvelleLongeur);
 
 /**
  *\fn MOT_Mot MOT_obteniriIemeMot(MOT_TableauDeMots tableauMots, int position);
@@ -108,7 +108,7 @@ void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m);
  */
 
 
-void MOT_supprimerTableauMots(MOT_TableauDeMots tableau);
+void MOT_supprimerTableauMots(MOT_TableauDeMots *tableau);
 
 /**
  *\fn int MOT_estUneLettre(char charactere)
@@ -149,7 +149,7 @@ int MOT_estUnMot(char *chaine);
  *\param longeur : la nouvelle longeur du mot
 */
 
-void MOT_fixerLongeurMot(MOT_Mot *m, unsigned int longeur);
+void MOT_fixerLongueurMot(MOT_Mot *m, unsigned int longeur);
 
 /**
  *\fn MOT_Mot MOT_creerMot(char *chaine)
@@ -159,7 +159,7 @@ void MOT_fixerLongeurMot(MOT_Mot *m, unsigned int longeur);
  *\param chaine : la chaine utiliser pour construire la variable de type Mot
  *\return La variable de type Mot construit à partir du paramètre d'entrée
 */
-MOT_Mot creerMot(char *chaine);
+MOT_Mot MOT_creerMot(char *chaine);
 
 
 /**
