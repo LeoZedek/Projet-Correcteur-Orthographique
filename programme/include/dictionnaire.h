@@ -27,6 +27,14 @@ typedef struct DICTIONNAIRE_Noeuds{
  */
 typedef DICTIONNAIRE_Noeuds *DICTIONNAIRE_Dictionnaire;
 
+/**
+ *\fn int DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide();
+ *\brief Renvoie un Dictionnaire vide. Ça sera un pointeur vers NULL. 
+ *
+ *\return Le dictionnaire vide.
+*/
+
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide();
 
 /**
  *\fn int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire)
@@ -92,5 +100,14 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine);
  *\return Le nom du fichier enregistré
 */
 char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire);
+
+/**
+ *\fn void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
+ *\brief Supprime et déalloue entièrement un dictionnaire.
+ *
+ *\param *dictionnaire : Le pointeur sur le dictionnaire qui sera supprimer.
+*/
+
+void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
 #endif
