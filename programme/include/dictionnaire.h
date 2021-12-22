@@ -56,27 +56,6 @@ int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire) ;
 */
 int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot) ;
 
-
-/**
- *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief Renvoie le fils gauche du dictionnaire "dictionnaire"
- *
- *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
- *\return Le sous arbre gauche de la racine du dictionnaire passé en paramètre
-*/
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire dictionnaire) ;
-
-
-/**
- *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief Renvoie le fils droit du dictionnaire "dictionnaire"
- *
- *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
- *\return Le sous arbre droit de la racine du dictionnaire passé en paramètre
-*/
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire dictionnaire) ;
-
-
 /**
  *\fn void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot)
  *\brief Ajoute un mot au dictionnaire
@@ -84,13 +63,13 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnair
  *
  *\param *dictionnaire : Le pointeur vers le dictionnaire dans lequelle on insère le mot
  *\param mot : Le mot que l'on insère
- *\return Ne renvoye rien mais modifie l'etat du dicctionnaire
+ *\return Ne renvoye rien mais modifie l'etat du dictionnaire
 */
 void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot);
 
 
 /**
- *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, fichier)
+ *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier)
  *\brief ajoute le contenue d'un fichier dans le dictionnaire
  *\attention precondition : Le fichier doit être accessible en lecture
  *
@@ -98,7 +77,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
  *\param nomFichier : Le nom du fichier qui contient tous les mots à insérer
  *\return Ne renvoie rien, modifie juste le contenue du dictionnaire
 */
-void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char nomFichier);
+void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier);
 
 
 /**
