@@ -18,3 +18,9 @@ void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int 
 	(*pointeurTableauEntiers).longueur = nouvelleLongueur;
 }
 
+
+int CO_obtenirIemeEntier(CO_TableauDEntiers tableauEntiers, int position){
+	return tableauEntiers.lesEntiers[position];
+}
+
+
