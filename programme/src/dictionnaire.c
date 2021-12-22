@@ -7,8 +7,10 @@
  */
 #include <string.h>
 #include<assert.h>
+#include<stdlib.h>
 #include"dictionnaire.h"
 #include"mot.h"
+
 /*------------Signatures------------------------------*/
 int max(int a, int b);
 int abs(int a);
@@ -17,7 +19,7 @@ int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire);
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire);
 MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire);
-void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot){
+void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot);
 void DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsGauche);
 void DICTIONNAIRE_fixerFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsDroit);
 void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire);
@@ -58,9 +60,10 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide(){
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot){
 	DICTIONNAIRE_Dictionnaire dictionnaire ;
-	dictionnaire = (DICTIONNAIRE_Dictionnaire)malloc(DICTIONNAIRE_Noeuds);
+	dictionnaire = (DICTIONNAIRE_Dictionnaire)malloc(sizeof(DICTIONNAIRE_Noeuds));
 	dictionnaire->mot = mot ;
-
+	dictionnaire->filsGauche = DICTIONNAIRE_dictionnaireVide();
+	dictionnaire->filsDroit = DICTIONNAIRE_dictionnaireVide() ;
 }
 void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot){
 
@@ -209,7 +212,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 	MOT_Mot motDico;
 	
 	if (DICTIONNAIRE_estVide(*dictionnaire)){
-		*dictionnaire = DICTIONNAIRE_ajouterRacine(mot,DICTIONNAIRE_dictionnaire(),DICTIONNAIRE_dictionnaire());
+		*dictionnaire = DICTIONNAIRE_dictionnaire(mot);
 	}
 	else{
 		chaineAInserer = MOT_motEnChaine(mot) ;
@@ -236,7 +239,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char nomFichier){}
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine){
-	return DICTIONNAIRE_dictionnaire();//Temporaire pour compilation
+	return DICTIONNAIRE_dictionnaireVide();//Temporaire pour compilation
 }
 
 char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire){
