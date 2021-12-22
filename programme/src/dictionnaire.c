@@ -13,12 +13,12 @@
 int max(int a, int b);
 int abs(int a);
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire();
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_ajouterRacine(MOT_Mot mot, DICTIONNAIRE_Dictionnaire filsGauche, DICTIONNAIRE_Dictionnaire filsDroit);
 int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire);
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire);
 MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire);
-void DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsGauche);
+void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot){
+oid DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsGauche);
 void DICTIONNAIRE_fixerFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsDroit);
 void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire);
 void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
@@ -52,14 +52,15 @@ int abs(int a){
 	}
 }
 
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(){
-	return NULL ;
-}
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot){
+	DICTIONNAIRE_Dictionnaire dictionnaire ;
+	dictionnaire = (DICTIONNAIRE_Dictionnaire)malloc(DICTIONNAIRE_Noeuds);
+	dictionnaire->mot = mot ;
 
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_ajouterRacine(MOT_Mot mot, DICTIONNAIRE_Dictionnaire filsGauche, DICTIONNAIRE_Dictionnaire filsDroit){
-	return DICTIONNAIRE_dictionnaire() ;//A COMPLETER
 }
+void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot){
 
+}
 int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire){
 	return (dictionnaire==NULL);
 }
