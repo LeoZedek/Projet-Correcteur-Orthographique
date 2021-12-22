@@ -10,5 +10,7 @@ CO_TableauDEntiers CO_tableauDEntiersVide(){
 	return tab;
 }
 
-
+int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers){
+	return tableauEntiers.longeur;
+}
 
