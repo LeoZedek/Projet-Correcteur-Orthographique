@@ -130,21 +130,20 @@ void MOT_fixerLongueurMot(MOT_Mot *m, unsigned int nvLongueur) {
 
 MOT_Mot MOT_remplacerLettre(MOT_Mot m, int pos, char c) {
 
-	assert(pos < MOT_longueurMot(m));
+	assert(pos < MOT_longueurMot(m) && pos >= 0 && MOT_estUneLettre(c));
 
 	MOT_Mot nvMot;
 	char *chaine = MOT_motEnChaine(m);
 
 	chaine[pos] = c;
 	nvMot = MOT_creerMot(chaine);
-	MOT_fixerLongueurMot(&nvMot, MOT_longueurMot(m));
 
 	return nvMot;
 }
 
 MOT_Mot MOT_supprimerLettre(MOT_Mot m, int pos) {
 
-	assert(pos < MOT_longueurMot(m));
+	assert(pos < MOT_longueurMot(m) && pos >= 0);
 
 	MOT_Mot nvMot;
 	char *chaine = MOT_motEnChaine(m);
@@ -156,19 +155,36 @@ MOT_Mot MOT_supprimerLettre(MOT_Mot m, int pos) {
 	}
 
 	nvMot = MOT_creerMot(nvChaine);
-	MOT_fixerLongueurMot(&nvMot, MOT_longueurMot(m) - 1);
 
 	return nvMot;
 }
 
 MOT_Mot MOT_insererLettre(MOT_Mot m, int pos, char c) {
-	MOT_Mot mot ; //A changer -> pour la compilation
-	return mot ; //A changer -> pour la compilation
+
+	assert(0 <= pos && pos <= MOT_longueurMot(m) && MOT_estUneLettre(c));
+
+	MOT_Mot nvMot;
+	char *chaine = MOT_motEnChaine(m);
+	char nvChaine[Taille_Max_Mot];
+	strcpy(nvChaine, chaine);
+
+	for (int i = pos + 1; i <= MOT_longueurMot(m) + 1; i++) {
+		nvChaine[i] = chaine[i - 1];
+	}
+
+	nvChaine[pos] = c;
+	nvMot = MOT_creerMot(nvChaine);
+
+	return nvMot;
 }
 
 MOT_Mot MOT_inverserLettre(MOT_Mot m, int pos) {
-	MOT_Mot mot ; //A changer -> pour la compilation
-	return mot ; //A changer -> pour la compilation
+
+	assert(0 <= pos && pos < MOT_longueurMot(m) - 1);
+
+	MOT_Mot nvMot;
+
+	return nvMot;
 }
 
 MOT_DeuxMots MOT_decomposerMot(MOT_Mot m, int pos) {

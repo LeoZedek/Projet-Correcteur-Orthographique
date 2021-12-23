@@ -79,9 +79,9 @@ void test_MOT_remplacerLettre(void){
 
 void test_MOT_supprimerLettre(void){
 	MOT_Mot mot1 = MOT_creerMot("papillon");
-	MOT_Mot mot2 = MOT_creerMot("papelllon");
-	MOT_Mot mot3 = MOT_supprimerLettre(mot2,4);
-	CU_ASSERT_TRUE(MOT_sontEgaux(mot1, mot3));
+	MOT_Mot mot2 = MOT_creerMot("papllon");
+	MOT_Mot mot3 = MOT_supprimerLettre(mot1,3);
+	CU_ASSERT_TRUE(MOT_sontEgaux(mot2, mot3));
 }
 
 
