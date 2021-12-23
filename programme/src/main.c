@@ -12,17 +12,37 @@ void afficherAide(){
 }
 
 int main(int argc, char **argv){	
-	
-	if (argc == 1){
-		afficherAide(); //Affichage de l'aide dans le cas ou il n'y a pas de paramètre à l'appelle de la fonction
-	}
-	else{
-		if (strcmp(argv[1],"-h")==0){// Affichage de l'aide à la demande de l'utilisateur
-			afficherAide(); 
+	char *nomDictionnaire,*nomFichier ;
+	DICTIONNAIRE_Dictionnaire dictionnaire;
+	if (argc>1){//appel avec option
+		if (strcmp(argv[1],"-h")==0){//demande de l'aide SOS !
+			afficherAide();
 		}
 		else{
-			/*------------------------ Fonctionnement du correcteur ------------------------------*/
-			printf("n'affiche pas l'aide");
+			if (strcmp(argv[1],"-d")==0 && argc>=2){//première option est -d ET il y a un nom de fichier (a priori mais c'est une précondition) après
+				nomDictionnaire = argv[2];
+				dictionnaire = DICTIONNAIRE_chargerDictionnaire(nomDictionnaire);//on charge le dictionnaire meme si il est vide
+				//Quesaquo du dictionnaire qui n'existe pas et qu'il faut créé (voir dans la lib DICO)
+				if (argc >= 3){// il reste de paramètres en option
+					if (strcmp(argv[3],"-f")==0 && argc>=4){// l'utilisateur souhaitent ajouter des mots ET a donner le nom du fichier à ajouter
+						nomFichier = argv[3];
+						DICTIONNAIRE_ajouterFichier(&dictionnaire,nomFichier);
+					}
+					else {//le paramètre suivant n'est pas -f OU le fichier n'a pas été donné
+						afficherAide();
+					}
+				}
+				else{
+					//coder la correction ici 
+					//Le dictionnaire a été chargé il faut récupérer la chaine de carcatère du texte et appliquer les éventuelles corrections
+				}
+			}
+			else{//la premiere option n'est pas -d ou il n'y a pas le nom de fichier après
+				afficherAide();
+			}
 		}
+	}
+	else {//appel sans option
+		afficherAide();
 	}
 }
