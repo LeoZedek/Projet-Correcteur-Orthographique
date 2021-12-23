@@ -6,18 +6,18 @@ const int CO_Taille_Max = 10000;
 MOT_TableauDeMots MOT_tableauDeMotsVide() {
 
 	MOT_TableauDeMots tabVide;
-	
+
 	tabVide.lesMots = (MOT_Mot*)malloc(sizeof(MOT_Mot) * CO_Taille_Max);
 	MOT_fixerLongueurTabMots(&tabVide, 0);
 	return tabVide;
 }
 
 int MOT_obtenirLongueurTabMots(MOT_TableauDeMots tableauMots) {
-	return 1; //A changer -> pour la compilation
+	return tableauMots.longueur;
 }
 
 void MOT_fixerLongueurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvelleLongeur) {
-
+	(*pointeurTableauMots).longueur = nouvelleLongeur;
 }
 
 MOT_Mot MOT_obtenirIemeMot(MOT_TableauDeMots tableauMots, int position) {
