@@ -27,6 +27,7 @@ char *saisirChaine(char *lpBuffer, size_t nBufSize){//code trouver sur internet 
 int main(int argc, char **argv){	
 	char *nomDictionnaire,*nomFichier ;
 	char chaineEntree[TAILLEMAX];
+	CO_MotsDansPhrase tableauMot;
 	DICTIONNAIRE_Dictionnaire dictionnaire;
 	if (argc>1){//appel avec option
 		if (strcmp(argv[1],"-h")==0){//utilisateur demande de l'aide envoie de SOS ! d'un terrien en detresse
@@ -52,7 +53,9 @@ int main(int argc, char **argv){
 					//coder la correction ici 
 					//Le dictionnaire a été chargé il faut récupérer la chaine de carcatère du texte et appliquer les éventuelles corrections
 					saisirChaine(chaineEntree,sizeof(chaineEntree));
-					fprintf(stderr,"on a rentre %s\n",chaineEntree);
+					fprintf(stderr,"on a rentre %s\n",chaineEntree);//pour tester le fonctionnement
+					tableauMot = CO_phraseEnMots(chaineEntree);
+					
 				}
 			}
 			else{//la premiere option n'est pas -d ou il n'y a pas le nom de fichier après
