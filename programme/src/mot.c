@@ -2,7 +2,10 @@
 #include"correcteurOrthographique.h"
 #include<assert.h>
 #include<stdlib.h>
+#include<string.h>
 #define Taille_Max 10000
+#define TRUE 1
+#define FALSE 0
 
 MOT_TableauDeMots MOT_tableauDeMotsVide() {
 
@@ -55,8 +58,45 @@ int MOT_estUneLettre(char c) {
 	return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || (c == '-');
 }
 
+MOT_Mot MOT_creerMot(char *chaine) {
+	//assert(MOT_estUnMot(chaine))
+
+	MOT_Mot mot;
+
+	mot.chaine = chaine;
+	MOT_fixerLongueurMot(&mot, strlen(chaine));
+
+	return mot;
+}
+
 unsigned int MOT_longueurMot(MOT_Mot mot) {
-	return 1; //A changer -> pour la compilation
+	return mot.longueur;
+}
+
+char *MOT_motEnChaine(MOT_Mot m) {
+	return m.chaine;
+}
+
+int MOT_sontEgaux(MOT_Mot m1, MOT_Mot m2) {
+	int egaux = TRUE;
+
+	if (MOT_longueurMot(m1) != MOT_longueurMot(m2)) {
+		egaux = FALSE;
+	}
+
+	else {
+
+		char *chaine1 = MOT_motEnChaine(m1);
+		char *chaine2 = MOT_motEnChaine(m2);
+
+		for (int i = 0; i < MOT_longueurMot(m1); i++) {
+			if (chaine1[i] != chaine2[i]) {
+				egaux = FALSE;
+			}
+		}
+	}
+
+	return egaux;
 }
 
 int MOT_estUnMot(char *chaine) {
@@ -67,19 +107,6 @@ void MOT_fixerLongueurMot(MOT_Mot *m, unsigned int longeur) {
 
 }
 
-MOT_Mot MOT_creerMot(char *chaine) {
-	MOT_Mot mot ; //A changer -> pour la compilation
-	return mot ; //A changer -> pour la compilation
-}
-
-int MOT_sontEgaux(MOT_Mot m1, MOT_Mot m2) {
-	return 1; //A changer -> pour la compilation
-}
-
-char *MOT_motEnChaine(MOT_Mot m) {
-	char *tmp; //A changer -> pour la compilation
-	return tmp; //A changer -> pour la compilation
-}
 
 MOT_Mot MOT_remplacerLettre(MOT_Mot m, int pos, char c) {
 	MOT_Mot mot ; //A changer -> pour la compilation
@@ -87,7 +114,7 @@ MOT_Mot MOT_remplacerLettre(MOT_Mot m, int pos, char c) {
 }
 
 MOT_Mot MOT_supprimerLettre(MOT_Mot m, int pos) {
-	MOT_Mot mot ; //A changer -> pour la compilation
+	MOT_Mot mot = MOT_creerMot("bonjour") ; //A changer -> pour la compilation
 	return mot ; //A changer -> pour la compilation
 }
 
