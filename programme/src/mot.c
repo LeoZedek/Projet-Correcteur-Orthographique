@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<string.h>
 #define Taille_Max_Tableau 10000
-#define Taille_Max_Mot 50
+#define Taille_Max_Mot 500
 #define TRUE 1
 #define FALSE 0
 
@@ -50,6 +50,9 @@ void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m) {
 }
 
 void MOT_supprimerTableauMots(MOT_TableauDeMots *tableau) {
+
+	//Rajouter le free des Mots.
+
 	MOT_fixerLongueurTabMots(tableau, -1);
 	free((*tableau).lesMots);
 }
@@ -133,13 +136,29 @@ MOT_Mot MOT_remplacerLettre(MOT_Mot m, int pos, char c) {
 	char *chaine = MOT_motEnChaine(m);
 
 	chaine[pos] = c;
+	nvMot = MOT_creerMot(chaine);
+	MOT_fixerLongueurMot(&nvMot, MOT_longueurMot(m));
 
-	return MOT_creerMot(chaine);
+	return nvMot;
 }
 
 MOT_Mot MOT_supprimerLettre(MOT_Mot m, int pos) {
-	MOT_Mot mot = MOT_creerMot("bonjour") ; //A changer -> pour la compilation
-	return mot ; //A changer -> pour la compilation
+
+	assert(pos < MOT_longueurMot(m));
+
+	MOT_Mot nvMot;
+	char *chaine = MOT_motEnChaine(m);
+	char nvChaine[Taille_Max_Mot];
+	strcpy(nvChaine, chaine);
+
+	for (int i = pos; i < MOT_longueurMot(m); i++) {
+		nvChaine[i] = chaine[i + 1];
+	}
+
+	nvMot = MOT_creerMot(nvChaine);
+	MOT_fixerLongueurMot(&nvMot, MOT_longueurMot(m) - 1);
+
+	return nvMot;
 }
 
 MOT_Mot MOT_insererLettre(MOT_Mot m, int pos, char c) {
