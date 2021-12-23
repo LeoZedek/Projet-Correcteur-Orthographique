@@ -1,8 +1,15 @@
 #include"mot.h"
+#include"correcteurOrthographique.h"
+
+const int CO_Taille_Max = 10000;
 
 MOT_TableauDeMots MOT_tableauDeMotsVide() {
-	MOT_TableauDeMots temp; //A changer -> pour la compilation
-	return temp; //A changer -> pour la compilation
+
+	MOT_TableauDeMots tabVide;
+	
+	tabVide.lesMots = (MOT_Mot*)malloc(sizeof(MOT_Mot) * CO_Taille_Max);
+	MOT_fixerLongueurTabMots(&tabVide, 0);
+	return tabVide;
 }
 
 int MOT_obtenirLongueurTabMots(MOT_TableauDeMots tableauMots) {
