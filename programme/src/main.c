@@ -1,10 +1,14 @@
 #include<stdio.h>
+#include<string.h>
 #include"correcteurOrthographique.h"
 #include"dictionnaire.h"
 #include"mot.h"
 
 void afficherAide(){
-	printf("Affichage de l'aide");
+	printf("Aide de asispell :\n");
+	printf("\t asispell -h : cette aide\n");
+	printf("\t asispell -d dico : correction de l'entree standard a l'aide du dictionnaire dico\n");
+	printf("\t asispell -d dico -f fic : completer le dictionnaire dico a l'aide des mots du fichier fic (un mot par ligne)\n");
 }
 
 int main(int argc, char **argv){	
@@ -13,12 +17,12 @@ int main(int argc, char **argv){
 		afficherAide(); //Affichage de l'aide dans le cas ou il n'y a pas de paramètre à l'appelle de la fonction
 	}
 	else{
-		if (1/*A Changer*/){//argv[1]=="-h" faire la comparaison avec les  chaine de char
-			afficherAide(); // Affichage de l'aide à la demande de l'utilisateur
+		if (strcmp(argv[1],"-h")==0){// Affichage de l'aide à la demande de l'utilisateur
+			afficherAide(); 
 		}
 		else{
 			/*------------------------ Fonctionnement du correcteur ------------------------------*/
-			
+			printf("n'affiche pas l'aide");
 		}
 	}
 }
