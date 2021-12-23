@@ -183,6 +183,14 @@ MOT_Mot MOT_inverserLettre(MOT_Mot m, int pos) {
 	assert(0 <= pos && pos < MOT_longueurMot(m) - 1);
 
 	MOT_Mot nvMot;
+	char *chaine = MOT_motEnChaine(m);
+	char nvChaine[Taille_Max_Mot];
+	strcpy(nvChaine, chaine);
+
+	nvChaine[pos] = chaine[pos + 1];
+	nvChaine[pos + 1] = chaine[pos];
+
+	nvMot = MOT_creerMot(nvChaine);
 
 	return nvMot;
 }
