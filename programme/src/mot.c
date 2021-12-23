@@ -226,3 +226,5 @@ MOT_DeuxMots MOT_decomposerMot(MOT_Mot m, int pos) {
 
 	return nvMots;
 }
+
+//Ce qu'il reste à faire : tout mettre en allocation dynamique et mettre les free (supprimer) dans les tests.
