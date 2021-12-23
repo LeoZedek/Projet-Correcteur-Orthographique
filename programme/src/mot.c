@@ -49,9 +49,19 @@ void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m) {
 
 }
 
+void MOT_supprimerMot(MOT_Mot *m) {
+	MOT_fixerLongueurMot(m, -1);
+	free((*m).chaine);
+}
+
 void MOT_supprimerTableauMots(MOT_TableauDeMots *tableau) {
 
-	//Rajouter le free des Mots.
+	MOT_Mot motASupprimer;
+
+	for (int i = 0; i < MOT_obtenirLongueurTabMots(*tableau); i++) {
+		motASupprimer = MOT_obtenirIemeMot(*tableau, i);
+		MOT_supprimerMot(&motASupprimer);
+	}
 
 	MOT_fixerLongueurTabMots(tableau, -1);
 	free((*tableau).lesMots);
