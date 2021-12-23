@@ -33,8 +33,8 @@ int main(int argc, char **argv){
 	CO_TableauBooleens tableauBool ;
 	CO_TableauPositions tableauPositions;
 	MOT_TableauDeMots tableauMotCorriger;
-	int logueurTableau;
-	int entierCourant;
+	MOT_Mot motAcorriger;
+	int logueurTableau, entierCourant,i,j, longueurTableauMotCor,position;
 	if (argc>1){//appel avec option
 		if (strcmp(argv[1],"-h")==0){//utilisateur demande de l'aide envoie de SOS ! d'un terrien en detresse
 			afficherAide();
@@ -65,21 +65,21 @@ int main(int argc, char **argv){
 					tableauBool = CO_sontPresents(tableauDeMot,dictionnaire);
 					tableauPositions = CO_obtenirTabPositions(tableauMotDansPhrase);
 					logueurTableau = CO_obtenirLongueurTabEntiers(tableauBool);
-					for (int i = 0; i<logueurTableau;i++){
+					for (i = 0; i<logueurTableau;i++){
 						entierCourant = CO_obtenirIemeEntier(tableauBool,i);
 						if (entierCourant){
 							printf("*\n");
 						}
 						else{
 							printf("& ");
-							MOT_Mot motAcorriger = MOT_obtenirIemeMot(tableauDeMot,i);
+							motAcorriger = MOT_obtenirIemeMot(tableauDeMot,i);
 							printf("%s ", MOT_motEnChaine(motAcorriger));
 							tableauMotCorriger = CO_proposerMots(motAcorriger,dictionnaire);
-							int longueurTableauMotCor = MOT_obtenirLongueurTabMots(tableauMotCorriger);
+							longueurTableauMotCor = MOT_obtenirLongueurTabMots(tableauMotCorriger);
 							printf("%d ", longueurTableauMotCor);
-							int position = CO_obtenirIemeEntier(tableauPositions,i);
+							position = CO_obtenirIemeEntier(tableauPositions,i);
 							printf("%d:", position);
-							for (int j = 0; j<longueurTableauMotCor;j++){
+							for (j = 0; j<longueurTableauMotCor;j++){
 								printf("%s ",MOT_motEnChaine(MOT_obtenirIemeMot(tableauMotCorriger,j)));
 							}
 							printf("\n");
