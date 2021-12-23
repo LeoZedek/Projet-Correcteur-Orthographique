@@ -27,8 +27,14 @@ char *saisirChaine(char *lpBuffer, size_t nBufSize){//code trouver sur internet 
 int main(int argc, char **argv){	
 	char *nomDictionnaire,*nomFichier ;
 	char chaineEntree[TAILLEMAX];
-	CO_MotsDansPhrase tableauMot;
+	CO_MotsDansPhrase tableauMotDansPhrase;
 	DICTIONNAIRE_Dictionnaire dictionnaire;
+	MOT_TableauDeMots tableauDeMot ;
+	CO_TableauBooleens tableauBool ;
+	CO_TableauPositions tableauPositions;
+	MOT_TableauDeMots tableauMotCorriger;
+	int logueurTableau;
+	int entierCourant;
 	if (argc>1){//appel avec option
 		if (strcmp(argv[1],"-h")==0){//utilisateur demande de l'aide envoie de SOS ! d'un terrien en detresse
 			afficherAide();
@@ -54,8 +60,31 @@ int main(int argc, char **argv){
 					//Le dictionnaire a été chargé il faut récupérer la chaine de carcatère du texte et appliquer les éventuelles corrections
 					saisirChaine(chaineEntree,sizeof(chaineEntree));
 					fprintf(stderr,"on a rentre %s\n",chaineEntree);//pour tester le fonctionnement
-					tableauMot = CO_phraseEnMots(chaineEntree);
-					
+					tableauMotDansPhrase = CO_phraseEnMots(chaineEntree);
+					tableauDeMot = CO_obtenirTabMots(tableauMotDansPhrase);
+					tableauBool = CO_sontPresents(tableauDeMot,dictionnaire);
+					tableauPositions = CO_obtenirTabPositions(tableauMotDansPhrase);
+					logueurTableau = CO_obtenirLongueurTabEntiers(tableauBool);
+					for (int i = 0; i<logueurTableau;i++){
+						entierCourant = CO_obtenirIemeEntier(tableauBool,i);
+						if (entierCourant){
+							printf("*\n");
+						}
+						else{
+							printf("& ");
+							MOT_Mot motAcorriger = MOT_obtenirIemeMot(tableauDeMot,i);
+							printf("%s ", MOT_motEnChaine(motAcorriger));
+							tableauMotCorriger = CO_proposerMots(motAcorriger,dictionnaire);
+							int longueurTableauMotCor = MOT_obtenirLongueurTabMots(tableauMotCorriger);
+							printf("%d ", longueurTableauMotCor);
+							int position = CO_obtenirIemeEntier(tableauPositions,i);
+							printf("%d:", position);
+							for (int j = 0; j<longueurTableauMotCor;j++){
+								printf("%s ",MOT_motEnChaine(MOT_obtenirIemeMot(tableauMotCorriger,j)));
+							}
+							printf("\n");
+						}
+					}
 				}
 			}
 			else{//la premiere option n'est pas -d ou il n'y a pas le nom de fichier après
