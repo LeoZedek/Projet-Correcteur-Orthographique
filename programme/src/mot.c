@@ -1,13 +1,14 @@
 #include"mot.h"
 #include"correcteurOrthographique.h"
-
-const int CO_Taille_Max = 10000;
+#include<assert.h>
+#include<stdlib.h>
+#define Taille_Max 10000
 
 MOT_TableauDeMots MOT_tableauDeMotsVide() {
 
 	MOT_TableauDeMots tabVide;
 
-	tabVide.lesMots = (MOT_Mot*)malloc(sizeof(MOT_Mot) * CO_Taille_Max);
+	tabVide.lesMots = (MOT_Mot*)malloc(sizeof(MOT_Mot) * Taille_Max);
 	MOT_fixerLongueurTabMots(&tabVide, 0);
 	return tabVide;
 }
@@ -20,15 +21,17 @@ void MOT_fixerLongueurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvel
 	(*pointeurTableauMots).longueur = nouvelleLongeur;
 }
 
-MOT_Mot MOT_obtenirIemeMot(MOT_TableauDeMots tableauMots, int position) {
-	MOT_Mot mot ; //A changer -> pour la compilation
-	return mot ; //A changer -> pour la compilation
+MOT_Mot *MOT_obtenirLesMots(MOT_TableauDeMots tableauMots) {
+	return tableauMots.lesMots;
 }
 
-MOT_Mot *MOT_obtenirLesMots(MOT_TableauDeMots tableauMots) {
-	MOT_Mot *mot ; //A changer -> pour la compilation
-	return mot ; //A changer -> pour la compilation
+MOT_Mot MOT_obtenirIemeMot(MOT_TableauDeMots tableauMots, int position) {
+	assert(position < MOT_obtenirLongueurTabMots(tableauMots) && position >= 0);
+
+	MOT_Mot* lesMots = MOT_obtenirLesMots(tableauMots);
+	return lesMots[position];
 }
+
 
 void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m) {
 
