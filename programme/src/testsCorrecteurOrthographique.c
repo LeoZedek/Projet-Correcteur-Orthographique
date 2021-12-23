@@ -15,7 +15,7 @@ int clean_suite_success(void) {
 }
 
 
-int sontEgauxEntiers(CO_TableauBooleens entierGeneres, CO_TableauBooleens entierVerifies){
+int sontEgauxEntiers(CO_TableauDEntiers entierGeneres, CO_TableauDEntiers entierVerifies){
   int i;
   int egaux = TRUE;
 
@@ -163,7 +163,24 @@ void test_phraseEnMots(void)
   CO_supprimerMotsEtPositions(&motsEtPositions);
 }
 
+void test_ajouterEntier(void)
+{
+  CO_TableauDEntiers tabExacts = CO_tableauDEntiersVide();
+  CO_TableauDEntiers tabTest = CO_tableauDEntiersVide();
 
+  CO_fixerLongueurTabEntiers(&tabExacts, 3);
+  int *lesEntiersExacts = CO_obtenirLesEntiers(tabExacts);
+  lesEntiersExacts[0] = 1;
+  lesEntiersExacts[1] = 2;
+  lesEntiersExacts[2] = 3;
+
+  CO_ajouterEntier(&tabTest, 1);
+  CO_ajouterEntier(&tabTest, 2);
+  CO_ajouterEntier(&tabTest, 3);
+
+  CU_ASSERT_TRUE(sontEgauxEntiers(tabTest, tabExacts));
+
+}
 
 int main(int argc, char** argv){
   CU_pSuite pSuite = NULL;
