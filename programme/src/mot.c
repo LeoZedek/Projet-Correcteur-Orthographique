@@ -35,6 +35,14 @@ MOT_Mot MOT_obtenirIemeMot(MOT_TableauDeMots tableauMots, int position) {
 
 void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m) {
 
+	assert(MOT_obtenirLongueurTabMots(*tableauMots) < Taille_Max);
+
+	int longueur = MOT_obtenirLongueurTabMots(*tableauMots);
+	MOT_Mot *lesMots = MOT_obtenirLesMots(*tableauMots);
+
+	lesMots[longueur] = m;
+	MOT_fixerLongueurTabMots(tableauMots, longueur + 1);
+
 }
 
 void MOT_supprimerTableauMots(MOT_TableauDeMots *tableau) {
