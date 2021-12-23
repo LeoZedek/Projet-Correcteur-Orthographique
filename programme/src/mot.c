@@ -46,7 +46,8 @@ void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m) {
 }
 
 void MOT_supprimerTableauMots(MOT_TableauDeMots *tableau) {
-
+	MOT_fixerLongueurTabMots(tableau, -1);
+	free((*tableau).lesMots);
 }
 
 int MOT_estUneLettre(char charactere) {
