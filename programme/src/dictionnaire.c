@@ -236,29 +236,52 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 		}
 	}
 }
-
+void afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire){
+	if (!dictionnaire){
+		return;
+	}
+	if (dictionnaire->filsGauche){
+		afficherArbre(dictionnaire->filsGauche);
+	}
+	printf("%s\n",MOT_motEnChaine(DICTIONNAIRE_obtenirMot(dictionnaire)));
+	if (dictionnaire->filsDroit){
+		afficherArbre(dictionnaire->filsDroit);
+	}
+}
+/* partie temporaire pour les tests ! ( cp cl dans le main)
+int main(int argc, char **argv){
+	DICTIONNAIRE_Dictionnaire dictionnaire ;
+	char*nomfichier = argv[1];
+	DICTIONNAIRE_ajouterFichier(&dictionnaire,nomfichier);
+}
+*/
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier){
 	char chaine[30];//taille max du mot
 	MOT_Mot mot ;
 	FILE* fichier ;
-	fichier = fopen(nomFichier, "w");
+	fichier = fopen(nomFichier, "r");
+	assert(fichier!=NULL);
 	while(EOF){
 		fgets(chaine,50,fichier);
 		mot = MOT_creerMot(chaine);
 		DICTIONNAIRE_ajouterMot(dictionnaire, mot);
 	}
 	fclose(fichier);
+	afficherArbre(*dictionnaire);
 }
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine){
-	//cas ou le fichier n'existe pas -> nouveau dictionnaire donc dictionnaire vide
+	//cas ou le fichier n'existe pas -> nouveau dictionnaire donc dictionnaire vide -> FILE*fichier est a NULL faire une erreure (assert)
 
-	//cas ou le fichier existe le charger 
+	//cas ou le fichier existe le charger
 	//Question comment est stocker est fichier ? donc comment le charger ?
 	return DICTIONNAIRE_dictionnaireVide();//Temporaire pour compilation
 }
 
 char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire){
+	/*
+	1 le fichier dictionnaire existe 
+	*/
 	char *tmp=NULL ;//Temporaire pour compilation
 	return tmp ;
 }
