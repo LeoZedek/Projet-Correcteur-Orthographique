@@ -251,6 +251,10 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 }
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine){
+	//cas ou le fichier n'existe pas -> nouveau dictionnaire donc dictionnaire vide
+
+	//cas ou le fichier existe le charger 
+	//Question comment est stocker est fichier ? donc comment le charger ?
 	return DICTIONNAIRE_dictionnaireVide();//Temporaire pour compilation
 }
 
