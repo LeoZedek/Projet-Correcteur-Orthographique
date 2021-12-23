@@ -107,7 +107,7 @@ void test_MOT_decomposerMot(void){
 	MOT_DeuxMots motsAObtenir;
 	motsAObtenir.mot1 = MOT_creerMot("papi");
 	motsAObtenir.mot2 = MOT_creerMot("llon");
-	MOT_DeuxMots motsATester = MOT_decomposerMot(mot,3);
+	MOT_DeuxMots motsATester = MOT_decomposerMot(mot,4);
 	CU_ASSERT_TRUE(MOT_sontEgaux(motsAObtenir.mot1,motsATester.mot1) && MOT_sontEgaux(motsAObtenir.mot2,motsATester.mot2));
 }
 

@@ -196,6 +196,23 @@ MOT_Mot MOT_inverserLettre(MOT_Mot m, int pos) {
 }
 
 MOT_DeuxMots MOT_decomposerMot(MOT_Mot m, int pos) {
-	MOT_DeuxMots mot ; //A changer -> pour la compilation
-	return mot ; //A changer -> pour la compilation
+
+	assert(0 < pos && pos < MOT_longueurMot(m));
+
+	MOT_DeuxMots nvMots;
+	char *chaine = MOT_motEnChaine(m);
+	char nvChaine[Taille_Max_Mot];
+
+	strcpy(nvChaine, chaine);
+	nvChaine[pos] = '\0';
+	nvMots.mot1 = MOT_creerMot(nvChaine);
+
+	for (int i = pos; i <= MOT_longueurMot(m); ++i) {
+		nvChaine[i - pos] = chaine[i];
+
+	}
+
+	nvMots.mot2 = MOT_creerMot(nvChaine);
+
+	return nvMots;
 }
