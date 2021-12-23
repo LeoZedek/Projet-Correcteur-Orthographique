@@ -15,7 +15,7 @@ int main(int argc, char **argv){
 	char *nomDictionnaire,*nomFichier ;
 	DICTIONNAIRE_Dictionnaire dictionnaire;
 	if (argc>1){//appel avec option
-		if (strcmp(argv[1],"-h")==0){//demande de l'aide SOS !
+		if (strcmp(argv[1],"-h")==0){//utilisateur demande de l'aide envoie de SOS ! d'un terrien en detresse
 			afficherAide();
 		}
 		else{
