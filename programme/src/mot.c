@@ -3,7 +3,8 @@
 #include<assert.h>
 #include<stdlib.h>
 #include<string.h>
-#define Taille_Max 10000
+#define Taille_Max_Tableau 10000
+#define Taille_Max_Mot 50
 #define TRUE 1
 #define FALSE 0
 
@@ -11,7 +12,7 @@ MOT_TableauDeMots MOT_tableauDeMotsVide() {
 
 	MOT_TableauDeMots tabVide;
 
-	tabVide.lesMots = (MOT_Mot*)malloc(sizeof(MOT_Mot) * Taille_Max);
+	tabVide.lesMots = (MOT_Mot*)malloc(sizeof(MOT_Mot) * Taille_Max_Tableau);
 	MOT_fixerLongueurTabMots(&tabVide, 0);
 	return tabVide;
 }
@@ -38,7 +39,7 @@ MOT_Mot MOT_obtenirIemeMot(MOT_TableauDeMots tableauMots, int position) {
 
 void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m) {
 
-	assert(MOT_obtenirLongueurTabMots(*tableauMots) < Taille_Max);
+	assert(MOT_obtenirLongueurTabMots(*tableauMots) < Taille_Max_Tableau);
 
 	int longueur = MOT_obtenirLongueurTabMots(*tableauMots);
 	MOT_Mot *lesMots = MOT_obtenirLesMots(*tableauMots);
@@ -59,11 +60,12 @@ int MOT_estUneLettre(char c) {
 }
 
 MOT_Mot MOT_creerMot(char *chaine) {
-	//assert(MOT_estUnMot(chaine))
+	assert(MOT_estUnMot(chaine) && strlen(chaine) < Taille_Max_Mot);
 
 	MOT_Mot mot;
 
-	mot.chaine = chaine;
+	mot.chaine = (char*)malloc(sizeof(char) * Taille_Max_Mot);
+	strcpy(mot.chaine, chaine);
 	MOT_fixerLongueurMot(&mot, strlen(chaine));
 
 	return mot;
@@ -90,7 +92,9 @@ int MOT_sontEgaux(MOT_Mot m1, MOT_Mot m2) {
 		char *chaine2 = MOT_motEnChaine(m2);
 
 		for (int i = 0; i < MOT_longueurMot(m1); i++) {
+
 			if (chaine1[i] != chaine2[i]) {
+
 				egaux = FALSE;
 			}
 		}
@@ -100,17 +104,37 @@ int MOT_sontEgaux(MOT_Mot m1, MOT_Mot m2) {
 }
 
 int MOT_estUnMot(char *chaine) {
-	return 1 ; //A changer -> pour la compilation
+	int estUnMot = TRUE;
+
+	if (chaine == NULL || strlen(chaine) == 0) {
+		estUnMot = FALSE;
+	}
+
+	else {
+		for (int i = 0; i < strlen(chaine); i++) {
+			if (!MOT_estUneLettre(chaine[i])) {
+				estUnMot = FALSE;
+			}
+		}
+	}
+	return estUnMot;
 }
 
-void MOT_fixerLongueurMot(MOT_Mot *m, unsigned int longeur) {
-
+void MOT_fixerLongueurMot(MOT_Mot *m, unsigned int nvLongueur) {
+	(*m).longueur = nvLongueur;
 }
 
 
 MOT_Mot MOT_remplacerLettre(MOT_Mot m, int pos, char c) {
-	MOT_Mot mot ; //A changer -> pour la compilation
-	return mot ; //A changer -> pour la compilation
+
+	assert(pos < MOT_longueurMot(m));
+
+	MOT_Mot nvMot;
+	char *chaine = MOT_motEnChaine(m);
+
+	chaine[pos] = c;
+
+	return MOT_creerMot(chaine);
 }
 
 MOT_Mot MOT_supprimerLettre(MOT_Mot m, int pos) {
