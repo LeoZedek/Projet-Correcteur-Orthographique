@@ -50,8 +50,9 @@ void MOT_supprimerTableauMots(MOT_TableauDeMots *tableau) {
 	free((*tableau).lesMots);
 }
 
-int MOT_estUneLettre(char charactere) {
-	return 1; //A changer -> pour la compilation
+int MOT_estUneLettre(char c) {
+	
+	return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || (c == '-');
 }
 
 unsigned int MOT_longueurMot(MOT_Mot mot) {
