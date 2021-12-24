@@ -66,8 +66,8 @@ CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition){
 void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
 	MOT_TableauDeMots tabMots = CO_obtenirTabMots(*motsEtPosition); 
 	CO_TableauPositions tabPos = CO_obtenirTabPositions(*motsEtPosition);
-	MOT_supprimerTableauMots(*tabMots);
-	CO_supprimerTableauEntiers(*tabPos);
+	MOT_supprimerTableauMots(&tabMots);
+	CO_supprimerTableauEntiers(&tabPos);
 }
 
 
