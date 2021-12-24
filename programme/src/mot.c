@@ -283,3 +283,9 @@ MOT_DeuxMots MOT_decomposerMot(MOT_Mot m, int pos) {
 	free(nvChaine);
 	return nvMots;
 }
+
+void MOT_enleverSautDeLigne(char *chaine) {
+	assert(strlen(chaine) >= 2);
+
+	chaine[strlen(chaine) - 1] = '\0';
+}
