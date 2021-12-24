@@ -36,7 +36,7 @@ void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire);
 int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot);
 void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot);
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier);
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine);
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire);
 void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire);
 void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire);
 void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
@@ -187,8 +187,8 @@ void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dic
 		motAsauvegarder = DICTIONNAIRE_obtenirMot(dictionnaire);
 		chaineAsauvegarder = MOT_motEnChaine(motAsauvegarder);
 		fprintf(fichier,"%s\n",chaineAsauvegarder);
-		filsGauche = *DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
-		filsDroit = *DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
+		filsGauche = *DICTIONNAIRE_obtenirFilsGauche(&dictionnaire);
+		filsDroit = *DICTIONNAIRE_obtenirFilsDroit(&dictionnaire);
 		if(filsGauche){
 			DICTIONNAIRE_enregistrerDicoRec(fichier,filsGauche);
 		}
@@ -283,7 +283,7 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 	}
 }
 
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char nomDictionnaire){
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire){
 /* 	FILE *fichierDictionnaire = NULL ;
 	char chaine[TAILLEMOTMAX] = "";
 	fichierDictionnaire = fopen(nomDictionnaire,"r"); */
@@ -305,8 +305,8 @@ void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNA
 	fichierDictionnaire = fopen(nomFichierDictionnaire,"w+");
 	assert(fichierDictionnaire);
 	DICTIONNAIRE_enregistrerDicoRec(fichierDictionnaire,dictionnaire);
-	fclose(nomFichierDictionnaire);
-	DICTIONNAIRE_supprimer(dictionnaire);
+	fclose(fichierDictionnaire);
+	DICTIONNAIRE_supprimer(&dictionnaire);
 }
 
 void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){

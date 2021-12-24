@@ -88,7 +88,7 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
  *\param nomDuDictionnaire : Le nom du fichier du dictionnaire à charger
  *\return Retourne le dictionnaire créé
 */
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine);
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire);
 
 
 /**
