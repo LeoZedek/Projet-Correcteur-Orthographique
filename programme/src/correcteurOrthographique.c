@@ -20,13 +20,14 @@ int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers){
 }
 
 void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongueur){
+	assert(CO_obtenirLongueurTabEntiers(*pointeurTableauEntiers) > 1);
 	(*pointeurTableauEntiers).longueur = nouvelleLongueur;
 }
 
 
 int CO_obtenirIemeEntier(CO_TableauDEntiers tableauEntiers, int position)
-//position>=0 et position <= longueur tableau
 {
+	assert(position>=0 && position < CO_obtenirLongueurTabEntiers(tableauEntiers));
 	return tableauEntiers.lesEntiers[position];
 }
 
@@ -63,6 +64,8 @@ CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition){
 	return tabPos;
 }
 
+/*----------------------------------PARTIE PUBLIQUE---------------------------------------------*/
+
 void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
 	MOT_TableauDeMots tabMots = CO_obtenirTabMots(*motsEtPosition); 
 	CO_TableauPositions tabPos = CO_obtenirTabPositions(*motsEtPosition);
@@ -71,9 +74,8 @@ void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
 }
 
 
-/*----------------------------------PARTIE PUBLIQUE---------------------------------------------*/
-
 CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionnaire dictionnaire){
+	assert(!DICTIONNAIRE_estVide(dictionnaire));
 	CO_TableauBooleens tabBool = CO_tableauDEntiersVide();
 	int i;
 	MOT_Mot mot;
@@ -91,6 +93,7 @@ CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionn
 } 
 
 MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionnaire){
+	assert(!DICTIONNAIRE_estVide(dictionnaire));
 	MOT_TableauDeMots resultatMots; 
 	MOT_Mot motCorrige;
 	MOT_DeuxMots motCorriges;
