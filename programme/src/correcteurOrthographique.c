@@ -65,7 +65,11 @@ CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition){
 }
 
 void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
-
+	/*MOT_TableauDeMots *tabMots = motsEtPosition->mots; 
+	CO_TableauPositions *tabPos = motsEtPosition->positions;
+	MOT_supprimerTableauMots(tabMots);
+	CO_supprimerTableauEntiers(tabPos);
+	*/
 }
 
 CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionnaire dictionnaire){
