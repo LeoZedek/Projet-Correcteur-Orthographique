@@ -64,11 +64,10 @@ CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition){
 }
 
 void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
-	/*MOT_TableauDeMots *tabMots = motsEtPosition->mots; 
-	CO_TableauPositions *tabPos = motsEtPosition->positions;
-	MOT_supprimerTableauMots(tabMots);
-	CO_supprimerTableauEntiers(tabPos);
-	*/
+	MOT_TableauDeMots tabMots = CO_obtenirTabMots(*motsEtPosition); 
+	CO_TableauPositions tabPos = CO_obtenirTabPositions(*motsEtPosition);
+	MOT_supprimerTableauMots(*tabMots);
+	CO_supprimerTableauEntiers(*tabPos);
 }
 
 
@@ -92,8 +91,48 @@ CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionn
 } 
 
 MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionnaire){
-	MOT_TableauDeMots tmp; //A changer -> pour la compilation
-	return tmp ; //A changer -> pour la compilation
+	MOT_TableauDeMots resultatMots; 
+	MOT_Mot motCorrige;
+	MOT_DeuxMots motCorriges;
+	char tiret;
+	for (char lettre = 'a'; lettre <= 'z'; lettre++){
+		for (int i=0 ; i< MOT_longueurMot(m); i++){
+			motCorrige = MOT_remplacerLettre(m, i, lettre);
+			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
+				MOT_ajouterMot(&resultatMots, motCorrige);
+		}
+		for (int i=0 ; i< MOT_longueurMot(m)+1; i++){
+			motCorrige = MOT_insererLettre(m, i, lettre);
+			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
+				MOT_ajouterMot(&resultatMots, motCorrige);
+		}
+	
+	}
+	tiret = '-';
+	for (int i=0 ; i< MOT_longueurMot(m); i++){
+			motCorrige = MOT_remplacerLettre(m, i, tiret);
+			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
+				MOT_ajouterMot(&resultatMots, motCorrige);
+		}
+	for (int i=0 ; i< MOT_longueurMot(m)+1; i++){
+			motCorrige = MOT_insererLettre(m, i, tiret);
+			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
+				MOT_ajouterMot(&resultatMots, motCorrige);
+		}
+		
+	for (int i=0 ; i< MOT_longueurMot(m); i++){
+			motCorrige = MOT_supprimerLettre(m, i);
+			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
+				MOT_ajouterMot(&resultatMots, motCorrige);
+		}
+	for (int i=1 ; i< MOT_longueurMot(m)-1; i++){
+			motCorriges = MOT_decomposerMot(m, i);
+			if (DICTIONNAIRE_estPresent(dictionnaire, motCorriges.mot1))
+				MOT_ajouterMot(&resultatMots, motCorriges.mot1);
+			if (DICTIONNAIRE_estPresent(dictionnaire, motCorriges.mot2))
+				MOT_ajouterMot(&resultatMots, motCorriges.mot2);
+		}
+	return resultatMots; 
 }
 
 CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
@@ -111,8 +150,8 @@ CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
 			temp[i-pos] = phrase[i];
 		}	
 		else {
-			pos = i + 1;
 			temp[i-pos+1] = '\0';
+			pos = i + 1;
 			mot = MOT_creerMot(temp); 
 			MOT_ajouterMot(&tabMots, mot);
 			CO_ajouterEntier(&tabPos, pos);
