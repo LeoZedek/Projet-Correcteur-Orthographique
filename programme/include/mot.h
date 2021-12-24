@@ -1,8 +1,8 @@
 /**
  * \file mot.h
- * \brief Implantation du TAD Mot
+ * \brief Fichier .h des fonctions et structures poubliques du TAD Mot
  * \version 1.0
- * \date 11/12/2021
+ * \date 24/12/2021
  *
  */
  
@@ -59,17 +59,6 @@ MOT_TableauDeMots MOT_tableauDeMotsVide();
 int MOT_obtenirLongueurTabMots(MOT_TableauDeMots tableauMots);
 
 /**
- *\fn void MOT_fixerLongeurTabMots(MOT_TableauDeMots *tableauMots, int nouvelleLongeur)
- *\brief Fonction qui permet de fixer la longeur d'un tableau de mots
- *
- *\param pointeurTableauMots : Est le poiteur du tableau dont la longeur sera modifé
- *\param nouvelleLongeur : La nouvelle longeur du tableau
- *
- */
-
-void MOT_fixerLongueurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvelleLongeur);
-
-/**
  *\fn MOT_Mot MOT_obteniriIemeMot(MOT_TableauDeMots tableauMots, int position);
  *\brief Fonction qui permet d'obtenir le mot à une certaine position du tableau
  *
@@ -80,37 +69,6 @@ void MOT_fixerLongueurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvel
 
 MOT_Mot MOT_obtenirIemeMot(MOT_TableauDeMots tableauMots, int position);
 
-/**
- *\fn MOT_Mot *MOT_obtenirLesMots(MOT_TableauDeMots tableauMots);
- *\brief Permet d'obtenir le pointeur sur le premier mot du tableau
- *
- *\param tableauMots : Le tableau de mot
- *\return Le pointeur sur le premier mot du tableau
- */
-
-MOT_Mot *MOT_obtenirLesMots(MOT_TableauDeMots tableauMots);
-
-/**
- *\fn MOT_Mot MOT_copierMot(MOT_Mot mot);
- *\brief Copie un mot.
- *
- *\param mot : Le mot qui sera copié.
- *\return Le mot copié, il est égale à celui mis en paramètre mais pas identique.
- */
-
-MOT_Mot MOT_copierMot(MOT_Mot mot);
-
-/**
- *\fn void MOT_fixerIemeMot(MOT_TableauDeMots *tableau, MOT_Mot mot, int i);
- *\brief Fixe un mot à une position donné.
- *\attention Précondition : i < MOT_obtenirLongueurTabMot(*tableau)
- *
- *\param *tableau : Le pointeur sur le tableau de mot qui sera modifié.
- *\param mot : Le mot qui sera fixer à la position i du tableau
- *\param i : La position du Mot dans le tableau.
- */
-
-void MOT_fixerIemeMot(MOT_TableauDeMots *tableau, MOT_Mot mot, int i);
 
 /**
  *\fn void MOT_ajouterMot(MOT_TableauDeMots *tableauMots);
@@ -144,16 +102,6 @@ int MOT_estUneLettre(char charactere);
 
 
 /**
- *\fn unsigned int MOT_longeurMot(MOT_Mot mot)
- *\brief Renvoie la longueur d'un mot
- *
- *\param mot : est le mot de type Mot
- *\return La longueur du mot
- */
-
-unsigned int MOT_longueurMot(MOT_Mot mot);
-
-/**
  *\fn int MOT_estUnMot(char *chaine)
  *\brief Renvoie si une chaine de caractère est composé seulement de caractère de l'alphabet
  *
@@ -164,16 +112,6 @@ unsigned int MOT_longueurMot(MOT_Mot mot);
 int MOT_estUnMot(char *chaine);
 
 /**
- *\fn int MOT_fixerLongeurMot(MOT_Mot *mot, unsigned int longeur)
- *\brief fixe la longeur d'un mot
- *
- *\param *mot : le poiteur du mot
- *\param longeur : la nouvelle longeur du mot
-*/
-
-void MOT_fixerLongueurMot(MOT_Mot *mot, unsigned int longeur);
-
-/**
  *\fn MOT_Mot MOT_creerMot(char *chaine)
  *\brief Renvoie une variable de type Mot creer à partir d'une chaine de caractère
  *\attention précondition : estUnMot(chaine)
@@ -181,8 +119,17 @@ void MOT_fixerLongueurMot(MOT_Mot *mot, unsigned int longeur);
  *\param chaine : la chaine utiliser pour construire la variable de type Mot
  *\return La variable de type Mot construit à partir du paramètre d'entrée
 */
+
 MOT_Mot MOT_creerMot(char *chaine);
 
+/**
+ *\fn void MOT_supprimerMot(MOT_Mot *mot);
+ *\brief Déalloue un mot, plus en particulier, son attribut chaine.
+ *
+ *\param *mot : Le pointeur sur le mot qui sera déallouer.
+*/
+
+void MOT_supprimerMot(MOT_Mot *mot);
 
 /**
  *\fn int sontEgaux(Mot mot1, Mot mot2)
@@ -194,17 +141,6 @@ MOT_Mot MOT_creerMot(char *chaine);
 */
 int MOT_sontEgaux(MOT_Mot mot1, MOT_Mot mot2);
 
-
-/**
- *\fn char *MOT_motEnChaine(MOT_Mot mot)
- *\brief Transforme une variable de type Mot en une chaine de caractère.
- *
- *\param mot : Le Mot qui sera transformé en chaine
- *\return La chaine de caractère correspondant au mot.
-*/
-char *MOT_motEnChaine(MOT_Mot mot);
-
-
 /**
  *\fn MOT_Mot MOT_remplacerLettre(MOT_Mot mot, int position, char lettre);
  *\brief Renvoie une variable de type MOT_Mot avec une seule lettre remplacer
@@ -215,6 +151,7 @@ char *MOT_motEnChaine(MOT_Mot mot);
  *\param lettre : La lettre qui remplacera celle à la position pos
  *\return Une copie du mot qui sera modifié
 */
+
 MOT_Mot MOT_remplacerLettre(MOT_Mot mot, int position, char lettre);
 
 

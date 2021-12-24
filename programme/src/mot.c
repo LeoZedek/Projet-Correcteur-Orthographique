@@ -1,11 +1,18 @@
 #include"mot.h"
-#include"correcteurOrthographique.h"
+#include"motPrivee.h"
 #include<assert.h>
 #include<stdlib.h>
 #include<string.h>
 #define Taille_Max_Tableau 10000
 #define TRUE 1
 #define FALSE 0
+
+//////////////PARTIE PRIVÉÉ////////////////////////////////////
+
+
+
+//////////////PARITE PUBLIC////////////////////////////////////
+
 
 MOT_TableauDeMots MOT_tableauDeMotsVide() {
 
@@ -149,7 +156,7 @@ int MOT_estUnMot(char *chaine) {
 	return estUnMot;
 }
 
-void MOT_fixerLongueurMot(MOT_Mot *m, unsigned int nvLongueur) {
+void MOT_fixerLongueurMot(MOT_Mot *m, int nvLongueur) {
 	(*m).longueur = nvLongueur;
 }
 

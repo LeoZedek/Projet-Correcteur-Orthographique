@@ -1,6 +1,7 @@
 #include<stdlib.h>
 #include<CUnit/Basic.h>
 #include"mot.h"
+#include"motPrivee.h"
 #include"correcteurOrthographique.h"
 #define TRUE 1
 #define FALSE 0
@@ -41,6 +42,7 @@ void test_MOT_ajouterMot(void){
 	MOT_ajouterMot(&tabMotsTest,m);
 	CU_ASSERT_TRUE(sontEgauxMots(tabMots, tabMotsTest));
 
+	MOT_supprimerMot(&m);
 	MOT_supprimerTableauMots(&tabMots);
 	MOT_supprimerTableauMots(&tabMotsTest);
 }
