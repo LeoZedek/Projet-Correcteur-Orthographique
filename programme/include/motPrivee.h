@@ -72,16 +72,5 @@ unsigned int MOT_longueurMot(MOT_Mot mot);
 
 void MOT_fixerLongueurMot(MOT_Mot *mot, int longeur);
 
-/**
- *\fn char *MOT_motEnChaine(MOT_Mot mot)
- *\brief Transforme une variable de type Mot en une chaine de caractère.
- *
- *\param mot : Le Mot qui sera transformé en chaine
- *\return La chaine de caractère correspondant au mot.
-*/
-
-char *MOT_motEnChaine(MOT_Mot mot);
-
-
 
 #endif

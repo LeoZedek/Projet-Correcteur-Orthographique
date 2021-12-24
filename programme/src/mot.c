@@ -43,10 +43,6 @@ void MOT_fixerLongueurMot(MOT_Mot *m, int nvLongueur) {
 	(*m).longueur = nvLongueur;
 }
 
-char *MOT_motEnChaine(MOT_Mot m) {
-	return m.chaine;
-}
-
 //////////////FIN PARTIE PRIVÉÉ////////////////////////////////
 
 //////////////PARTIE PUBLIC////////////////////////////////////
@@ -151,6 +147,15 @@ int MOT_sontEgaux(MOT_Mot m1, MOT_Mot m2) {
 	return egaux;
 }
 
+int estAvantOrdreAlphabetique(MOT_Mot mot1, MOT_Mot mot2) {
+
+	char *chaineMot1 = MOT_motEnChaine(mot1);
+	char *chaineMot2 = MOT_motEnChaine(mot2);
+
+	return (strcmp(chaineMot1, chaineMot2) < 0);
+
+}
+
 int MOT_estUnMot(char *chaine) {
 	int estUnMot = TRUE;
 
@@ -168,6 +173,9 @@ int MOT_estUnMot(char *chaine) {
 	return estUnMot;
 }
 
+char *MOT_motEnChaine(MOT_Mot m) {
+	return m.chaine;
+}
 
 MOT_Mot MOT_remplacerLettre(MOT_Mot m, int pos, char c) {
 
