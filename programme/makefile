@@ -3,7 +3,7 @@ LIBDIR=lib
 BINDIR=bin
 INCLUDEDIR=include
 TESTDIR=tests
-CC = gcc
+CC = gcc -fsanitize=address
 AR = ar
 CFLAGS=-Wall -pedantic -g -std=c99  -I$(INCLUDEDIR)  
 LDFLAGS=-L$(LIBDIR)
