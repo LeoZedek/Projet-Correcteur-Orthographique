@@ -76,6 +76,14 @@ void MOT_supprimerMot(MOT_Mot *m) {
 	free(chaineASupprimer);
 }
 
+void MOT_supprimerDeuxMots(MOT_DeuxMots *deuxMots) {
+	MOT_Mot motASupprimer = (*deuxMots).mot1;
+	MOT_supprimerMot(&motASupprimer);
+
+	motASupprimer = (*deuxMots).mot2;
+	MOT_supprimerMot(&motASupprimer);
+}
+
 void MOT_supprimerTableauMots(MOT_TableauDeMots *tableau) {
 
 	MOT_Mot motASupprimer, *lesMots;

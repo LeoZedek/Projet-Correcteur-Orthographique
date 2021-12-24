@@ -70,6 +70,10 @@ void test_MOT_sontEgaux(void){
 
 	CU_ASSERT_TRUE(MOT_sontEgaux(mot1, mot2));
 	CU_ASSERT_FALSE(MOT_sontEgaux(mot1, mot3));
+
+	MOT_supprimerMot(&mot1);
+	MOT_supprimerMot(&mot2);
+	MOT_supprimerMot(&mot3);
 }
 
 
@@ -78,6 +82,10 @@ void test_MOT_remplacerLettre(void){
 	MOT_Mot mot2 = MOT_creerMot("papellon");
 	MOT_Mot mot3 = MOT_remplacerLettre(mot2,3, 'i');
 	CU_ASSERT_TRUE(MOT_sontEgaux(mot1, mot3));
+
+	MOT_supprimerMot(&mot1);
+	MOT_supprimerMot(&mot2);
+	MOT_supprimerMot(&mot3);
 }
 
 
@@ -86,6 +94,10 @@ void test_MOT_supprimerLettre(void){
 	MOT_Mot mot2 = MOT_creerMot("papllon");
 	MOT_Mot mot3 = MOT_supprimerLettre(mot1,3);
 	CU_ASSERT_TRUE(MOT_sontEgaux(mot2, mot3));
+
+	MOT_supprimerMot(&mot1);
+	MOT_supprimerMot(&mot2);
+	MOT_supprimerMot(&mot3);
 }
 
 
@@ -95,6 +107,10 @@ void test_MOT_insererLettre(void){
 	MOT_Mot mot2 = MOT_creerMot("papllon");
 	MOT_Mot mot3 = MOT_insererLettre(mot2,3,'i');
 	CU_ASSERT_TRUE(MOT_sontEgaux(mot1, mot3));
+
+	MOT_supprimerMot(&mot1);
+	MOT_supprimerMot(&mot2);
+	MOT_supprimerMot(&mot3);
 }
 
 
@@ -103,6 +119,10 @@ void test_MOT_inverserLettre(void){
 	MOT_Mot mot2 = MOT_creerMot("paipllon");
 	MOT_Mot mot3 = MOT_inverserLettre(mot2,2);
 	CU_ASSERT_TRUE(MOT_sontEgaux(mot1, mot3));
+
+	MOT_supprimerMot(&mot1);
+	MOT_supprimerMot(&mot2);
+	MOT_supprimerMot(&mot3);
 }
 
 
@@ -113,6 +133,10 @@ void test_MOT_decomposerMot(void){
 	motsAObtenir.mot2 = MOT_creerMot("llon");
 	MOT_DeuxMots motsATester = MOT_decomposerMot(mot,4);
 	CU_ASSERT_TRUE(MOT_sontEgaux(motsAObtenir.mot1,motsATester.mot1) && MOT_sontEgaux(motsAObtenir.mot2,motsATester.mot2));
+
+	MOT_supprimerDeuxMots(&motsAObtenir);
+	MOT_supprimerDeuxMots(&motsATester);
+	MOT_supprimerMot(&mot);
 }
 
 int main(int argc, char** argv){

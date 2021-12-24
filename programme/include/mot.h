@@ -132,6 +132,15 @@ MOT_Mot MOT_creerMot(char *chaine);
 void MOT_supprimerMot(MOT_Mot *mot);
 
 /**
+ *\fn void MOT_supprimerDeuxMots(MOT_DeuxMots *deuxMots);
+ *\brief Déalloue une variable de type MOT_DeuxMots, plus en particulier, c'est 2 attribut Mot.
+ *
+ *\param *deuxMots : Le pointeur sur la variable à déallouer
+ */
+
+void MOT_supprimerDeuxMots(MOT_DeuxMots *deuxMots);
+
+/**
  *\fn int sontEgaux(Mot mot1, Mot mot2)
  *\brief Renvoie le test si deux mot sont identique (insensible à la casse)
  *
