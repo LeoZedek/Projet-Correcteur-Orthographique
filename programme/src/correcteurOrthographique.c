@@ -3,6 +3,7 @@
 #include "mot.h"
 #include "dictionnaire.h"
 #include "correcteurOrthographique.h"
+#define CO_TailleMax = 1000
 
 CO_TableauDEntiers CO_tableauDEntiersVide(){
 	CO_TableauDEntiers tab;
@@ -45,8 +46,10 @@ void CO_supprimerTableauEntiers(CO_TableauDEntiers *tableau){
 /*TEMPORAIRE MAIS PEUT ETRE COMPLETER ET ADAPTER !*/
 
 CO_MotsDansPhrase CO_motsEtPositionsVide(){
-	CO_MotsDansPhrase tmp ; //A changer -> pour la compilation
-	return tmp ; //A changer -> pour la compilation
+	CO_MotsDansPhrase motPhrase;
+	motPhrase.mots = MOT_tableauDeMotsVide();
+	motPhrase.positions = CO_tableauDEntiersVide();
+	return motPhrase; 
 }
 
 MOT_TableauDeMots CO_obtenirTabMots(CO_MotsDansPhrase motsEtPosition){
