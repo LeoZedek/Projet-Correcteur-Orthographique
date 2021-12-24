@@ -9,37 +9,12 @@
 
 //////////////PARTIE PRIVÉÉ////////////////////////////////////
 
-
-
-//////////////PARITE PUBLIC////////////////////////////////////
-
-
-MOT_TableauDeMots MOT_tableauDeMotsVide() {
-
-	MOT_TableauDeMots tabVide;
-
-	tabVide.lesMots = (MOT_Mot*)malloc(sizeof(MOT_Mot) * Taille_Max_Tableau);
-	MOT_fixerLongueurTabMots(&tabVide, 0);
-	return tabVide;
-}
-
-int MOT_obtenirLongueurTabMots(MOT_TableauDeMots tableauMots) {
-	return tableauMots.longueur;
-}
-
 void MOT_fixerLongueurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvelleLongeur) {
 	(*pointeurTableauMots).longueur = nouvelleLongeur;
 }
 
 MOT_Mot *MOT_obtenirLesMots(MOT_TableauDeMots tableauMots) {
 	return tableauMots.lesMots;
-}
-
-MOT_Mot MOT_obtenirIemeMot(MOT_TableauDeMots tableauMots, int position) {
-	assert(position < MOT_obtenirLongueurTabMots(tableauMots) && position >= 0);
-
-	MOT_Mot* lesMots = MOT_obtenirLesMots(tableauMots);
-	return lesMots[position];
 }
 
 MOT_Mot MOT_copierMot(MOT_Mot m) {
@@ -58,6 +33,43 @@ void MOT_fixerIemeMot(MOT_TableauDeMots *tableau, MOT_Mot m, int i) {
 	MOT_Mot *lesMots = MOT_obtenirLesMots(*tableau);
 
 	lesMots[i] = MOT_copierMot(m);
+}
+
+unsigned int MOT_longueurMot(MOT_Mot mot) {
+	return mot.longueur;
+}
+
+void MOT_fixerLongueurMot(MOT_Mot *m, int nvLongueur) {
+	(*m).longueur = nvLongueur;
+}
+
+char *MOT_motEnChaine(MOT_Mot m) {
+	return m.chaine;
+}
+
+//////////////FIN PARTIE PRIVÉÉ////////////////////////////////
+
+//////////////PARTIE PUBLIC////////////////////////////////////
+
+
+MOT_TableauDeMots MOT_tableauDeMotsVide() {
+
+	MOT_TableauDeMots tabVide;
+
+	tabVide.lesMots = (MOT_Mot*)malloc(sizeof(MOT_Mot) * Taille_Max_Tableau);
+	MOT_fixerLongueurTabMots(&tabVide, 0);
+	return tabVide;
+}
+
+int MOT_obtenirLongueurTabMots(MOT_TableauDeMots tableauMots) {
+	return tableauMots.longueur;
+}
+
+MOT_Mot MOT_obtenirIemeMot(MOT_TableauDeMots tableauMots, int position) {
+	assert(position < MOT_obtenirLongueurTabMots(tableauMots) && position >= 0);
+
+	MOT_Mot* lesMots = MOT_obtenirLesMots(tableauMots);
+	return lesMots[position];
 }
 
 void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m) {
@@ -115,14 +127,6 @@ MOT_Mot MOT_creerMot(char *s) {
 	return mot;
 }
 
-unsigned int MOT_longueurMot(MOT_Mot mot) {
-	return mot.longueur;
-}
-
-char *MOT_motEnChaine(MOT_Mot m) {
-	return m.chaine;
-}
-
 int MOT_sontEgaux(MOT_Mot m1, MOT_Mot m2) {
 	int egaux = TRUE;
 
@@ -162,10 +166,6 @@ int MOT_estUnMot(char *chaine) {
 		}
 	}
 	return estUnMot;
-}
-
-void MOT_fixerLongueurMot(MOT_Mot *m, int nvLongueur) {
-	(*m).longueur = nvLongueur;
 }
 
 
@@ -275,5 +275,3 @@ MOT_DeuxMots MOT_decomposerMot(MOT_Mot m, int pos) {
 	free(nvChaine);
 	return nvMots;
 }
-
-//Ce qu'il reste à faire : tout mettre en allocation dynamique et mettre les free (supprimer) dans les tests.
