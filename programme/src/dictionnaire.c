@@ -37,7 +37,7 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
 void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot);
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier);
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine);
-char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire);
+void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire);
 
 /*--------------Fonction Privé--------------------------*/
 //Qui ne sont ni dans la conception ni dans le .h
@@ -274,20 +274,24 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 	}
 }
 
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine){
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char nomDictionnaire){
 	//cas ou le fichier n'existe pas -> nouveau dictionnaire donc dictionnaire vide -> FILE*fichier est a NULL faire une erreure (assert)
-
-	//cas ou le fichier existe le charger
-	//Question comment est stocker est fichier ? donc comment le charger ?
+	FILE *fichierDictionnaire = NULL ;
+	fichierDictionnaire = fopen(nomDictionnaire,"r");
+	if (!fichierDictionnaire){// Le fichier donnée en paramètre n'existe pas donc on renvoie le dico vide
+		return DICTIONNAIRE_dictionnaireVide();
+	}
+	//cas ou le fichier existe le charger	Question comment est stocker est fichier ? donc comment le charger ?
+	else{
+		//charge le dictionnaire
+	}
 	return DICTIONNAIRE_dictionnaireVide();//Temporaire pour compilation
 }
 
-char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire){
+void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire){
 	/*
 	1 le fichier dictionnaire existe 
 	*/
-	char *tmp=NULL ;//Temporaire pour compilation
-	return tmp ;
 }
 void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){
 
