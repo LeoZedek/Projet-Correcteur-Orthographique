@@ -53,8 +53,9 @@ CO_MotsDansPhrase CO_motsEtPositionsVide(){
 }
 
 MOT_TableauDeMots CO_obtenirTabMots(CO_MotsDansPhrase motsEtPosition){
-	MOT_TableauDeMots tmp ; //A changer -> pour la compilation
-	return tmp ; //A changer -> pour la compilation
+	MOT_TableauDeMots tab; 
+	tab = motsEtPosition.mots;
+	return tab; 
 }
 
 CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition){
