@@ -261,16 +261,15 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 	fichier = fopen(nomFichier, "r");
 	if (fichier){
 		while(fgets(chaine,TAILLEMOTMAX,fichier) != NULL){
-			printf("Affichage du mot %s\n",chaine);
 			mot = MOT_creerMot(chaine);
 			DICTIONNAIRE_ajouterMot(dictionnaire, mot);
 		}
 		fclose(fichier);
-		printf("Affichage de l'arbre\n");
+		fprintf(stderr,"Affichage de l'arbre\n");
 		afficherArbre(*dictionnaire);
 	}
 	else{
-		printf("le fichier n'existe pas");
+		fprintf(stderr,"le fichier n'existe pas");
 		assert(0);
 	}
 }
