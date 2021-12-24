@@ -45,7 +45,7 @@ void test_MOT_ajouterMot(void){
 	MOT_supprimerMot(&m);
 	MOT_supprimerTableauMots(&tabMots);
 	MOT_supprimerTableauMots(&tabMotsTest);
-}
+	}
 
 
 void test_MOT_estUneLettre(void){
