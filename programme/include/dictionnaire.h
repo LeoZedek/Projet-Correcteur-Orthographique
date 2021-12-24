@@ -92,22 +92,29 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine);
 
 
 /**
- *\fn void DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief Enregistre le dictionnaire en paramètre dans un fichier dont il renvoie le nom
- *\attention precondition : Le fichier doit être accessible en lecture
+ *\fn void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire)
+ *\brief Enregistre le dictionnaire en paramètre dans un fichier dont le nom est passé en paramètre
+ *\attention precondition : Le fichier doit être accessible en ecriture
  *
+ *\param nomFichierDictionnaire : Le nom du fichier dans lequel on enregistre le dictionnaire
  *\param dictionnaire : Le dictionnaire que l'on enregistre dans le fichier
- *\return Le nom du fichier enregistré
+ *\return void
 */
-char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire);
+void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire);
 
 /**
- *\fn void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
- *\brief Supprime et déalloue entièrement un dictionnaire.
+ *\fn void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire)
+ *\brief Supprime et désalloue entièrement un dictionnaire.
  *
  *\param *dictionnaire : Le pointeur sur le dictionnaire qui sera supprimer.
 */
-
 void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
+/**
+ *\fn void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire)
+ *\brief Affiche un dictionnaire
+ *
+ *\param dictionnaire : Le dictionnaire à afficher
+*/
+void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire);
 #endif
