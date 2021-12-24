@@ -43,10 +43,6 @@ void MOT_fixerLongueurMot(MOT_Mot *m, int nvLongueur) {
 	(*m).longueur = nvLongueur;
 }
 
-char *MOT_motEnChaine(MOT_Mot m) {
-	return m.chaine;
-}
-
 //////////////FIN PARTIE PRIVÉÉ////////////////////////////////
 
 //////////////PARTIE PUBLIC////////////////////////////////////
@@ -177,6 +173,9 @@ int MOT_estUnMot(char *chaine) {
 	return estUnMot;
 }
 
+char *MOT_motEnChaine(MOT_Mot m) {
+	return m.chaine;
+}
 
 MOT_Mot MOT_remplacerLettre(MOT_Mot m, int pos, char c) {
 

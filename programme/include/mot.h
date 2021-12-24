@@ -163,6 +163,16 @@ int estAvantOrdreAlphabetique(MOT_Mot mot1, MOT_Mot mot2);
 int MOT_sontEgaux(MOT_Mot mot1, MOT_Mot mot2);
 
 /**
+ *\fn char *MOT_motEnChaine(MOT_Mot mot)
+ *\brief Transforme une variable de type Mot en une chaine de caractère.
+ *
+ *\param mot : Le Mot qui sera transformé en chaine
+ *\return La chaine de caractère correspondant au mot.
+*/
+
+char *MOT_motEnChaine(MOT_Mot mot);
+
+/**
  *\fn MOT_Mot MOT_remplacerLettre(MOT_Mot mot, int position, char lettre);
  *\brief Renvoie une variable de type MOT_Mot avec une seule lettre remplacer
  *\attention precondition : position < longueur(mot) et estUneLettre(lettre) et position > 0
