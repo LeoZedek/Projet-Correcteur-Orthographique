@@ -261,6 +261,7 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 	fichier = fopen(nomFichier, "r");
 	if (fichier){
 		while(fgets(chaine,TAILLEMOTMAX,fichier) != NULL){
+			MOT_enleverSautDeLigne(chaine);
 			mot = MOT_creerMot(chaine);
 			DICTIONNAIRE_ajouterMot(dictionnaire, mot);
 		}
@@ -275,24 +276,43 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 }
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char nomDictionnaire){
-	//cas ou le fichier n'existe pas -> nouveau dictionnaire donc dictionnaire vide -> FILE*fichier est a NULL faire une erreure (assert)
 	FILE *fichierDictionnaire = NULL ;
 	fichierDictionnaire = fopen(nomDictionnaire,"r");
 	if (!fichierDictionnaire){// Le fichier donnée en paramètre n'existe pas donc on renvoie le dico vide
 		return DICTIONNAIRE_dictionnaireVide();
 	}
 	//cas ou le fichier existe le charger	Question comment est stocker est fichier ? donc comment le charger ?
-	else{
+	else{//version naive
 		//charge le dictionnaire
 	}
 	return DICTIONNAIRE_dictionnaireVide();//Temporaire pour compilation
 }
 
+void enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire){//version "naive"
+	MOT_Mot motAsauvegarder;
+	char *chaineAsauvegarder = (char *)malloc(TAILLEMOTMAX * sizeof(char));
+	DICTIONNAIRE_Dictionnaire filsGauche,filsDroit;
+	if(dictionnaire){
+		motAsauvegarder = DICTIONNAIRE_obtenirMot(dictionnaire);
+		chaineAsauvegarder = MOT_motEnChaine(motAsauvegarder);
+		fprintf(fichier,"%s\n",chaineAsauvegarder);
+		filsGauche = DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
+		filsDroit = DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
+		if(filsGauche){
+			enregistrerDicoRec(fichier,filsGauche);
+		}
+		if(filsDroit){
+			enregistrerDicoRec(fichier,filsDroit);
+		}
+	}
+	free(chaineAsauvegarder);
+}
+
 void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire){
-	/*
-	1 le fichier dictionnaire existe 
-	*/
-	
+	FILE *fichierDictionnaire = NULL;
+	fichierDictionnaire = fopen(nomFichierDictionnaire,"w+");
+	assert(fichierDictionnaire);
+	enregistrerDicoRec(fichierDictionnaire,dictionnaire);
 }
 void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){
 
