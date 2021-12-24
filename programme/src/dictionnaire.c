@@ -12,6 +12,10 @@
 #include"dictionnaire.h"
 #include"mot.h"
 
+
+#define TAILLEMOTMAX 50
+
+
 /*------------Signatures------------------------------*/
 int max(int a, int b);
 int abs(int a);
@@ -65,6 +69,7 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot){
 	dictionnaire->mot = mot ;
 	dictionnaire->filsGauche = DICTIONNAIRE_dictionnaireVide();
 	dictionnaire->filsDroit = DICTIONNAIRE_dictionnaireVide() ;
+	return dictionnaire ;
 }
 void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot){
 
@@ -248,27 +253,26 @@ void afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire){
 		afficherArbre(dictionnaire->filsDroit);
 	}
 }
-/* partie temporaire pour les tests ! ( cp cl dans le main)
-int main(int argc, char **argv){
-	DICTIONNAIRE_Dictionnaire dictionnaire ;
-	char*nomfichier = argv[1];
-	DICTIONNAIRE_ajouterFichier(&dictionnaire,nomfichier);
-}
-*/
+
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier){
-	char chaine = (char *)malloc(30*sizeof(char));//taille max du mot
+	char chaine[TAILLEMOTMAX] = "";
 	MOT_Mot mot ;
-	FILE* fichier ;
-	chaine = "ab\0";
+	FILE* fichier =NULL ;
 	fichier = fopen(nomFichier, "r");
-	assert(fichier!=NULL);
-	while(chaine != EOF){
-		fgets(chaine,50,fichier);
-		mot = MOT_creerMot(chaine);
-		DICTIONNAIRE_ajouterMot(dictionnaire, mot);
+	if (fichier){
+		while(fgets(chaine,TAILLEMOTMAX,fichier) != NULL){
+			printf("Affichage du mot %s\n",chaine);
+			mot = MOT_creerMot(chaine);
+			DICTIONNAIRE_ajouterMot(dictionnaire, mot);
+		}
+		fclose(fichier);
+		printf("Affichage de l'arbre\n");
+		afficherArbre(*dictionnaire);
 	}
-	fclose(fichier);
-	afficherArbre(*dictionnaire);
+	else{
+		printf("le fichier n'existe pas");
+		assert(0);
+	}
 }
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine){
