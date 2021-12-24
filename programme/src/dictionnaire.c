@@ -269,34 +269,29 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 	MOT_Mot mot ;
 	FILE* fichier =NULL ;
 	fichier = fopen(nomFichier, "r");
-	if (fichier){
-		while(fgets(chaine,TAILLEMOTMAX,fichier) != NULL){
-			MOT_enleverSautDeLigne(chaine);
-			mot = MOT_creerMot(chaine);
-			DICTIONNAIRE_ajouterMot(dictionnaire, mot);
-		}
-		fclose(fichier);
+	assert(fichier);
+	while(fgets(chaine,TAILLEMOTMAX,fichier) != NULL){
+		MOT_enleverSautDeLigne(chaine);
+		mot = MOT_creerMot(chaine);
+		DICTIONNAIRE_ajouterMot(dictionnaire, mot);
 	}
-	else{
-		fprintf(stderr,"le fichier n'existe pas");
-		assert(0);
-	}
+	fclose(fichier);
 }
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire){
-/* 	FILE *fichierDictionnaire = NULL ;
-	char chaine[TAILLEMOTMAX] = "";
-	fichierDictionnaire = fopen(nomDictionnaire,"r"); */
+	FILE *fichierDictionnaire = NULL ;
+	/* char chaine[TAILLEMOTMAX] = ""; */
+	fichierDictionnaire = fopen(nomDictionnaire,"r");
 	DICTIONNAIRE_Dictionnaire dictionnaire ;
-	DICTIONNAIRE_ajouterFichier(&dictionnaire,nomDictionnaire);
-/* 	if (!fichierDictionnaire){// Le fichier donnée en paramètre n'existe pas donc on renvoie le dico vide
+	if (!fichierDictionnaire){// Le fichier donnée en paramètre n'existe pas donc on renvoie le dico vide
 		dictionnaire = DICTIONNAIRE_dictionnaireVide();
 	}
 	//cas ou le fichier existe le charger	Question comment est stocker est fichier ? donc comment le charger ?
 	else{
 		//Version non naive a coder ici
 		fclose(fichierDictionnaire);
-	} */
+		DICTIONNAIRE_ajouterFichier(&dictionnaire,nomDictionnaire);//si version pas naive enlever cette ligne
+	}
 	return dictionnaire;
 }
 
