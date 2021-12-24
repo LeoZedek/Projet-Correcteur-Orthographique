@@ -1,8 +1,11 @@
-#include"mot.h"
-#include"motPrivee.h"
 #include<assert.h>
 #include<stdlib.h>
 #include<string.h>
+#include<stdio.h>
+
+#include"mot.h"
+#include"motPrivee.h"
+
 #define Taille_Max_Tableau 10000
 #define TRUE 1
 #define FALSE 0
