@@ -73,8 +73,20 @@ void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
 }
 
 CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionnaire dictionnaire){
-	CO_TableauBooleens tmp ; //A changer -> pour la compilation
-	return tmp; //A changer -> pour la compilation
+	CO_TableauBooleens tabBool;
+	int i;
+	MOT_Mot mot;
+	int longueur = MOT_obtenirLongueurTabMots(mots);
+	for (i = 0; i<longueur; i++){
+	mot = MOT_obtenirIemeMot(mots, i);
+		if (DICTIONNAIRE_estPresent(dictionnaire, mot)){
+			CO_ajouterEntier(&tabBool,1);
+		}
+		else{
+			CO_ajouterEntier(&tabBool,0);
+		}
+	}
+	return tabBool; 
 } 
 
 MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionnaire){
