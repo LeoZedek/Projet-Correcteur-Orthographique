@@ -141,6 +141,17 @@ void MOT_supprimerMot(MOT_Mot *mot);
 void MOT_supprimerDeuxMots(MOT_DeuxMots *deuxMots);
 
 /**
+ *\fn int estAvantOrdreAlphabetique(MOT_Mot mot1, MOT_Mot mot2);
+ *\brief Renvoie 1 si le mot1 est plus petit par rapport à l'ordre alphabètique 0 sinon.
+ *
+ *\param mot1 : un des deux mots qui vont être comparer ensemble
+ *\param mot2 : l'autre des deux mots qui vont être comparer ensemble
+ *\return Le booléen de la comparaison.
+*/
+
+int estAvantOrdreAlphabetique(MOT_Mot mot1, MOT_Mot mot2);
+
+/**
  *\fn int sontEgaux(Mot mot1, Mot mot2)
  *\brief Renvoie le test si deux mot sont identique (insensible à la casse)
  *
@@ -148,7 +159,18 @@ void MOT_supprimerDeuxMots(MOT_DeuxMots *deuxMots);
  *\param mot2 : l'autre des deux mots qui vont être comparer ensemble
  *\return Le resultat du test de similarité des 2 mots
 */
+
 int MOT_sontEgaux(MOT_Mot mot1, MOT_Mot mot2);
+
+/**
+ *\fn char *MOT_motEnChaine(MOT_Mot mot)
+ *\brief Transforme une variable de type Mot en une chaine de caractère.
+ *
+ *\param mot : Le Mot qui sera transformé en chaine
+ *\return La chaine de caractère correspondant au mot.
+*/
+
+char *MOT_motEnChaine(MOT_Mot mot);
 
 /**
  *\fn MOT_Mot MOT_remplacerLettre(MOT_Mot mot, int position, char lettre);
