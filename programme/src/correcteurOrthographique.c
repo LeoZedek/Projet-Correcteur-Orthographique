@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 #include "mot.h"
 #include "dictionnaire.h"
 #include "correcteurOrthographique.h"
@@ -98,7 +99,7 @@ MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionna
 CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
 	int i;
 	int pos = 0;
-	int longueurPhrase = sizeof(phrase);
+	int longueurPhrase = strlen(phrase);
 	char temp[longueurPhrase];
 	MOT_Mot mot;
 	CO_MotsDansPhrase motsPhrase;
@@ -106,11 +107,12 @@ CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
 	MOT_TableauDeMots tabMots = CO_obtenirTabMots(motsPhrase);
 	CO_TableauPositions tabPos = CO_obtenirTabPositions(motsPhrase);
 	for (i=0; i<longueurPhrase; i++){
-		if (phrase[i] != ' '){
-			temp[i] = phrase[i];
+		if (MOT_estUneLettre(phrase[i])){
+			temp[i-pos] = phrase[i];
 		}	
-		else if (phrase[i] == ' '){
+		else {
 			pos = i + 1;
+			temp[i-pos+1] = '\0';
 			mot = MOT_creerMot(temp); 
 			MOT_ajouterMot(&tabMots, mot);
 			CO_ajouterEntier(&tabPos, pos);
