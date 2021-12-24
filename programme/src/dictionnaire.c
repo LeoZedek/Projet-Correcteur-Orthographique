@@ -154,7 +154,7 @@ int DICTIONNAIRE_hauteur(DICTIONNAIRE_Dictionnaire dictionnaire){
 		return 0;
 	}
 	else{
-		return max(DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire)), DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsDroit(&dictionnaire)));
+		return 1+max(DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire)), DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsDroit(&dictionnaire)));
 	}
 }
 
@@ -243,7 +243,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 	if (DICTIONNAIRE_estVide(*dictionnaire)){
 		*dictionnaire = DICTIONNAIRE_dictionnaire(mot);
 	}
-	else{
+	else{//Le dictionnaire n'est donc pas vide
 		chaineAInserer = MOT_motEnChaine(mot) ;
 		motDico = DICTIONNAIRE_obtenirMot(*dictionnaire);
 		chaineTest = MOT_motEnChaine(motDico) ; 
