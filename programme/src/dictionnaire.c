@@ -277,13 +277,15 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char nomDictionnaire){
 	FILE *fichierDictionnaire = NULL ;
+	char chaine[TAILLEMOTMAX] = "";
 	fichierDictionnaire = fopen(nomDictionnaire,"r");
+	DICTIONNAIRE_Dictionnaire dictionnaire ;
 	if (!fichierDictionnaire){// Le fichier donnée en paramètre n'existe pas donc on renvoie le dico vide
 		return DICTIONNAIRE_dictionnaireVide();
 	}
 	//cas ou le fichier existe le charger	Question comment est stocker est fichier ? donc comment le charger ?
 	else{//version naive
-		//charge le dictionnaire
+		DICTIONNAIRE_ajouterFichier(dictionnaire,nomDictionnaire);
 	}
 	return DICTIONNAIRE_dictionnaireVide();//Temporaire pour compilation
 }
