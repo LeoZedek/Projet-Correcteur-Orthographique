@@ -5,6 +5,8 @@
 #include "correcteurOrthographique.h"
 #define CO_TailleMax = 1000
 
+/*----------------------------------PARTIE PRIVEE-----------------------------------------------*/
+
 CO_TableauDEntiers CO_tableauDEntiersVide(){
 	CO_TableauDEntiers tab;
 	tab.lesEntiers = NULL;
@@ -34,16 +36,12 @@ int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers){
 void CO_ajouterEntier(CO_TableauDEntiers *tableauEntiers, int entierAAjouter){
 	CO_fixerLongueurTabEntiers(tableauEntiers, CO_obtenirLongueurTabEntiers(*tableauEntiers)+1);
 	(*tableauEntiers).lesEntiers[CO_obtenirLongueurTabEntiers(*tableauEntiers)] = entierAAjouter;
-
 }
-
 
 void CO_supprimerTableauEntiers(CO_TableauDEntiers *tableau){
 	free((*tableau).lesEntiers);
 	CO_fixerLongueurTabEntiers(tableau, -1);
 }
-
-/*TEMPORAIRE MAIS PEUT ETRE COMPLETER ET ADAPTER !*/
 
 CO_MotsDansPhrase CO_motsEtPositionsVide(){
 	CO_MotsDansPhrase motPhrase;
@@ -72,8 +70,11 @@ void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
 	*/
 }
 
+
+/*----------------------------------PARTIE PUBLIQUE---------------------------------------------*/
+
 CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionnaire dictionnaire){
-	CO_TableauBooleens tabBool;
+	CO_TableauBooleens tabBool = CO_tableauDEntiersVide();
 	int i;
 	MOT_Mot mot;
 	int longueur = MOT_obtenirLongueurTabMots(mots);
@@ -95,6 +96,26 @@ MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionna
 }
 
 CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
-	CO_MotsDansPhrase tmp ; //A changer -> pour la compilation
-	return tmp; //A changer -> pour la compilation
+	int i;
+	int pos = 0;
+	int longueurPhrase = sizeof(phrase);
+	char temp[longueurPhrase];
+	MOT_Mot mot;
+	CO_MotsDansPhrase motsPhrase;
+	motsPhrase = CO_motsEtPositionsVide();
+	MOT_TableauDeMots tabMots = CO_obtenirTabMots(motsPhrase);
+	CO_TableauPositions tabPos = CO_obtenirTabPositions(motsPhrase);
+	for (i=0; i<longueurPhrase; i++){
+		if (phrase[i] != ' '){
+			temp[i] = phrase[i];
+		}	
+		else if (phrase[i] == ' '){
+			pos = i + 1;
+			mot = MOT_creerMot(temp); 
+			MOT_ajouterMot(&tabMots, mot);
+			CO_ajouterEntier(&tabPos, pos);
+		}
+		
+	}
+	return motsPhrase; 
 }
