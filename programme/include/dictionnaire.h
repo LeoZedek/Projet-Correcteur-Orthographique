@@ -103,12 +103,18 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine);
 void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire);
 
 /**
- *\fn void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
- *\brief Supprime et déalloue entièrement un dictionnaire.
+ *\fn void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire)
+ *\brief Supprime et désalloue entièrement un dictionnaire.
  *
  *\param *dictionnaire : Le pointeur sur le dictionnaire qui sera supprimer.
 */
-
 void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
+/**
+ *\fn void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire)
+ *\brief Affiche un dictionnaire
+ *
+ *\param dictionnaire : Le dictionnaire à afficher
+*/
+void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire);
 #endif

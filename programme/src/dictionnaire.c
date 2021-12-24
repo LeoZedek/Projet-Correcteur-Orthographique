@@ -38,7 +38,9 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier);
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine);
 void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire);
-
+void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire);
+void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
+void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire);
 /*--------------Fonction Privé--------------------------*/
 //Qui ne sont ni dans la conception ni dans le .h
 int max(int a, int b){
@@ -59,10 +61,6 @@ int abs(int a){
 	}
 }
 
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide(){
-	return NULL ;
-}
-
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot){
 	DICTIONNAIRE_Dictionnaire dictionnaire ;
 	dictionnaire = (DICTIONNAIRE_Dictionnaire)malloc(sizeof(DICTIONNAIRE_Noeuds));
@@ -71,11 +69,9 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot){
 	dictionnaire->filsDroit = DICTIONNAIRE_dictionnaireVide() ;
 	return dictionnaire ;
 }
-void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot){
 
-}
-int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire){
-	return (dictionnaire==NULL);
+void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot){
+	(*dictionnaire)->mot = mot;
 }
 
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
@@ -183,8 +179,34 @@ void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	}
 }
 
+void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire){//version "naive"
+	MOT_Mot motAsauvegarder;
+	char *chaineAsauvegarder = (char *)malloc(TAILLEMOTMAX * sizeof(char));
+	DICTIONNAIRE_Dictionnaire filsGauche,filsDroit;
+	if(dictionnaire){
+		motAsauvegarder = DICTIONNAIRE_obtenirMot(dictionnaire);
+		chaineAsauvegarder = MOT_motEnChaine(motAsauvegarder);
+		fprintf(fichier,"%s\n",chaineAsauvegarder);
+		filsGauche = *DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
+		filsDroit = *DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
+		if(filsGauche){
+			DICTIONNAIRE_enregistrerDicoRec(fichier,filsGauche);
+		}
+		if(filsDroit){
+			DICTIONNAIRE_enregistrerDicoRec(fichier,filsDroit);
+		}
+	}
+	free(chaineAsauvegarder);
+}
 
 /*--------------Fonction Publique--------------------------*/
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide(){
+	return NULL ;
+}
+
+int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire){
+	return (dictionnaire==NULL);
+}
 
 int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot){
 	MOT_Mot motDico ;
@@ -241,18 +263,6 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 		}
 	}
 }
-void afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire){
-	if (!dictionnaire){
-		return;
-	}
-	if (dictionnaire->filsGauche){
-		afficherArbre(dictionnaire->filsGauche);
-	}
-	printf("%s\n",MOT_motEnChaine(DICTIONNAIRE_obtenirMot(dictionnaire)));
-	if (dictionnaire->filsDroit){
-		afficherArbre(dictionnaire->filsDroit);
-	}
-}
 
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier){
 	char chaine[TAILLEMOTMAX] = "";
@@ -290,39 +300,38 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char nomDictionnaire)
 	return dictionnaire;
 }
 
-void enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire){//version "naive"
-	MOT_Mot motAsauvegarder;
-	char *chaineAsauvegarder = (char *)malloc(TAILLEMOTMAX * sizeof(char));
-	DICTIONNAIRE_Dictionnaire filsGauche,filsDroit;
-	if(dictionnaire){
-		motAsauvegarder = DICTIONNAIRE_obtenirMot(dictionnaire);
-		chaineAsauvegarder = MOT_motEnChaine(motAsauvegarder);
-		fprintf(fichier,"%s\n",chaineAsauvegarder);
-		filsGauche = *DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
-		filsDroit = *DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
-		if(filsGauche){
-			enregistrerDicoRec(fichier,filsGauche);
-		}
-		if(filsDroit){
-			enregistrerDicoRec(fichier,filsDroit);
-		}
-	}
-	free(chaineAsauvegarder);
-}
-
-void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){
-	DICTIONNAIRE_supprimer(DICTIONNAIRE_obtenirFilsGauche(dictionnaire));
-	DICTIONNAIRE_supprimer(DICTIONNAIRE_obtenirFilsDroit(dictionnaire));
-	free(*dictionnaire);
-	*dictionnaire = NULL;
-}
-
-
 void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire){
 	FILE *fichierDictionnaire = NULL;
 	fichierDictionnaire = fopen(nomFichierDictionnaire,"w+");
 	assert(fichierDictionnaire);
-	enregistrerDicoRec(fichierDictionnaire,dictionnaire);
+	DICTIONNAIRE_enregistrerDicoRec(fichierDictionnaire,dictionnaire);
 	fclose(nomFichierDictionnaire);
 	DICTIONNAIRE_supprimer(dictionnaire);
+}
+
+void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){
+	DICTIONNAIRE_Dictionnaire *filsGauche, * filsDroit;
+	filsGauche = DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
+	filsDroit = DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
+	if(filsGauche){
+		DICTIONNAIRE_supprimer(filsGauche);
+	}
+	if (filsDroit){
+		DICTIONNAIRE_supprimer(filsDroit);
+	}
+	free(*dictionnaire);
+	*dictionnaire = NULL;
+}
+
+void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire){
+	if (!dictionnaire){
+		return;
+	}
+	if (dictionnaire->filsGauche){
+		DICTIONNAIRE_afficherArbre(dictionnaire->filsGauche);
+	}
+	printf("%s\n",MOT_motEnChaine(DICTIONNAIRE_obtenirMot(dictionnaire)));
+	if (dictionnaire->filsDroit){
+		DICTIONNAIRE_afficherArbre(dictionnaire->filsDroit);
+	}
 }
