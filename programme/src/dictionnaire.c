@@ -284,7 +284,7 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char nomDictionnaire)
 		return DICTIONNAIRE_dictionnaireVide();
 	}
 	//cas ou le fichier existe le charger	Question comment est stocker est fichier ? donc comment le charger ?
-	else{//version naive
+	else{//version naive -> perte de temps en rotation
 		DICTIONNAIRE_ajouterFichier(dictionnaire,nomDictionnaire);
 	}
 	return DICTIONNAIRE_dictionnaireVide();//Temporaire pour compilation
