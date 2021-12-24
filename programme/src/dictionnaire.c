@@ -292,6 +292,7 @@ void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNA
 	/*
 	1 le fichier dictionnaire existe 
 	*/
+	
 }
 void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){
 

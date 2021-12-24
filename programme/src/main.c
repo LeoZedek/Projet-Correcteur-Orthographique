@@ -48,7 +48,6 @@ int main(int argc, char **argv){
 				nomDictionnaire = argv[2];
 				fprintf(stderr,"on a le -d\n");
 				dictionnaire = DICTIONNAIRE_chargerDictionnaire(nomDictionnaire);//on charge le dictionnaire meme si il est vide
-				//Quesaquo du dictionnaire qui n'existe pas et qu'il faut créé (voir dans la lib DICO)
 				if (argc >= 4){// il reste de paramètres en option
 					if (strcmp(argv[3],"-f")==0 && argc>=4){// l'utilisateur souhaitent ajouter des mots ET a donner le nom du fichier à ajouter
 						fprintf(stderr,"on rentre dans le -f");
