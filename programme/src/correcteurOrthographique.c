@@ -53,14 +53,15 @@ CO_MotsDansPhrase CO_motsEtPositionsVide(){
 }
 
 MOT_TableauDeMots CO_obtenirTabMots(CO_MotsDansPhrase motsEtPosition){
-	MOT_TableauDeMots tab; 
-	tab = motsEtPosition.mots;
-	return tab; 
+	MOT_TableauDeMots tabMots; 
+	tabMots = motsEtPosition.mots;
+	return tabMots; 
 }
 
 CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition){
-	CO_TableauPositions tmp ; //A changer -> pour la compilation
-	return tmp ; //A changer -> pour la compilation
+	CO_TableauPositions tabPos; 
+	tabPos = motsEtPosition.positions;
+	return tabPos;
 }
 
 void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
