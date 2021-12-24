@@ -234,6 +234,7 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
 }
 
 void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot){
+	fprintf(stderr,"on rentre dans DICTIONNAIRE_ajouterMot\n");
 	DICTIONNAIRE_Dictionnaire *filsGauche, *filsDroit ;
 	char *chaineAInserer;
 	char *chaineTest;
@@ -265,11 +266,13 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 }
 
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier){
+	fprintf(stderr,"On rentre dans DICTIONNAIRE_ajouterFichier\n");
 	char chaine[TAILLEMOTMAX] = "";
 	MOT_Mot mot ;
 	FILE* fichier =NULL ;
+	fprintf(stderr,"Nom du fichier : %s\n",nomFichier);
 	fichier = fopen(nomFichier, "r");
-	assert(fichier);
+	assert(fichier != NULL);
 	while(fgets(chaine,TAILLEMOTMAX,fichier) != NULL){
 		MOT_enleverSautDeLigne(chaine);
 		mot = MOT_creerMot(chaine);
