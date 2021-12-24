@@ -75,7 +75,6 @@ void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
 
 
 CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionnaire dictionnaire){
-	assert(!DICTIONNAIRE_estVide(dictionnaire));
 	CO_TableauBooleens tabBool = CO_tableauDEntiersVide();
 	int i;
 	MOT_Mot mot;
@@ -93,7 +92,6 @@ CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionn
 } 
 
 MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionnaire){
-	assert(!DICTIONNAIRE_estVide(dictionnaire));
 	MOT_TableauDeMots resultatMots; 
 	MOT_Mot motCorrige;
 	MOT_DeuxMots motCorriges;
