@@ -151,6 +151,15 @@ int MOT_sontEgaux(MOT_Mot m1, MOT_Mot m2) {
 	return egaux;
 }
 
+int estAvantOrdreAlphabetique(MOT_Mot mot1, MOT_Mot mot2) {
+
+	char *chaineMot1 = MOT_motEnChaine(mot1);
+	char *chaineMot2 = MOT_motEnChaine(mot2);
+
+	return (strcmp(chaineMot1, chaineMot2) < 0);
+
+}
+
 int MOT_estUnMot(char *chaine) {
 	int estUnMot = TRUE;
 
