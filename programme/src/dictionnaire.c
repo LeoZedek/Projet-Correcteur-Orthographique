@@ -266,8 +266,6 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 			DICTIONNAIRE_ajouterMot(dictionnaire, mot);
 		}
 		fclose(fichier);
-		fprintf(stderr,"Affichage de l'arbre\n");
-		afficherArbre(*dictionnaire);
 	}
 	else{
 		fprintf(stderr,"le fichier n'existe pas");
@@ -276,18 +274,20 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 }
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char nomDictionnaire){
-	FILE *fichierDictionnaire = NULL ;
+/* 	FILE *fichierDictionnaire = NULL ;
 	char chaine[TAILLEMOTMAX] = "";
-	fichierDictionnaire = fopen(nomDictionnaire,"r");
+	fichierDictionnaire = fopen(nomDictionnaire,"r"); */
 	DICTIONNAIRE_Dictionnaire dictionnaire ;
-	if (!fichierDictionnaire){// Le fichier donnée en paramètre n'existe pas donc on renvoie le dico vide
-		return DICTIONNAIRE_dictionnaireVide();
+	DICTIONNAIRE_ajouterFichier(&dictionnaire,nomDictionnaire);
+/* 	if (!fichierDictionnaire){// Le fichier donnée en paramètre n'existe pas donc on renvoie le dico vide
+		dictionnaire = DICTIONNAIRE_dictionnaireVide();
 	}
 	//cas ou le fichier existe le charger	Question comment est stocker est fichier ? donc comment le charger ?
-	else{//version naive -> perte de temps en rotation
-		DICTIONNAIRE_ajouterFichier(dictionnaire,nomDictionnaire);
-	}
-	return DICTIONNAIRE_dictionnaireVide();//Temporaire pour compilation
+	else{
+		//Version non naive a coder ici
+		fclose(fichierDictionnaire);
+	} */
+	return dictionnaire;
 }
 
 void enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire){//version "naive"
@@ -298,8 +298,8 @@ void enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire){//
 		motAsauvegarder = DICTIONNAIRE_obtenirMot(dictionnaire);
 		chaineAsauvegarder = MOT_motEnChaine(motAsauvegarder);
 		fprintf(fichier,"%s\n",chaineAsauvegarder);
-		filsGauche = DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
-		filsDroit = DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
+		filsGauche = *DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
+		filsDroit = *DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
 		if(filsGauche){
 			enregistrerDicoRec(fichier,filsGauche);
 		}
@@ -310,12 +310,19 @@ void enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire){//
 	free(chaineAsauvegarder);
 }
 
+void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){
+	DICTIONNAIRE_supprimer(DICTIONNAIRE_obtenirFilsGauche(dictionnaire));
+	DICTIONNAIRE_supprimer(DICTIONNAIRE_obtenirFilsDroit(dictionnaire));
+	free(*dictionnaire);
+	*dictionnaire = NULL;
+}
+
+
 void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire){
 	FILE *fichierDictionnaire = NULL;
 	fichierDictionnaire = fopen(nomFichierDictionnaire,"w+");
 	assert(fichierDictionnaire);
 	enregistrerDicoRec(fichierDictionnaire,dictionnaire);
-}
-void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){
-
+	fclose(nomFichierDictionnaire);
+	DICTIONNAIRE_supprimer(dictionnaire);
 }

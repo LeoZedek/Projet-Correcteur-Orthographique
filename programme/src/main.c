@@ -89,6 +89,7 @@ int main(int argc, char **argv){
 						}
 					}
 				}
+				DICTIONNAIRE_enregistrerDictionnaire(nomDictionnaire,dictionnaire);
 			}
 			else{//la premiere option n'est pas -d ou il n'y a pas le nom de fichier après
 				afficherAide();
