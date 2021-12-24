@@ -256,12 +256,13 @@ int main(int argc, char **argv){
 }
 */
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier){
-	char chaine[30];//taille max du mot
+	char chaine = (char *)malloc(30*sizeof(char));//taille max du mot
 	MOT_Mot mot ;
 	FILE* fichier ;
+	chaine = "ab\0";
 	fichier = fopen(nomFichier, "r");
 	assert(fichier!=NULL);
-	while(EOF){
+	while(chaine != EOF){
 		fgets(chaine,50,fichier);
 		mot = MOT_creerMot(chaine);
 		DICTIONNAIRE_ajouterMot(dictionnaire, mot);
