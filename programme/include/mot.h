@@ -234,4 +234,14 @@ MOT_Mot MOT_inverserLettre(MOT_Mot mot, int position);
 */
 MOT_DeuxMots MOT_decomposerMot(MOT_Mot mot, int position);
 
+/**
+ *\fn void MOT_enleverSautDeLigne(char *chaine);
+ *\brief Enleve le charactère saut de ligne d'un mot(il faut qu'il soir forcement à l'avant dernière position). Utiliser pour gerer la lecture des fichiers textes.
+ *\attention Precondition : strlen(chaine) >= 2
+ *
+ *\param *chaine : La chaine de caractère dont on enlèvera le saut de ligne.
+*/
+
+void MOT_enleverSautDeLigne(char *chaine);
+
 #endif
