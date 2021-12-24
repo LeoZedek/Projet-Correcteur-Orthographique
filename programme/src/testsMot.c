@@ -36,11 +36,13 @@ void test_MOT_ajouterMot(void){
 	MOT_TableauDeMots tabMots = MOT_tableauDeMotsVide();
 	MOT_Mot m = MOT_creerMot("papillon");
 	MOT_fixerLongueurTabMots(&tabMots, 1);
-	tabMots.lesMots[0] = m;
+	tabMots.lesMots[0] = MOT_copierMot(m);
 	MOT_TableauDeMots tabMotsTest = MOT_tableauDeMotsVide();
 	MOT_ajouterMot(&tabMotsTest,m);
 	CU_ASSERT_TRUE(sontEgauxMots(tabMots, tabMotsTest));
+
 	MOT_supprimerTableauMots(&tabMots);
+	MOT_supprimerTableauMots(&tabMotsTest);
 }
 
 
