@@ -35,33 +35,12 @@ void test_Dictionnaire_estPresent(Dictionnaire dictionnaire, Mot mot){
   MOT_Mot m = creerMot("test");
   DICTIONNAIRE_ajouterMot(&dico, m);
 
-  m = creerMot("corriger");
-  DICTIONNAIRE_ajouterMot(&dico, m);
-
-  m = creerMot("les");
-  DICTIONNAIRE_ajouterMot(&dico, m);
-
-  m = creerMot("fautes");
-  DICTIONNAIRE_ajouterMot(&dico, m);
-
   MOT_TableauDeMots mots;
   CO_TableauBooleens booleenCorrects, booleenGeneres;
 
   mots = MOT_tableauDeMotsVide();
   booleenCorrects = CO_tableauDEntiersVide();
   booleenGeneres = CO_tableauDEntiersVide();
-  
-  m = creerMot("corriger");
-  MOT_ajouterMot(&mots, m);
-
-  m = creerMot("les");
-  MOT_ajouterMot(&mots, m);
-
-  m = creerMot("foutes");
-  MOT_ajouterMot(&mots, m);
-
-  CO_ajouterEntier(&booleenCorrects, TRUE);
-  CO_ajouterEntier(&booleenCorrects, TRUE);
   CO_ajouterEntier(&booleenCorrects, FALSE);
   
   booleenGeneres = CO_sontPresents(mots, dico);
