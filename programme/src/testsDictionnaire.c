@@ -20,40 +20,46 @@ int clean_suite_success(void) {
   return 0; 
 }
 
-struct dictionnaire{
-   struct * left, *right;
+struct dict{
+   struct dict* left, *right;
    char mot[10];
 }
-*root = NULL;
 
-typedef struct Dictionaire dictionnaire;
+
+void tester_max(void){
+   CU_ASSERT_EQUAL( max(1,2),2);
+   CU_ASSERT_EQUAL( max(2,1),2);
+}
+void tester_abs(void){
+   CU_ASSERT_EQUAL( abs(1),1);
+   CU_ASSERT_EQUAL( abs(-1),1);
+}
 
 void test_Dictionnaire_estPresent(Dictionnaire dictionnaire, Mot mot){
 
-  DICTIONNAIRE_Dictionnaire dico;
+   char *chaineAtester = "salut" ;
+   char *chaineDico = "salutation";
 
-  MOT_Mot m = creerMot("test");
-  DICTIONNAIRE_ajouterMot(&dico, m);
+   if (CU_ASSERT_FALSE(DICTIONNAIRE_estVide(dictionnaire))){
+		return 0 ;
+	}
+   else{
+		
+		if (CU_ASSERT_EQUAL(chaineAtester, chaineDico)){
+			return 1;
+		}
+		else{
+			
+			if (strcmp(chaineAtester, chaineDico)<0){
+				return test_DICTIONNAIRE_estPresent(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot) ;
+			}
+			else{
+				return test_DICTIONNAIRE_estPresent(*DICTIONNAIRE_obtenirFilsDroit(&dictionnaire), mot) ;
+			}
+		}
+	}
 
-  MOT_TableauDeMots mots;
-  CO_TableauBooleens booleenCorrects, booleenGeneres;
 
-  mots = MOT_tableauDeMotsVide();
-  booleenCorrects = CO_tableauDEntiersVide();
-  booleenGeneres = CO_tableauDEntiersVide();
-  CO_ajouterEntier(&booleenCorrects, FALSE);
-  
-  booleenGeneres = CO_sontPresents(mots, dico);
-  
-  CU_ASSERT_TRUE(sontEgauxEntiers(booleenGeneres,booleenCorrects));
-
-  MOT_supprimerTableauMots(mots);
-  CO_supprimerTableauEntiers(booleenCorrects);
-  CO_supprimerTableauEntiers(booleenGeneres);
-
-
-
-}
 void  test_DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, Mot mot);
 	MOT_TableauDeMots tabMots = MOT_tableauDeMotsVide();
 	MOT_Mot mot = MOT_creerMot("arbre");
@@ -65,20 +71,6 @@ void  test_DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, Mot 
 	MOT_supprimerTableauMots(tabMots);
 }
 
-
-
-/*Dictionaire DICTIONNAIRE_obtenirFilsGauche(Dictionnaire dictionnaire);
-Dictionaire DICTIONNAIRE_obtenirFilsDroit(Dictionnaire dictionnaire);
-//DICTIONNAIRE_Dictionnaire 
-//DICTIONNAIRE_dictionnaireVide();
-
-  if estVide(dictionnaire){
-      return test_estPresent(CO_obtenirFilsGauche(dictionnaire, mot));
-  }
-  else {
-      return test_estPresent(CO_obtenirFilsDroite(dictionnaire, mot));
-  }
- }*/
 
 
  int main(int argc , char∗∗ argv){
@@ -96,11 +88,15 @@ Dictionaire DICTIONNAIRE_obtenirFilsDroit(Dictionnaire dictionnaire);
  }
 
  /* Ajout des tests à la suite de tests boite noire */
- if ((NULL == CU add test(pSuite, ”Test presence”, test_Dictionnaire_estPresent))
-  || (NULL == CU add test(pSuite, ”Test ajouter”, est_DICTIONNAIRE_ajouterMot))) {
+ if ((NULL == CU add test(pSuite, ”Test max”, tester_max))
+  ||((NULL == CU add test(pSuite, ”tester abs”, tester_abs))
+  || (NULL == CU add test(pSuite, ”Test presence”, test_Dictionnaire_estPresent))
+  || (NULL == CU add test(pSuite, ”Test ajouter”, est_DICTIONNAIRE_ajouterMot))
+  ) {
    CU cleanup registry () ;
    return CU get error () ;
 }
+
  /* Lancement des tests */
  CU basic set mode(CU BRM VERBOSE);
  CU basic run tests () ;
