@@ -65,7 +65,7 @@ void test_MOT_estUnMot(void){
 
 void test_MOT_sontEgaux(void){
 	MOT_Mot mot1 = MOT_creerMot("papillon");
-	MOT_Mot mot2 = MOT_creerMot("papillon");
+	MOT_Mot mot2 = MOT_creerMot("Papillon");
 	MOT_Mot mot3 = MOT_creerMot("carottes");
 
 	CU_ASSERT_TRUE(MOT_sontEgaux(mot1, mot2));

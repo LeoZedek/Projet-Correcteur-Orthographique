@@ -128,7 +128,6 @@ MOT_Mot MOT_creerMot(char *s) {
 	}
 	chaineMot[longueurS] = '\0';
 
-	strcpy(mot.chaine, s);
 	MOT_fixerLongueurMot(&mot, strlen(s));
 
 	return mot;
