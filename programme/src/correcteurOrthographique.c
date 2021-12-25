@@ -157,7 +157,7 @@ CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
                 dansUnMot = TRUE;
             }
 
-            tem[i - pos] = phrase[i];
+            temp[i - pos] = phrase[i];
         }
         else {
 
