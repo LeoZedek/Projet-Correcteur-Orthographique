@@ -3,6 +3,7 @@
 #include<assert.h>
 #include<stdlib.h>
 #include<string.h>
+#include<ctype.h>
 #define Taille_Max_Tableau 10000
 #define TRUE 1
 #define FALSE 0
@@ -114,9 +115,19 @@ int MOT_estUneLettre(char c) {
 MOT_Mot MOT_creerMot(char *s) {
 	assert(MOT_estUnMot(s));
 
+	int longueurS = strlen(s);
 	MOT_Mot mot;
+	char *chaineMot;
 
-	mot.chaine = (char*)malloc(sizeof(char) * (strlen(s) + 1));
+	mot.chaine = (char*)malloc(sizeof(char) * (longueurS + 1));
+
+	chaineMot = MOT_motEnChaine(mot);
+
+	for (int i = 0; i < longueurS; i++) {
+		chaineMot[i] = tolower(s[i]);
+	}
+	chaineMot[longueurS] = '\0';
+
 	strcpy(mot.chaine, s);
 	MOT_fixerLongueurMot(&mot, strlen(s));
 
