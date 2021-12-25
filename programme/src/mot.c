@@ -78,7 +78,7 @@ void MOT_ajouterMot(MOT_TableauDeMots *tableauMots, MOT_Mot m) {
 	int longueur = MOT_obtenirLongueurTabMots(*tableauMots);
 
 	MOT_fixerLongueurTabMots(tableauMots, longueur + 1);
-	MOT_fixerIemeMot(tableauMots, MOT_copierMot(m), longueur);
+	MOT_fixerIemeMot(tableauMots, m, longueur);
 }
 
 void MOT_supprimerMot(MOT_Mot *m) {
@@ -117,10 +117,19 @@ int MOT_estUneLettre(char c) {
 MOT_Mot MOT_creerMot(char *s) {
 	assert(MOT_estUnMot(s));
 
+	int longueurS = strlen(s);
 	MOT_Mot mot;
+	char *chaineMot;
 
-	mot.chaine = (char*)malloc(sizeof(s));
-	strcpy(mot.chaine, s);
+	mot.chaine = (char*)malloc(sizeof(char) * (longueurS + 1));
+
+	chaineMot = MOT_motEnChaine(mot);
+
+	for (int i = 0; i < longueurS; i++) {
+		chaineMot[i] = tolower(s[i]);
+	}
+	chaineMot[longueurS] = '\0';
+
 	MOT_fixerLongueurMot(&mot, strlen(s));
 
 	return mot;
@@ -208,7 +217,7 @@ MOT_Mot MOT_supprimerLettre(MOT_Mot m, int pos) {
 		nvChaine[i] = chaine[i];
 	}
 
-	for (int i = pos + 1; i < MOT_longueurMot(m); i++) {
+	for (int i = pos + 1; i < MOT_longueurMot(m) + 1; i++) {
 		nvChaine[i - 1] = chaine[i];
 	}
 
