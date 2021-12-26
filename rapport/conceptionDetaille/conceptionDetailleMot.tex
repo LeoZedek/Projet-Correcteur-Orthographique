@@ -159,7 +159,7 @@
 \begin{algorithme}%
       \fonctionAvecPreconditions{inverserLettre}
       {mot : Mot, pos : NaturelNonNul}%
-      {mot : Mot}%
+      {Mot}%
       {pos $<$ longueur(mot)}%
       {nouvelleChaine : \chaine, temp: \caractere }%
       {
@@ -174,20 +174,19 @@
 /***********************************************************************************/
 \begin{algorithme}
          \fonctionAvecPreconditions{décomposerMot}
-         {pos : \entier,unMot : Mot}%
+         {pos : NaturelNonNul, mot : Mot}%
          {Mot, Mot}%
-         {(pos $<$ longueur(unMot)) $\land$ \& (pos $>$ 1)}%
-         {i : \entier, mot1,mot2: Mot}%
+         {(pos $<$ longueur(unMot)) ET (pos $>$ 1)}%
+         {i : NaturelNonNul; nvChaine1, nvChaine2 : \chaine}%
          {
-               \pour{i}{1}{pos}{}%
-                {
-                 \affecter{mot1[i]}{unMot[i]}%
-                }
-               \pour{i}{pos+1}{longueur(unMot)}{}%
-                {
-                 \affecter{mot2[i]}{unMot[i]}%
-                }
-               \retourner{mot1}%  
-               \retourner{mot2}%
+           \pour{i}{1}{pos}{}%
+            {
+             \affecter{nvChaine1[i]}{mot[i]}%
+            }
+           \pour{i}{pos+1}{longueur(unMot)}{}%
+            {
+             \affecter{nvChaine2[i - pos]}{mot[i]}%
+            }
+           \retourner{creerMot(nvChaine1), creerMot(nvChaine2)}%  
           }
 \end{algorithme}
