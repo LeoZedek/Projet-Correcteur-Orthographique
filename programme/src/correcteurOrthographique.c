@@ -5,6 +5,8 @@
 #include "dictionnaire.h"
 #include "correcteurOrthographique.h"
 #define CO_TailleMax = 1000
+#define TRUE 1
+#define FALSE 0
 
 /*----------------------------------PARTIE PRIVEE-----------------------------------------------*/
 
@@ -20,13 +22,14 @@ int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers){
 }
 
 void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongueur){
+	assert(CO_obtenirLongueurTabEntiers(*pointeurTableauEntiers) > 1);
 	(*pointeurTableauEntiers).longueur = nouvelleLongueur;
 }
 
 
 int CO_obtenirIemeEntier(CO_TableauDEntiers tableauEntiers, int position)
-//position>=0 et position <= longueur tableau
 {
+	assert(position>=0 && position < CO_obtenirLongueurTabEntiers(tableauEntiers));
 	return tableauEntiers.lesEntiers[position];
 }
 
@@ -63,6 +66,8 @@ CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition){
 	return tabPos;
 }
 
+/*----------------------------------PARTIE PUBLIQUE---------------------------------------------*/
+
 void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
 	MOT_TableauDeMots tabMots = CO_obtenirTabMots(*motsEtPosition); 
 	CO_TableauPositions tabPos = CO_obtenirTabPositions(*motsEtPosition);
@@ -70,8 +75,6 @@ void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
 	CO_supprimerTableauEntiers(&tabPos);
 }
 
-
-/*----------------------------------PARTIE PUBLIQUE---------------------------------------------*/
 
 CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionnaire dictionnaire){
 	CO_TableauBooleens tabBool = CO_tableauDEntiersVide();
@@ -136,27 +139,41 @@ MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionna
 }
 
 CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
-	int i;
-	int pos = 0;
-	int longueurPhrase = strlen(phrase);
-	char temp[longueurPhrase];
-	MOT_Mot mot;
-	CO_MotsDansPhrase motsPhrase;
-	motsPhrase = CO_motsEtPositionsVide();
-	MOT_TableauDeMots tabMots = CO_obtenirTabMots(motsPhrase);
-	CO_TableauPositions tabPos = CO_obtenirTabPositions(motsPhrase);
-	for (i=0; i<longueurPhrase; i++){
-		if (MOT_estUneLettre(phrase[i])){
-			temp[i-pos] = phrase[i];
-		}	
-		else {
-			temp[i-pos+1] = '\0';
-			pos = i + 1;
-			mot = MOT_creerMot(temp); 
-			MOT_ajouterMot(&tabMots, mot);
-			CO_ajouterEntier(&tabPos, pos);
-		}
-		
-	}
-	return motsPhrase; 
+    int i;
+    int pos = 0;
+    int longueurPhrase = strlen(phrase);
+    char *temp = (char*)malloc(sizeof(char) * (longueurPhrase + 1));
+    MOT_Mot mot;
+    CO_MotsDansPhrase motsPhrase;
+    motsPhrase = CO_motsEtPositionsVide();
+    MOT_TableauDeMots tabMots = CO_obtenirTabMots(motsPhrase);
+    CO_TableauPositions tabPos = CO_obtenirTabPositions(motsPhrase);
+    int dansUnMot = FALSE;
+    for (i=0; i<longueurPhrase + 1; i++){
+        if (MOT_estUneLettre(phrase[i])){
+            
+            if (!dansUnMot) {
+                pos = i;
+                dansUnMot = TRUE;
+            }
+
+            temp[i - pos] = phrase[i];
+        }
+        else {
+
+            if (dansUnMot) {
+                dansUnMot = FALSE;
+                temp[i - pos] = '\0';
+                mot = MOT_creerMot(temp); 
+                MOT_ajouterMot(&tabMots, mot);
+                CO_ajouterEntier(&tabPos, pos);
+            }
+
+        }
+
+    }
+
+    MOT_supprimerMot(mot);
+    free(temp);
+    return motsPhrase; 
 }
