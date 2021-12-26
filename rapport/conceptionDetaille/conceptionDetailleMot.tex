@@ -104,25 +104,26 @@
 /***********************************************************************************/
 \begin{algorithme}
       \fonctionAvecPreconditions{SupprimerLettre}
-       {pos : \entier, mot : Mot}
+       {pos : NaturelNonNul, mot : Mot}
        {Mot}
        {pos $\leq$ longueur(mot)}
-       {}
+       {nouvelleChaine : \chaine, longueurMot : NaturelNonNul}
        {
-       	\tantque{mot[pos]$\neq$'0'}
+       \affecter{longueurMot}{longueur(mot)}
+       \affecter{nouvelleChaine}{motEnChaine(mot)}
+       	\pour{i}{pos}{longueurMot - 1}{}
              {
-               \affecter{mot[pos]}{mot[pos+1]}
-               \affecter{pos}{pos+1}
+               \affecter{nouvelleChaine[i]}{chaine[i + 1]}
              }
-            
+        \retourner{creerMot(nouvelleChaine)}%    
         }
-       \retourner{mot}%
+       
 \end{algorithme}
 
 /***********************************************************************************/
 \begin{algorithme}
       \fonctionAvecPreconditions{InsérerLettre}%
-       {pos : \entier, c : \caractere, mot : Mot}%
+       {pos : NaturelNonNul, c : \caractere, mot : Mot}%
        {Mot}%
        {(pos $\leq$ longueur(mot)+1)) $\land$ \& (estUneLettre(c))}%
        {}
