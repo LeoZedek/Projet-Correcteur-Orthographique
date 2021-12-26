@@ -246,7 +246,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 	else{//Le dictionnaire n'est donc pas vide
 		chaineAInserer = MOT_motEnChaine(mot) ;
 		motDico = DICTIONNAIRE_obtenirMot(*dictionnaire);
-		chaineTest = MOT_motEnChaine(motDico) ; 
+		chaineTest = MOT_motEnChaine(motDico);
 		if (strcmp(chaineAInserer, chaineTest)<0){
 			filsGauche = DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
 			DICTIONNAIRE_ajouterMot(filsGauche,mot);
@@ -255,6 +255,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 		else{
 			if (strcmp(chaineAInserer,chaineTest)>0){
 				filsDroit = DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
+				fprintf(stderr,"%s\t%s\t%p\n",chaineAInserer,chaineTest,(*filsDroit));
 				DICTIONNAIRE_ajouterMot(filsDroit, mot);
 				DICTIONNAIRE_fixerFilsDroit(dictionnaire,*filsDroit);
 			}//else c'est les meme chaine donc pas besoin d'inserer
@@ -263,6 +264,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 			DICTIONNAIRE_reequilibrer(dictionnaire);
 		}
 	}
+	fprintf(stderr,"on sort dans DICTIONNAIRE_ajouterMot ------------------------------\n");
 }
 
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier){
@@ -276,6 +278,8 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 	while(fgets(chaine,TAILLEMOTMAX,fichier) != NULL){
 		MOT_enleverSautDeLigne(chaine);
 		mot = MOT_creerMot(chaine);
+		char *test=MOT_motEnChaine(mot);
+		fprintf(stderr,"ajouter fichier %s\n",test);
 		DICTIONNAIRE_ajouterMot(dictionnaire, mot);
 	}
 	fclose(fichier);
@@ -286,8 +290,9 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire
 	/* char chaine[TAILLEMOTMAX] = ""; */
 	fichierDictionnaire = fopen(nomDictionnaire,"r");
 	DICTIONNAIRE_Dictionnaire dictionnaire ;
+	dictionnaire = DICTIONNAIRE_dictionnaireVide();
 	if (!fichierDictionnaire){// Le fichier donnée en paramètre n'existe pas donc on renvoie le dico vide
-		dictionnaire = DICTIONNAIRE_dictionnaireVide();
+		return dictionnaire;
 	}
 	//cas ou le fichier existe le charger	Question comment est stocker est fichier ? donc comment le charger ?
 	else{
