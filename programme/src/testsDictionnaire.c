@@ -5,6 +5,7 @@
 #include "mot.h"
 #include "dictionnaire.h"
 #include "dictionnairePrive.h"
+#include "motPrivee.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -39,17 +40,18 @@ int test_Dictionnaire_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot
 	CU_ASSERT_FALSE(DICTIONNAIRE_estVide(dictionnaire));
 	CU_ASSERT_EQUAL(chaineAtester, chaineDico);
 	if (strcmp(chaineAtester, chaineDico)<0){
-		return test_DICTIONNAIRE_estPresent( *DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot) ;
+		return test_Dictionnaire_estPresent( *DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot) ;
 	}
 	else{
-		return test_DICTIONNAIRE_estPresent( *DICTIONNAIRE_obtenirFilsDroit(&dictionnaire), mot) ;
+		return test_Dictionnaire_estPresent( *DICTIONNAIRE_obtenirFilsDroit(&dictionnaire), mot) ;
 	}
 }
 
 
 void  test_DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot){
 	MOT_TableauDeMots tabMots = MOT_tableauDeMotsVide();
-	MOT_Mot mot = MOT_creerMot("arbre");
+	//MOT_Mot 
+	mot = MOT_creerMot("arbre"); //tu as deja la variable mot en paramètre
 	MOT_fixerLongueurTabMots(&tabMots, 1);
 	tabMots.lesMots[0] = mot;
 	MOT_TableauDeMots tabMotsTest = MOT_tableauDeMotsVide();
