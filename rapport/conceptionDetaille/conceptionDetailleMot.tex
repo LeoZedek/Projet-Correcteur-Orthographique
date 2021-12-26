@@ -143,8 +143,8 @@
 
 /***********************************************************************************/
 \begin{algorithme}%
-      \fonctionAvecPreconditions{RemplacerLettre}
-       {position : \entier,c : \caractere, mot : Mot}%
+      \fonctionAvecPreconditions{remplacerLettre}
+       {position : NaturelNonNul,c : \caractere, mot : Mot}%
        {Mot}%
        {(pos $\leq$ longueur(mot))) ET (estUneLettre(c))}
        {nouvelleChaine : \chaine}
@@ -157,16 +157,17 @@
 
 /***********************************************************************************/
 \begin{algorithme}%
-      \fonctionAvecPreconditions{inverserDeuxLettresConsecutives}
-      {position : \entier}%
+      \fonctionAvecPreconditions{inverserLettre}
+      {mot : Mot, pos : NaturelNonNul}%
       {mot : Mot}%
       {pos $<$ longueur(mot)}%
-      {a: \caractere }%
+      {nouvelleChaine : \chaine, temp: \caractere }%
       {
-          \affecter{a}{mot[pos]}%
-          \affecter{mot[pos]}{mot[pos+1]}%
-          \affecter{mot[pos+1]}{a}%
-         
+        \affecter{nouvelleChaine}{motEnChaine(mot)}
+          \affecter{temp}{nouvelleChaine[pos]}%
+          \affecter{nouvelleChaine[pos]}{nouvelleChaine[pos+1]}%
+          \affecter{nouvelleChaine[pos+1]}{temp}%
+         \retourner{creerMot(nouvelleChaine)}
       }
 \end{algorithme}
 
