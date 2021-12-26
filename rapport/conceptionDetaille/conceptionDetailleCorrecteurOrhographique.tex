@@ -27,7 +27,7 @@
 	{i, longueur : \naturel \\ tabBool : CO\_TableauBooleens\\ mot : MOT\_mot}%
 	{%
 	\affecter{longueur}{MOT\_obtenirLongueurTabMots(mots)}
-	\pour{i}{0}{longueur}{}%
+	\pour{i}{0}{longueur - 1}{}%
 	{	
 		\affecter{mot}{MOT\_obtenirIemeMot(mots,i)}
 		\sialorssinon{DICTIONNAIRE\_estPresent(dictionnaire, mot)}%
@@ -51,13 +51,13 @@
 	{resultatMots : MOT\_TableauDeMots\\ motCorrige : MOT\_Mot\\ motCorriges : MOT\_DeuxMot\\ lettre, tiret : \caractere \\ i : \naturel}%
 	{%
 	\pour{lettre}{'a'}{'z'}{}%
-		{\pour{i}{0}{MOT\_longueurMot(m)}{}%
+		{\pour{i}{0}{MOT\_longueurMot(m) - 1}{}%
 			{
 			\affecter{motCorrige}{MOT\_remplacerLettre(m, i, lettre)}
 			\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motCorrige)}%
 				{\instruction{MOT\_ajouterMot(resultatMots, motCorrige)}}
 			}
-		\pour{i}{0}{MOT\_longueurMot(m) + 1}{}%
+		\pour{i}{0}{MOT\_longueurMot(m)}{}%
 			{\affecter{motCorrige}{MOT\_insererLettre(m, i, lettre)}
 			\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motCorrige)}%
 				{\instruction{MOT\_ajouter(resultatMots, motCorrige)}}
@@ -65,13 +65,13 @@
 		}
 		
 	\affecter{tiret}{"-"}
-	{\pour{i}{0}{MOT\_longueurMot(m)}{}%
+	{\pour{i}{0}{MOT\_longueurMot(m) - 1}{}%
 		{
 		\affecter{motCorrige}{MOT\_remplacerLettre(m, i, tiret)}
 		\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motCorrige)}%
 			{\instruction{MOT\_ajouterMot(resultatMots, motCorrige)}}
 		}
-	\pour{i}{0}{MOT\_longueurMot(m) + 1}{}%
+	\pour{i}{0}{MOT\_longueurMot(m)}{}%
 		{
 		\affecter{motCorrige}{MOT\_insererLettre(m, i, tiret)}
 		\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motCorrige)}%
@@ -79,13 +79,13 @@
 		}
 		}\\
 	
-	\pour{i}{0}{MOT\_longueurMot(m)}{}%
+	\pour{i}{0}{MOT\_longueurMot(m) - 1}{}%
 		{\affecter{motCorrige}{MOT\_supprimerLettre(m, i)}
-		\sialors{DICTIONNAIRE\_estPresent(motCorrige, d)}%
+		\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motCorrige)}%
 			{\instruction{MOT\_ajouter(resultatMots, motCorrige)}}
 		}
 		
-	\pour{i}{1}{MOT\_longueurMot(m) - 1}{}%
+	\pour{i}{1}{MOT\_longueurMot(m) - 2}{}%
 		{\affecter{motCorriges}{MOT\_decomposerMot(m, i)}
 		\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motCorriges.mot1)}%
 			{\instruction{MOT\_ajouter(resultatMots, motCorriges.mot1)}}
@@ -118,9 +118,9 @@
 	\affecter{tabPos}{CO\_obtenirTabPositions(motsPhrase)}
 	\affecter{dansUnMot}{FAUX}
 	
-	\pour{i}{0}{MOT\_longueurMot(m)}{}%
+	\pour{i}{0}{longueurPhrase}{}%
 		{
-		\sialorssinon{DICTIONNAIRE\_estPresent(motCorrige, d)}%
+		\sialorssinon{MOT\_estUneLettre(phrase[i])}%
 			{
 			\sialors{NON(dansUnMot)}%
 			{
@@ -132,22 +132,15 @@
 			}%
 			{
 			\sialors{dansUnMot}%
-			{
+				{
 				\affecter{dansUnMot}{FAUX}
 				\affecter{mot}{MOT\_creerMot(temp)}
 				\instruction{MOT\_ajouterMot(tabMots, mot)}
 				\instruction{CO\_ajouterEntier(tabPos, pos)}
-			}
-			
-			
+				}
 			
 			}
 		}
-
-
-
-
-
 	\retourner{motsPhrase}
 	}
 \end{algorithme}
