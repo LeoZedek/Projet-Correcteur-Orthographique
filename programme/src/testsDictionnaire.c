@@ -34,10 +34,50 @@ int dictionnaire_sontEgaux(DICTIONNAIRE_Dictionnaire dico1, DICTIONNAIRE_Diction
 
 }
 int test_simple_rotation_droite(){
-	return 0;
+	DICTIONNAIRE_Dictionnaire dico, dictionnaireDesire, fg, fd, fgg;
+	fgg = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	DICTIONNAIRE_fixerFilsGauche(&fg, fgg);
+
+	dico =DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	DICTIONNAIRE_fixerFilsGauche(&dico, fg);
+
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	dictionnaireDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	DICTIONNAIRE_fixerFilsGauche(&dictionnaireDesire, fg);
+	DICTIONNAIRE_fixerFilsDroit(&dictionnaireDesire, fd);
+
+	DICTIONNAIRE_simpleRotationDroite(&dico);
+
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico, dictionnaireDesire));
+
+	DICTIONNAIRE_supprimer(dico);
+	DICTIONNAIRE_supprimer(dictionnaireDesire);
 }
 
 int test_simple_rotation_gauche(){
+	DICTIONNAIRE_Dictionnaire dico, dictionnaireDesire, fg, fd, fdd;
+	fdd = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	DICTIONNAIRE_fixerFilsDroit(&fd, fdd);
+
+	dico =DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	DICTIONNAIRE_fixerFilsDroit(&dico, fd);
+
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	dictionnaireDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	DICTIONNAIRE_fixerFilsGauche(&dictionnaireDesire, fg);
+	DICTIONNAIRE_fixerFilsDroit(&dictionnaireDesire, fd);
+
+	DICTIONNAIRE_simpleRotationDroite(&dico);
+
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico, dictionnaireDesire));
+
+	DICTIONNAIRE_supprimer(dico);
+	DICTIONNAIRE_supprimer(dictionnaireDesire);
+
 	return 0;
 }
 
