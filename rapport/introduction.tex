@@ -1,9 +1,9 @@
 \section{Introdution}
 \subsection{Contexte}
-Ce projet a été réalisé par Alexis \textsc{Imbert}, Ruth \textsc{Lioté}, Amina \textsc{Sakouti} et Léo \textsc{Zedek} dans le cadre du cours d'algorithmie avancé et programmation C, suivie en ITI3 et dirigé par M DELESTRE, le projet a été supervisé par M GUERIAU.\\
+Ce projet a été réalisé par Alexis \textsc{Imbert}, Ruth \textsc{Lioté}, Amina \textsc{Sakouti} et Léo \textsc{Zedek} dans le cadre du cours d'algorithmie avancée et programmation C, suivi en ITI3 et dirigé par M DELESTRE, le projet a été supervisé par M GUERIAU.\\
 \\
 \subsection{Cahiers des charges}
-L'objectif de ce projet est de développer un correcteur orthographique à l'image des programmes unix ispell et aspell 1. Les fonctionnalités attendues de ce programme sont les suivantes.\\
+L'objectif de ce projet est de développer un correcteur orthographique à l'image des programmes unix ispell et aspell 1. Les fonctionnalités attendues de ce programme sont les suivantes :\\
 \\
 \paragraph{Aider}
 Lorsqu'il est lancé sans option, ou avec l'option -h, ou avec une option non reconnue, le programme doit afficher une aide.\\
@@ -50,12 +50,11 @@ A l'image du programme ispell, le programme doit pouvoir analyser (et proposer d
 \\
 1. un mot est bien orthographié (présent dans le dictionnaire), le programme produit une étoile ('*')
 pour ce mot ;\\
-2. un mot est mal orthographié, le programme produit un et commercial (\&) suivi des informa-
-tions suivantes :
+2. un mot est mal orthographié, le programme produit un et commercial (\&) suivi des informations suivantes :
 \begin{itemize}
 	\item le mot mal orthographié ;
 	\item le nombre de corrections proposées ;
-	\item le position du mot mal orthographié depuis le début du flux d'entrée, suivi de deux points\\
+	\item le position du mot mal orthographié depuis le début du flux d'entrée, suivi de deux points ;
 	\item les corrections proposées séparées par un espace.
 \end{itemize}
 Voici un exemple d'utilisation :
@@ -96,7 +95,7 @@ v o t e s r o t e s p o t e s n o t e s l o t e s d o t e s c o t e s b o t e s
 \end{lstlisting}
 
 \subsection{Comment corriger un mot ?}
-Pour proposer des corrections d'un mot mal orthographié (pour un dictionnnaire donné) le plus\\simple est de partir de ce mot et de lui appliquer des transformations qui permettent d'obtenir des mots proches. Si une transformation donne un mot bien orthographié alors ce mot est une correction possible. Voici quelques exemples de transformation :
+Pour proposer des corrections d'un mot mal orthographié (pour un dictionnnaire donné) le plus\\simple est de partir de celui-ci et de lui appliquer des transformations qui permettent d'obtenir des mots lui ressemblant. Si une transformation donne un mot bien orthographié alors ce mot est une correction possible. Voici quelques exemples de transformations :
 \begin{itemize}
 \item remplacement d'une lettre ;
 \item inversion de deux lettres consécutives ;
@@ -108,33 +107,33 @@ Pour proposer des corrections d'un mot mal orthographié (pour un dictionnnaire 
 \end{itemize}
 
 Dans l'exemple précédent, ce sont ces trois premières stratégies qui sont utilisées (c'est pour cela que le programme n'arrive pas à proposer une correction valable pour le mot fote).\\
-L'inconvénient de cette méthode est qu'elle génère beaucoup de mots. Par exemple pour un mot de 5 lettres, la première stratégie va générer $5 *(26 + 16) -5 = 205$ mots (26 lettres de l'alphabet et 16 versions accentuées). Il faut donc que être capable de vérifier si un mot est présent dans un dictionnaire de manière efficace (le fichier dico-ref\_asscii.txt proposé contient 336531 mots)\\
+L'inconvénient de cette méthode est qu'elle génère beaucoup de mots. Par exemple pour un mot de 5 lettres, la première stratégie va générer $5 *(26 + 16) -5 = 205$ mots (26 lettres de l'alphabet et 16 versions accentuées). Il faut donc être capable de vérifier si un mot est présent dans un dictionnaire de manière efficace (le fichier dico-ref\_asscii.txt proposé contient 336531 mots)\\
 \\
 \subsection{Travail demandé}
 \paragraph{Analyse}
-On nous donne les type Mode, et le TAD Fichiertexte, dans le rapport.\\
+On nous donne les types Mode, et le TAD Fichiertexte, dans le sujet.\\
 \\
 Nous avons du spécifier les TADs Mot, Dictionnaire et CorrecteurOrthographique.\\
 \paragraph{Conception}
 \subparagraph{Conception préliminaire}
-Nous avons données les signatures des fonctions et procédures des TAD précédents ainsi que celles issues de l'analyse descendantes (fonctions et procédures métiers)\\
+Nous avons donné les signatures des fonctions et procédures des TADs précédents ainsi que celles issues de l'analyse descendante (fonctions et procédures métiers).\\
 
 \subparagraph{Conception détaillée}
-Nous avons fais l'analyse descendantes des fonctions et procédures des TAD précédents les plus complexes. Ainsi que celle des fonctions et procédures métiers.\\
+Nous avons donné les algorithmes des fonctions et procédures des TADs précédents les plus complexes. Ainsi que celle des fonctions et procédures métiers.\\
 
-\paragraph{Dévellopement, tests unitaires et documentation}
-Développer le programme en C en testant au maximum vos fonctions à l'aide de l'API CUnit (la personne qui codera les tests unitaires ne doit pas être la personne qui implante les fonctions C). Vous générerez aussi une documentation de votre code à l'aide du logiciel Doxygen\\
+\paragraph{Développement, tests unitaires et documentation}
+Nous avons développé le programme en C en testant au maximum nos fonctions à l'aide de l'API CUnit. Avec cela, nous avons générer une documentation de notre code à l'aide du logiciel Doxygen.\\
 
 \subsection{Ajout}
-Le pdf du rapport peut être obtenue grace à la compilation du fichier .tex (make dans le dossier rapport).\\
-Le correcteur orthographique est lui aussi compilable grace un makefile dans le dossier programme,\\
-Les options du makefile
+Le pdf du rapport peut être obtenu grâce à la compilation du fichier .tex (makefile inclus dans le dossier rapport).\\
+Le correcteur orthographique peut lui aussi être compilé grâce à un makefile inclus dans le dossier programme.\\
+Les options du makefile :
 \begin{itemize}
-	\item all (make par défaut) compile le programme, les tests unitaires et la documentation\\
-	\item tests compile seulements les tests unitaires\\
-	\item doc compile uniquement la documentation Doxygen\\
+	\item \textbf{all} (make par défaut) compile le programme, les tests unitaires et la documentation,\\
+	\item \textbf{tests} compile seulement les tests unitaires,\\
+	\item \textbf{doc} compile uniquement la documentation Doxygen.\\
 \end{itemize}
-Nous avons ajouté un script à la racine du projet qui permet de compilé à la fois le rapport et le programme (option all) en copiant dans le dossier "resultat" le pdf du rapport, le programe et la documentation Doxygen au format pdf.\\
+De plus, nous avons ajouté un script à la racine du projet permettant de compiler à la fois le rapport et le programme (option all) en copiant dans le dossier "resultat" le pdf du rapport, le programme et la documentation Doxygen au format pdf.\\
 
 
 
