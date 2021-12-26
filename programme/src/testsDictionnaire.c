@@ -50,7 +50,36 @@ int test_double_rotation_gauche(){
 }
 
 int test_hauteur(){
-	return 0;
+	int resultat = TRUE;
+	DICTIONNAIRE_Dictionnaire dictionnaire,filsgauche,filsdroit,filsgauchegauche;
+	if (DICTIONNAIRE_hauteur(DICTIONNAIRE_dictionnaireVide())!=0){
+		resultat = FALSE;
+	}
+
+	DICTIONNAIRE_dictionnaire(MOT_creerMot("test"));
+	if (DICTIONNAIRE_hauteur(dictionnaire)!=1){
+		resultat = FALSE;
+	}
+
+	filsgauche = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsgauche"));
+	DICTIONNAIRE_fixerFilsGauche(&dictionnaire,filsgauche);
+	if(DICTIONNAIRE_hauteur(dictionnaire) != 2){
+		resultat = FALSE;
+	}
+
+	filsgauchegauche = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsgauchegauche"));
+	DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_obtenirFilsGauche(&dictionnaire),filsgauchegauche);
+	if (DICTIONNAIRE_hauteur(dictionnaire)!=3){
+		resultat = FALSE;
+	}
+
+	filsdroit = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsdroit"));
+	DICTIONNAIRE_fixerFilsDroit(&dictionnaire,filsdroit);
+	if (DICTIONNAIRE_hauteur(dictionnaire) != 3){
+		resultat = FALSE;
+	}
+
+	return resultat;
 }
 
 int test_reequilibrer(){

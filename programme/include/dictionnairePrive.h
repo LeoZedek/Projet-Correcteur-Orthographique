@@ -27,7 +27,7 @@ int max(int a, int b);
  *\return entier positif
 */
 int abs(int a);
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire();
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot);
 int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire);
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire);
