@@ -80,25 +80,24 @@
      {
           \sialorssinon{longueur(mot1)$\neq$ longueur(mot2)}%
                   {
-                   \affecter{res}{faux}
+                   \retourner{Faux}
                   }%
                   {
-                   \affecter{res}{vrai}
+                   \affecter{res}{Vrai}
                    \affecter{i}{0}
-                   \tantque{(res = vrai) $\land$ \& (i $\leq$ longueur(mot1))}%
+                   \tantque{(res = vrai) ET (i $\leq$ longueur(mot1))}%
                     {
-                     \sialorssinon{mot1[i] = mot2[i]}%
+                     \sialors{mot1[i] != mot2[i]}%
                        {
-                        \affecter{res}{vrai}%
-                        \affecter{i}{i+1}%
+                        \affecter{res}{Faux}%
                        }
-                       {
-                        \affecter{res}{faux}%
-                       }
+                       
+                       \affecter{i}{i + 1}
+                       
                     }
                    }%
       
-         \retourner{Res}
+         \retourner{res}
       }
 \end{algorithme}
 
