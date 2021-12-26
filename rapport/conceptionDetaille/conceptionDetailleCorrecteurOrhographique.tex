@@ -1,63 +1,153 @@
 \begin{algorithme}
 
-\constante{alphabet}%
-	{'abcdefghijklmnopqrstuvwxyzéèêëàâäùüûôöïîÿç'}\\
+\constante{CO\_TailleMax}{1000}\\
 
-\fonction{sontPresents}%
-	{mots : Liste<Mot>, d : Dictionnaire}%
-	{Liste<Booleen>}%
-	{i : \naturel, resultat : Liste<Booleen>}%
+\begin{enregistrement}{CO\_TableauDEntiers}
+	\champEnregistrement{lesEntiers}{\tableauUneDimension{CO\_TailleMax}{d’}{\entier}}
+	\champEnregistrement{longueur}{\naturel}
+\end{enregistrement}\\
+
+\type{CO\_TableauPositions}{CO\_TableauDEntiers}\\
+
+\type{CO\_TableauBooleens}{CO\_TailleMax}{de}{\booleen}\\
+
+\begin{enregistrement}{CO\_MotsDansPhrase}
+	\champEnregistrement{mots}{MOT\_TableauDeMots}
+	\champEnregistrement{positions}{CO\_TableauPositions}
+\end{enregistrement}\\
+
+\end{algorithme}
+
+***********************************************************************************
+
+\begin{algorithme}
+\fonction{CO\_sontPresents}%
+	{mots : MOT\_TableauDeMots, d : Dictionnaire}%
+	{\\CO\_TableauBooleens}%
+	{i, longueur : \naturel \\ tabBool : CO\_TableauBooleens\\ mot : MOT\_mot}%
 	{%
-	\pour{i}{1}{Liste.longueur(mots)}{}%
-		{\instruction{ajouter(resultat, estPresent(Liste.obtenirElement(mots, i), d))}}%
-	\retourner{resultat}%
+	\affecter{longueur}{MOT\_obtenirLongueurTabMots(mots)}
+	\pour{i}{0}{longueur}{}%
+	{	
+		\affecter{mot}{MOT\_obtenirIemeMot(mots,i)}
+		\sialorssinon{DICTIONNAIRE\_estPresent(dictionnaire, mot)}%
+		{
+			\affecter{tabBool[i]}{tVRAI)}
+		}%
+		{
+			\affecter{tabBool[i]}{FAUX)}%
+			}
+	}%
+	\retourner{tabBool}
 	}\\
+\end{algorithme}
 	
-\fonction{proposerMots}%
-	{m : Mot, d : Dictionnaire}%
-	{Ensemble<Mot>}%
-	{motCorrige, motCorrige2 : Mot, resultat : Ensemble<Mot>}%
-	{%
-	\pour{k}{1}{Chaine.longueur(alphabet)}{}%
-		{\pour{i}{1}{Mot.longeur(m)}{}%
-			{\instruction{motCorrige <- remplacerLettre(m, alphabet[k], i)}\\
-			\sialors{Dictionnaire.estPresent(motCorrige, d)}%
-				{\instruction{ajouter(resultat, motCorrige)}}
-			}
-		\pour{i}{1}{Mot.longeur(m) + 1}{}%
-			{\instruction{motCorrige <- insererLettre(m, alphabet[k], i)}\\
-			\sialors{Dictionnaire.estPresent(motCorrige, d)}%
-				{\instruction{ajouter(resultat, motCorrige)}}
-			}
-		}
-	\pour{i}{1}{Mot.longeur(m)}{}%
-		{\instruction{motCorrige <- supprimerLettre(m, i)}\\
-		\sialors{Dictionnaire.estPresent(motCorrige, d)}%
-			{\instruction{ajouter(resultat, motCorrige)}}
-		}
-		
-	\pour{i}{2}{Mot.longeur(m) - 1}{}%
-		{\instruction{motCorrige, motCorrige2 <- decomposerMot(m, i)}\\
-		\sialors{Dictionnaire.estPresent(motCorrige, d)}%
-			{\instruction{ajouter(resultat, motCorrige)}}
-		\sialors{Dictionnaire.estPresent(motCorrige2, d)}%
-			{\instruction{ajouter(resultat, motCorrige2)}}
-		}
+***********************************************************************************
 
-			
+\begin{algorithme}
+\fonction{CO\_proposerMots}%
+	{m : MOT\_Mot, dictionnaire : DICTIONNAIRE\_Dictionnaire}%
+	{\\MOT\_TableauDeMots}%
+	{resultatMots : MOT\_TableauDeMots\\ motCorrige : MOT\_Mot\\ motCorriges : MOT\_DeuxMot\\ lettre, tiret : \caractere \\ i : \naturel}%
+	{%
+	\pour{lettre}{'a'}{'z'}{}%
+		{\pour{i}{0}{MOT\_longueurMot(m)}{}%
+			{
+			\affecter{motCorrige}{MOT\_remplacerLettre(m, i, lettre)}
+			\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motCorrige)}%
+				{\instruction{MOT\_ajouterMot(resultatMots, motCorrige)}}
+			}
+		\pour{i}{0}{MOT\_longueurMot(m) + 1}{}%
+			{\affecter{motCorrige}{MOT\_insererLettre(m, i, lettre)}
+			\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motCorrige)}%
+				{\instruction{MOT\_ajouter(resultatMots, motCorrige)}}
+			}
+		}
 		
-	\retourner{resultat}%
+	\affecter{tiret}{"-"}
+	{\pour{i}{0}{MOT\_longueurMot(m)}{}%
+		{
+		\affecter{motCorrige}{MOT\_remplacerLettre(m, i, tiret)}
+		\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motCorrige)}%
+			{\instruction{MOT\_ajouterMot(resultatMots, motCorrige)}}
+		}
+	\pour{i}{0}{MOT\_longueurMot(m) + 1}{}%
+		{
+		\affecter{motCorrige}{MOT\_insererLettre(m, i, tiret)}
+		\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motCorrige)}%
+			{\instruction{MOT\_ajouter(resultatMots, motCorrige)}}
+		}
+		}\\
+	
+	\pour{i}{0}{MOT\_longueurMot(m)}{}%
+		{\affecter{motCorrige}{MOT\_supprimerLettre(m, i)}
+		\sialors{DICTIONNAIRE\_estPresent(motCorrige, d)}%
+			{\instruction{MOT\_ajouter(resultatMots, motCorrige)}}
+		}
+		
+	\pour{i}{1}{MOT\_longueurMot(m) - 1}{}%
+		{\affecter{motCorriges}{MOT\_decomposerMot(m, i)}
+		\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motCorriges.mot1)}%
+			{\instruction{MOT\_ajouter(resultatMots, motCorriges.mot1)}}
+		\sialors{DICTIONNAIRE\_estPresent(dictionnaire, motsCorriges.mot2)}%
+			{\instruction{MOT\_ajouter(resultatMots, motCorriges.mot2)}}
+		}
+	
+	\retourner{resultatMots}
 	}\\
+\end{algorithme}
 
-\fonction{proposerMotsListe}%
-	{mots : Liste<Mot>, d : Dictionnaire}%
-	{Liste< Ensemble<Mot> >}%
-	{resultat : Liste< Ensemble<Mot> >}%
-	{%
-	\pour{i}{1}{Liste.longeur(mots)}{}%
-		{%
-		\instruction{ajouter(resultat, proposerMots(obtenirElements(mots, i), d))}
+***********************************************************************************
+
+\begin{algorithme}
+\fonction{CO\_phraseEnMots}%
+	{phrase : \caractere}%
+	{CO\_MotsDansPhrase}%
+	{i, pos, longueurPhrase : \naturel \\
+    	temp : \chaine \\
+    	mot : MOT\_Mot\\
+   	motsPhrase : CO\_MotsDansPhrase\\
+	dansUnMot : \booleen \\
+	tabMots : MOT\_TableauDeMots\\
+	tabPos : CO\_TableauPositions}%
+	{
+	\affecter{pos}{0}
+	\affecter{longueurPhrase}{longueur(phrase)}
+	\affecter{motsPhrase}{CO\_motsEtPositionsVide()}
+	\affecter{tabMots}{CO\_obtenirTabMots(motsPhrase)}
+	\affecter{tabPos}{CO\_obtenirTabPositions(motsPhrase)}
+	\affecter{dansUnMot}{FAUX}
+	
+	\pour{i}{0}{MOT\_longueurMot(m)}{}%
+		{
+		\sialorssinon{DICTIONNAIRE\_estPresent(motCorrige, d)}%
+			{
+			\sialors{NON(dansUnMot)}%
+			{
+				\affecter{pos}{i}
+				\affecter{dansUnMot}{VRAI}
+			}
+			
+			\affecter{temp[i - pos]}{phrase[i]}
+			}%
+			{
+			\sialors{dansUnMot}%
+			{
+				\affecter{dansUnMot}{FAUX}
+				\affecter{mot}{MOT\_creerMot(temp)}
+				\instruction{MOT\_ajouterMot(tabMots, mot)}
+				\instruction{CO\_ajouterEntier(tabPos, pos)}
+			}
+			
+			
+			
+			}
 		}
-	}
 
+
+
+
+
+	\retourner{motsPhrase}
+	}
 \end{algorithme}
