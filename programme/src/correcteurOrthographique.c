@@ -173,7 +173,7 @@ CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
 
     }
 
-    MOT_supprimerMot(mot);
+    MOT_supprimerMot(&mot);
     free(temp);
     return motsPhrase; 
 }
