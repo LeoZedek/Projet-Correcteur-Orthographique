@@ -44,7 +44,7 @@
 
 		    	\pour{i}{1}{longueur(chaine)}{}%
 			   {
-			      \affecter{c}{m[i]}%
+			      \affecter{c}{chaine[i]}%
 			      \sialors{non(estUneLettre(c))}%
 				  {
 				     \affecter{res}{faux}
@@ -59,22 +59,15 @@
 
 /***********************************************************************************/
 \begin{algorithme}
-    \fonction{créerMot}
-     {chaine : \chaine}%
-     {m : Mot}%
-     {i : \entier, longueur : \entier, lettre : \caractere }%
-     {
-	\affecter{i}{1}%
-	\affecter{longueur}{0}% 
-	\lire{lettre}
-	\tantque{estUneLettre(lettre)}%
-	  {
-	    \affecter{m[i]}{lettre}%
-            \affecter{i}{i+1}%
-	    \affecter{longueur}{longueur+1}%
-	  }
-	\retourner{m}
-     }
+    \fonctionAvecPreconditions{créerMot}
+    {chaine : \chaine}%
+    {Mot}%
+    {estUnMot(chaine)}%
+    {Mot : resultat}%
+    {
+    \affecter{mot.chaine}{chaine}
+    \affecter{mot.longueur}{longueur(chaine)}
+    }
 \end{algorithme}
 
 /***********************************************************************************/
