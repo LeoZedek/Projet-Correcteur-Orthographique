@@ -103,7 +103,7 @@
 
 /***********************************************************************************/
 \begin{algorithme}
-      \fonctionAvecPreconditions{SupprimerLettre}
+      \fonctionAvecPreconditions{supprimerLettre}
        {pos : NaturelNonNul, mot : Mot}
        {Mot}
        {pos $\leq$ longueur(mot)}
@@ -122,7 +122,7 @@
 
 /***********************************************************************************/
 \begin{algorithme}
-      \fonctionAvecPreconditions{InsérerLettre}%
+      \fonctionAvecPreconditions{insererLettre}%
        {pos : NaturelNonNul, c : \caractere, mot : Mot}%
        {Mot}%
        {(pos $\leq$ longueur(mot)+1)) ET (estUneLettre(c))}%
@@ -143,15 +143,15 @@
 
 /***********************************************************************************/
 \begin{algorithme}%
-      \fonction{RemplacerLettre}
+      \fonctionAvecPreconditions{RemplacerLettre}
        {position : \entier,c : \caractere, mot : Mot}%
        {Mot}%
-       {}
+       {(pos $\leq$ longueur(mot))) ET (estUneLettre(c))}
+       {nouvelleChaine : \chaine}
        {
-          \instruction{supprimerLettre(position,mot)}
-          \instruction{insérerLettre(position,c,mot)}
-       
-          \retourner{mot}
+          \affecter{nouvelleChaine}{motEnChaine(mot)}
+          \affecter{nouvelleChaine[position]}{c}      
+          \retourner{creerMot(nouvelleChaine)}
        }
 \end{algorithme}
 
