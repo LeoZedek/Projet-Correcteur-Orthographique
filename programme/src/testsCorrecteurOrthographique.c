@@ -16,17 +16,18 @@ int clean_suite_success(void) {
 
 
 int sontEgauxEntiers(CO_TableauDEntiers entierGeneres, CO_TableauDEntiers entierVerifies){
-  int i;
+  int i = 0;
   int egaux = TRUE;
 
   if (CO_obtenirLongueurTabEntiers(entierGeneres) != CO_obtenirLongueurTabEntiers(entierVerifies)) {
     egaux = FALSE;
   }
   else {
-    for (i=0; i<CO_obtenirLongueurTabEntiers(entierGeneres); i++){
+    while (egaux && i < CO_obtenirLongueurTabEntiers(entierGeneres)) {
       if (CO_obtenirIemeEntier(entierGeneres, i) != CO_obtenirIemeEntier(entierVerifies, i)) {
         egaux = FALSE;
       }
+      i++;
     }   
   }
 
@@ -34,16 +35,18 @@ int sontEgauxEntiers(CO_TableauDEntiers entierGeneres, CO_TableauDEntiers entier
 }
 
 int sontEgauxMots(MOT_TableauDeMots motsGeneres, MOT_TableauDeMots motsVerifies){
-  int i;
+  int i = 0;
   int egaux = TRUE;
   if (MOT_obtenirLongueurTabMots(motsGeneres) != MOT_obtenirLongueurTabMots(motsVerifies)) {
     egaux = FALSE;
   }
   else {
-    for (i=0; i < MOT_obtenirLongueurTabMots(motsGeneres); i++){
+    while (egaux && i < MOT_obtenirLongueurTabMots(motsGeneres)) {
       if (!MOT_sontEgaux(MOT_obtenirIemeMot(motsGeneres, i), MOT_obtenirIemeMot(motsVerifies, i))) {
         egaux = FALSE;
       }
+
+      i++;
     }   
   }
 

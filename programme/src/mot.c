@@ -137,7 +137,7 @@ MOT_Mot MOT_creerMot(char *s) {
 }
 
 int MOT_sontEgaux(MOT_Mot m1, MOT_Mot m2) {
-	int egaux = TRUE;
+	int i = 0, egaux = TRUE;
 
 	if (MOT_longueurMot(m1) != MOT_longueurMot(m2)) {
 		egaux = FALSE;
@@ -148,12 +148,14 @@ int MOT_sontEgaux(MOT_Mot m1, MOT_Mot m2) {
 		char *chaine1 = MOT_motEnChaine(m1);
 		char *chaine2 = MOT_motEnChaine(m2);
 
-		for (int i = 0; i < MOT_longueurMot(m1); i++) {
+		while (egaux && i < MOT_longueurMot(m1)) {
 
 			if (chaine1[i] != chaine2[i]) {
 
 				egaux = FALSE;
 			}
+
+			i++;
 		}
 	}
 
