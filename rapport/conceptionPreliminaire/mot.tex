@@ -8,15 +8,17 @@
 	\signatureFonction{longueur}%
 		{m : Mot}%
 		{\naturelNonNul}
-	\signatureFonctionAvecPreconditions{estUnMot}%
+	\signatureFonction{estUnMot}%
 		{chaine : \chaine}%
-		{\booleen}%
-		{longueur(c)>1 ET estUneLettre(c[i]) $\forall 1\leq i \leq longueur(m)$}
+		{\booleen}
 	%Création de signature de procédure 1 : nom de la procédure
 	\signatureFonctionAvecPreconditions{creerMot}%
 		{chaine : \chaine}%
-		{m : Mot}%
+		{Mot}%
 		{estUnMot(chaine)}
+	\signatureFonction{estAvantOrdreAlphabetique}%
+		{m1, m2 : Mot}%
+		{\booleen}
 	\signatureFonction{sontEgaux}%
 		{m1, m2 : Mot}%
 		{\booleen}
@@ -34,7 +36,7 @@
 	\signatureFonctionAvecPreconditions{insererLettre}%
 		{m : Mot, c : \caractere, pos : \naturelNonNul}%
 		{Mot}%
-		{$pos \leq longueur(m)$}
+		{$pos \leq longueur(m) + 1$}
 	\signatureFonctionAvecPreconditions{inverserLettre}%
 		{m : Mot, pos : \naturelNonNul}%
 		{Mot}%

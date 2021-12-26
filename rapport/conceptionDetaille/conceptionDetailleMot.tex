@@ -1,14 +1,16 @@
 \begin{algorithme}
+    
+    \begin{enregistrement}{Mot}%
+        \champEnregistrement{\chaine}{chaine}%
+        \champEnregistrement{NaturelNonNul}{longueur}
+    \end{enregistrement}
+
      \fonction{estUneLettre}
       {c : \caractere}%
       {\booleen}%
-      {res : \booleen}%
+      {}%
       {
-          \sialorssinon{$('a' \geq c \leq 'z' ) \lor ('A' \geq c \leq 'Z')$}
-           {\affecter{res}{vrai}}
-           {\affecter{res}{faux}}
-            
-          \retourner{res}
+          \retourner{$('a' \leq$ c ET c $\leq 'z' )$ OU ('A' $\leq$ c ET c $\leq$ 'Z') OU c = '-'}
       }
 \end{algorithme}
 
@@ -17,39 +19,33 @@
       \fonction{longueur}
        {mot : Mot}%
        {\entier}%
-       {long : \entier }%
+       {}%
        {
-         \affecter{long}{0}%
-         \tantque{mot[long] $\neq$ '0'}%
-           {
-            \affecter{long}{long+1}
-           }
-           
-         \retourner{long}
          
+        \retourner{mot.longueur}
+
         }
 \end{algorithme}
 
 /***********************************************************************************/
 \begin{algorithme}
-    \fonctionAvecPreconditions{estUnMot}%
-     {m : \chaine}%
+    \fonction{estUnMot}%
+     {chaine : \chaine}%
      {\booleen}%
-     {(longueur(m)>1) ET (estUneLettre(m[i]))}%
-     {i: \entier,res : \booleen, c: \caractere}%
-     {
-         \sialorssinon{longueur(m) $\leq 1$}%
+     {i: \entier, res : \booleen, c: \caractere}%
+     {     
+
+         \sialorssinon{longueur(chaine) = 0}%
         	{
-        		\retourner{vrai}
+        		\retourner{Faux}
         	}%
         	{
-		    	\pour{i}{1}{longueur(m)}{}%
+                \affecter{res}{Vrai}
+
+		    	\pour{i}{1}{longueur(chaine)}{}%
 			   {
 			      \affecter{c}{m[i]}%
-			      \sialorssinon{estUneLettre(c)}%
-				  {
-				     \affecter{res}{vrai}
-				  }%
+			      \sialors{non(estUneLettre(c))}%
 				  {
 				     \affecter{res}{faux}
 				  }%
