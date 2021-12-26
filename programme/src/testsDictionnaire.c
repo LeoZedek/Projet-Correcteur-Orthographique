@@ -8,42 +8,37 @@
 #define TRUE 1
 #define FALSE 0
 
-//CU initialize registry() initialiser le registre de tests
-//CU add suite() ajouter tests au registre
-//CU add test() ajouter tests a une suite de tests
+//CU_initialize_registry() initialiser le registre de tests
+//CU_add_suite() ajouter tests au registre
+//CU_add_test() ajouter tests a une suite de tests
 
-int init_suite_success(void) { 
-  return 0; 
+int init_suite_success(void) {
+	return 0;
 }
 
 int clean_suite_success(void) { 
-  return 0; 
-}
-
-struct dict{
-   struct dict* left, *right;
-   char mot[10];
+	return 0; 
 }
 
 
 void tester_max(void){
-   CU_ASSERT_EQUAL( max(1,2),2);
-   CU_ASSERT_EQUAL( max(2,1),2);
+	CU_ASSERT_EQUAL( max(1,2),2);
+	CU_ASSERT_EQUAL( max(2,1),2);
 }
 void tester_abs(void){
-   CU_ASSERT_EQUAL( abs(1),1);
-   CU_ASSERT_EQUAL( abs(-1),1);
+	CU_ASSERT_EQUAL( abs(1),1);
+	CU_ASSERT_EQUAL( abs(-1),1);
 }
 
-void test_Dictionnaire_estPresent(Dictionnaire dictionnaire, Mot mot){
+int test_Dictionnaire_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot){
 
    char *chaineAtester = "salut" ;
    char *chaineDico = "salutation";
 
-   if (CU_ASSERT_FALSE(DICTIONNAIRE_estVide(dictionnaire))){
+	if (CU_ASSERT_FALSE(DICTIONNAIRE_estVide(dictionnaire))){
 		return 0 ;
 	}
-   else{
+	else{
 		
 		if (CU_ASSERT_EQUAL(chaineAtester, chaineDico)){
 			return 1;
@@ -51,10 +46,10 @@ void test_Dictionnaire_estPresent(Dictionnaire dictionnaire, Mot mot){
 		else{
 			
 			if (strcmp(chaineAtester, chaineDico)<0){
-				return test_DICTIONNAIRE_estPresent(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot) ;
+				return test_DICTIONNAIRE_estPresent( *DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot) ;
 			}
 			else{
-				return test_DICTIONNAIRE_estPresent(*DICTIONNAIRE_obtenirFilsDroit(&dictionnaire), mot) ;
+				return test_DICTIONNAIRE_estPresent( *DICTIONNAIRE_obtenirFilsDroit(&dictionnaire), mot) ;
 			}
 		}
 	}
@@ -68,44 +63,44 @@ void  test_DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, Mot 
 	MOT_TableauDeMots tabMotsTest = MOT_tableauDeMotsVide();
 	MOT_ajouterMot(&tabMotsTest,mot);
 	CU_ASSERT_TRUE(sontEgauxMots(tabMots, tabMotsTest));
-	MOT_supprimerTableauMots(tabMots);
+	MOT_supprimerTableauMots(&tabMots);
 }
 
 
 
- int main(int argc , char∗∗ argv){
- CU_pSuite pSuite = NULL;
- 
- /* initialisation du registre de tests */
- if (CUE_SUCCESS != CU initialize registry())
- return CU get error () ;
+int main(int argc , char **argv){
+	CU_pSuite pSuite = NULL;
+	
+ 	/* initialisation du registre de tests */
+	if (CUE_SUCCESS != CU_initialize_registry())
+	return CU_get_error() ;
 
- /* ajout d'une suite de test */
- pSuite = CU add suite(”Tests boite noire ”, init suite success , clean suite success ) ;
- if (NULL == pSuite) {
- CU cleanup registry () ;
- return CU get error () ;
- }
+ 	/* ajout d'une suite de test */
+	pSuite = CU_add_suite("Tests boite noire ", init_suite_success() , clean_suite_success() ) ;
+	if (NULL == pSuite){
+	CU_cleanup_registry();
+	return CU_get_error();
+	}
 
- /* Ajout des tests à la suite de tests boite noire */
- if ((NULL == CU add test(pSuite, ”Test max”, tester_max))
-  ||((NULL == CU add test(pSuite, ”tester abs”, tester_abs))
-  || (NULL == CU add test(pSuite, ”Test presence”, test_Dictionnaire_estPresent))
-  || (NULL == CU add test(pSuite, ”Test ajouter”, est_DICTIONNAIRE_ajouterMot))
-  ) {
-   CU cleanup registry () ;
-   return CU get error () ;
-}
+	/* Ajout des tests à la suite de tests boite noire */
+	if ((NULL == CU_add_test(pSuite, "Test max", tester_max))
+		||((NULL == CU_add_test(pSuite, "tester abs", tester_abs))
+		|| (NULL == CU_add_test(pSuite, "Test presence", test_Dictionnaire_estPresent))
+		|| (NULL == CU_add_test(pSuite, "Test ajouter", test_DICTIONNAIRE_ajouterMot))
+		)) {
+			CU_cleanup_registry() ;
+			return CU_get_error() ;
+	}
 
- /* Lancement des tests */
- CU basic set mode(CU BRM VERBOSE);
- CU basic run tests () ;
- printf (”\n”);
-  CU basic show failures ( CU get failure list ()) ;
- printf (”\n\n”);
+	/* Lancement des tests */
+	CU_basic_set_mode(CU_BRM_VERBOSE);
+	CU_basic_run_tests();
+	printf ("\n");
+	CU_basic_show_failures (CU_get_failure_list()) ;
+	printf ("\n\n");
 
  /* Nettoyage du registre */
- CU cleanup registry () ;
- return CU get error () ;
- }
+	CU_cleanup_registry() ;
+	return CU_get_error() ;
+}
 
