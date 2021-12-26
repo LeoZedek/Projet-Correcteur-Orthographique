@@ -22,7 +22,16 @@ int clean_suite_success(void) {
 	return 0; 
 }
 int dictionnaire_sontEgaux(DICTIONNAIRE_Dictionnaire dico1, DICTIONNAIRE_Dictionnaire dico2){
-	return 0;
+	if(!(dico1) && !(dico2)){
+		return TRUE;
+	}
+	else if ( strcmp( MOT_motEnChaine(DICTIONNAIRE_obtenirMot(dico1)),MOT_motEnChaine(DICTIONNAIRE_obtenirMot(dico2)))==0){
+		return TRUE;
+	}
+	else{
+		return FALSE;
+	}
+
 }
 int test_simple_rotation_droite(){
 	return 0;
