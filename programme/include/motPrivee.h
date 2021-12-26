@@ -53,16 +53,6 @@ MOT_Mot MOT_copierMot(MOT_Mot mot);
 void MOT_fixerIemeMot(MOT_TableauDeMots *tableau, MOT_Mot mot, int i);
 
 /**
- *\fn unsigned int MOT_longeurMot(MOT_Mot mot)
- *\brief Renvoie la longueur d'un mot
- *
- *\param mot : est le mot de type Mot
- *\return La longueur du mot
- */
-
-unsigned int MOT_longueurMot(MOT_Mot mot);
-
-/**
  *\fn int MOT_fixerLongeurMot(MOT_Mot *mot, int longeur)
  *\brief fixe la longeur d'un mot
  *

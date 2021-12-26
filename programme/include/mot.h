@@ -141,6 +141,16 @@ void MOT_supprimerMot(MOT_Mot *mot);
 void MOT_supprimerDeuxMots(MOT_DeuxMots *deuxMots);
 
 /**
+ *\fn unsigned int MOT_longeurMot(MOT_Mot mot)
+ *\brief Renvoie la longueur d'un mot
+ *
+ *\param mot : est le mot de type Mot
+ *\return La longueur du mot
+ */
+
+int MOT_longueurMot(MOT_Mot mot);
+
+/**
  *\fn int estAvantOrdreAlphabetique(MOT_Mot mot1, MOT_Mot mot2);
  *\brief Renvoie 1 si le mot1 est plus petit par rapport à l'ordre alphabètique 0 sinon.
  *

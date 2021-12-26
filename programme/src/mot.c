@@ -39,10 +39,6 @@ void MOT_fixerIemeMot(MOT_TableauDeMots *tableau, MOT_Mot m, int i) {
 	lesMots[i] = MOT_copierMot(m);
 }
 
-unsigned int MOT_longueurMot(MOT_Mot mot) {
-	return mot.longueur;
-}
-
 void MOT_fixerLongueurMot(MOT_Mot *m, int nvLongueur) {
 	(*m).longueur = nvLongueur;
 }
@@ -134,6 +130,10 @@ MOT_Mot MOT_creerMot(char *s) {
 	MOT_fixerLongueurMot(&mot, strlen(s));
 
 	return mot;
+}
+
+int MOT_longueurMot(MOT_Mot mot) {
+	return mot.longueur;
 }
 
 int MOT_sontEgaux(MOT_Mot m1, MOT_Mot m2) {
