@@ -1,3 +1,6 @@
+\par Dans la conception d\'etaill\'ee pr\'esente, seules les fonctions n\'ecessitant un minimum de r\'eflexion ont \'et\'e mises, les getters et setters ne sont notamment pas inclus.\\
+
+
 \begin{algorithme}
 
 \constante{CO\_TailleMax}{1000}\\
@@ -9,7 +12,7 @@
 
 \type{CO\_TableauPositions}{CO\_TableauDEntiers}\\
 
-\type{CO\_TableauBooleens}{CO\_TailleMax}{de}{\booleen}\\
+\type{CO\_TableauBooleens}{CO\_TailleMax}{de }{\booleen}\\
 
 \begin{enregistrement}{CO\_MotsDansPhrase}
 	\champEnregistrement{mots}{MOT\_TableauDeMots}
@@ -26,13 +29,14 @@
 	{\\CO\_TableauBooleens}%
 	{i, longueur : \naturel \\ tabBool : CO\_TableauBooleens\\ mot : MOT\_mot}%
 	{%
+	\affecter{tabBool}{CO\_tableauDEntiersVide()}
 	\affecter{longueur}{MOT\_obtenirLongueurTabMots(mots)}
 	\pour{i}{0}{longueur - 1}{}%
 	{	
 		\affecter{mot}{MOT\_obtenirIemeMot(mots,i)}
 		\sialorssinon{DICTIONNAIRE\_estPresent(dictionnaire, mot)}%
 		{
-			\affecter{tabBool[i]}{tVRAI)}
+			\affecter{tabBool[i]}{VRAI)}
 		}%
 		{
 			\affecter{tabBool[i]}{FAUX)}%
@@ -101,7 +105,7 @@
 
 \begin{algorithme}
 \fonction{CO\_phraseEnMots}%
-	{phrase : \caractere}%
+	{phrase : \chaine}%
 	{CO\_MotsDansPhrase}%
 	{i, pos, longueurPhrase : \naturel \\
     	temp : \chaine \\
