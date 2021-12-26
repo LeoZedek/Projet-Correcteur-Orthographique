@@ -111,9 +111,9 @@
        {
        \affecter{longueurMot}{longueur(mot)}
        \affecter{nouvelleChaine}{motEnChaine(mot)}
-       	\pour{i}{pos}{longueurMot - 1}{}
+       	\pour{i}{pos + 1}{longueurMot}{}
              {
-               \affecter{nouvelleChaine[i]}{chaine[i + 1]}
+               \affecter{nouvelleChaine[i - 1]}{chaine[i]}
              }
         \retourner{creerMot(nouvelleChaine)}%    
         }
@@ -125,16 +125,19 @@
       \fonctionAvecPreconditions{InsérerLettre}%
        {pos : NaturelNonNul, c : \caractere, mot : Mot}%
        {Mot}%
-       {(pos $\leq$ longueur(mot)+1)) $\land$ \& (estUneLettre(c))}%
-       {}
+       {(pos $\leq$ longueur(mot)+1)) ET (estUneLettre(c))}%
+       {chaine, nouvelleChaine : \chaine, i : NaturelNonNul}
        {
-               \affecter{mot[pos]}{c}
-               \tantque{mot[pos] $\neq$ '0'}%
-                {
-                 \affecter{mot[pos+1]}{mot[pos]}
-                 \affecter{pos}{pos+1}
-                }
-              \retourner{mot}
+            \affecter{chaine}{motEnChaine(mot)}
+            \affecter{nouvelleChaine}{chaine}
+            \pour{i}{pos + 1}{longueur(mot) + 1}{}%
+            {
+                \affecter{nouvelleChaine[i]}{chaine[i - 1]}
+            }
+            \affecter{nouvelleChaine[pos]}{c}
+
+            \retourner{creerMot(nouvelleChaine)}
+            
        }
 \end{algorithme}
 
