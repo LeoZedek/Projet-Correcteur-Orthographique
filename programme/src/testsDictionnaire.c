@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include<stdlib.h>
-#include<CUnit/Basic.h>
+#include <stdlib.h>
+#include <CUnit/Basic.h>
 #include "correcteurOrthographique.h"
 #include "mot.h"
 #include "dictionnaire.h"
@@ -21,6 +21,52 @@ int init_suite_success(void) {
 int clean_suite_success(void) { 
 	return 0; 
 }
+int dictionnaire_sontEgaux(DICTIONNAIRE_Dictionnaire dico1, DICTIONNAIRE_Dictionnaire dico2){
+	return 0;
+}
+int test_simple_rotation_droite(){
+	return 0;
+}
+
+int test_simple_rotation_gauche(){
+	return 0;
+}
+
+int test_double_rotation_droite(){
+	return 0;
+}
+
+int test_double_rotation_gauche(){
+	return 0;
+}
+
+int test_hauteur(){
+	return 0;
+}
+
+int test_reequilibrer(){
+	return 0;
+}
+
+int test_estPresent(){
+	return 0;
+}
+
+int test_ajouterMot(){
+	return 0;
+}
+
+int test_chargerDico(){
+	return 0;
+}
+
+int test_enregistrerDico(){
+	return 0;
+}
+
+int test_ajouterFichier(){
+	return 0;
+}
 
 
 void tester_max(void){
@@ -31,35 +77,6 @@ void tester_abs(void){
 	CU_ASSERT_EQUAL( abs(1),1);
 	CU_ASSERT_EQUAL( abs(-1),1);
 }
-
-int test_Dictionnaire_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot){
-
-   char *chaineAtester = "salut" ;
-   char *chaineDico = "salutation";
-
-	CU_ASSERT_FALSE(DICTIONNAIRE_estVide(dictionnaire));
-	CU_ASSERT_EQUAL(chaineAtester, chaineDico);
-	if (strcmp(chaineAtester, chaineDico)<0){
-		return test_Dictionnaire_estPresent( *DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot) ;
-	}
-	else{
-		return test_Dictionnaire_estPresent( *DICTIONNAIRE_obtenirFilsDroit(&dictionnaire), mot) ;
-	}
-}
-
-
-void  test_DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot){
-	MOT_TableauDeMots tabMots = MOT_tableauDeMotsVide();
-	//MOT_Mot 
-	mot = MOT_creerMot("arbre"); //tu as deja la variable mot en paramètre
-	MOT_fixerLongueurTabMots(&tabMots, 1);
-	tabMots.lesMots[0] = mot;
-	MOT_TableauDeMots tabMotsTest = MOT_tableauDeMotsVide();
-	MOT_ajouterMot(&tabMotsTest,mot);
-	CU_ASSERT_TRUE(sontEgauxMots(tabMots, tabMotsTest));
-	MOT_supprimerTableauMots(&tabMots);
-}
-
 
 
 int main(int argc , char **argv){
@@ -79,8 +96,6 @@ int main(int argc , char **argv){
 	/* Ajout des tests à la suite de tests boite noire */
 	if ((NULL == CU_add_test(pSuite, "Test max", tester_max))
 		||((NULL == CU_add_test(pSuite, "tester abs", tester_abs))
-		|| (NULL == CU_add_test(pSuite, "Test presence", test_Dictionnaire_estPresent))
-		|| (NULL == CU_add_test(pSuite, "Test ajouter", test_DICTIONNAIRE_ajouterMot))
 		)) {
 			CU_cleanup_registry() ;
 			return CU_get_error() ;
