@@ -4,6 +4,7 @@
 #include "correcteurOrthographique.h"
 #include "mot.h"
 #include "dictionnaire.h"
+#include "dictionnairePrive.h"
 
 #define TRUE 1
 #define FALSE 0
@@ -35,27 +36,18 @@ int test_Dictionnaire_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot
    char *chaineAtester = "salut" ;
    char *chaineDico = "salutation";
 
-	if (CU_ASSERT_FALSE(DICTIONNAIRE_estVide(dictionnaire))){
-		return 0 ;
+	CU_ASSERT_FALSE(DICTIONNAIRE_estVide(dictionnaire));
+	CU_ASSERT_EQUAL(chaineAtester, chaineDico);
+	if (strcmp(chaineAtester, chaineDico)<0){
+		return test_DICTIONNAIRE_estPresent( *DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot) ;
 	}
 	else{
-		
-		if (CU_ASSERT_EQUAL(chaineAtester, chaineDico)){
-			return 1;
-		}
-		else{
-			
-			if (strcmp(chaineAtester, chaineDico)<0){
-				return test_DICTIONNAIRE_estPresent( *DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot) ;
-			}
-			else{
-				return test_DICTIONNAIRE_estPresent( *DICTIONNAIRE_obtenirFilsDroit(&dictionnaire), mot) ;
-			}
-		}
+		return test_DICTIONNAIRE_estPresent( *DICTIONNAIRE_obtenirFilsDroit(&dictionnaire), mot) ;
 	}
+}
 
 
-void  test_DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, Mot mot);
+void  test_DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot){
 	MOT_TableauDeMots tabMots = MOT_tableauDeMotsVide();
 	MOT_Mot mot = MOT_creerMot("arbre");
 	MOT_fixerLongueurTabMots(&tabMots, 1);

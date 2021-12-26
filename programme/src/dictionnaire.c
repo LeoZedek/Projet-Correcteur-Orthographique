@@ -11,36 +11,10 @@
 #include<stdio.h>
 #include"dictionnaire.h"
 #include"mot.h"
-
+#include"dictionnairePrive.h"
 
 #define TAILLEMOTMAX 50
 
-
-/*------------Signatures------------------------------*/
-int max(int a, int b);
-int abs(int a);
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire();
-int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire);
-DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
-DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire);
-MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire);
-void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot);
-void DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsGauche);
-void DICTIONNAIRE_fixerFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsDroit);
-void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire);
-void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
-void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire);
-void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
-int DICTIONNAIRE_hauteur(DICTIONNAIRE_Dictionnaire dictionnaire);
-void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire);
-int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot);
-void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot);
-void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier);
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire);
-void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire);
-void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire);
-void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
-void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire);
 /*--------------Fonction Privé--------------------------*/
 //Qui ne sont ni dans la conception ni dans le .h
 int max(int a, int b){
