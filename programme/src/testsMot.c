@@ -1,6 +1,7 @@
 #include<stdlib.h>
 #include<CUnit/Basic.h>
 #include"mot.h"
+#include"motPrivee.h"
 #include"correcteurOrthographique.h"
 #define TRUE 1
 #define FALSE 0
@@ -36,12 +37,15 @@ void test_MOT_ajouterMot(void){
 	MOT_TableauDeMots tabMots = MOT_tableauDeMotsVide();
 	MOT_Mot m = MOT_creerMot("papillon");
 	MOT_fixerLongueurTabMots(&tabMots, 1);
-	tabMots.lesMots[0] = m;
+	tabMots.lesMots[0] = MOT_copierMot(m);
 	MOT_TableauDeMots tabMotsTest = MOT_tableauDeMotsVide();
 	MOT_ajouterMot(&tabMotsTest,m);
 	CU_ASSERT_TRUE(sontEgauxMots(tabMots, tabMotsTest));
+
+	MOT_supprimerMot(&m);
 	MOT_supprimerTableauMots(&tabMots);
-}
+	MOT_supprimerTableauMots(&tabMotsTest);
+	}
 
 
 void test_MOT_estUneLettre(void){
@@ -61,11 +65,15 @@ void test_MOT_estUnMot(void){
 
 void test_MOT_sontEgaux(void){
 	MOT_Mot mot1 = MOT_creerMot("papillon");
-	MOT_Mot mot2 = MOT_creerMot("papillon");
+	MOT_Mot mot2 = MOT_creerMot("Papillon");
 	MOT_Mot mot3 = MOT_creerMot("carottes");
 
 	CU_ASSERT_TRUE(MOT_sontEgaux(mot1, mot2));
 	CU_ASSERT_FALSE(MOT_sontEgaux(mot1, mot3));
+
+	MOT_supprimerMot(&mot1);
+	MOT_supprimerMot(&mot2);
+	MOT_supprimerMot(&mot3);
 }
 
 
@@ -74,14 +82,22 @@ void test_MOT_remplacerLettre(void){
 	MOT_Mot mot2 = MOT_creerMot("papellon");
 	MOT_Mot mot3 = MOT_remplacerLettre(mot2,3, 'i');
 	CU_ASSERT_TRUE(MOT_sontEgaux(mot1, mot3));
+
+	MOT_supprimerMot(&mot1);
+	MOT_supprimerMot(&mot2);
+	MOT_supprimerMot(&mot3);
 }
 
 
 void test_MOT_supprimerLettre(void){
 	MOT_Mot mot1 = MOT_creerMot("papillon");
-	MOT_Mot mot2 = MOT_creerMot("papelllon");
-	MOT_Mot mot3 = MOT_supprimerLettre(mot2,4);
-	CU_ASSERT_TRUE(MOT_sontEgaux(mot1, mot3));
+	MOT_Mot mot2 = MOT_creerMot("papllon");
+	MOT_Mot mot3 = MOT_supprimerLettre(mot1,3);
+	CU_ASSERT_TRUE(MOT_sontEgaux(mot2, mot3));
+
+	MOT_supprimerMot(&mot1);
+	MOT_supprimerMot(&mot2);
+	MOT_supprimerMot(&mot3);
 }
 
 
@@ -91,6 +107,10 @@ void test_MOT_insererLettre(void){
 	MOT_Mot mot2 = MOT_creerMot("papllon");
 	MOT_Mot mot3 = MOT_insererLettre(mot2,3,'i');
 	CU_ASSERT_TRUE(MOT_sontEgaux(mot1, mot3));
+
+	MOT_supprimerMot(&mot1);
+	MOT_supprimerMot(&mot2);
+	MOT_supprimerMot(&mot3);
 }
 
 
@@ -99,6 +119,10 @@ void test_MOT_inverserLettre(void){
 	MOT_Mot mot2 = MOT_creerMot("paipllon");
 	MOT_Mot mot3 = MOT_inverserLettre(mot2,2);
 	CU_ASSERT_TRUE(MOT_sontEgaux(mot1, mot3));
+
+	MOT_supprimerMot(&mot1);
+	MOT_supprimerMot(&mot2);
+	MOT_supprimerMot(&mot3);
 }
 
 
@@ -107,8 +131,12 @@ void test_MOT_decomposerMot(void){
 	MOT_DeuxMots motsAObtenir;
 	motsAObtenir.mot1 = MOT_creerMot("papi");
 	motsAObtenir.mot2 = MOT_creerMot("llon");
-	MOT_DeuxMots motsATester = MOT_decomposerMot(mot,3);
+	MOT_DeuxMots motsATester = MOT_decomposerMot(mot,4);
 	CU_ASSERT_TRUE(MOT_sontEgaux(motsAObtenir.mot1,motsATester.mot1) && MOT_sontEgaux(motsAObtenir.mot2,motsATester.mot2));
+
+	MOT_supprimerDeuxMots(&motsAObtenir);
+	MOT_supprimerDeuxMots(&motsATester);
+	MOT_supprimerMot(&mot);
 }
 
 int main(int argc, char** argv){
