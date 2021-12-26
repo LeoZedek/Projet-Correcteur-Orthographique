@@ -1,3 +1,10 @@
+/**
+ * \file mot.c
+ * \brief Implémantation du TAD Mot
+ * \version 1.0
+ * \date 03/01/2022
+ *
+ */
 #include<assert.h>
 #include<stdlib.h>
 #include<string.h>
