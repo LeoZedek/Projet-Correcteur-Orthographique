@@ -41,16 +41,26 @@ int dictionnaire_sontEgaux(DICTIONNAIRE_Dictionnaire dico1, DICTIONNAIRE_Diction
 
 }
 void test_simple_rotation_droite(){
-	DICTIONNAIRE_Dictionnaire dico, dictionnaireDesire, fg, fd, fgg;
+	DICTIONNAIRE_Dictionnaire dico, dictionnaireDesire, fg, fd, fgg, fdg, fdd, fgd;
 	fgg = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+	fdg = DICTIONNAIRE_dictionnaire(MOT_creerMot("arbre"));
 	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
 	DICTIONNAIRE_fixerFilsGauche(&fg, fgg);
+	DICTIONNAIRE_fixerFilsDroit(&fg, fdg);
 
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("droite"));
 	dico =DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
 	DICTIONNAIRE_fixerFilsGauche(&dico, fg);
+	DICTIONNAIRE_fixerFilsDroit(&dico, fd);
 
 	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+
 	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	fdd = DICTIONNAIRE_dictionnaire(MOT_creerMot("droite"));
+	fgd = DICTIONNAIRE_dictionnaire(MOT_creerMot("arbre"));
+	DICTIONNAIRE_fixerFilsGauche(&fd, fgd);
+	DICTIONNAIRE_fixerFilsDroit(&fd, fdd);
+
 	dictionnaireDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
 	DICTIONNAIRE_fixerFilsGauche(&dictionnaireDesire, fg);
 	DICTIONNAIRE_fixerFilsDroit(&dictionnaireDesire, fd);
@@ -64,17 +74,28 @@ void test_simple_rotation_droite(){
 }
 
 void test_simple_rotation_gauche(){
-	DICTIONNAIRE_Dictionnaire dico, dictionnaireDesire, fg, fd, fdd;
-	fdd = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
-	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	DICTIONNAIRE_Dictionnaire dico, dictionnaireDesire, fg, fd, fgd, fdd, fgg, fdg;
+	fdd = DICTIONNAIRE_dictionnaire(MOT_creerMot("droite"));
+	fgd = DICTIONNAIRE_dictionnaire(MOT_creerMot("arbre"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
 	DICTIONNAIRE_fixerFilsDroit(&fd, fdd);
+	DICTIONNAIRE_fixerFilsGauche(&fd, fgd);
 
-	dico =DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+
+	dico =DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
 	DICTIONNAIRE_fixerFilsDroit(&dico, fd);
+	DICTIONNAIRE_fixerFilsGauche(&dico, fg);
 
-	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
-	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
-	dictionnaireDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("droite"));
+
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	fgg = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+	fdg = DICTIONNAIRE_dictionnaire(MOT_creerMot("arbre"));
+	DICTIONNAIRE_fixerFilsGauche(&fg, fgg);
+	DICTIONNAIRE_fixerFilsDroit(&fg, fdg);
+
+	dictionnaireDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
 	DICTIONNAIRE_fixerFilsGauche(&dictionnaireDesire, fg);
 	DICTIONNAIRE_fixerFilsDroit(&dictionnaireDesire, fd);
 
@@ -87,8 +108,37 @@ void test_simple_rotation_gauche(){
 
 }
 
-int test_double_rotation_droite(){
-	return 0;
+void test_double_rotation_droite(){
+	DICTIONNAIRE_Dictionnaire dico, dictionnaireDesire, fg, fd, fgg, fdg, fdd, fgd;
+	fgg = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+	fdg = DICTIONNAIRE_dictionnaire(MOT_creerMot("arbre"));
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	DICTIONNAIRE_fixerFilsGauche(&fg, fgg);
+	DICTIONNAIRE_fixerFilsDroit(&fg, fdg);
+
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("droite"));
+	dico =DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	DICTIONNAIRE_fixerFilsGauche(&dico, fg);
+	DICTIONNAIRE_fixerFilsDroit(&dico, fd);
+
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	fdd = DICTIONNAIRE_dictionnaire(MOT_creerMot("droite"));
+	fgd = DICTIONNAIRE_dictionnaire(MOT_creerMot("arbre"));
+	DICTIONNAIRE_fixerFilsGauche(&fd, fgd);
+	DICTIONNAIRE_fixerFilsDroit(&fd, fdd);
+
+	dictionnaireDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	DICTIONNAIRE_fixerFilsGauche(&dictionnaireDesire, fg);
+	DICTIONNAIRE_fixerFilsDroit(&dictionnaireDesire, fd);
+
+	DICTIONNAIRE_simpleRotationDroite(&dico);
+
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico, dictionnaireDesire));
+
+	DICTIONNAIRE_supprimer(&dico);
+	DICTIONNAIRE_supprimer(&dictionnaireDesire);
 }
 
 int test_double_rotation_gauche(){
