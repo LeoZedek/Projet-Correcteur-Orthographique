@@ -327,7 +327,7 @@ void test_ajouterMot(){
 	
 	DICTIONNAIRE_ajouterMot(&dicoTest,MOT_creerMot("motC"));
 	dicoSolu2 = DICTIONNAIRE_dictionnaire(MOT_creerMot("motB"));
-	DICTIONNAIRE_fixerFilsGauche(&dicoSolu2,DICTIONNAIRE_dictionnair(MOT_creerMot("motA")));
+	DICTIONNAIRE_fixerFilsGauche(&dicoSolu2,DICTIONNAIRE_dictionnaire(MOT_creerMot("motA")));
 	DICTIONNAIRE_fixerFilsDroit(&dicoSolu2,DICTIONNAIRE_dictionnaire(MOT_creerMot("motC")));
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoSolu2,dicoTest));
 	//Je ne tests que la simple rotation pcq les rotations sont géré par la fonctions rééquilibrer qui est censer fonctionner
