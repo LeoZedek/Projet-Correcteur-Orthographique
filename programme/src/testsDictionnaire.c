@@ -161,7 +161,6 @@ int test_double_rotation_gauche(){
 }
 
 void test_hauteur(){
-	int resultat = TRUE;
 	DICTIONNAIRE_Dictionnaire dictionnaire,filsgauche,filsdroit,filsgauchegauche;
 	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(DICTIONNAIRE_dictionnaireVide())==0)
 
