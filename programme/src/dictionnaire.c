@@ -278,8 +278,8 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire
 }
 
 void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire){
-	FILE *fichierDictionnaire = NULL;
-	fichierDictionnaire = fopen(nomFichierDictionnaire,"w+");
+		FILE *fichierDictionnaire = NULL;
+		fichierDictionnaire = fopen(nomFichierDictionnaire,"w+");
 	assert(fichierDictionnaire);
 	DICTIONNAIRE_enregistrerDicoRec(fichierDictionnaire,dictionnaire);
 	fclose(fichierDictionnaire);

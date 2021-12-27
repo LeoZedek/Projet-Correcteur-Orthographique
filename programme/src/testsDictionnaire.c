@@ -355,8 +355,31 @@ void test_chargerETenregistrerDico(void){
 
 }
 
-int test_ajouterFichier(){
-	return 0;
+void test_ajouterFichier(){
+	FILE *fichier;
+	char *nomFichier = "testAjouterFichier.txt";
+	DICTIONNAIRE_Dictionnaire dicoDesire, fg, fd, dicoTest;
+
+	fichier = fopen(nomFichier,"w+");
+	fprintf(fichier, "%s\n", "Bonjour");
+	fprintf(fichier, "%s\n", "Salut");
+	fprintf(fichier, "%s\n", "Hello");
+	fclose(fichier);
+
+	dicoDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("Hello"));
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("Bonjour"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("Salut"));
+	DICTIONNAIRE_fixerFilsDroit(&dicoDesire, fd);
+	DICTIONNAIRE_fixerFilsGauche(&dicoDesire, fg);
+
+	dicoTest = DICTIONNAIRE_dictionnaireVide();
+	DICTIONNAIRE_ajouterFichier(&dicoTest, nomFichier);
+
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
+
+	DICTIONNAIRE_supprimer(&dicoTest);
+	DICTIONNAIRE_supprimer(&dicoDesire);
+	remove(nomFichier);
 }
 
 
@@ -414,11 +437,12 @@ int main(int argc , char **argv){
 		||((NULL == CU_add_test(pSuite,"Test Simple rotation doite",test_simple_rotation_droite)))
 		||((NULL == CU_add_test(pSuite,"Test Simple rotation gauche",test_simple_rotation_gauche)))
 		||((NULL == CU_add_test(pSuite,"Test double rotation doite",test_double_rotation_droite)))
-		//||((NULL == CU_add_test(pSuite,"Test double rotation gauche",test_double_rotation_gauche)))
+		||((NULL == CU_add_test(pSuite,"Test double rotation gauche",test_double_rotation_gauche)))
 		||((NULL == CU_add_test(pSuite,"Test de la hauteur",test_hauteur)))
 		||((NULL == CU_add_test(pSuite,"Test rééquilibrer",test_reequilibrer)))
 		||((NULL == CU_add_test(pSuite,"Test ajouter mot",test_ajouterMot)))
 		||((NULL == CU_add_test(pSuite,"Test charger et enregistrer dictionnaire",test_chargerETenregistrerDico)))
+		||((NULL == CU_add_test(pSuite,"Test ajouter fichier",test_ajouterFichier)))
 		) {
 			CU_cleanup_registry() ;
 			return CU_get_error() ;
