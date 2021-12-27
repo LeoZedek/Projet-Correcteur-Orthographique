@@ -238,13 +238,13 @@ int main(int argc , char **argv){
 	
  	/* initialisation du registre de tests */
 	if (CUE_SUCCESS != CU_initialize_registry())
-	return CU_get_error() ;
+		return CU_get_error() ;
 
  	/* ajout d'une suite de test */
-	pSuite = CU_add_suite("Tests boite noire ", init_suite_success() , clean_suite_success() ) ;
+	pSuite = CU_add_suite("Tests boite noire ", init_suite_success, clean_suite_success) ;
 	if (NULL == pSuite){
-	CU_cleanup_registry();
-	return CU_get_error();
+		CU_cleanup_registry();
+		return CU_get_error();
 	}
 
 	/* Ajout des tests à la suite de tests boite noire */
@@ -262,7 +262,7 @@ int main(int argc , char **argv){
 	CU_basic_show_failures (CU_get_failure_list()) ;
 	printf ("\n\n");
 
- /* Nettoyage du registre */
+	/* Nettoyage du registre */
 	CU_cleanup_registry() ;
 	return CU_get_error() ;
 }
