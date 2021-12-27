@@ -395,6 +395,8 @@ void tester_abs(void){
 void test_estVide(void) {
     DICTIONNAIRE_Dictionnaire dico = DICTIONNAIRE_dictionnaireVide();
     CU_ASSERT_TRUE(DICTIONNAIRE_estVide(dico));
+
+    DICTIONNAIRE_supprimer(&dico);
 }
 
 void test_estPresent(void) {
@@ -413,6 +415,8 @@ void test_estPresent(void) {
     DICTIONNAIRE_ajouterMot(&d, mot2);
 	CU_ASSERT_TRUE(DICTIONNAIRE_estPresent(d,mot1));
 	CU_ASSERT_TRUE(DICTIONNAIRE_estPresent(d,mot2));
+
+	DICTIONNAIRE_supprimer(&d);
 }
 
 int main(int argc , char **argv){
