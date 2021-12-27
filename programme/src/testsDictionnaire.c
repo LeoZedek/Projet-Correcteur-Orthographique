@@ -250,9 +250,18 @@ int main(int argc , char **argv){
 	}
 
 	/* Ajout des tests à la suite de tests boite noire */
-	if ((NULL == CU_add_test(pSuite, "Test max", tester_max))
-		||((NULL == CU_add_test(pSuite, "tester abs", tester_abs))
-		)) {
+	if (
+		   (NULL == CU_add_test(pSuite,"Test max", tester_max))
+		||((NULL == CU_add_test(pSuite,"Test abs", tester_abs)))
+		||((NULL == CU_add_test(pSuite,"Test dictionnaire Vide", test_estVide)))
+		||((NULL == CU_add_test(pSuite,"Test Simple rotation doite",test_simple_rotation_droite)))
+		||((NULL == CU_add_test(pSuite,"Test Simple rotation gauche",test_simple_rotation_gauche)))
+		||((NULL == CU_add_test(pSuite,"Test double rotation doite",test_double_rotation_droite)))
+		//||((NULL == CU_add_test(pSuite,"Test double rotation gauche",test_double_rotation_gauche)))
+		||((NULL == CU_add_test(pSuite,"Test de la hauteur",test_hauteur)))
+		//||((NULL == CU_add_test(pSuite,"Test rééquilibrer",test_reequilibrer)))
+		//||((NULL == CU_add_test(pSuite,"Test ajouter mot",test_ajouterMot)))
+		) {
 			CU_cleanup_registry() ;
 			return CU_get_error() ;
 	}
