@@ -200,13 +200,11 @@ void test_double_rotation_gauche(){
 	DICTIONNAIRE_supprimer(&dictionnaireDesire);
 }
 
-<<<<<<< HEAD
 
 int test_hauteur(){
 	int resultat = TRUE;
-=======
+
 void test_hauteur(){
->>>>>>> 48daaf3100c0841ee4eb502d4c1e45fa12474ef3
 	DICTIONNAIRE_Dictionnaire dictionnaire,filsgauche,filsdroit,filsgauchegauche;
 	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(DICTIONNAIRE_dictionnaireVide())==0)
 
