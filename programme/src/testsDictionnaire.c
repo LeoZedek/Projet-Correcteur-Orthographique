@@ -226,8 +226,30 @@ int test_reequilibrer(){
 
 
 
-int test_ajouterMot(){
-	return 0;
+void test_ajouterMot(){
+	DICTIONNAIRE_Dictionnaire dicoTest, dicoSolu,dicoSolu2;
+	dicoTest = DICTIONNAIRE_dictionnaireVide();
+	dicoSolu = DICTIONNAIRE_dictionnaireVide();
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoSolu,dicoTest));
+	
+	DICTIONNAIRE_ajouterMot(&dicoTest,MOT_creerMot("motA"));
+	dicoSolu = DICTIONNAIRE_dictionnaire(MOT_creerMot("motA"));
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoSolu,dicoTest));
+	
+	DICTIONNAIRE_ajouterMot(&dicoTest,MOT_creerMot("motB"));
+	DICTIONNAIRE_fixerFilsDroit(&dicoSolu,DICTIONNAIRE_dictionnaire(MOT_creerMot("motB")));
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoSolu,dicoTest));
+	
+	DICTIONNAIRE_ajouterMot(&dicoTest,MOT_creerMot("motC"));
+	dicoSolu2 = DICTIONNAIRE_dictionnaire(MOT_creerMot("motB"));
+	DICTIONNAIRE_fixerFilsGauche(&dicoSolu2,DICTIONNAIRE_dictionnair(MOT_creerMot("motA")));
+	DICTIONNAIRE_fixerFilsDroit(&dicoSolu2,DICTIONNAIRE_dictionnaire(MOT_creerMot("motC")));
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoSolu2,dicoTest));
+	//Je ne tests que la simple rotation pcq les rotations sont géré par la fonctions rééquilibrer qui est censer fonctionner
+
+	DICTIONNAIRE_supprimer(&dicoTest);
+	DICTIONNAIRE_supprimer(&dicoSolu);
+	DICTIONNAIRE_supprimer(&dicoSolu2);
 }
 
 int test_chargerDico(){
