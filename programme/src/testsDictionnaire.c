@@ -325,12 +325,16 @@ void test_ajouterMot(){
 	DICTIONNAIRE_supprimer(&dicoSolu2);
 }
 
-int test_chargerDico(){
-	return 0;
-}
-
-int test_enregistrerDico(){
-	return 0;
+void test_chargerETenregistrerDico(void){
+	DICTIONNAIRE_Dictionnaire dico1 = DICTIONNAIRE_dictionnaireVide();
+	DICTIONNAIRE_Dictionnaire dico2;
+	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Papillon"));
+	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Chat"));
+	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Lapin"));
+	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Pizza"));
+	DICTIONNAIRE_enregistrerDictionnaire("dicoTest.txt", dico1);
+	dico2 = DICTIONNAIRE_chargerDictionnaire("dicoTest.txt");
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico1, dico2));
 }
 
 int test_ajouterFichier(){
@@ -396,6 +400,7 @@ int main(int argc , char **argv){
 		||((NULL == CU_add_test(pSuite,"Test de la hauteur",test_hauteur)))
 		//||((NULL == CU_add_test(pSuite,"Test rééquilibrer",test_reequilibrer)))
 		||((NULL == CU_add_test(pSuite,"Test ajouter mot",test_ajouterMot)))
+		||((NULL == CU_add_test(pSuite,"Test charger et enregistrer dictionnaire",test_chargerETenregistrerDico)))
 		) {
 			CU_cleanup_registry() ;
 			return CU_get_error() ;
