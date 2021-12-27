@@ -288,16 +288,18 @@ void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNA
 
 void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	DICTIONNAIRE_Dictionnaire *filsGauche, * filsDroit;
-	filsGauche = DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
-	filsDroit = DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
-	if(filsGauche){
-		DICTIONNAIRE_supprimer(filsGauche);
+	if(!DICTIONNAIRE_estVide(*dictionnaire)){
+		filsGauche = DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
+		filsDroit = DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
+		if(filsGauche){
+			DICTIONNAIRE_supprimer(filsGauche);
+		}
+		if (filsDroit){
+			DICTIONNAIRE_supprimer(filsDroit);
+		}
+		free(*dictionnaire);
+		*dictionnaire = NULL;
 	}
-	if (filsDroit){
-		DICTIONNAIRE_supprimer(filsDroit);
-	}
-	free(*dictionnaire);
-	*dictionnaire = NULL;
 }
 
 void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire){
