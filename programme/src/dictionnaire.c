@@ -229,7 +229,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 		else{
 			if (strcmp(chaineAInserer,chaineTest)>0){
 				filsDroit = DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
-				fprintf(stderr,"%s\t%s\t%p\n",chaineAInserer,chaineTest,(*filsDroit));
+				fprintf(stderr,"%s\t%s\t%p\n",chaineAInserer,chaineTest,((void*)filsDroit));
 				DICTIONNAIRE_ajouterMot(filsDroit, mot);
 				DICTIONNAIRE_fixerFilsDroit(dictionnaire,*filsDroit);
 			}//else c'est les meme chaine donc pas besoin d'inserer
