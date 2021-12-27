@@ -156,8 +156,48 @@ void test_double_rotation_droite(){
 	DICTIONNAIRE_supprimer(&dictionnaireDesire);
 }
 
-int test_double_rotation_gauche(){
-	return 0;
+void test_double_rotation_gauche(){
+	DICTIONNAIRE_Dictionnaire dico, dictionnaireDesire, fg, fd, fgg, fdg, fdd, fgd, fggd, fdgd;
+
+	//Création du dictionnaire qui va être testé
+	fdd = DICTIONNAIRE_dictionnaire(MOT_creerMot("droite"));
+	fgd = DICTIONNAIRE_dictionnaire(MOT_creerMot("lampe"));
+	fggd = DICTIONNAIRE_dictionnaire(MOT_creerMot("draps"));
+	fdgd = DICTIONNAIRE_dictionnaire(MOT_creerMot("arbre"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	DICTIONNAIRE_fixerFilsGauche(&fgd, fggd);
+	DICTIONNAIRE_fixerFilsDroit(&fgd, fdgd);
+	DICTIONNAIRE_fixerFilsGauche(&fd, fgd);
+	DICTIONNAIRE_fixerFilsDroit(&fd, fdd);
+
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+	dico =DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	DICTIONNAIRE_fixerFilsGauche(&dico, fg);
+	DICTIONNAIRE_fixerFilsDroit(&dico, fd);
+
+	//Création du dictionnaire désiré en sortie
+	fgg = DICTIONNAIRE_dictionnaire(MOT_creerMot("chapeau"));
+	fdg = DICTIONNAIRE_dictionnaire(MOT_creerMot("draps"));
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	DICTIONNAIRE_fixerFilsGauche(&fg, fgg);
+	DICTIONNAIRE_fixerFilsDroit(&fg, fdg);
+
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	fdd = DICTIONNAIRE_dictionnaire(MOT_creerMot("droite"));
+	fgd = DICTIONNAIRE_dictionnaire(MOT_creerMot("arbre"));
+	DICTIONNAIRE_fixerFilsGauche(&fd, fgd);
+	DICTIONNAIRE_fixerFilsDroit(&fd, fdd);
+
+	dictionnaireDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("arbre"));
+	DICTIONNAIRE_fixerFilsGauche(&dictionnaireDesire, fg);
+	DICTIONNAIRE_fixerFilsDroit(&dictionnaireDesire, fd);
+
+	DICTIONNAIRE_simpleRotationDroite(&dico);
+
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico, dictionnaireDesire));
+
+	DICTIONNAIRE_supprimer(&dico);
+	DICTIONNAIRE_supprimer(&dictionnaireDesire);
 }
 
 void test_hauteur(){
