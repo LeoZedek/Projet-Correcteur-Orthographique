@@ -226,16 +226,16 @@ void test_reequilibrer(){
 	DICTIONNAIRE_Dictionnaire dicoTest, dicoDesire, fd, fgd, fdd, fg, fgg, fdg;
 
 	//Création du dictionnaire qui va subir reequilibrer
-	fgg = DICTIONNAIRE_dictionnaire("gauche");
-	fg = DICTIONNAIRE_dictionnaire("lapin");
+	fgg = DICTIONNAIRE_dictionnaire(MOT_creerMot("gauche"));
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
 	DICTIONNAIRE_fixerFilsGauche(&fg, fgg);
-	dicoTest = DICTIONNAIRE_dictionnaire("racine");
+	dicoTest = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
 	DICTIONNAIRE_fixerFilsGauche(&dicoTest, fg);
 
 	//Création du dictionnaire que l'on doit obtenir
-	fg = DICTIONNAIRE_dictionnaire("gauche");
-	fd = DICTIONNAIRE_dictionnaire("racine");
-	dicoDesire = DICTIONNAIRE_dictionnaire("lapin");
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("gauche"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	dicoDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
 	DICTIONNAIRE_fixerFilsGauche(&dicoDesire, fg);
 	DICTIONNAIRE_fixerFilsDroit(&dicoDesire, fd);
 
@@ -244,16 +244,16 @@ void test_reequilibrer(){
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
 
 	//Création du dictionnaire qui va subir reequilibrer
-	fdd = DICTIONNAIRE_dictionnaire("zebre");
-	fd = DICTIONNAIRE_dictionnaire("velo");
+	fdd = DICTIONNAIRE_dictionnaire(MOT_creerMot("zebre"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("velo"));
 	DICTIONNAIRE_fixerFilsDroit(&fd, fdd);
-	dicoTest = DICTIONNAIRE_dictionnaire("racine");
+	dicoTest = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
 	DICTIONNAIRE_fixerFilsDroit(&dicoTest, fd);
 
 	//Création du dictionnaire que l'on doit obtenir
-	fg = DICTIONNAIRE_dictionnaire("racine");
-	fd = DICTIONNAIRE_dictionnaire("zebre");
-	dicoDesire = DICTIONNAIRE_dictionnaire("velo");
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("zebre"));
+	dicoDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("velo"));
 	DICTIONNAIRE_fixerFilsGauche(&dicoDesire, fg);
 	DICTIONNAIRE_fixerFilsDroit(&dicoDesire, fd);
 
@@ -262,16 +262,16 @@ void test_reequilibrer(){
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
 
 	//Création du dictionnaire qui va subir reequilibrer
-	fdg = DICTIONNAIRE_dictionnaire("livre");
-	fg = DICTIONNAIRE_dictionnaire("lapin");
+	fdg = DICTIONNAIRE_dictionnaire(MOT_creerMot("livre"));
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
 	DICTIONNAIRE_fixerFilsDroit(&fg, fdg);
-	dicoTest = DICTIONNAIRE_dictionnaire("racine");
+	dicoTest = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
 	DICTIONNAIRE_fixerFilsGauche(&dicoTest, fg);
 
 	//Création du dictionnaire que l'on doit obtenir
-	fg = DICTIONNAIRE_dictionnaire("lapin");
-	fd = DICTIONNAIRE_dictionnaire("racine");
-	dicoDesire = DICTIONNAIRE_dictionnaire("livre");
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	dicoDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("livre"));
 	DICTIONNAIRE_fixerFilsGauche(&dicoDesire, fg);
 	DICTIONNAIRE_fixerFilsDroit(&dicoDesire, fd);
 
@@ -280,16 +280,16 @@ void test_reequilibrer(){
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
 
 	//Création du dictionnaire qui va subir reequilibrer
-	fgd = DICTIONNAIRE_dictionnaire("the");
-	fd = DICTIONNAIRE_dictionnaire("velo");
+	fgd = DICTIONNAIRE_dictionnaire(MOT_creerMot("the"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("velo"));
 	DICTIONNAIRE_fixerFilsGauche(&fd, fgd);
-	dicoTest = DICTIONNAIRE_dictionnaire("racine");
+	dicoTest = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
 	DICTIONNAIRE_fixerFilsDroit(&dicoTest, fd);
 
 	//Création du dictionnaire que l'on doit obtenir
-	fg = DICTIONNAIRE_dictionnaire("racine");
-	fd = DICTIONNAIRE_dictionnaire("velo");
-	dicoDesire = DICTIONNAIRE_dictionnaire("the");
+	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("racine"));
+	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("velo"));
+	dicoDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("the"));
 	DICTIONNAIRE_fixerFilsGauche(&dicoDesire, fg);
 	DICTIONNAIRE_fixerFilsDroit(&dicoDesire, fd);
 
