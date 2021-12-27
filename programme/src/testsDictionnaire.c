@@ -160,37 +160,25 @@ int test_double_rotation_gauche(){
 	return 0;
 }
 
-int test_hauteur(){
+void test_hauteur(){
 	int resultat = TRUE;
 	DICTIONNAIRE_Dictionnaire dictionnaire,filsgauche,filsdroit,filsgauchegauche;
-	if (DICTIONNAIRE_hauteur(DICTIONNAIRE_dictionnaireVide())!=0){
-		resultat = FALSE;
-	}
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(DICTIONNAIRE_dictionnaireVide())==0)
 
 	DICTIONNAIRE_dictionnaire(MOT_creerMot("test"));
-	if (DICTIONNAIRE_hauteur(dictionnaire)!=1){
-		resultat = FALSE;
-	}
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire)==1)
 
 	filsgauche = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsgauche"));
 	DICTIONNAIRE_fixerFilsGauche(&dictionnaire,filsgauche);
-	if(DICTIONNAIRE_hauteur(dictionnaire) != 2){
-		resultat = FALSE;
-	}
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 2)
 
 	filsgauchegauche = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsgauchegauche"));
 	DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_obtenirFilsGauche(&dictionnaire),filsgauchegauche);
-	if (DICTIONNAIRE_hauteur(dictionnaire)!=3){
-		resultat = FALSE;
-	}
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire)==3)
 
 	filsdroit = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsdroit"));
 	DICTIONNAIRE_fixerFilsDroit(&dictionnaire,filsdroit);
-	if (DICTIONNAIRE_hauteur(dictionnaire) != 3){
-		resultat = FALSE;
-	}
-
-	return resultat;
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 3);
 }
 
 int test_reequilibrer(){
