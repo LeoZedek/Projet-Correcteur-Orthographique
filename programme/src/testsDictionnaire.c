@@ -182,9 +182,7 @@ int test_reequilibrer(){
 	return 0;
 }
 
-int test_estPresent(){
-	return 0;
-}
+
 
 int test_ajouterMot(){
 	return 0;
@@ -212,6 +210,28 @@ void tester_abs(void){
 	CU_ASSERT_EQUAL( abs(-1),1);
 }
 
+void test_estVide(void) {
+    DICTIONNAIRE_Dictionnaire dico = Dictionnaire_dictionnaire();
+    CU_ASSERT_TRUE(Dictionnaire_estVide(dico));
+}
+
+void test_estPresent(void) {
+    DICTIONNAIRE_Dictionnaire d = Dictionnaire_dictionnaire();
+    MOT_Mot mot1 = MOT_creerMot("Salut");
+    MOT_Mot mot2 = MOT_creerMot("Salutation");
+
+	CU_ASSERT_FALSE(DICTIONNAIRE_estPresent(d,mot1));
+	CU_ASSERT_FALSE(DICTIONNAIRE_estPresent(d,mot2));
+
+
+    DICTIONNAIER_ajouterMot(&d, mot1);
+    CU_ASSERT_TRUE(DICTIONNAIRE_estPresent(d, mot1));
+    CU_ASSERT_FALSE(DICTIONNAIRE_estPresent(d, mot2));
+
+    DICTIONNAIRE_ajouterMot(&d, mot2);
+	CU_ASSERT_TRUE(DICTIONNAIRE_estPresent(d,mot1));
+	CU_ASSERT_TRUE(DICTIONNAIRE_estPresent(d,mot2));
+}
 
 int main(int argc , char **argv){
 	CU_pSuite pSuite = NULL;
