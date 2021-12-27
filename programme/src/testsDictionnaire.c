@@ -243,6 +243,9 @@ void test_reequilibrer(){
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
 
+	DICTIONNAIRE_supprimer(&dicoTest);
+	DICTIONNAIRE_supprimer(&dictionnaireDesire);
+
 	//Création du dictionnaire qui va subir reequilibrer
 	fdd = DICTIONNAIRE_dictionnaire(MOT_creerMot("zebre"));
 	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("velo"));
@@ -260,6 +263,9 @@ void test_reequilibrer(){
 	DICTIONNAIRE_reequilibrer(&dicoTest);
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
+
+	DICTIONNAIRE_supprimer(&dicoTest);
+	DICTIONNAIRE_supprimer(&dictionnaireDesire);
 
 	//Création du dictionnaire qui va subir reequilibrer
 	fdg = DICTIONNAIRE_dictionnaire(MOT_creerMot("livre"));
@@ -279,6 +285,9 @@ void test_reequilibrer(){
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
 
+	DICTIONNAIRE_supprimer(&dicoTest);
+	DICTIONNAIRE_supprimer(&dictionnaireDesire);
+
 	//Création du dictionnaire qui va subir reequilibrer
 	fgd = DICTIONNAIRE_dictionnaire(MOT_creerMot("the"));
 	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("velo"));
@@ -296,6 +305,9 @@ void test_reequilibrer(){
 	DICTIONNAIRE_reequilibrer(&dicoTest);
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
+
+	DICTIONNAIRE_supprimer(&dicoTest);
+	DICTIONNAIRE_supprimer(&dictionnaireDesire);
 
 }
 
