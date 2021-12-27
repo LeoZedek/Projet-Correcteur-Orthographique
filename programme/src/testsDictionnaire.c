@@ -244,7 +244,7 @@ void test_reequilibrer(){
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
 
 	DICTIONNAIRE_supprimer(&dicoTest);
-	DICTIONNAIRE_supprimer(&dictionnaireDesire);
+	DICTIONNAIRE_supprimer(&dicoDesire);
 
 	//Création du dictionnaire qui va subir reequilibrer
 	fdd = DICTIONNAIRE_dictionnaire(MOT_creerMot("zebre"));
@@ -265,7 +265,7 @@ void test_reequilibrer(){
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
 
 	DICTIONNAIRE_supprimer(&dicoTest);
-	DICTIONNAIRE_supprimer(&dictionnaireDesire);
+	DICTIONNAIRE_supprimer(&dicoDesire);
 
 	//Création du dictionnaire qui va subir reequilibrer
 	fdg = DICTIONNAIRE_dictionnaire(MOT_creerMot("livre"));
@@ -286,7 +286,7 @@ void test_reequilibrer(){
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
 
 	DICTIONNAIRE_supprimer(&dicoTest);
-	DICTIONNAIRE_supprimer(&dictionnaireDesire);
+	DICTIONNAIRE_supprimer(&dicoDesire);
 
 	//Création du dictionnaire qui va subir reequilibrer
 	fgd = DICTIONNAIRE_dictionnaire(MOT_creerMot("the"));
@@ -307,7 +307,7 @@ void test_reequilibrer(){
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
 
 	DICTIONNAIRE_supprimer(&dicoTest);
-	DICTIONNAIRE_supprimer(&dictionnaireDesire);
+	DICTIONNAIRE_supprimer(&dicoDesire);
 
 }
 
@@ -349,6 +349,9 @@ void test_chargerETenregistrerDico(void){
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico1, dico2));
 
 	remove("dicoTest.txt");
+
+	DICTIONNAIRE_supprimer(&dico1);
+	DICTIONNAIRE_supprimer(&dico2);
 
 }
 
