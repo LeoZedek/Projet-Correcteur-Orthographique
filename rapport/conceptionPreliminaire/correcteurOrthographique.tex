@@ -1,4 +1,47 @@
 \begin{algorithme}
+	\signatureFonction{tableauDEntiersVide}%
+		{}%
+		{TableauDEntiers}
+		
+	\signatureFonction{obtenirLongueurTabEntiers}%
+		{tableauEntiers : TableauDEntiers}%
+		{\naturel}
+		
+	\signatureProcedureAvecPreconditions{fixerLongueurTabEntiers}%
+		{\paramEntreeSortie{pointeurTableauEntiers : \typePointeur{TableauDEntiers}}}%
+		{\paramEntree{nouvelleLongueur : \naturel}}%
+		{obtenirLongueurTabEntiers(pointeurTableauEntiers) > 1}
+		
+	\signatureFonctionAvecPreconditions{obtenirIemeEntier}%
+		{tableauEntiers : TableauDEntiers, position : \naturel}%
+		{Entier}%
+		{position>=0 ET position < obtenirLongueurTabEntiers(tableauEntiers)}
+	
+	\signatureFonction{obtenirLesEntiers}%
+		{tableauEntiers : CO_TableauDEntiers}%
+		{Entier}
+		
+	\signatureProcedure{ajouterEntier}%
+		{tableauEntiers : TableauDEntiers}%
+		{}
+		
+	\signatureProcedure{supprimerTableauEntiers}%
+		{\paramEntreeSortie{tableau : \typePointeur{TableauDEntiers}}}%
+		{}
+		
+	\signatureFonction{motsEtPositionsVide}%
+		{}%
+		{}
+
+	\signatureFonction{obtenirTabMots}%
+		{}%
+		{}
+	
+	\signatureFonction{obtenirTabPositions}%
+		{}%
+		{}
+	
+	
 	\signatureFonction{sontPresents}%
 		{mots : Liste<Mot>, d : Dictionnaire}%
 		{Liste<\booleen>}
@@ -9,3 +52,10 @@
 		{liste : Liste<Mot>, d : Dictionnaire}%
 		{Liste<Ensemble<Mot>>, Liste<Booleen>}%
 \end{algorithme}
+
+
+
+
+\signatureFonction{}%
+		{}%
+		{}
