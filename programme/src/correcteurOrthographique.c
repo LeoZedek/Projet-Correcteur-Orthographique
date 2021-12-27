@@ -122,7 +122,12 @@ MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionna
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
 		}
-		
+	
+	for (int i=0 ; i< MOT_longueurMot(m) - 2; i++){
+			motCorrige = MOT_inverserLettre(m, i);
+			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
+				MOT_ajouterMot(&resultatMots, motCorrige);
+		}	
 	for (int i=0 ; i< MOT_longueurMot(m); i++){
 			motCorrige = MOT_supprimerLettre(m, i);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
