@@ -219,7 +219,7 @@ void test_hauteur(){
 	DICTIONNAIRE_fixerFilsDroit(&dictionnaire,filsdroit);
 	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 3);
 
-	DICTIONNAIRE_supprimer(dictionnaire);
+	DICTIONNAIRE_supprimer(&dictionnaire);
 }
 
 void test_reequilibrer(){
