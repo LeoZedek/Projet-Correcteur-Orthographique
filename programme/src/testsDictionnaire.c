@@ -220,11 +220,82 @@ void test_hauteur(){
 	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 3);
 }
 
-int test_reequilibrer(){
-	return 0;
+void test_reequilibrer(){
+	DICTIONNAIRE_Dictionnaire dicoTest, dicoDesire, fd, fgd, fdd, fg, fgg, fdg;
+
+	//Création du dictionnaire qui va subir reequilibrer
+	fgg = DICTIONNAIRE_dictionnaire("gauche");
+	fg = DICTIONNAIRE_dictionnaire("lapin");
+	DICTIONNAIRE_fixerFilsGauche(&fg, fgg);
+	dicoTest = DICTIONNAIRE_dictionnaire("racine");
+	DICTIONNAIRE_fixerFilsGauche(&dicoTest, fg);
+
+	//Création du dictionnaire que l'on doit obtenir
+	fg = DICTIONNAIRE_dictionnaire("gauche");
+	fd = DICTIONNAIRE_dictionnaire("racine");
+	dicoDesire = DICTIONNAIRE_dictionnaire("lapin");
+	DICTIONNAIRE_fixerFilsGauche(&dicoDesire, fg);
+	DICTIONNAIRE_fixerFilsDroit(&dicoDesire, fd);
+
+	DICTIONNAIRE_reequilibrer(&dicoTest);
+
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
+
+	//Création du dictionnaire qui va subir reequilibrer
+	fdd = DICTIONNAIRE_dictionnaire("zebre");
+	fd = DICTIONNAIRE_dictionnaire("velo");
+	DICTIONNAIRE_fixerFilsDroit(&fd, fdd);
+	dicoTest = DICTIONNAIRE_dictionnaire("racine");
+	DICTIONNAIRE_fixerFilsDroit(&dicoTest, fd);
+
+	//Création du dictionnaire que l'on doit obtenir
+	fg = DICTIONNAIRE_dictionnaire("racine");
+	fd = DICTIONNAIRE_dictionnaire("zebre");
+	dicoDesire = DICTIONNAIRE_dictionnaire("velo");
+	DICTIONNAIRE_fixerFilsGauche(&dicoDesire, fg);
+	DICTIONNAIRE_fixerFilsDroit(&dicoDesire, fd);
+
+	DICTIONNAIRE_reequilibrer(&dicoTest);
+
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
+
+	//Création du dictionnaire qui va subir reequilibrer
+	fdg = DICTIONNAIRE_dictionnaire("livre");
+	fg = DICTIONNAIRE_dictionnaire("lapin");
+	DICTIONNAIRE_fixerFilsDroit(&fg, fdg);
+	dicoTest = DICTIONNAIRE_dictionnaire("racine");
+	DICTIONNAIRE_fixerFilsGauche(&dicoTest, fg);
+
+	//Création du dictionnaire que l'on doit obtenir
+	fg = DICTIONNAIRE_dictionnaire("lapin");
+	fd = DICTIONNAIRE_dictionnaire("racine");
+	dicoDesire = DICTIONNAIRE_dictionnaire("livre");
+	DICTIONNAIRE_fixerFilsGauche(&dicoDesire, fg);
+	DICTIONNAIRE_fixerFilsDroit(&dicoDesire, fd);
+
+	DICTIONNAIRE_reequilibrer(&dicoTest);
+
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
+
+	//Création du dictionnaire qui va subir reequilibrer
+	fgd = DICTIONNAIRE_dictionnaire("the");
+	fd = DICTIONNAIRE_dictionnaire("velo");
+	DICTIONNAIRE_fixerFilsGauche(&fd, fgd);
+	dicoTest = DICTIONNAIRE_dictionnaire("racine");
+	DICTIONNAIRE_fixerFilsDroit(&dicoTest, fd);
+
+	//Création du dictionnaire que l'on doit obtenir
+	fg = DICTIONNAIRE_dictionnaire("racine");
+	fd = DICTIONNAIRE_dictionnaire("velo");
+	dicoDesire = DICTIONNAIRE_dictionnaire("the");
+	DICTIONNAIRE_fixerFilsGauche(&dicoDesire, fg);
+	DICTIONNAIRE_fixerFilsDroit(&dicoDesire, fd);
+
+	DICTIONNAIRE_reequilibrer(&dicoTest);
+
+	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
+
 }
-
-
 
 int test_ajouterMot(){
 	return 0;
