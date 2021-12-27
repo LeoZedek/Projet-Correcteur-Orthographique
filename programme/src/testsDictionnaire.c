@@ -347,6 +347,9 @@ void test_chargerETenregistrerDico(void){
 	DICTIONNAIRE_enregistrerDictionnaire("dicoTest.txt", dico1);
 	dico2 = DICTIONNAIRE_chargerDictionnaire("dicoTest.txt");
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico1, dico2));
+
+	remove("dicoTest.txt");
+
 }
 
 int test_ajouterFichier(){
