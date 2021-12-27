@@ -163,6 +163,10 @@ void tester_abs(void){
 	CU_ASSERT_EQUAL( abs(-1),1);
 }
 
+void test_estVide(void) {
+    DICTIONNAIRE_Dictionnaire dico = Dictionnaire_dictionnaire();
+    CU_ASSERT_TRUE(Dictionnaire_estVide(dico));
+}
 
 int main(int argc , char **argv){
 	CU_pSuite pSuite = NULL;
