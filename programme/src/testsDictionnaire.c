@@ -25,8 +25,15 @@ int dictionnaire_sontEgaux(DICTIONNAIRE_Dictionnaire dico1, DICTIONNAIRE_Diction
 	if(!(dico1) && !(dico2)){
 		return TRUE;
 	}
-	else if ( strcmp( MOT_motEnChaine(DICTIONNAIRE_obtenirMot(dico1)),MOT_motEnChaine(DICTIONNAIRE_obtenirMot(dico2)))==0){
-		return TRUE;
+	else if (!(dico1) && dico2){
+		return FALSE;
+	}
+	else if (dico1 && !(dico2)){
+		return FALSE;
+	}
+	else if (MOT_sontEgaux(DICTIONNAIRE_obtenirMot(dico1),DICTIONNAIRE_obtenirMot(dico2))){
+		return ((dictionnaire_sontEgaux(*DICTIONNAIRE_obtenirFilsGauche(&dico1), *DICTIONNAIRE_obtenirFilsGauche(&dico2))) 
+			&&(dictionnaire_sontEgaux(*DICTIONNAIRE_obtenirFilsDroit(&dico1),*DICTIONNAIRE_obtenirFilsDroit(&dico2))));
 	}
 	else{
 		return FALSE;
