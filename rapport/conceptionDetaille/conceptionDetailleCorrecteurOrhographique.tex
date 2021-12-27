@@ -26,7 +26,7 @@
 \begin{algorithme}
 \fonction{sontPresents}%
 	{mots : TableauDeMots, dictionnaire : Dictionnaire}%
-	{\\TableauBooleens}%
+	{TableauBooleens}%
 	{i, longueur : \naturel \\ tabBool : TableauBooleens\\ mot : mot}%
 	{%
 	\affecter{tabBool}{}
@@ -51,7 +51,7 @@
 \begin{algorithme}
 \fonction{proposerMots}%
 	{m : Mot, dictionnaire : Dictionnaire}%
-	{\\TableauDeMots}%
+	{TableauDeMots}%
 	{resultatMots : TableauDeMots\\ motCorrige : Mot\\ motCorriges : MOTDeuxMot\\ lettre, tiret : \caractere \\ i : \naturel}%
 	{%
 	\pour{lettre}{'a'}{'z'}{}%
@@ -83,6 +83,11 @@
 		}
 		}\\
 	
+	\pour{i}{0}{longueurMot(m) - 2}{}%
+		{\affecter{motCorrige}{inverserLettre(m, i)}
+		\sialors{estPresent(dictionnaire, motCorrige)}%
+			{\instruction{ajouter(resultatMots, motCorrige)}}
+		}
 	\pour{i}{0}{longueurMot(m) - 1}{}%
 		{\affecter{motCorrige}{supprimerLettre(m, i)}
 		\sialors{estPresent(dictionnaire, motCorrige)}%

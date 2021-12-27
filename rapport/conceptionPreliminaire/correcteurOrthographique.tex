@@ -8,21 +8,20 @@
 		{\naturel}
 		
 	\signatureProcedureAvecPreconditions{fixerLongueurTabEntiers}%
-		{\paramEntreeSortie{pointeurTableauEntiers : \typePointeur{TableauDEntiers}}}%
-		{\paramEntree{nouvelleLongueur : \naturel}}%
+		{\paramEntreeSortie{pointeurTableauEntiers : \typePointeur{TableauDEntiers}}, \paramEntree{nouvelleLongueur : \naturel}}%
 		{obtenirLongueurTabEntiers(pointeurTableauEntiers) > 1}
 		
 	\signatureFonctionAvecPreconditions{obtenirIemeEntier}%
 		{tableauEntiers : TableauDEntiers, position : \naturel}%
-		{Entier}%
+		{\entier}%
 		{position>=0 ET position < obtenirLongueurTabEntiers(tableauEntiers)}
 	
 	\signatureFonction{obtenirLesEntiers}%
-		{tableauEntiers : CO_TableauDEntiers}%
-		{Entier}
+		{tableauEntiers : TableauDEntiers}%
+		{\tableauUneDimension{Taille\_Max}{d'}{\entier}}
 		
 	\signatureProcedure{ajouterEntier}%
-		{tableauEntiers : TableauDEntiers}%
+		{\paramEntreeSortie{tableauEntiers : \typePointeur{TableauDEntiers}},\paramEntree{entierAAjouter : \entier}}%
 		{}
 		
 	\signatureProcedure{supprimerTableauEntiers}%
@@ -43,19 +42,14 @@
 	
 	
 	\signatureFonction{sontPresents}%
-		{mots : Liste<Mot>, d : Dictionnaire}%
-		{Liste<\booleen>}
+		{mots : TableauDeMots, dictionnaire : Dictionnaire}%
+		{TableauDeBooleens}\\
+		
 	\signatureFonction{proposerMot}%
-		{m : Mot, d : Dictionnaire}%
-		{Ensemble<Mot>}%
+		{m : Mot, dictionnaire : Dictionnaire}%
+		{TableauDeMots}\\
+		
 	\signatureFonction{phraseEnMots}%
-		{liste : Liste<Mot>, d : Dictionnaire}%
-		{Liste<Ensemble<Mot>>, Liste<Booleen>}%
+		{phrase : \chaine}%
+		{MotsDansPhrase}
 \end{algorithme}
-
-
-
-
-\signatureFonction{}%
-		{}%
-		{}
