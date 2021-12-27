@@ -132,9 +132,7 @@ int test_reequilibrer(){
 	return 0;
 }
 
-int test_estPresent(){
-	return 0;
-}
+
 
 int test_ajouterMot(){
 	return 0;
