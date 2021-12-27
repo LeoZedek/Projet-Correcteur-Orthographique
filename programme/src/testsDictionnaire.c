@@ -218,6 +218,8 @@ void test_hauteur(){
 	filsdroit = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsdroit"));
 	DICTIONNAIRE_fixerFilsDroit(&dictionnaire,filsdroit);
 	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 3);
+
+	DICTIONNAIRE_supprimer(dictionnaire);
 }
 
 int test_reequilibrer(){
