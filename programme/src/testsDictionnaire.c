@@ -200,38 +200,30 @@ void test_double_rotation_gauche(){
 	DICTIONNAIRE_supprimer(&dictionnaireDesire);
 }
 
+<<<<<<< HEAD
 
 int test_hauteur(){
 	int resultat = TRUE;
+=======
+void test_hauteur(){
+>>>>>>> 48daaf3100c0841ee4eb502d4c1e45fa12474ef3
 	DICTIONNAIRE_Dictionnaire dictionnaire,filsgauche,filsdroit,filsgauchegauche;
-	if (DICTIONNAIRE_hauteur(DICTIONNAIRE_dictionnaireVide())!=0){
-		resultat = FALSE;
-	}
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(DICTIONNAIRE_dictionnaireVide())==0)
 
 	DICTIONNAIRE_dictionnaire(MOT_creerMot("test"));
-	if (DICTIONNAIRE_hauteur(dictionnaire)!=1){
-		resultat = FALSE;
-	}
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire)==1)
 
 	filsgauche = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsgauche"));
 	DICTIONNAIRE_fixerFilsGauche(&dictionnaire,filsgauche);
-	if(DICTIONNAIRE_hauteur(dictionnaire) != 2){
-		resultat = FALSE;
-	}
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 2)
 
 	filsgauchegauche = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsgauchegauche"));
 	DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_obtenirFilsGauche(&dictionnaire),filsgauchegauche);
-	if (DICTIONNAIRE_hauteur(dictionnaire)!=3){
-		resultat = FALSE;
-	}
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire)==3)
 
 	filsdroit = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsdroit"));
 	DICTIONNAIRE_fixerFilsDroit(&dictionnaire,filsdroit);
-	if (DICTIONNAIRE_hauteur(dictionnaire) != 3){
-		resultat = FALSE;
-	}
-
-	return resultat;
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 3);
 }
 
 int test_reequilibrer(){
@@ -294,13 +286,13 @@ int main(int argc , char **argv){
 	
  	/* initialisation du registre de tests */
 	if (CUE_SUCCESS != CU_initialize_registry())
-	return CU_get_error() ;
+		return CU_get_error() ;
 
  	/* ajout d'une suite de test */
-	pSuite = CU_add_suite("Tests boite noire ", init_suite_success() , clean_suite_success() ) ;
+	pSuite = CU_add_suite("Tests boite noire ", init_suite_success, clean_suite_success) ;
 	if (NULL == pSuite){
-	CU_cleanup_registry();
-	return CU_get_error();
+		CU_cleanup_registry();
+		return CU_get_error();
 	}
 
 	/* Ajout des tests à la suite de tests boite noire */
@@ -318,7 +310,7 @@ int main(int argc , char **argv){
 	CU_basic_show_failures (CU_get_failure_list()) ;
 	printf ("\n\n");
 
- /* Nettoyage du registre */
+	/* Nettoyage du registre */
 	CU_cleanup_registry() ;
 	return CU_get_error() ;
 }
