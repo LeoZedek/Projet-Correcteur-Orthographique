@@ -410,7 +410,7 @@ int main(int argc , char **argv){
 		||((NULL == CU_add_test(pSuite,"Test double rotation doite",test_double_rotation_droite)))
 		//||((NULL == CU_add_test(pSuite,"Test double rotation gauche",test_double_rotation_gauche)))
 		||((NULL == CU_add_test(pSuite,"Test de la hauteur",test_hauteur)))
-		//||((NULL == CU_add_test(pSuite,"Test rééquilibrer",test_reequilibrer)))
+		||((NULL == CU_add_test(pSuite,"Test rééquilibrer",test_reequilibrer)))
 		||((NULL == CU_add_test(pSuite,"Test ajouter mot",test_ajouterMot)))
 		||((NULL == CU_add_test(pSuite,"Test charger et enregistrer dictionnaire",test_chargerETenregistrerDico)))
 		) {
