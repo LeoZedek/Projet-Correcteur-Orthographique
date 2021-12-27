@@ -226,12 +226,12 @@ void tester_abs(void){
 }
 
 void test_estVide(void) {
-    DICTIONNAIRE_Dictionnaire dico = Dictionnaire_dictionnaire();
-    CU_ASSERT_TRUE(Dictionnaire_estVide(dico));
+    DICTIONNAIRE_Dictionnaire dico = DICTIONNAIRE_dictionnaireVide();
+    CU_ASSERT_TRUE(DICTIONNAIRE_estVide(dico));
 }
 
 void test_estPresent(void) {
-    DICTIONNAIRE_Dictionnaire d = Dictionnaire_dictionnaire();
+    DICTIONNAIRE_Dictionnaire d = DICTIONNAIRE_dictionnaireVide();
     MOT_Mot mot1 = MOT_creerMot("Salut");
     MOT_Mot mot2 = MOT_creerMot("Salutation");
 
@@ -239,7 +239,7 @@ void test_estPresent(void) {
 	CU_ASSERT_FALSE(DICTIONNAIRE_estPresent(d,mot2));
 
 
-    DICTIONNAIER_ajouterMot(&d, mot1);
+    DICTIONNAIRE_ajouterMot(&d, mot1);
     CU_ASSERT_TRUE(DICTIONNAIRE_estPresent(d, mot1));
     CU_ASSERT_FALSE(DICTIONNAIRE_estPresent(d, mot2));
 
