@@ -36,12 +36,12 @@ int abs(int a){
 }
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot){
-	DICTIONNAIRE_Dictionnaire dictionnaire ;
+	DICTIONNAIRE_Dictionnaire dictionnaire;
 	dictionnaire = (DICTIONNAIRE_Dictionnaire)malloc(sizeof(DICTIONNAIRE_Noeuds));
-	dictionnaire->mot = mot ;
+	dictionnaire->mot = mot;
 	dictionnaire->filsGauche = DICTIONNAIRE_dictionnaireVide();
-	dictionnaire->filsDroit = DICTIONNAIRE_dictionnaireVide() ;
-	return dictionnaire ;
+	dictionnaire->filsDroit = DICTIONNAIRE_dictionnaireVide();
+	return dictionnaire;
 }
 
 void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot){
@@ -49,52 +49,50 @@ void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot){
 }
 
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
-	assert(!(DICTIONNAIRE_estVide(*dictionnaire))) ;
-	return &((*dictionnaire)->filsGauche) ;
+	assert(!(DICTIONNAIRE_estVide(*dictionnaire)));
+	return &((*dictionnaire)->filsGauche);
 }
 
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire){
-	assert(!(DICTIONNAIRE_estVide(*dictionnaire))) ;
-	return &((*dictionnaire)->filsDroit) ;
+	assert(!(DICTIONNAIRE_estVide(*dictionnaire)));
+	return &((*dictionnaire)->filsDroit);
 }
 
 MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire){
-	assert(!(DICTIONNAIRE_estVide(dictionnaire))) ;
-	return dictionnaire->mot ;
+	assert(!(DICTIONNAIRE_estVide(dictionnaire)));
+	return dictionnaire->mot;
 }
 
 void DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsGauche){
-	(*dictionnaire)->filsGauche=filsGauche ;
+	(*dictionnaire)->filsGauche=filsGauche;
 }
 
 void DICTIONNAIRE_fixerFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsDroit){
-	(*dictionnaire)->filsDroit = filsDroit ;
+	(*dictionnaire)->filsDroit = filsDroit;
 }
 
 void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	assert(!(DICTIONNAIRE_estVide(*dictionnaire)) 
 		&& !(DICTIONNAIRE_estVide(*DICTIONNAIRE_obtenirFilsGauche(dictionnaire))));
-	DICTIONNAIRE_Dictionnaire *racine, *filsGauche, *filsDroitGauche;
-	racine = dictionnaire ;
-	filsGauche = DICTIONNAIRE_obtenirFilsGauche(dictionnaire) ;
-	filsDroitGauche = DICTIONNAIRE_obtenirFilsDroit(filsGauche) ;
-	DICTIONNAIRE_fixerFilsGauche(racine, *filsDroitGauche) ;
-	DICTIONNAIRE_fixerFilsDroit(filsGauche, *racine) ;
-	dictionnaire = filsGauche ;
+	DICTIONNAIRE_Dictionnaire racine, filsGauche, filsDroitGauche;
+	racine = *dictionnaire;
+	filsGauche = *DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
+	filsDroitGauche = *DICTIONNAIRE_obtenirFilsDroit(&filsGauche);
+	DICTIONNAIRE_fixerFilsGauche(&racine, filsDroitGauche);
+	DICTIONNAIRE_fixerFilsDroit(&filsGauche, racine);
+	*dictionnaire = filsGauche;
 }
 
 void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	assert(!(DICTIONNAIRE_estVide(*dictionnaire))
 		&& !(DICTIONNAIRE_estVide(*DICTIONNAIRE_obtenirFilsDroit(dictionnaire))));
-	
-	DICTIONNAIRE_Dictionnaire *racine, *filsDroit, *filsGaucheDroit;
-	
-	racine = dictionnaire ;
-	filsDroit = DICTIONNAIRE_obtenirFilsDroit(dictionnaire) ;
-	filsGaucheDroit = DICTIONNAIRE_obtenirFilsGauche(filsDroit) ;
-	DICTIONNAIRE_fixerFilsGauche(filsDroit, *racine) ;
-	DICTIONNAIRE_fixerFilsDroit(racine, *filsGaucheDroit) ;
-	dictionnaire = filsDroit ;
+	DICTIONNAIRE_Dictionnaire racine, filsDroit, filsGaucheDroit;
+	racine = *dictionnaire;
+	filsDroit = *DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
+	filsGaucheDroit = *DICTIONNAIRE_obtenirFilsGauche(&filsDroit);
+	DICTIONNAIRE_fixerFilsDroit(&racine, filsGaucheDroit);
+	DICTIONNAIRE_fixerFilsGauche(&filsDroit, racine);
+	*dictionnaire = filsDroit;
 }
 
 void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){
@@ -175,7 +173,7 @@ void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dic
 
 /*--------------Fonction Publique--------------------------*/
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide(){
-	return NULL ;
+	return NULL;
 }
 
 int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire){
@@ -183,11 +181,11 @@ int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire){
 }
 
 int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot){
-	MOT_Mot motDico ;
-	char *chaineAtester ;
-	char *chaineDico ;
+	MOT_Mot motDico;
+	char *chaineAtester;
+	char *chaineDico;
 	if (DICTIONNAIRE_estVide(dictionnaire)){
-		return 0 ;
+		return 0;
 	}
 	else{
 		motDico = DICTIONNAIRE_obtenirMot(dictionnaire);
@@ -198,10 +196,10 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
 			chaineAtester = MOT_motEnChaine(mot);
 			chaineDico = MOT_motEnChaine(motDico);
 			if (strcmp(chaineAtester, chaineDico)<0){
-				return DICTIONNAIRE_estPresent(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot) ;
+				return DICTIONNAIRE_estPresent(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire), mot);
 			}
 			else{
-				return DICTIONNAIRE_estPresent(*DICTIONNAIRE_obtenirFilsDroit(&dictionnaire), mot) ;
+				return DICTIONNAIRE_estPresent(*DICTIONNAIRE_obtenirFilsDroit(&dictionnaire), mot);
 			}
 		}
 	}
@@ -209,7 +207,7 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
 
 void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot){
 	fprintf(stderr,"on rentre dans DICTIONNAIRE_ajouterMot\n");
-	DICTIONNAIRE_Dictionnaire *filsGauche, *filsDroit ;
+	DICTIONNAIRE_Dictionnaire *filsGauche, *filsDroit;
 	char *chaineAInserer;
 	char *chaineTest;
 	MOT_Mot motDico;
@@ -218,7 +216,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 		*dictionnaire = DICTIONNAIRE_dictionnaire(mot);
 	}
 	else{//Le dictionnaire n'est donc pas vide
-		chaineAInserer = MOT_motEnChaine(mot) ;
+		chaineAInserer = MOT_motEnChaine(mot);
 		motDico = DICTIONNAIRE_obtenirMot(*dictionnaire);
 		chaineTest = MOT_motEnChaine(motDico);
 		if (strcmp(chaineAInserer, chaineTest)<0){
@@ -244,8 +242,8 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier){
 	fprintf(stderr,"On rentre dans DICTIONNAIRE_ajouterFichier\n");
 	char chaine[TAILLEMOTMAX] = "";
-	MOT_Mot mot ;
-	FILE* fichier =NULL ;
+	MOT_Mot mot;
+	FILE* fichier =NULL;
 	fprintf(stderr,"Nom du fichier : %s\n",nomFichier);
 	fichier = fopen(nomFichier, "r");
 	assert(fichier != NULL);
@@ -260,10 +258,10 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 }
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire){
-	FILE *fichierDictionnaire = NULL ;
-	/* char chaine[TAILLEMOTMAX] = ""; */
+	FILE *fichierDictionnaire = NULL;
+	/* char chaine[TAILLEMOTMAX] = "";*/
 	fichierDictionnaire = fopen(nomDictionnaire,"r");
-	DICTIONNAIRE_Dictionnaire dictionnaire ;
+	DICTIONNAIRE_Dictionnaire dictionnaire;
 	dictionnaire = DICTIONNAIRE_dictionnaireVide();
 	if (!fichierDictionnaire){// Le fichier donnée en paramètre n'existe pas donc on renvoie le dico vide
 		return dictionnaire;
