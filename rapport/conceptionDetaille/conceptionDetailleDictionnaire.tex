@@ -61,15 +61,15 @@
 \begin{algorithme}
 	\procedureAvecPreconditions{faireSimpleRotationDroite}%
 	{\paramEntreeSortie{d : Dictionnaire}}%
-	{non(estVide(obtenirFilsGauche(d)))}%
-	{fg, fd, fgg, fdg : Dictionnaire}%
+	{non(estVide(d)) ET non(estVide(obtenirFilsGauche(d)))}%
+	{fg, fdg, racine : Dictionnaire}%
 	{
+	\affecter{racine}{d}
 	\affecter{fg}{obtenirFilsGauche(d)}
-	\affecter{fd}{obtenirFilsDroit(d)}
-	\affecter{fgg}{obtenirFilsGauche(fg)}
-	\affecter{fdg}{obtenirFilsDroit(fg)}
-	
-	\affecter{d}{fixerRacine(fgg, fixerRacine(fdg, fd, obtenirMot(d)), obtenirMot(fg))}
+	\affecter{fdg}{obtenirFilsDroit(fgf)}
+	\instruction{fixerFilsGauche(racine, fdg)}
+	\instruction{fixerFilsDroit(fg, racine)}
+	\affecter{d}{fg}
 	}
 \end{algorithme}
 
