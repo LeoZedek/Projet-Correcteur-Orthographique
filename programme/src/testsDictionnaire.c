@@ -204,7 +204,7 @@ void test_hauteur(){
 	DICTIONNAIRE_Dictionnaire dictionnaire,filsgauche,filsdroit,filsgauchegauche;
 	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(DICTIONNAIRE_dictionnaireVide())==0)
 
-	DICTIONNAIRE_dictionnaire(MOT_creerMot("test"));
+	dictionnaire = DICTIONNAIRE_dictionnaire(MOT_creerMot("test"));
 	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire)==1)
 
 	filsgauche = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsgauche"));
