@@ -29,7 +29,7 @@ void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int 
 
 int CO_obtenirIemeEntier(CO_TableauDEntiers tableauEntiers, int position)
 {
-	assert(position>=0 && position < CO_obtenirLongueurTabEntiers(tableauEntiers));
+	//assert(position>=0 && position < CO_obtenirLongueurTabEntiers(tableauEntiers));
 	return tableauEntiers.lesEntiers[position];
 }
 
