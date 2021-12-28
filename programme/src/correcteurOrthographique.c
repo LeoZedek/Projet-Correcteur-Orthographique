@@ -22,7 +22,7 @@ int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers){
 }
 
 void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongueur){
-	assert(CO_obtenirLongueurTabEntiers(*pointeurTableauEntiers) > 1);
+	//assert(CO_obtenirLongueurTabEntiers(*pointeurTableauEntiers) > 1);
 	(*pointeurTableauEntiers).longueur = nouvelleLongueur;
 }
 
