@@ -59,6 +59,22 @@
 \end{algorithme}
 
 \begin{algorithme}
+	\fonction{hauteur}%
+	{}
+	{\booleen}
+	{}
+	{
+		\sialorssinon{estVide(dictionnaire)}%
+		{
+			\retourner{-1}
+		}%
+		{
+			\retourner{1 + max(hauteur(obtenirFilsGauche(d)), hauteur(obtenirFilsDroit(d)))}
+		}
+	}
+\end{algorithme}
+
+\begin{algorithme}
 	\procedureAvecPreconditions{faireSimpleRotationDroite}%
 	{\paramEntreeSortie{d : Dictionnaire}}%
 	{non(estVide(d)) ET non(estVide(obtenirFilsGauche(d)))}%
