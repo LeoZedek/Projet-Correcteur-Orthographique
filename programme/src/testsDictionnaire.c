@@ -202,22 +202,22 @@ void test_double_rotation_gauche(){
 
 void test_hauteur(){
 	DICTIONNAIRE_Dictionnaire dictionnaire,filsgauche,filsdroit,filsgauchegauche;
-	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(DICTIONNAIRE_dictionnaireVide())==0)
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(DICTIONNAIRE_dictionnaireVide())==-1)
 
 	dictionnaire = DICTIONNAIRE_dictionnaire(MOT_creerMot("test"));
-	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire)==1)
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire)==0)
 
 	filsgauche = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsgauche"));
 	DICTIONNAIRE_fixerFilsGauche(&dictionnaire,filsgauche);
-	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 2)
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 1)
 
 	filsgauchegauche = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsgauchegauche"));
 	DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_obtenirFilsGauche(&dictionnaire),filsgauchegauche);
-	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire)==3)
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire)==2)
 
 	filsdroit = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsdroit"));
 	DICTIONNAIRE_fixerFilsDroit(&dictionnaire,filsdroit);
-	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 3);
+	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 2);
 
 /* 	DICTIONNAIRE_supprimer(&dictionnaire);
  */}
