@@ -34,6 +34,10 @@
 		{\paramEntreeSortie{dictionnaire : Dictionnaire}}%
 		{non(estVide(dictionnaire)) ET non(estVide(obtenirFilsDroit(dictionnaire)) ET non(estVide(obtenirFilsGauche(obtenirFilsDroit(dictionnaire)))))}
 
+	\signatureProcedureAvecPreconditions{reequilibrer}%
+		{\paramEntreeSortie{dictionnaire : Dictionnaire}}%
+		{non(estVide(dictionnaire)) ET abs(hauteur(obtenirFilsGauche(dictionnaire)) - hauteur(obtenirFilsDroit(dictionnaire))) = 2}
+
 	%Création de signature de procédure 1 : nom de la procédure
 	\signatureProcedureAvecPreconditions{ajouterMot}%
 		%2 Les paramètres avec les commandes \paramEntree \paramSortie et \paramEntreeSortie
