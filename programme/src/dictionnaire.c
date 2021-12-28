@@ -252,7 +252,6 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire){
 	FILE *fichierDictionnaire = NULL;
-	/* char chaine[TAILLEMOTMAX] = "";*/
 	fichierDictionnaire = fopen(nomDictionnaire,"r");
 	DICTIONNAIRE_Dictionnaire dictionnaire;
 	dictionnaire = DICTIONNAIRE_dictionnaireVide();
