@@ -90,8 +90,8 @@ void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	racine = *dictionnaire;
 	filsDroit = *DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
 	filsGaucheDroit = *DICTIONNAIRE_obtenirFilsGauche(&filsDroit);
-	DICTIONNAIRE_fixerFilsDroit(&racine, filsGaucheDroit);
 	DICTIONNAIRE_fixerFilsGauche(&filsDroit, racine);
+	DICTIONNAIRE_fixerFilsDroit(&racine, filsGaucheDroit);
 	*dictionnaire = filsDroit;
 }
 
@@ -123,7 +123,7 @@ void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 
 int DICTIONNAIRE_hauteur(DICTIONNAIRE_Dictionnaire dictionnaire){
 	if (!(dictionnaire)){
-		return 0;
+		return -1;
 	}
 	else{
 		return 1+max(DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire)), DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsDroit(&dictionnaire)));

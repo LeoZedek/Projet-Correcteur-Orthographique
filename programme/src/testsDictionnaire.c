@@ -103,8 +103,7 @@ void test_simple_rotation_gauche(){
 	DICTIONNAIRE_fixerFilsGauche(&dictionnaireDesire, fg);
 	DICTIONNAIRE_fixerFilsDroit(&dictionnaireDesire, fd);
 
-	DICTIONNAIRE_simpleRotationDroite(&dico);
-
+	DICTIONNAIRE_simpleRotationGauche(&dico);
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico, dictionnaireDesire));
 /* 
 	DICTIONNAIRE_supprimer(&dico);
