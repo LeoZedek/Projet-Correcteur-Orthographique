@@ -27,14 +27,34 @@
 \end{algorithme}
 
 
+
 \begin{algorithme}
 	\fonction{estPresent}%
 	{d : Dictionnaire, m : Mot}%
 	{\booleen}%
 	{}%
 	{\sialorssinon{estVide(d)}%
-		{\retourner{estPresent(obtenirFilsGauche(d),m)}}%
-		{\retourner{estPresent(obtenirFilsDroite(d),m)}}%
+		{
+		\retourner{Faux}
+		}
+		{
+		\affecter{motDico}{obtenirMot(d)}
+		\sialorssinon{sontEgaux(m, motDico)}%
+			{
+			\retourner{Vrai}
+			}
+			{
+
+
+			\sialorssinon{estAvantOrdreAlphabetique(m, motDico)}%
+				{
+				\retourner{estPresent(obtenirFilsGauche(d), m)}
+				}
+				{
+				\retourner{estPresent(obtenirFilsDroite(d), m)}
+				}
+			}
+		}
 	}
 \end{algorithme}
 
