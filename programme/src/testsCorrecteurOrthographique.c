@@ -205,6 +205,9 @@ void test_ajouterEntier(void)
 
   CU_ASSERT_TRUE(sontEgauxEntiers(tabTest, tabExacts));
 
+  CO_supprimerTableauEntiers(&tabTest);
+  CO_supprimerTableauEntiers(&tabExacts);
+
 }
 
 int main(int argc, char** argv){
