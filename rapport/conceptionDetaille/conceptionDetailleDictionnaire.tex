@@ -117,33 +117,35 @@
 
 
 \begin{algorithme}
-	\procedureAvecPreconditions{ajouterMot}%
+	\procedure{ajouterMot}%
 	{\paramEntreeSortie{d : Dictionnaire}, \paramEntree{m : Mot}}%
-	{non(estPresent(d,m))}%
-	{temp : Dictionnaire}%
+	{fg, fd : Dictionnaire\\ motDico : Mot}%
 	{
-		\sialorssinon{estPlusPetit(m, obtenirMot(d))}
+		\sialorssinon{estVide(d)}
+		{
+			\affecter{d}{dicitionnaire(m)}
+		}%
+		{
+			\affecter{motDico}{obtenirMot(d)}
+			\sialorssinon{estAvantOrdreAlphabetique(m, motDico)}
 			{
-			\affecter{temp}{obtenirFilsGauche(d)}
-			\instruction{inserer(temp, m)}
-			\instruction{fixerFilsGauche(d, temp)}
-			\sialors{hauteur(obtenirFilsGauche(d)) > hauteur(obtenirFilsDroit(d))+1}	{\sialorssinon{hauteur(hauteur(obtenirFilsGauche(obtenirFilsGauche(d)))$\geq$ \\hauteur(obtenirFilsDroit(obtenirFilsGauche(d)))}
-			{\instruction{faireSimpleRotationDroite(d)}}
-			{\instruction{faireDoubleRotationDroite(d)}}
-			}
+				\affecter{fg}{obtenirFilsGauche}
+				\instruction{ajouterMot(fg, m)}
+				\instruction{fixerFilsGauche(d, fg)}
 			}%
-			{\affecter{temp}{obtenirFilsDroit(d)}
-			\instruction{inserer(temp, m)}
-			\instruction{fixerFilsDroit(d, temp)}
-			\sialors{hauteur(obtenirFilsDroit(d)) > hauteur(obtenirFilsGauche(d))+1}
-						{\sialorssinon{hauteur(obtenirFilsGauche(obtenirFilsDroit(d))) $\leq$ \\hauteur(obtenirFilsDroit(obtenirFilsDroit(d)))}
-				{\instruction{faireSimpleRotationGauche(d)}}%
-				{\instruction{faireDoubleRotaionGauche(d)}}
+			{
+				\sialors{estAvantOrdreAlphabetique(motDico, m)}
+				{
+					\affecter{fd}{obtenirFilsDroit(d)}
+					\instruction{ajouterMot(fd, m)}
+					\instruction{fixerFilsDroit(d, fd)}
 				}
 			}
-		
-		
-	
+			\sialors{abs(hauteur(obtenirFilsGauche(d)) - hauteur(obtenirFilsDroit(d)))}%
+			{
+				\instruction{reequilibrer(d)}
+			}
+		}
 	}
 \end{algorithme}
 
