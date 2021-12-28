@@ -4,7 +4,7 @@
 #include "mot.h"
 #include "dictionnaire.h"
 #include "correcteurOrthographique.h"
-#define CO_TailleMax = 1000
+#define CO_TailleMax 1000
 #define TRUE 1
 #define FALSE 0
 
@@ -12,7 +12,7 @@
 
 CO_TableauDEntiers CO_tableauDEntiersVide(){
 	CO_TableauDEntiers tab;
-	tab.lesEntiers = NULL;
+	tab.lesEntiers = (int*)malloc(sizeof(int) * CO_TailleMax);
 	tab.longueur = 0;
 	return tab;
 }
@@ -40,7 +40,7 @@ int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers){
 void CO_ajouterEntier(CO_TableauDEntiers *tableauEntiers, int entierAAjouter){
 	CO_fixerLongueurTabEntiers(tableauEntiers, CO_obtenirLongueurTabEntiers(*tableauEntiers)+1);
 	int longueur = CO_obtenirLongueurTabEntiers(*tableauEntiers);
-	(*tableauEntiers).lesEntiers[longueur] = entierAAjouter;
+	(*tableauEntiers).lesEntiers[longueur - 1] = entierAAjouter;
 }
 
 void CO_supprimerTableauEntiers(CO_TableauDEntiers *tableau){
