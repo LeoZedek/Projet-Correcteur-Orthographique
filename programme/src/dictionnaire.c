@@ -116,7 +116,7 @@ void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	DICTIONNAIRE_Dictionnaire *filsDroit;
 	
 	filsDroit = DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
-	DICTIONNAIRE_simpleRotationDroite(dictionnaire);
+	DICTIONNAIRE_simpleRotationDroite(filsDroit);
 	DICTIONNAIRE_fixerFilsDroit(dictionnaire,*filsDroit);
 	DICTIONNAIRE_simpleRotationGauche(dictionnaire);
 }

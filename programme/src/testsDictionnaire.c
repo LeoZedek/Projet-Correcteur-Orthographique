@@ -147,7 +147,7 @@ void test_double_rotation_droite(){
 	DICTIONNAIRE_fixerFilsGauche(&dictionnaireDesire, fg);
 	DICTIONNAIRE_fixerFilsDroit(&dictionnaireDesire, fd);
 
-	DICTIONNAIRE_simpleRotationDroite(&dico);
+	DICTIONNAIRE_doubleRotationDroite(&dico);
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico, dictionnaireDesire));
 
@@ -187,11 +187,11 @@ void test_double_rotation_gauche(){
 	DICTIONNAIRE_fixerFilsGauche(&fd, fgd);
 	DICTIONNAIRE_fixerFilsDroit(&fd, fdd);
 
-	dictionnaireDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("arbre"));
+	dictionnaireDesire = DICTIONNAIRE_dictionnaire(MOT_creerMot("lampe"));
 	DICTIONNAIRE_fixerFilsGauche(&dictionnaireDesire, fg);
 	DICTIONNAIRE_fixerFilsDroit(&dictionnaireDesire, fd);
 
-	DICTIONNAIRE_simpleRotationDroite(&dico);
+	DICTIONNAIRE_doubleRotationGauche(&dico);
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico, dictionnaireDesire));
 
