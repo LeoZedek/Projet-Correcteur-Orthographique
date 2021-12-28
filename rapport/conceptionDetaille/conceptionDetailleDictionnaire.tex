@@ -77,14 +77,14 @@
 	\procedureAvecPreconditions{faireSimpleRotationGauche}%
 	{\paramEntreeSortie{d : Dictionnaire}}%
 	{non(estVide(obtenirFilsDroit(d)))}%
-	{fg, fd, fgd, fdd : Dictionnaire}%
+	{fg, fd, fgd : Dictionnaire}%
 	{
-	\affecter{fg}{obtenirFilsGauche(d)}
+	\affecter{racine}{d}
 	\affecter{fd}{obtenirFilsDroit(d)}
-	\affecter{fgd}{obtenirFilsGauche(fd)}
-	\affecter{fdd}{obtenirFilsDroit(fd)}
-	
-	\affecter{d}{fixerRacine(fixerRacine(fg, fgd, obtenirElement(d)), fdd, obtenirElement(fd))}
+	\affecter{fgd}{obtenirFilsgauche(fd)}
+	\instruction{fixerFilsDroit(racine, fgd)}
+	\instruction{fixerFilsGauche(fd, racine)}
+	\affecter{d}{fd}
 	}
 \end{algorithme}
 
