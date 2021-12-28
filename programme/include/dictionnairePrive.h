@@ -42,17 +42,17 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot);
  *\brief verifie si le dictionnaire est vide
  *
  *\param dictionnaire : DICTIONNAIRE_Dictionnaire
- *\return booléen (unsigned int)
+ *\return booléen (unsigned int) si vrai 1, sinon 0
 */
 
 int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire);
 
 /**
  *\fn DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire)
- *\brief obtenir fils  de gauche dictionnaire
+ *\brief obtenir fils gauche de dictionnaire
  *
  *\param *dictionnaire : DICTIONNAIRE_Dictionnaire
- *\return booléen (unsigned int) si vrai 1, sinon 0 
+ *\return dictionnaire 
 */
 DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
