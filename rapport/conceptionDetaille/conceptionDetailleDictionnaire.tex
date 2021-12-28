@@ -115,6 +115,36 @@
 	}
 \end{algorithme}
 
+\begin{algorithme}
+	\procedureAvecPreconditions{reequilibrer}%
+	{\paramEntreeSortie{d : Dictionnaire}}%
+	{non(estVide(d) ET abs(hauteur(obtenirFilsGauche(d)) - hauteur(obtenirFilsDroit(d))) = 2)}%
+	{fg, fd : Dictionnaire}%
+	{	
+		\affecter{fd}{obtenirFilsDroit(d)}
+		\affecter{fg}{obtenirFilsGauche(d)}
+		\sialorssinon{hauteur(fg) > hauteur(fd)}%
+		{
+			\sialorssinon{hauteur(obtenirFilsGauche(fg)) > hauteur(obtenirFilsDroit(fg))}%
+			{
+				\instruction{faireSimpleRotationDroite(d)}
+			}
+			{
+				\instruction{faireDoubleRotationDroite(d)}
+			}
+		}
+		{
+			\sialorssinon{hauteur(obtenirFilsDroit(fd)) > hauteur(obtenirFilsGauche(fd))}%
+			{
+				\instruction{faireSimpleRotationGauche(d)}
+			}
+			{
+				\instruction{faireDoubleRotaionGauche(d)}
+			}
+		}
+	}
+
+\end{algorithme}
 
 \begin{algorithme}
 	\procedure{ajouterMot}%
