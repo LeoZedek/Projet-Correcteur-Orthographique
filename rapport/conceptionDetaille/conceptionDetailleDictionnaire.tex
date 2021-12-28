@@ -306,8 +306,9 @@
 \end{algorithme}
 
 \begin{algorithme}
-	\procedure{ajouterFichier}%
+	\procedureAvecPreconditions{ajouterFichier}%
 	{\paramEntreeSortie{dico : Dictionnaire}, \paramEntree{nomFichier : \chaine}}%
+	{nomFichier != ""}
 	{mot : Mot\\ chaine : \chaine\\ fichier : FichierTexte}%
 	{
 		\affecter{fichier}{fichierTexte(nomFichier)}
