@@ -46,9 +46,17 @@
 	\signatureProcedureAvecPreconditions{ajouterFichier}%
 		{\paramEntreeSortie{dictionnaire : Dictionnaire}, \paramEntree{fichier : FichierTexte}}%
 		{mode(fichierTexte) = lecture}
-	\signatureProcedure{chargerDictionnaire}%
-		{\paramEntree{ chaine : \chaine}, \paramSortie{dictionnaire : Dictionnaire}}
-	\signatureFonction{enregistrerDictionnaire}%
-		{dictionnaire : Dictionnaire}%
-		{FichierTexte}
+
+	\signatureFonctionAvecPreconditions{chargerDico}%
+		{nomFichier : \chaine}
+		{Dictionnaire}
+		{nomFichier != ""}
+
+	\signatureProcedureAvecPreconditions{enregistrerDico}%
+		{\paramEntree{dictionnaire : Dictionnaire, nomFichier : \chaine}}%
+		{nomFichier != ""}
+
+	\signatureProcedureAvecPreconditions{ajouterFichier}%
+		{\paramEntreeSortie{dictionnaire : Dictionnaire}, \paramEntree{nomFichier : \chaine}}%
+		{nomFichier != ""}
 \end{algorithme}
