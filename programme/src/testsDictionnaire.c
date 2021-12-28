@@ -339,10 +339,16 @@ void test_ajouterMot(){
 void test_chargerETenregistrerDico(void){
 	DICTIONNAIRE_Dictionnaire dico1 = DICTIONNAIRE_dictionnaireVide();
 	DICTIONNAIRE_Dictionnaire dico2 = DICTIONNAIRE_dictionnaireVide();
-	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Papillon"));
-	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Chat"));
-	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Lapin"));
-	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Pizza"));
+	MOT_Mot mot1 = MOT_creerMot("Papillon");
+	MOT_Mot mot2 = MOT_creerMot("Chat");
+	MOT_Mot mot3 = MOT_creerMot("Lapin");
+	MOT_Mot mot4 = MOT_creerMot("Pizza");
+
+
+	DICTIONNAIRE_ajouterMot(&dico1, mot1);
+	DICTIONNAIRE_ajouterMot(&dico1, mot2);
+	DICTIONNAIRE_ajouterMot(&dico1, mot3);
+	DICTIONNAIRE_ajouterMot(&dico1, mot4);
 	DICTIONNAIRE_enregistrerDictionnaire("dicoTest.txt", dico1);
 	dico2 = DICTIONNAIRE_chargerDictionnaire("dicoTest.txt");
 
