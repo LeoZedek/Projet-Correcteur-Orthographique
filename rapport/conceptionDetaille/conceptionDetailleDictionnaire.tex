@@ -305,18 +305,21 @@
 
 \end{algorithme}
 
+\begin{algorithme}
+	\procedure{ajouterFichier}%
+	{\paramEntreeSortie{dico : Dictionnaire}, \paramEntree{nomFichier : \chaine}}%
+	{mot : Mot\\ chaine : \chaine\\ fichier : FichierTexte}%
+	{
+		\affecter{fichier}{fichierTexte(nomFichier)}
+		\affecter{fichier}{ouvrir(fichier, lecture)}
+		\affecter{fichier, chaine}{lireChaine(fichier)}
+		\tantque{non(finFichier(fichier))}%
+		{
+			\affecter{mot}{creerMot(chaine)}
+			\instruction{ajouterMot(dico, mot)}
+			\affecter{fichier, chaine}{lireChaine(fichier)}
+		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		\affecter{fichier}{fermer(fichier)}
+	}
+\end{algorithme}
