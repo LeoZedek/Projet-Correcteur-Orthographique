@@ -13,6 +13,14 @@
 	\signatureFonction{estPrésent}%
 		{dictionnaire : Dictionnaire, motChercher : mot}%
 		{\booleen}
+
+	\signatureFonction{hauteur}%
+		{dictionnaire : Dictionnaire}%
+		{\entier}
+
+	\signatureProcedureAvecPreconditions{faireSimpleRotationDroite}%
+		{\paramEntreeSortie{dictionnaire : Dictionnaire}}
+		{non(estVide(dictionnaire) ET non(estVide(obtenirFilsGauche(dictionnaire))))}
 	
 	%Création de signature de procédure 1 : nom de la procédure
 	\signatureProcedureAvecPreconditions{ajouterMot}%
