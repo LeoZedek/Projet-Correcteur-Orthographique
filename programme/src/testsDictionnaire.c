@@ -70,9 +70,9 @@ void test_simple_rotation_droite(){
 	DICTIONNAIRE_simpleRotationDroite(&dico);
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico, dictionnaireDesire));
-/* 
+
 	DICTIONNAIRE_supprimer(&dico);
-	DICTIONNAIRE_supprimer(&dictionnaireDesire); */
+	DICTIONNAIRE_supprimer(&dictionnaireDesire);
 }
 
 void test_simple_rotation_gauche(){
@@ -105,10 +105,10 @@ void test_simple_rotation_gauche(){
 
 	DICTIONNAIRE_simpleRotationGauche(&dico);
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico, dictionnaireDesire));
-/* 
+
 	DICTIONNAIRE_supprimer(&dico);
 	DICTIONNAIRE_supprimer(&dictionnaireDesire);
- */
+
 }
 
 void test_double_rotation_droite(){
@@ -151,8 +151,8 @@ void test_double_rotation_droite(){
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico, dictionnaireDesire));
 
-	/* DICTIONNAIRE_supprimer(&dico);
-	DICTIONNAIRE_supprimer(&dictionnaireDesire); */
+	DICTIONNAIRE_supprimer(&dico);
+	DICTIONNAIRE_supprimer(&dictionnaireDesire);
 }
 
 void test_double_rotation_gauche(){
@@ -195,8 +195,8 @@ void test_double_rotation_gauche(){
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico, dictionnaireDesire));
 
-/* 	DICTIONNAIRE_supprimer(&dico);
-	DICTIONNAIRE_supprimer(&dictionnaireDesire); */
+	DICTIONNAIRE_supprimer(&dico);
+	DICTIONNAIRE_supprimer(&dictionnaireDesire);
 }
 
 void test_hauteur(){
@@ -218,8 +218,8 @@ void test_hauteur(){
 	DICTIONNAIRE_fixerFilsDroit(&dictionnaire,filsdroit);
 	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 2);
 
-/* 	DICTIONNAIRE_supprimer(&dictionnaire);
- */}
+	DICTIONNAIRE_supprimer(&dictionnaire);
+}
 
 void test_reequilibrer(){
 	DICTIONNAIRE_Dictionnaire dicoTest, dicoDesire, fd, fgd, fdd, fg, fgg, fdg;
@@ -241,10 +241,10 @@ void test_reequilibrer(){
 	DICTIONNAIRE_reequilibrer(&dicoTest);
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
-/* 
+
 	DICTIONNAIRE_supprimer(&dicoTest);
 	DICTIONNAIRE_supprimer(&dicoDesire);
- */
+
 	//Création du dictionnaire qui va subir reequilibrer
 	fdd = DICTIONNAIRE_dictionnaire(MOT_creerMot("zebre"));
 	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("velo"));
@@ -262,10 +262,10 @@ void test_reequilibrer(){
 	DICTIONNAIRE_reequilibrer(&dicoTest);
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
-/* 
+
 	DICTIONNAIRE_supprimer(&dicoTest);
 	DICTIONNAIRE_supprimer(&dicoDesire);
- */
+
 	//Création du dictionnaire qui va subir reequilibrer
 	fdg = DICTIONNAIRE_dictionnaire(MOT_creerMot("livre"));
 	fg = DICTIONNAIRE_dictionnaire(MOT_creerMot("lapin"));
@@ -283,10 +283,10 @@ void test_reequilibrer(){
 	DICTIONNAIRE_reequilibrer(&dicoTest);
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
-/* 
+
 	DICTIONNAIRE_supprimer(&dicoTest);
 	DICTIONNAIRE_supprimer(&dicoDesire);
- */
+
 	//Création du dictionnaire qui va subir reequilibrer
 	fgd = DICTIONNAIRE_dictionnaire(MOT_creerMot("the"));
 	fd = DICTIONNAIRE_dictionnaire(MOT_creerMot("velo"));
@@ -304,10 +304,10 @@ void test_reequilibrer(){
 	DICTIONNAIRE_reequilibrer(&dicoTest);
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
-/* 
+
 	DICTIONNAIRE_supprimer(&dicoTest);
 	DICTIONNAIRE_supprimer(&dicoDesire);
- */
+
 }
 
 void test_ajouterMot(){
@@ -330,11 +330,11 @@ void test_ajouterMot(){
 	DICTIONNAIRE_fixerFilsDroit(&dicoSolu2,DICTIONNAIRE_dictionnaire(MOT_creerMot("motC")));
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoSolu2,dicoTest));
 	//Je ne tests que la simple rotation pcq les rotations sont géré par la fonctions rééquilibrer qui est censer fonctionner
-/* 
+
 	DICTIONNAIRE_supprimer(&dicoTest);
 	DICTIONNAIRE_supprimer(&dicoSolu);
 	DICTIONNAIRE_supprimer(&dicoSolu2);
- */}
+}
 
 void test_chargerETenregistrerDico(void){
 	DICTIONNAIRE_Dictionnaire dico1 = DICTIONNAIRE_dictionnaireVide();
@@ -348,10 +348,9 @@ void test_chargerETenregistrerDico(void){
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico1, dico2));
 
 	remove("dicoTest.txt");
-/* 
-	DICTIONNAIRE_supprimer(&dico1);
+
 	DICTIONNAIRE_supprimer(&dico2);
- */
+
 }
 
 void test_ajouterFichier(){
@@ -376,8 +375,8 @@ void test_ajouterFichier(){
 
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dicoDesire, dicoTest));
 
-/* 	DICTIONNAIRE_supprimer(&dicoTest);
-	DICTIONNAIRE_supprimer(&dicoDesire); */
+	DICTIONNAIRE_supprimer(&dicoTest);
+	DICTIONNAIRE_supprimer(&dicoDesire);
 	remove(nomFichier);
 }
 
@@ -394,9 +393,9 @@ void tester_abs(void){
 void test_estVide(void) {
     DICTIONNAIRE_Dictionnaire dico = DICTIONNAIRE_dictionnaireVide();
     CU_ASSERT_TRUE(DICTIONNAIRE_estVide(dico));
-/* 
+
     DICTIONNAIRE_supprimer(&dico);
- */}
+}
 
 void test_estPresent(void) {
     DICTIONNAIRE_Dictionnaire d = DICTIONNAIRE_dictionnaireVide();
@@ -414,9 +413,9 @@ void test_estPresent(void) {
     DICTIONNAIRE_ajouterMot(&d, mot2);
 	CU_ASSERT_TRUE(DICTIONNAIRE_estPresent(d,mot1));
 	CU_ASSERT_TRUE(DICTIONNAIRE_estPresent(d,mot2));
-/* 
+
 	DICTIONNAIRE_supprimer(&d);
- */}
+}
 
 int main(int argc , char **argv){
 	CU_pSuite pSuite = NULL;
