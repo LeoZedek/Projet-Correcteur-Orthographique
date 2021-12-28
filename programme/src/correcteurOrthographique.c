@@ -39,7 +39,8 @@ int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers){
 
 void CO_ajouterEntier(CO_TableauDEntiers *tableauEntiers, int entierAAjouter){
 	CO_fixerLongueurTabEntiers(tableauEntiers, CO_obtenirLongueurTabEntiers(*tableauEntiers)+1);
-	(*tableauEntiers).lesEntiers[CO_obtenirLongueurTabEntiers(*tableauEntiers)] = entierAAjouter;
+	int longueur = CO_obtenirLongueurTabEntiers(*tableauEntiers);
+	(*tableauEntiers).lesEntiers[longueur] = entierAAjouter;
 }
 
 void CO_supprimerTableauEntiers(CO_TableauDEntiers *tableau){
@@ -91,10 +92,11 @@ CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionn
 		}
 	}
 	return tabBool; 
+	
 } 
 
 MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionnaire){
-	MOT_TableauDeMots resultatMots; 
+	MOT_TableauDeMots resultatMots = MOT_tableauDeMotsVide(); 
 	MOT_Mot motCorrige;
 	MOT_DeuxMots motCorriges;
 	char tiret;
