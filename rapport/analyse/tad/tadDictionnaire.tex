@@ -15,10 +15,10 @@
 		\tadOperationAvecPreconditions{ajouterFichier}%
 			{\tadDeuxParams{Dictionnaire}{FichierTexte}}%
 			{\tadUnParam{Dictionnaire}}
-		\tadOperation{chargerDictionnaire}%
+		\tadOperation{chargerDico}%
 			{\tadUnParam{\chaine}}%
 			{\tadUnParam{Dictionnaire}}
-		\tadOperation{sauvegarderDictionnaire}%
+		\tadOperation{enregistrerDico}%
 			{\tadUnParam{Dictionnaire}}%
 			{\tadUnParam{\booleen}}
 		\tadOperation{estPresent}%
@@ -35,9 +35,9 @@
 			{ajoute un mot dans le dictionnaire}
 		\tadSemantique{ajouterFichier}%
 			{ajoute les mots d’un fichier texte dans le dictionnaire}
-		\tadSemantique{chargerDictionnaire}%
+		\tadSemantique{chargerDico}%
 			{charge un dictionnaire \`a partir d’un fichier}
-		\tadSemantique{sauvegarderDictionnaire}%
+		\tadSemantique{enregistrerDico}%
 			{cr\'e\'e un fichier texte contenant tous les mots du dictionnaire mis en paramètre.}
 		\tadSemantique{estPresent}%
 			{indique si un mot est pr\'esent dans le dictionnaire}
