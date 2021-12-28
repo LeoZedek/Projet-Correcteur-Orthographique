@@ -288,6 +288,8 @@ void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){
 		if (filsDroit){
 			DICTIONNAIRE_supprimer(filsDroit);
 		}
+		MOT_Mot motAsupprimer = DICTIONNAIRE_obtenirMot(*dictionnaire);
+		MOT_supprimerMot(&motAsupprimer);
 		free(*dictionnaire);
 		*dictionnaire = NULL;
 	}
