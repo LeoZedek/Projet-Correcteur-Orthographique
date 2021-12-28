@@ -345,10 +345,13 @@ void test_chargerETenregistrerDico(void){
 	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Pizza"));
 	DICTIONNAIRE_enregistrerDictionnaire("dicoTest.txt", dico1);
 	dico2 = DICTIONNAIRE_chargerDictionnaire("dicoTest.txt");
+
+	remove("./dicoTest.txt");
+
 	CU_ASSERT_TRUE(dictionnaire_sontEgaux(dico1, dico2));
 
-	remove("dicoTest.txt");
 
+	DICTIONNAIRE_supprimer(&dico1);
 	DICTIONNAIRE_supprimer(&dico2);
 
 }

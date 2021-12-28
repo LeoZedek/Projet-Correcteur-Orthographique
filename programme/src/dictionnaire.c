@@ -273,7 +273,7 @@ void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNA
 	assert(fichierDictionnaire);
 	DICTIONNAIRE_enregistrerDicoRec(fichierDictionnaire,dictionnaire);
 	fclose(fichierDictionnaire);
-	DICTIONNAIRE_supprimer(&dictionnaire);
+	//DICTIONNAIRE_supprimer(&dictionnaire);
 }
 
 void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire){
