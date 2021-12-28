@@ -14,21 +14,6 @@ int clean_suite_success(void) {
   return 0; 
 }
 
-int estPresentTabEntier(CO_TableauDEntiers tab, int entier) {
-  int longueur = CO_obtenirLongueurTabEntiers(tab);
-  int i = 0, entierDuTab, resultat = FALSE;
-
-  while (!resultat && i < longueur) {
-    entierDuTab = CO_obtenirIemeEntier(tab, i);
-    if (entierDuTab == entier) {
-      resultat = TRUE;
-    }
-    i++;
-  }
-
-  return resultat;
-}
-
 int estPresentTabMot(MOT_TableauDeMots tab, MOT_Mot m) {
   int longueur = MOT_obtenirLongueurTabMots(tab);
   int i = 0, resultat = FALSE;
