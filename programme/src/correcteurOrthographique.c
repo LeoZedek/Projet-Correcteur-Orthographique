@@ -22,14 +22,14 @@ int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers){
 }
 
 void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongueur){
-	assert(CO_obtenirLongueurTabEntiers(*pointeurTableauEntiers) > 1);
+	//assert(CO_obtenirLongueurTabEntiers(*pointeurTableauEntiers) > 1);
 	(*pointeurTableauEntiers).longueur = nouvelleLongueur;
 }
 
 
 int CO_obtenirIemeEntier(CO_TableauDEntiers tableauEntiers, int position)
 {
-	//assert(position>=0 && position < CO_obtenirLongueurTabEntiers(tableauEntiers));
+	assert(position>=0 && position < CO_obtenirLongueurTabEntiers(tableauEntiers));
 	return tableauEntiers.lesEntiers[position];
 }
 
