@@ -338,7 +338,7 @@ void test_ajouterMot(){
 
 void test_chargerETenregistrerDico(void){
 	DICTIONNAIRE_Dictionnaire dico1 = DICTIONNAIRE_dictionnaireVide();
-	DICTIONNAIRE_Dictionnaire dico2;
+	DICTIONNAIRE_Dictionnaire dico2 = DICTIONNAIRE_dictionnaireVide();
 	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Papillon"));
 	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Chat"));
 	DICTIONNAIRE_ajouterMot(&dico1, MOT_creerMot("Lapin"));
