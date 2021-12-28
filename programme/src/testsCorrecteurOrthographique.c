@@ -14,6 +14,36 @@ int clean_suite_success(void) {
   return 0; 
 }
 
+int estPresentTabEntier(CO_TableauDEntiers tab, int entier) {
+  int longueur = CO_obtenirLongueurTabEntiers(tab);
+  int i = 0, entierDuTab, resultat = FALSE;
+
+  while (!resultat && i < longueur) {
+    entierDuTab = CO_obtenirIemeEntier(tab, i);
+    if (entierDuTab == entier) {
+      resultat = TRUE;
+    }
+    i++;
+  }
+
+  return resultat;
+}
+
+int estPresentTabMot(MOT_TableauDeMots tab, MOT_Mot m) {
+  int longueur = MOT_obtenirLongueurTabMots(tab);
+  int i = 0, resultat = FALSE;
+  MOT_Mot motDuTab;
+
+  while (!resultat && i < longueur) {
+    motDuTab = MOT_obtenirIemeMot(tab, i);
+    if (MOT_sontEgaux(m, motDuTab)) {
+      resultat = TRUE;
+    }
+    i++;
+  }
+
+  return resultat;
+}
 
 int sontEgauxEntiers(CO_TableauDEntiers entierGeneres, CO_TableauDEntiers entierVerifies){
   int i = 0;
@@ -118,7 +148,7 @@ void test_proposerMots(void){
 
   char *chaines[] = {"fia", "fait", "fais", "faim", "frai", "fiai", "fax", "fat", "far", "fui", "foi", "rai", "mai", "lai", "gai", "bai"};
   
-  MOT_Mot m;
+  MOT_Mot m, motPropose;
   for (int i = 0; i < 16; i++) {
     m = MOT_creerMot(chaines[i]);
     DICTIONNAIRE_ajouterMot(&dico, m);
@@ -127,7 +157,14 @@ void test_proposerMots(void){
   m = MOT_creerMot("fai");
   motsGeneres = CO_proposerMots(m, dico);
 
-  CU_ASSERT_TRUE(sontEgauxMots(motsGeneres, motsProposes));
+  CU_ASSERT_TRUE(MOT_obtenirLongueurTabMots(motsGeneres) == 16);
+
+  for (int i = 0; i < 16; i++) {
+    motPropose = MOT_obtenirIemeMot(motsProposes, i);
+    CU_ASSERT_TRUE(estPresentTabMot(motsGeneres, motPropose)); 
+  }
+
+  //CU_ASSERT_TRUE(sontEgauxMots(motsGeneres, motsProposes));
 
   MOT_supprimerTableauMots(&motsProposes);
   MOT_supprimerTableauMots(&motsGeneres);
