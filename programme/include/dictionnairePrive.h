@@ -148,6 +148,10 @@ void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
 */
 int DICTIONNAIRE_hauteur(DICTIONNAIRE_Dictionnaire dictionnaire);
 
+int DICTIONNAIRE_obtenirhauteur(DICTIONNAIRE_Dictionnaire dictionnaire);
+
+void DICTIONNAIRE_fixerhauteur(DICTIONNAIRE_Dictionnaire *dictionnaire);
+
 /**
  *\fn void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire)
  *\brief reequilibrer l'arbre dictionnaire

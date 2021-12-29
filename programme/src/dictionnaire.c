@@ -1,7 +1,7 @@
 /**
  * \file dictionnaire.c
  * \brief Implémantation du TAD dictionnaire
- * \version 1.0
+ * \version 1.1
  * \date 03/01/2022
  *
  */
@@ -40,6 +40,7 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot){
 	dictionnaire->mot = mot;
 	dictionnaire->filsGauche = DICTIONNAIRE_dictionnaireVide();
 	dictionnaire->filsDroit = DICTIONNAIRE_dictionnaireVide();
+	dictionnaire->hauteur = 0;
 	return dictionnaire;
 }
 
@@ -64,10 +65,12 @@ MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire){
 
 void DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsGauche){
 	(*dictionnaire)->filsGauche=filsGauche;
+	DICTIONNAIRE_fixerhauteur(dictionnaire);
 }
 
 void DICTIONNAIRE_fixerFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsDroit){
 	(*dictionnaire)->filsDroit = filsDroit;
+	DICTIONNAIRE_fixerhauteur(dictionnaire);
 }
 
 void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire){
@@ -119,14 +122,29 @@ void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	DICTIONNAIRE_fixerFilsDroit(dictionnaire,*filsDroit);
 	DICTIONNAIRE_simpleRotationGauche(dictionnaire);
 }
+int DICTIONNAIRE_obtenirhauteur(DICTIONNAIRE_Dictionnaire dictionnaire){
+	if (dictionnaire){
+		return dictionnaire->hauteur;
+	}
+	else{
+		return -1;
+	}
+}
+
+void DICTIONNAIRE_fixerhauteur(DICTIONNAIRE_Dictionnaire *dictionnaire){
+	if (*dictionnaire){
+		(*dictionnaire)->hauteur=1+max(DICTIONNAIRE_obtenirhauteur(*DICTIONNAIRE_obtenirFilsGauche(dictionnaire)),DICTIONNAIRE_obtenirhauteur(*DICTIONNAIRE_obtenirFilsDroit(dictionnaire)));
+	}
+}
 
 int DICTIONNAIRE_hauteur(DICTIONNAIRE_Dictionnaire dictionnaire){
-	if (!(dictionnaire)){
+	return DICTIONNAIRE_obtenirhauteur(dictionnaire);
+	/* if (!(dictionnaire)){
 		return -1;
 	}
 	else{
 		return 1+max(DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsGauche(&dictionnaire)), DICTIONNAIRE_hauteur(*DICTIONNAIRE_obtenirFilsDroit(&dictionnaire)));
-	}
+	} */
 }
 
 void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire){
@@ -268,6 +286,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 			DICTIONNAIRE_reequilibrer(dictionnaire);
 		}
 	}
+	DICTIONNAIRE_fixerhauteur(dictionnaire);
 }
 
 void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier){
