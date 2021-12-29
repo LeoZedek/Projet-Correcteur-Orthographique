@@ -150,24 +150,59 @@ void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	}
 }
 
-void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire){//version "naive"
-	MOT_Mot motAsauvegarder;
-	char *chaineAsauvegarder = (char *)malloc(TAILLEMOTMAX * sizeof(char));
+void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire){
 	DICTIONNAIRE_Dictionnaire filsGauche,filsDroit;
-	if(dictionnaire){
-		motAsauvegarder = DICTIONNAIRE_obtenirMot(dictionnaire);
-		strcpy(chaineAsauvegarder, MOT_motEnChaine(motAsauvegarder));
-		fprintf(fichier,"%s\n",chaineAsauvegarder);
+	
+	if (DICTIONNAIRE_estVide(dictionnaire)) {
+		fprintf(fichier, "\n");
+	}
+	else {
+		fprintf(fichier, "%s\n", MOT_motEnChaine(DICTIONNAIRE_obtenirMot(dictionnaire)));
+
 		filsGauche = *DICTIONNAIRE_obtenirFilsGauche(&dictionnaire);
+		DICTIONNAIRE_enregistrerDicoRec(fichier, filsGauche);
+
 		filsDroit = *DICTIONNAIRE_obtenirFilsDroit(&dictionnaire);
-		if(filsGauche){
-			DICTIONNAIRE_enregistrerDicoRec(fichier,filsGauche);
+		DICTIONNAIRE_enregistrerDicoRec(fichier, filsDroit);
+	}
+
+}
+
+void DICTIONNAIRE_chargerDicoR(DICTIONNAIRE_Dictionnaire *dictionnaire, FILE *fichier, char *chaine) {
+	DICTIONNAIRE_Dictionnaire filsGauche, filsDroit;
+	// char nvChaine[TAILLEMOTMAX];
+
+	if (strlen(chaine) != 0) {
+		MOT_enleverSautDeLigne(chaine);
+	}
+
+	if (strlen(chaine) != 0) {
+		*dictionnaire  = DICTIONNAIRE_dictionnaire(MOT_creerMot(chaine));
+
+		if (fgets(chaine, TAILLEMOTMAX, fichier) != NULL) {
+			filsGauche = *DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
+			DICTIONNAIRE_chargerDicoR(&filsGauche, fichier, chaine);
+			DICTIONNAIRE_fixerFilsGauche(dictionnaire, filsGauche);
 		}
-		if(filsDroit){
-			DICTIONNAIRE_enregistrerDicoRec(fichier,filsDroit);
+
+		if (fgets(chaine, TAILLEMOTMAX, fichier) != NULL) {
+			filsDroit = *DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
+			DICTIONNAIRE_chargerDicoR(&filsDroit, fichier, chaine);
+			DICTIONNAIRE_fixerFilsDroit(dictionnaire, filsDroit);
 		}
 	}
-	free(chaineAsauvegarder);
+
+}
+
+int DICTIONNAIRE_fichierEstVide(FILE *fichier) {
+	int size;
+	if (fichier != NULL) {
+	    fseek (fichier, 0, SEEK_END);
+	    size = ftell(fichier);
+
+	    return (size == 0);
+	}
+	else {return 0;}
 }
 
 /*--------------Fonction Publique--------------------------*/
@@ -243,32 +278,39 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 	assert(fichier != NULL);
 	while(fgets(chaine,TAILLEMOTMAX,fichier) != NULL){
 		MOT_enleverSautDeLigne(chaine);
-		mot = MOT_creerMot(chaine);
-		DICTIONNAIRE_ajouterMot(dictionnaire, mot);
+		if (MOT_estUnMot(chaine)) {
+			mot = MOT_creerMot(chaine);
+			DICTIONNAIRE_ajouterMot(dictionnaire, mot);
+		}
+		
 	}
 	fclose(fichier);
 }
 
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire){
-	FILE *fichierDictionnaire = NULL;
+	FILE *fichierDictionnaire;
 	fichierDictionnaire = fopen(nomDictionnaire,"r");
+	char chaine[TAILLEMOTMAX];
+
+	if (fichierDictionnaire == NULL) {
+		fichierDictionnaire = fopen(nomDictionnaire, "w+");
+		fclose(fichierDictionnaire);
+		fichierDictionnaire = fopen(nomDictionnaire, "r");
+	}
+
 	DICTIONNAIRE_Dictionnaire dictionnaire;
 	dictionnaire = DICTIONNAIRE_dictionnaireVide();
-	if (!fichierDictionnaire){// Le fichier donnée en paramètre n'existe pas donc on renvoie le dico vide
-		return dictionnaire;
+
+	if (fgets(chaine, TAILLEMOTMAX, fichierDictionnaire) != NULL) {
+		DICTIONNAIRE_chargerDicoR(&dictionnaire, fichierDictionnaire, chaine);
 	}
-	//cas ou le fichier existe le charger	Question comment est stocker est fichier ? donc comment le charger ?
-	else{
-		//Version non naive a coder ici
-		fclose(fichierDictionnaire);
-		DICTIONNAIRE_ajouterFichier(&dictionnaire,nomDictionnaire);//si version pas naive enlever cette ligne
-	}
+	fclose(fichierDictionnaire);
 	return dictionnaire;
 }
 
 void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire){
-		FILE *fichierDictionnaire = NULL;
-		fichierDictionnaire = fopen(nomFichierDictionnaire,"w+");
+	FILE *fichierDictionnaire = NULL;
+	fichierDictionnaire = fopen(nomFichierDictionnaire,"w+");
 	assert(fichierDictionnaire);
 	DICTIONNAIRE_enregistrerDicoRec(fichierDictionnaire,dictionnaire);
 	fclose(fichierDictionnaire);

@@ -119,7 +119,6 @@ int MOT_estUneLettre(char c) {
 }
 
 MOT_Mot MOT_creerMot(char *s) {
-	assert(MOT_estUnMot(s));
 
 	int longueurS = strlen(s);
 	MOT_Mot mot;
@@ -307,7 +306,7 @@ MOT_DeuxMots MOT_decomposerMot(MOT_Mot m, int pos) {
 }
 
 void MOT_enleverSautDeLigne(char *chaine) {
-	assert(strlen(chaine) >= 2);
+	assert(strlen(chaine) > 0);
 
 	chaine[strlen(chaine) - 1] = '\0';
 }
