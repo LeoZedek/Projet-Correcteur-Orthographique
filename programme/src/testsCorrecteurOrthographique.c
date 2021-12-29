@@ -91,7 +91,6 @@ void test_sontPresents(void)
 
   mots = MOT_tableauDeMotsVide();
   booleenCorrects = CO_tableauDEntiersVide();
-  booleenGeneres = CO_tableauDEntiersVide();
   
   m = MOT_creerMot("test");
   MOT_ajouterMot(&mots, m);
@@ -130,7 +129,6 @@ void test_proposerMots(void){
   MOT_TableauDeMots motsGeneres, motsProposes;
 
   dico = DICTIONNAIRE_dictionnaireVide();
-  motsGeneres = MOT_tableauDeMotsVide();
   motsProposes = MOT_tableauDeMotsVide();
 
   char *chaines[] = {"fia", "fait", "fais", "faim", "frai", "fiai", "fax", "fat", "far", "fui", "foi", "rai", "mai", "lai", "gai", "bai"};
@@ -162,7 +160,7 @@ void test_phraseEnMots(void)
 {
   char *phrase = " bonjour  je:#suis,#une#'pizza";
 
-  CO_MotsDansPhrase motsEtPositions = CO_motsEtPositionsVide();
+  CO_MotsDansPhrase motsEtPositions;
   motsEtPositions = CO_phraseEnMots(phrase);
 
   MOT_TableauDeMots motsExacts = MOT_tableauDeMotsVide();
