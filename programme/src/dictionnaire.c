@@ -171,25 +171,24 @@ void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dic
 
 void DICTIONNAIRE_chargerDicoR(DICTIONNAIRE_Dictionnaire *dictionnaire, FILE *fichier, char *chaine) {
 	DICTIONNAIRE_Dictionnaire filsGauche, filsDroit;
-	char nvChaine[TAILLEMOTMAX];
+	// char nvChaine[TAILLEMOTMAX];
 
-	fgets(nvChaine, TAILLEMOTMAX, fichier);
-	if (strlen(nvChaine) != 0) {
-		MOT_enleverSautDeLigne(nvChaine);
+	if (strlen(chaine) != 0) {
+		MOT_enleverSautDeLigne(chaine);
 	}
 
-	if (strlen(nvChaine) != 0) {
-		*dictionnaire  = DICTIONNAIRE_dictionnaire(MOT_creerMot(nvChaine));
+	if (strlen(chaine) != 0) {
+		*dictionnaire  = DICTIONNAIRE_dictionnaire(MOT_creerMot(chaine));
 
-		if (! feof(fichier)) {
+		if (fgets(chaine, TAILLEMOTMAX, fichier) != NULL) {
 			filsGauche = *DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
-			DICTIONNAIRE_chargerDicoR(&filsGauche, fichier);
+			DICTIONNAIRE_chargerDicoR(&filsGauche, fichier, chaine);
 			DICTIONNAIRE_fixerFilsGauche(dictionnaire, filsGauche);
 		}
 
-		if (! feof(fichier)) {
+		if (fgets(chaine, TAILLEMOTMAX, fichier) != NULL) {
 			filsDroit = *DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
-			DICTIONNAIRE_chargerDicoR(&filsDroit, fichier);
+			DICTIONNAIRE_chargerDicoR(&filsDroit, fichier, chaine);
 			DICTIONNAIRE_fixerFilsDroit(dictionnaire, filsDroit);
 		}
 	}
@@ -292,6 +291,7 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire){
 	FILE *fichierDictionnaire;
 	fichierDictionnaire = fopen(nomDictionnaire,"r");
+	char chaine[TAILLEMOTMAX];
 
 	if (fichierDictionnaire == NULL) {
 		fichierDictionnaire = fopen(nomDictionnaire, "w+");
@@ -301,9 +301,9 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire
 
 	DICTIONNAIRE_Dictionnaire dictionnaire;
 	dictionnaire = DICTIONNAIRE_dictionnaireVide();
-	
-	if (!DICTIONNAIRE_fichierEstVide(fichierDictionnaire)) {
-		DICTIONNAIRE_chargerDicoR(&dictionnaire, fichierDictionnaire);
+
+	if (fgets(chaine, TAILLEMOTMAX, fichierDictionnaire) != NULL) {
+		DICTIONNAIRE_chargerDicoR(&dictionnaire, fichierDictionnaire, chaine);
 	}
 	fclose(fichierDictionnaire);
 	return dictionnaire;
