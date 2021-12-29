@@ -144,11 +144,10 @@ MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionna
 		}
 	for (int i=1 ; i< MOT_longueurMot(m)-1; i++){
 			motCorriges = MOT_decomposerMot(m, i);
-			if (DICTIONNAIRE_estPresent(dictionnaire, motCorriges.mot1))
+			if (DICTIONNAIRE_estPresent(dictionnaire, motCorriges.mot1) && DICTIONNAIRE_estPresent(dictionnaire, motCorriges.mot2)) {
 				MOT_ajouterMot(&resultatMots, motCorriges.mot1);
-			if (DICTIONNAIRE_estPresent(dictionnaire, motCorriges.mot2))
 				MOT_ajouterMot(&resultatMots, motCorriges.mot2);
-
+			}
 			MOT_supprimerDeuxMots(&motCorriges);
 		}
 	return resultatMots; 
