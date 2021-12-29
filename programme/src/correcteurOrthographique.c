@@ -204,16 +204,6 @@ CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
     CO_fixerLongueurTabEntiers(&motsPhrase.positions, CO_obtenirLongueurTabEntiers(tabPos));
     MOT_fixerLongueurTabMots(&motsPhrase.mots, MOT_obtenirLongueurTabMots(tabMots));
 
-		/*i = longueurPhrase + 1;
-		temp[i - pos] = '\0';
-    mot = MOT_creerMot(temp); 
-    MOT_ajouterMot(&tabMots, mot);
-    CO_ajouterEntier(&tabPos, pos);
-    
-    
-    J'ai essayé de voir pour le dernier mot, car du coup j'ai l'impression que celui-ci n'est pas ajouter après la boucle for.
-    */
-    
     MOT_supprimerMot(&mot);
     free(temp);
     return motsPhrase; 

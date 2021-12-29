@@ -151,8 +151,6 @@ void test_proposerMots(void){
     CU_ASSERT_TRUE(estPresentTabMot(motsGeneres, motPropose)); 
   }
 
-  //CU_ASSERT_TRUE(sontEgauxMots(motsGeneres, motsProposes));
-
   MOT_supprimerTableauMots(&motsProposes);
   MOT_supprimerTableauMots(&motsGeneres);
   DICTIONNAIRE_supprimer(&dico);
