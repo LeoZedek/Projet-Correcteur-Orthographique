@@ -11,19 +11,6 @@
 
 /*----------------------------------PARTIE PRIVEE-----------------------------------------------*/
 
-void afficherTabEntier(CO_TableauDEntiers tab) {
-  for (int i = 0; i < CO_obtenirLongueurTabEntiers(tab); i++) {
-    printf("%d\n", CO_obtenirIemeEntier(tab, i));
-  }
-}
-
-void afficherTabMot(MOT_TableauDeMots tab) {
-  for (int i = 0; i < MOT_obtenirLongueurTabMots(tab); i++) {
-    printf("%s\n", MOT_motEnChaine(MOT_obtenirIemeMot(tab, i)));
-  }
-}
-
-
 CO_TableauDEntiers CO_tableauDEntiersVide(){
 	CO_TableauDEntiers tab;
 	tab.lesEntiers = (int*)malloc(sizeof(int) * CO_TailleMax);
