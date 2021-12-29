@@ -14,6 +14,8 @@ int clean_suite_success(void) {
   return 0; 
 }
 
+
+
 int estPresentTabMot(MOT_TableauDeMots tab, MOT_Mot m) {
   int longueur = MOT_obtenirLongueurTabMots(tab);
   int i = 0, resultat = FALSE;

@@ -20,10 +20,6 @@
 
 //////////////PARTIE PRIVÉÉ////////////////////////////////////
 
-void MOT_fixerLongueurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvelleLongeur) {
-	(*pointeurTableauMots).longueur = nouvelleLongeur;
-}
-
 MOT_Mot *MOT_obtenirLesMots(MOT_TableauDeMots tableauMots) {
 	return tableauMots.lesMots;
 }
@@ -62,6 +58,10 @@ MOT_TableauDeMots MOT_tableauDeMotsVide() {
 	tabVide.lesMots = (MOT_Mot*)malloc(sizeof(MOT_Mot) * Taille_Max_Tableau);
 	MOT_fixerLongueurTabMots(&tabVide, 0);
 	return tabVide;
+}
+
+void MOT_fixerLongueurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvelleLongeur) {
+	(*pointeurTableauMots).longueur = nouvelleLongeur;
 }
 
 int MOT_obtenirLongueurTabMots(MOT_TableauDeMots tableauMots) {
