@@ -211,7 +211,8 @@ void test_hauteur(){
 	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire) == 1)
 
 	filsgauchegauche = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsgauchegauche"));
-	DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_obtenirFilsGauche(&dictionnaire),filsgauchegauche);
+	DICTIONNAIRE_fixerFilsGauche(&filsgauche,filsgauchegauche);
+	DICTIONNAIRE_fixerFilsGauche(&dictionnaire,filsgauche);
 	CU_ASSERT_TRUE(DICTIONNAIRE_hauteur(dictionnaire)==2)
 
 	filsdroit = DICTIONNAIRE_dictionnaire(MOT_creerMot("filsdroit"));
