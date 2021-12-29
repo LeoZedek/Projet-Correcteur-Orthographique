@@ -18,6 +18,7 @@ typedef struct DICTIONNAIRE_Noeuds{
 	MOT_Mot mot ;
 	struct DICTIONNAIRE_Noeuds *filsGauche ;
 	struct DICTIONNAIRE_Noeuds *filsDroit ;
+	int hauteur;
 } DICTIONNAIRE_Noeuds ;
 
 
@@ -27,6 +28,14 @@ typedef struct DICTIONNAIRE_Noeuds{
  */
 typedef DICTIONNAIRE_Noeuds *DICTIONNAIRE_Dictionnaire;
 
+/**
+ *\fn int DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide();
+ *\brief Renvoie un Dictionnaire vide. Ça sera un pointeur vers NULL. 
+ *
+ *\return Le dictionnaire vide.
+*/
+
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide();
 
 /**
  *\fn int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire)
@@ -48,27 +57,6 @@ int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire) ;
 */
 int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot) ;
 
-
-/**
- *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief Renvoie le fils gauche du dictionnaire "dictionnaire"
- *
- *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
- *\return Le sous arbre gauche de la racine du dictionnaire passé en paramètre
-*/
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire dictionnaire) ;
-
-
-/**
- *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief Renvoie le fils droit du dictionnaire "dictionnaire"
- *
- *\param dictionnaire : Le dictionnaire en question (racine 'actuel' de l'arbre')
- *\return Le sous arbre droit de la racine du dictionnaire passé en paramètre
-*/
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnaire dictionnaire) ;
-
-
 /**
  *\fn void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot)
  *\brief Ajoute un mot au dictionnaire
@@ -76,13 +64,13 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnair
  *
  *\param *dictionnaire : Le pointeur vers le dictionnaire dans lequelle on insère le mot
  *\param mot : Le mot que l'on insère
- *\return Ne renvoye rien mais modifie l'etat du dicctionnaire
+ *\return Ne renvoye rien mais modifie l'etat du dictionnaire
 */
 void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot);
 
 
 /**
- *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, fichier)
+ *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier)
  *\brief ajoute le contenue d'un fichier dans le dictionnaire
  *\attention precondition : Le fichier doit être accessible en lecture
  *
@@ -90,7 +78,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
  *\param nomFichier : Le nom du fichier qui contient tous les mots à insérer
  *\return Ne renvoie rien, modifie juste le contenue du dictionnaire
 */
-void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char nomFichier);
+void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier);
 
 
 /**
@@ -101,17 +89,33 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char n
  *\param nomDuDictionnaire : Le nom du fichier du dictionnaire à charger
  *\return Retourne le dictionnaire créé
 */
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char chaine);
+DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire);
 
 
 /**
- *\fn void DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief Enregistre le dictionnaire en paramètre dans un fichier dont il renvoie le nom
- *\attention precondition : Le fichier doit être accessible en lecture
+ *\fn void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire)
+ *\brief Enregistre le dictionnaire en paramètre dans un fichier dont le nom est passé en paramètre
+ *\attention precondition : Le fichier doit être accessible en ecriture
  *
+ *\param nomFichierDictionnaire : Le nom du fichier dans lequel on enregistre le dictionnaire
  *\param dictionnaire : Le dictionnaire que l'on enregistre dans le fichier
- *\return Le nom du fichier enregistré
+ *\return void
 */
-char *DICTIONNAIRE_enregistrerDictionnaire(DICTIONNAIRE_Dictionnaire dictionnaire);
+void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire);
 
+/**
+ *\fn void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire)
+ *\brief Supprime et désalloue entièrement un dictionnaire.
+ *
+ *\param *dictionnaire : Le pointeur sur le dictionnaire qui sera supprimer.
+*/
+void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
+
+/**
+ *\fn void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire)
+ *\brief Affiche un dictionnaire
+ *
+ *\param dictionnaire : Le dictionnaire à afficher
+*/
+void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire);
 #endif

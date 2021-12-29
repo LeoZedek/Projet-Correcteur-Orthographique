@@ -16,7 +16,7 @@
  *
  */
  
-const int CO_TailleMax = 1000;
+// const int CO_TailleMax = 1000; /*pb avec cette ligne*/
 
 
 /**
@@ -26,12 +26,12 @@ const int CO_TailleMax = 1000;
  
 typedef struct {
     int *lesEntiers;
-    int longeur;
+    int longueur;
 } CO_TableauDEntiers;
 
 /**
  *\fn CO_TableauDEntiers CO_tableauDEntiersVide();
- *\brief Fonction qui permet de construire un tableau vide. Sa longeur est fixé à 0 et le pointeur sera allouer avec la taille CO_TailleMax
+ *\brief Fonction qui permet de construire un tableau vide. Sa longueur est fixée à 0 et le pointeur sera alloué avec la taille CO_TailleMax
  *
  *\return Un tableau d'entiers vide
  */
@@ -39,29 +39,29 @@ typedef struct {
 CO_TableauDEntiers CO_tableauDEntiersVide();
 
 /**
- *\fn int CO_obtenirLongeurTabEntiers(CO_TableauDEntiers tableauEntiers);
- *\brief Fonction qui permet d'obtenir la longeur d'un tableau d'Entiers
+ *\fn int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers);
+ *\brief Fonction qui permet d'obtenir la longueur d'un tableau d'Entiers
  *
- *\param tableauEntiers : Est le tableau dont la longeur sera retourner
- *\return La longeur du tableau
+ *\param tableauEntiers : Est le tableau dont la longueur sera retourner
+ *\return La longueur du tableau
  */
 
-int CO_obtenirLongeurTabEntiers(CO_TableauDEntiers tableauEntiers);
+int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers);
 
 /**
- *\fn void CO_fixerLongeurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongeur);
- *\brief Fonction qui permet de fixer la longeur d'un tableau d'entiers
+ *\fn void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongueur);
+ *\brief Fonction qui permet de fixer la longueur d'un tableau d'entiers
  *
- *\param pointeurTableauEntiers : Est le poiteur du tableau dont la longeur sera modifé
- *\param nouvelleLongeur : La nouvelle longeur du tableau
+ *\param pointeurTableauEntiers : Est le pointeur du tableau dont la longueur sera modifé
+ *\param nouvelleLongueur : La nouvelle longueur du tableau
  *
  */
 
-void CO_fixerLongeurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongeur);
+void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongueur);
 
 /**
  *\fn int CO_obteniriIemeEntier(CO_TableauDEntiers tableauEntiers, int position);
- *\brief Fonction qui permet d'obtenir l'entier à une certaine position du tableau
+ *\brief Procédure qui permet d'obtenir l'entier à une certaine position du tableau
  *
  *\param tableauEntiers : Est le tableau dont l'entier sera extrait
  *\param position : La position de l'entier extrait
@@ -82,7 +82,7 @@ int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers);
 
 /**
  *\fn void MOT_ajouterEntier(CO_TableauDEntiers *tableauEntiers, int entierAAjouter);
- *\brief Ajoute un entier à la fin du tableau et augmente sa longeur de 1.
+ *\brief Ajoute un entier à la fin du tableau et augmente sa longueur de 1.
  *
  *\param tableauEntiers : Le pointeur sur le tableau d'entier.
  *\param m : L'entier qui sera ajouté à la fin du tableau
@@ -92,13 +92,13 @@ void CO_ajouterEntier(CO_TableauDEntiers *tableauEntiers, int entierAAjouter);
 
 /**
  *\fn void CO_supprimerTableauEntiers(CO_TableauDEntiers tableau);
- *\brief Permet de désallouer le pointeur du tableau et fixe la longeur à -1. Le tableau n'est plus à vocation d'être utilisé.
+ *\brief Permet de désallouer le pointeur du tableau et fixe la longueur à -1. Le tableau n'est plus à vocation d'être utilisé.
  *
- *\param tableau : le tableau qui sera supprimer.
+ *\param *tableau : Le pointeur sur tableau qui sera supprimer.
  */
 
 
-void CO_supprimerTableauEntiers(CO_TableauDEntiers tableau);
+void CO_supprimerTableauEntiers(CO_TableauDEntiers *tableau);
 
 /**
  * \brief Le type CO_TableauPositions permet de représenter un tableau d'entiers qui correspond à des positions.
@@ -126,8 +126,42 @@ typedef struct {
 } CO_MotsDansPhrase;
 
 /**
+ * \fn CO_MotsDansPhrase CO_motsEtPositionsVide();
+ * \brief Fonction qui créer une variable de type CO_MotsDansPhrase avec des tableaux vide.
+ *
+ * \return La structure avec des tableaux vides.
+ */
+
+CO_MotsDansPhrase CO_motsEtPositionsVide();
+
+
+/**
+ * \fn MOT_TableauDeMots CO_obtenirTabMots(CO_MotsDansPhrase motsEtPosition);
+ * \brief Fonction getter pour avoir le tableau de Mots.
+ * \param motsEtPosition : La structure dont on prends le tableau de mots.
+ */
+
+MOT_TableauDeMots CO_obtenirTabMots(CO_MotsDansPhrase motsEtPosition);
+
+/**
+ * \fn CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition);
+ * \brief Fonction getter pour avoir le tableau de Positions.
+ * \param motsEtPosition : La structure dont on prends le tableau de positions.
+ */
+
+CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition);
+
+/**
+ * \fn void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition);
+ * \brief Fonction qui supprime et désalloue la structure CO_MotsDansPhrase.
+ * \param *motsEtPosition : Le pointeur sur la structure à désallouer.
+ */
+
+void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition);
+
+/**
  * \fn CO_TableauBooleens sontPresents(Mot mots[], Dictionnaire dictionnaire)
- * \brief Fonction de vérification pour voir si une liste de mots est présente dans le dictionnaire ou non.
+ * \brief Procédure de vérification pour voir si une liste de mots est présente dans le dictionnaire ou non.
  *
  * \param tableauBooleens : un pointeur sur un entier
  * \param mots : un pointeur sur un mot
