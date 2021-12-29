@@ -151,24 +151,47 @@ void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire){
 	}
 }
 
-void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire){//version "naive"
-	MOT_Mot motAsauvegarder;
-	char *chaineAsauvegarder = (char *)malloc(TAILLEMOTMAX * sizeof(char));
+void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dictionnaire){
 	DICTIONNAIRE_Dictionnaire filsGauche,filsDroit;
-	if(dictionnaire){
-		motAsauvegarder = DICTIONNAIRE_obtenirMot(dictionnaire);
-		strcpy(chaineAsauvegarder, MOT_motEnChaine(motAsauvegarder));
-		fprintf(fichier,"%s\n",chaineAsauvegarder);
+	
+	if (DICTIONNAIRE_estVide(dictionnaire)) {
+		fprintf(fichier, "\n");
+	}
+	else {
+		fprintf(fichier, "%s\n", MOT_motEnChaine(DICTIONNAIRE_obtenirMot(dictionnaire)));
+
 		filsGauche = *DICTIONNAIRE_obtenirFilsGauche(&dictionnaire);
+		DICTIONNAIRE_enregistrerDicoRec(fichier, filsGauche);
+
 		filsDroit = *DICTIONNAIRE_obtenirFilsDroit(&dictionnaire);
-		if(filsGauche){
-			DICTIONNAIRE_enregistrerDicoRec(fichier,filsGauche);
+		DICTIONNAIRE_enregistrerDicoRec(fichier, filsDroit);
+	}
+
+}
+
+void DICTIONNAIRE_chargerDicoR(DICTIONNAIRE_Dictionnaire *dictionnaire, FILE *fichier) {
+	DICTIONNAIRE_Dictionnaire filsGauche, filsDroit;
+	char nvChaine[TAILLEMOTMAX];
+
+	fgets(nvChaine, TAILLEMOTMAX, fichier);
+	MOT_enleverSautDeLigne(nvChaine);
+
+	if (strlen(nvChaine) != 0) {
+		*dictionnaire  = DICTIONNAIRE_dictionnaire(MOT_creerMot(nvChaine));
+
+		if (! feof(fichier)) {
+			filsGauche = *DICTIONNAIRE_obtenirFilsGauche(dictionnaire);
+			DICTIONNAIRE_chargerDicoR(&filsGauche, fichier);
+			DICTIONNAIRE_fixerFilsGauche(dictionnaire, filsGauche);
 		}
-		if(filsDroit){
-			DICTIONNAIRE_enregistrerDicoRec(fichier,filsDroit);
+
+		if (! feof(fichier)) {
+			filsDroit = *DICTIONNAIRE_obtenirFilsDroit(dictionnaire);
+			DICTIONNAIRE_chargerDicoR(&filsDroit, fichier);
+			DICTIONNAIRE_fixerFilsDroit(dictionnaire, filsDroit);
 		}
 	}
-	free(chaineAsauvegarder);
+
 }
 
 /*--------------Fonction Publique--------------------------*/
@@ -255,21 +278,17 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire
 	fichierDictionnaire = fopen(nomDictionnaire,"r");
 	DICTIONNAIRE_Dictionnaire dictionnaire;
 	dictionnaire = DICTIONNAIRE_dictionnaireVide();
-	if (!fichierDictionnaire){// Le fichier donnée en paramètre n'existe pas donc on renvoie le dico vide
-		return dictionnaire;
+	
+	if (! feof(fichierDictionnaire)) {
+		DICTIONNAIRE_chargerDicoR(&dictionnaire, fichierDictionnaire);
 	}
-	//cas ou le fichier existe le charger	Question comment est stocker est fichier ? donc comment le charger ?
-	else{
-		//Version non naive a coder ici
-		fclose(fichierDictionnaire);
-		DICTIONNAIRE_ajouterFichier(&dictionnaire,nomDictionnaire);//si version pas naive enlever cette ligne
-	}
+	fclose(fichierDictionnaire);
 	return dictionnaire;
 }
 
 void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire){
-		FILE *fichierDictionnaire = NULL;
-		fichierDictionnaire = fopen(nomFichierDictionnaire,"w+");
+	FILE *fichierDictionnaire = NULL;
+	fichierDictionnaire = fopen(nomFichierDictionnaire,"w+");
 	assert(fichierDictionnaire);
 	DICTIONNAIRE_enregistrerDicoRec(fichierDictionnaire,dictionnaire);
 	fclose(fichierDictionnaire);

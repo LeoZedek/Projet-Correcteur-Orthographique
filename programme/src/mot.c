@@ -307,7 +307,7 @@ MOT_DeuxMots MOT_decomposerMot(MOT_Mot m, int pos) {
 }
 
 void MOT_enleverSautDeLigne(char *chaine) {
-	assert(strlen(chaine) >= 2);
+	assert(strlen(chaine) > 0);
 
 	chaine[strlen(chaine) - 1] = '\0';
 }
