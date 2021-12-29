@@ -228,6 +228,7 @@ int main(int argc, char** argv){
   if ((NULL == CU_add_test(pSuite, "mots sont présents", test_sontPresents))
       || (NULL == CU_add_test(pSuite, "proposition de mots", test_proposerMots))
       || (NULL == CU_add_test(pSuite, "découpage d'une phrase en mots", test_phraseEnMots)) 
+      || (NULL == CU_add_test(pSuite, "Ajout d'un entier", test_ajouterEntier)) 
       ) 
     {
       CU_cleanup_registry();
