@@ -16,7 +16,6 @@
 #define TAILLEMOTMAX 50
 
 /*--------------Fonction Privé--------------------------*/
-//Qui ne sont ni dans la conception ni dans le .h
 int max(int a, int b){
 	if (a>b){
 		return a;
