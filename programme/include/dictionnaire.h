@@ -18,6 +18,7 @@ typedef struct DICTIONNAIRE_Noeuds{
 	MOT_Mot mot ;
 	struct DICTIONNAIRE_Noeuds *filsGauche ;
 	struct DICTIONNAIRE_Noeuds *filsDroit ;
+	int hauteur;
 } DICTIONNAIRE_Noeuds ;
 
 
