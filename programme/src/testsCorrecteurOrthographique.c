@@ -153,6 +153,7 @@ void test_proposerMots(void){
     CU_ASSERT_TRUE(estPresentTabMot(motsGeneres, motPropose)); 
   }
 
+  MOT_supprimerMot(&m);
   MOT_supprimerTableauMots(&motsProposes);
   MOT_supprimerTableauMots(&motsGeneres);
   DICTIONNAIRE_supprimer(&dico);
@@ -169,12 +170,27 @@ void test_phraseEnMots(void)
 
   MOT_TableauDeMots motsExacts = MOT_tableauDeMotsVide();
   CO_TableauPositions positionsExactes = CO_tableauDEntiersVide();
+  MOT_Mot mot;
 
-  MOT_ajouterMot(&motsExacts, MOT_creerMot("bonjour"));
-  MOT_ajouterMot(&motsExacts, MOT_creerMot("je"));
-  MOT_ajouterMot(&motsExacts, MOT_creerMot("suis"));
-  MOT_ajouterMot(&motsExacts, MOT_creerMot("une"));
-  MOT_ajouterMot(&motsExacts, MOT_creerMot("pizza"));
+  mot = MOT_creerMot("bonjour");
+  MOT_ajouterMot(&motsExacts, mot);
+  MOT_supprimerMot(&mot);
+
+  mot = MOT_creerMot("je");
+  MOT_ajouterMot(&motsExacts, mot);
+  MOT_supprimerMot(&mot);
+
+  mot = MOT_creerMot("suis");
+  MOT_ajouterMot(&motsExacts, mot);
+  MOT_supprimerMot(&mot);
+
+  mot = MOT_creerMot("une");
+  MOT_ajouterMot(&motsExacts, mot);
+  MOT_supprimerMot(&mot);
+
+  mot = MOT_creerMot("pizza");
+  MOT_ajouterMot(&motsExacts, mot);
+  MOT_supprimerMot(&mot);
 
   CO_ajouterEntier(&positionsExactes, 1);
   CO_ajouterEntier(&positionsExactes, 10);
