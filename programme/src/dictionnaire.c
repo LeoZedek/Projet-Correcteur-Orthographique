@@ -169,7 +169,7 @@ void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dic
 
 }
 
-void DICTIONNAIRE_chargerDicoR(DICTIONNAIRE_Dictionnaire *dictionnaire, FILE *fichier) {
+void DICTIONNAIRE_chargerDicoR(DICTIONNAIRE_Dictionnaire *dictionnaire, FILE *fichier, char *chaine) {
 	DICTIONNAIRE_Dictionnaire filsGauche, filsDroit;
 	char nvChaine[TAILLEMOTMAX];
 
@@ -280,8 +280,10 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 	assert(fichier != NULL);
 	while(fgets(chaine,TAILLEMOTMAX,fichier) != NULL){
 		MOT_enleverSautDeLigne(chaine);
-		mot = MOT_creerMot(chaine);
-		DICTIONNAIRE_ajouterMot(dictionnaire, mot);
+		if (MOT_estUnMot(chaine)) {
+			mot = MOT_creerMot(chaine);
+			DICTIONNAIRE_ajouterMot(dictionnaire, mot);
+		}
 		
 	}
 	fclose(fichier);
