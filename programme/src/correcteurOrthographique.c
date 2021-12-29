@@ -106,11 +106,13 @@ MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionna
 			motCorrige = MOT_remplacerLettre(m, i, lettre);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}
 		for (int i=0 ; i< MOT_longueurMot(m)+1; i++){
 			motCorrige = MOT_insererLettre(m, i, lettre);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}
 	
 	}
@@ -119,22 +121,26 @@ MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionna
 			motCorrige = MOT_remplacerLettre(m, i, tiret);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}
 	for (int i=0 ; i< MOT_longueurMot(m)+1; i++){
 			motCorrige = MOT_insererLettre(m, i, tiret);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}
 	
 	for (int i=0 ; i< MOT_longueurMot(m) - 1; i++){
 			motCorrige = MOT_inverserLettre(m, i);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}	
 	for (int i=0 ; i< MOT_longueurMot(m); i++){
 			motCorrige = MOT_supprimerLettre(m, i);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}
 	for (int i=1 ; i< MOT_longueurMot(m)-1; i++){
 			motCorriges = MOT_decomposerMot(m, i);
@@ -142,6 +148,8 @@ MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionna
 				MOT_ajouterMot(&resultatMots, motCorriges.mot1);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorriges.mot2))
 				MOT_ajouterMot(&resultatMots, motCorriges.mot2);
+
+			MOT_supprimerDeuxMots(&motCorriges);
 		}
 	return resultatMots; 
 }
@@ -175,6 +183,7 @@ CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
                 mot = MOT_creerMot(temp); 
                 MOT_ajouterMot(&tabMots, mot);
                 CO_ajouterEntier(&tabPos, pos);
+                MOT_supprimerMot(&mot);
             }
 
         }
@@ -186,12 +195,12 @@ CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
     	mot = MOT_creerMot(temp);
     	MOT_ajouterMot(&tabMots, mot);
     	CO_ajouterEntier(&tabPos, pos);
+    	MOT_supprimerMot(&mot);
     }
 
     CO_fixerLongueurTabEntiers(&motsPhrase.positions, CO_obtenirLongueurTabEntiers(tabPos));
     MOT_fixerLongueurTabMots(&motsPhrase.mots, MOT_obtenirLongueurTabMots(tabMots));
 
-    MOT_supprimerMot(&mot);
     free(temp);
     return motsPhrase; 
 }

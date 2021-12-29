@@ -94,15 +94,19 @@ void test_sontPresents(void)
   
   m = MOT_creerMot("test");
   MOT_ajouterMot(&mots, m);
+  MOT_supprimerMot(&m);
 
   m = MOT_creerMot("correction");
   MOT_ajouterMot(&mots, m);
+  MOT_supprimerMot(&m);
 
   m = MOT_creerMot("dromadaire");
   MOT_ajouterMot(&mots, m);
+  MOT_supprimerMot(&m);
 
   m = MOT_creerMot("foutes");
   MOT_ajouterMot(&mots, m);
+  MOT_supprimerMot(&m);
 
   CO_ajouterEntier(&booleenCorrects, TRUE);
   CO_ajouterEntier(&booleenCorrects, TRUE);
