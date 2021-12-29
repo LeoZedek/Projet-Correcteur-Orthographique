@@ -156,7 +156,7 @@ void DICTIONNAIRE_enregistrerDicoRec(FILE *fichier,DICTIONNAIRE_Dictionnaire dic
 	DICTIONNAIRE_Dictionnaire filsGauche,filsDroit;
 	if(dictionnaire){
 		motAsauvegarder = DICTIONNAIRE_obtenirMot(dictionnaire);
-		chaineAsauvegarder = MOT_motEnChaine(motAsauvegarder);
+		strcpy(chaineAsauvegarder, MOT_motEnChaine(motAsauvegarder));
 		fprintf(fichier,"%s\n",chaineAsauvegarder);
 		filsGauche = *DICTIONNAIRE_obtenirFilsGauche(&dictionnaire);
 		filsDroit = *DICTIONNAIRE_obtenirFilsDroit(&dictionnaire);

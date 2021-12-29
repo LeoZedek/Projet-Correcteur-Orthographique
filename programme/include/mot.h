@@ -59,6 +59,17 @@ MOT_TableauDeMots MOT_tableauDeMotsVide();
 int MOT_obtenirLongueurTabMots(MOT_TableauDeMots tableauMots);
 
 /**
+ *\fn void MOT_fixerLongeurTabMots(MOT_TableauDeMots *tableauMots, int nouvelleLongeur)
+ *\brief Fonction qui permet de fixer la longeur d'un tableau de mots
+ *
+ *\param pointeurTableauMots : Est le poiteur du tableau dont la longeur sera modifé
+ *\param nouvelleLongeur : La nouvelle longeur du tableau
+ *
+ */
+
+void MOT_fixerLongueurTabMots(MOT_TableauDeMots *pointeurTableauMots, int nouvelleLongeur);
+
+/**
  *\fn MOT_Mot MOT_obteniriIemeMot(MOT_TableauDeMots tableauMots, int position);
  *\brief Fonction qui permet d'obtenir le mot à une certaine position du tableau
  *

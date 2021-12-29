@@ -1,10 +1,11 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+#include <stdio.h>
 #include "mot.h"
 #include "dictionnaire.h"
 #include "correcteurOrthographique.h"
-#define CO_TailleMax = 1000
+#define CO_TailleMax 1000
 #define TRUE 1
 #define FALSE 0
 
@@ -12,7 +13,7 @@
 
 CO_TableauDEntiers CO_tableauDEntiersVide(){
 	CO_TableauDEntiers tab;
-	tab.lesEntiers = NULL;
+	tab.lesEntiers = (int*)malloc(sizeof(int) * CO_TailleMax);
 	tab.longueur = 0;
 	return tab;
 }
@@ -39,7 +40,8 @@ int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers){
 
 void CO_ajouterEntier(CO_TableauDEntiers *tableauEntiers, int entierAAjouter){
 	CO_fixerLongueurTabEntiers(tableauEntiers, CO_obtenirLongueurTabEntiers(*tableauEntiers)+1);
-	(*tableauEntiers).lesEntiers[CO_obtenirLongueurTabEntiers(*tableauEntiers)] = entierAAjouter;
+	int longueur = CO_obtenirLongueurTabEntiers(*tableauEntiers);
+	(*tableauEntiers).lesEntiers[longueur - 1] = entierAAjouter;
 }
 
 void CO_supprimerTableauEntiers(CO_TableauDEntiers *tableau){
@@ -91,10 +93,11 @@ CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionn
 		}
 	}
 	return tabBool; 
+	
 } 
 
 MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionnaire){
-	MOT_TableauDeMots resultatMots; 
+	MOT_TableauDeMots resultatMots = MOT_tableauDeMotsVide(); 
 	MOT_Mot motCorrige;
 	MOT_DeuxMots motCorriges;
 	char tiret;
@@ -103,11 +106,13 @@ MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionna
 			motCorrige = MOT_remplacerLettre(m, i, lettre);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}
 		for (int i=0 ; i< MOT_longueurMot(m)+1; i++){
 			motCorrige = MOT_insererLettre(m, i, lettre);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}
 	
 	}
@@ -116,22 +121,26 @@ MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionna
 			motCorrige = MOT_remplacerLettre(m, i, tiret);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}
 	for (int i=0 ; i< MOT_longueurMot(m)+1; i++){
 			motCorrige = MOT_insererLettre(m, i, tiret);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}
 	
-	for (int i=0 ; i< MOT_longueurMot(m) - 2; i++){
+	for (int i=0 ; i< MOT_longueurMot(m) - 1; i++){
 			motCorrige = MOT_inverserLettre(m, i);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}	
 	for (int i=0 ; i< MOT_longueurMot(m); i++){
 			motCorrige = MOT_supprimerLettre(m, i);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorrige))
 				MOT_ajouterMot(&resultatMots, motCorrige);
+			MOT_supprimerMot(&motCorrige);
 		}
 	for (int i=1 ; i< MOT_longueurMot(m)-1; i++){
 			motCorriges = MOT_decomposerMot(m, i);
@@ -139,6 +148,8 @@ MOT_TableauDeMots CO_proposerMots(MOT_Mot m, DICTIONNAIRE_Dictionnaire dictionna
 				MOT_ajouterMot(&resultatMots, motCorriges.mot1);
 			if (DICTIONNAIRE_estPresent(dictionnaire, motCorriges.mot2))
 				MOT_ajouterMot(&resultatMots, motCorriges.mot2);
+
+			MOT_supprimerDeuxMots(&motCorriges);
 		}
 	return resultatMots; 
 }
@@ -172,13 +183,24 @@ CO_MotsDansPhrase CO_phraseEnMots(char *phrase){
                 mot = MOT_creerMot(temp); 
                 MOT_ajouterMot(&tabMots, mot);
                 CO_ajouterEntier(&tabPos, pos);
+                MOT_supprimerMot(&mot);
             }
 
         }
 
     }
 
-    MOT_supprimerMot(&mot);
+    if (dansUnMot) {
+    	temp[i - pos + 1] = '\0';
+    	mot = MOT_creerMot(temp);
+    	MOT_ajouterMot(&tabMots, mot);
+    	CO_ajouterEntier(&tabPos, pos);
+    	MOT_supprimerMot(&mot);
+    }
+
+    CO_fixerLongueurTabEntiers(&motsPhrase.positions, CO_obtenirLongueurTabEntiers(tabPos));
+    MOT_fixerLongueurTabMots(&motsPhrase.mots, MOT_obtenirLongueurTabMots(tabMots));
+
     free(temp);
     return motsPhrase; 
 }

@@ -15,6 +15,23 @@ int clean_suite_success(void) {
 }
 
 
+
+int estPresentTabMot(MOT_TableauDeMots tab, MOT_Mot m) {
+  int longueur = MOT_obtenirLongueurTabMots(tab);
+  int i = 0, resultat = FALSE;
+  MOT_Mot motDuTab;
+
+  while (!resultat && i < longueur) {
+    motDuTab = MOT_obtenirIemeMot(tab, i);
+    if (MOT_sontEgaux(m, motDuTab)) {
+      resultat = TRUE;
+    }
+    i++;
+  }
+
+  return resultat;
+}
+
 int sontEgauxEntiers(CO_TableauDEntiers entierGeneres, CO_TableauDEntiers entierVerifies){
   int i = 0;
   int egaux = TRUE;
@@ -74,19 +91,22 @@ void test_sontPresents(void)
 
   mots = MOT_tableauDeMotsVide();
   booleenCorrects = CO_tableauDEntiersVide();
-  booleenGeneres = CO_tableauDEntiersVide();
   
   m = MOT_creerMot("test");
   MOT_ajouterMot(&mots, m);
+  MOT_supprimerMot(&m);
 
   m = MOT_creerMot("correction");
   MOT_ajouterMot(&mots, m);
+  MOT_supprimerMot(&m);
 
   m = MOT_creerMot("dromadaire");
   MOT_ajouterMot(&mots, m);
+  MOT_supprimerMot(&m);
 
   m = MOT_creerMot("foutes");
   MOT_ajouterMot(&mots, m);
+  MOT_supprimerMot(&m);
 
   CO_ajouterEntier(&booleenCorrects, TRUE);
   CO_ajouterEntier(&booleenCorrects, TRUE);
@@ -113,12 +133,11 @@ void test_proposerMots(void){
   MOT_TableauDeMots motsGeneres, motsProposes;
 
   dico = DICTIONNAIRE_dictionnaireVide();
-  motsGeneres = MOT_tableauDeMotsVide();
   motsProposes = MOT_tableauDeMotsVide();
 
   char *chaines[] = {"fia", "fait", "fais", "faim", "frai", "fiai", "fax", "fat", "far", "fui", "foi", "rai", "mai", "lai", "gai", "bai"};
   
-  MOT_Mot m;
+  MOT_Mot m, motPropose;
   for (int i = 0; i < 16; i++) {
     m = MOT_creerMot(chaines[i]);
     DICTIONNAIRE_ajouterMot(&dico, m);
@@ -127,8 +146,14 @@ void test_proposerMots(void){
   m = MOT_creerMot("fai");
   motsGeneres = CO_proposerMots(m, dico);
 
-  CU_ASSERT_TRUE(sontEgauxMots(motsGeneres, motsProposes));
+  CU_ASSERT_TRUE(MOT_obtenirLongueurTabMots(motsGeneres) == 16);
 
+  for (int i = 0; i < 16; i++) {
+    motPropose = MOT_obtenirIemeMot(motsProposes, i);
+    CU_ASSERT_TRUE(estPresentTabMot(motsGeneres, motPropose)); 
+  }
+
+  MOT_supprimerMot(&m);
   MOT_supprimerTableauMots(&motsProposes);
   MOT_supprimerTableauMots(&motsGeneres);
   DICTIONNAIRE_supprimer(&dico);
@@ -140,17 +165,32 @@ void test_phraseEnMots(void)
 {
   char *phrase = " bonjour  je:#suis,#une#'pizza";
 
-  CO_MotsDansPhrase motsEtPositions = CO_motsEtPositionsVide();
+  CO_MotsDansPhrase motsEtPositions;
   motsEtPositions = CO_phraseEnMots(phrase);
 
   MOT_TableauDeMots motsExacts = MOT_tableauDeMotsVide();
   CO_TableauPositions positionsExactes = CO_tableauDEntiersVide();
+  MOT_Mot mot;
 
-  MOT_ajouterMot(&motsExacts, MOT_creerMot("bonjour"));
-  MOT_ajouterMot(&motsExacts, MOT_creerMot("je"));
-  MOT_ajouterMot(&motsExacts, MOT_creerMot("suis"));
-  MOT_ajouterMot(&motsExacts, MOT_creerMot("une"));
-  MOT_ajouterMot(&motsExacts, MOT_creerMot("pizza"));
+  mot = MOT_creerMot("bonjour");
+  MOT_ajouterMot(&motsExacts, mot);
+  MOT_supprimerMot(&mot);
+
+  mot = MOT_creerMot("je");
+  MOT_ajouterMot(&motsExacts, mot);
+  MOT_supprimerMot(&mot);
+
+  mot = MOT_creerMot("suis");
+  MOT_ajouterMot(&motsExacts, mot);
+  MOT_supprimerMot(&mot);
+
+  mot = MOT_creerMot("une");
+  MOT_ajouterMot(&motsExacts, mot);
+  MOT_supprimerMot(&mot);
+
+  mot = MOT_creerMot("pizza");
+  MOT_ajouterMot(&motsExacts, mot);
+  MOT_supprimerMot(&mot);
 
   CO_ajouterEntier(&positionsExactes, 1);
   CO_ajouterEntier(&positionsExactes, 10);
@@ -183,6 +223,9 @@ void test_ajouterEntier(void)
 
   CU_ASSERT_TRUE(sontEgauxEntiers(tabTest, tabExacts));
 
+  CO_supprimerTableauEntiers(&tabTest);
+  CO_supprimerTableauEntiers(&tabExacts);
+
 }
 
 int main(int argc, char** argv){
@@ -203,6 +246,7 @@ int main(int argc, char** argv){
   if ((NULL == CU_add_test(pSuite, "mots sont présents", test_sontPresents))
       || (NULL == CU_add_test(pSuite, "proposition de mots", test_proposerMots))
       || (NULL == CU_add_test(pSuite, "découpage d'une phrase en mots", test_phraseEnMots)) 
+      || (NULL == CU_add_test(pSuite, "Ajout d'un entier", test_ajouterEntier)) 
       ) 
     {
       CU_cleanup_registry();
