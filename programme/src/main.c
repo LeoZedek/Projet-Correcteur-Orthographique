@@ -62,7 +62,7 @@ int main(int argc, char **argv){
 					//coder la correction ici 
 					//Le dictionnaire a été chargé il faut récupérer la chaine de carcatère du texte et appliquer les éventuelles corrections
 					saisirChaine(chaineEntree,sizeof(chaineEntree));
-					fprintf(stderr,"on a rentre %s\n",chaineEntree);//pour tester le fonctionnement
+					fprintf(stderr,"on a rentre : %s\n",chaineEntree);//pour tester le fonctionnement
 					tableauMotDansPhrase = CO_phraseEnMots(chaineEntree);
 					tableauDeMot = CO_obtenirTabMots(tableauMotDansPhrase);
 					tableauBool = CO_sontPresents(tableauDeMot,dictionnaire);
@@ -81,15 +81,20 @@ int main(int argc, char **argv){
 							longueurTableauMotCor = MOT_obtenirLongueurTabMots(tableauMotCorriger);
 							printf("%d ", longueurTableauMotCor);
 							position = CO_obtenirIemeEntier(tableauPositions,i);
-							printf("%d:", position);
+							printf("%d : ", position);
 							for (j = 0; j<longueurTableauMotCor;j++){
 								printf("%s ",MOT_motEnChaine(MOT_obtenirIemeMot(tableauMotCorriger,j)));
 							}
 							printf("\n");
-						}
+						}	
 					}
+					CO_supprimerTableauEntiers(&tableauBool);
+					MOT_supprimerTableauMots(&tableauMotCorriger);
+					CO_supprimerMotsEtPositions(&tableauMotDansPhrase);
+
 				}
 				DICTIONNAIRE_enregistrerDictionnaire(nomDictionnaire,dictionnaire);
+				DICTIONNAIRE_supprimer(&dictionnaire);
 			}
 			else{//la premiere option n'est pas -d ou il n'y a pas le nom de fichier après
 				afficherAide();
