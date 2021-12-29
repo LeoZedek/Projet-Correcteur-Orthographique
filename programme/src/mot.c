@@ -119,7 +119,6 @@ int MOT_estUneLettre(char c) {
 }
 
 MOT_Mot MOT_creerMot(char *s) {
-	assert(MOT_estUnMot(s));
 
 	int longueurS = strlen(s);
 	MOT_Mot mot;

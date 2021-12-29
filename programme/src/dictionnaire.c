@@ -174,11 +174,8 @@ void DICTIONNAIRE_chargerDicoR(DICTIONNAIRE_Dictionnaire *dictionnaire, FILE *fi
 	char nvChaine[TAILLEMOTMAX];
 
 	fgets(nvChaine, TAILLEMOTMAX, fichier);
-	printf("%d\n", (int)strlen(nvChaine));
-	printf("%s\n", nvChaine);
 	if (strlen(nvChaine) != 0) {
 		MOT_enleverSautDeLigne(nvChaine);
-		printf("%d\n", (int)strlen(nvChaine));
 	}
 
 	if (strlen(nvChaine) != 0) {
@@ -283,10 +280,9 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 	assert(fichier != NULL);
 	while(fgets(chaine,TAILLEMOTMAX,fichier) != NULL){
 		MOT_enleverSautDeLigne(chaine);
-		if (MOT_estUnMot(chaine)) {
-			mot = MOT_creerMot(chaine);
-			DICTIONNAIRE_ajouterMot(dictionnaire, mot);
-		}
+		mot = MOT_creerMot(chaine);
+		DICTIONNAIRE_ajouterMot(dictionnaire, mot);
+		
 	}
 	fclose(fichier);
 }
