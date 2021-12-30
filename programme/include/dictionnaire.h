@@ -38,16 +38,6 @@ typedef DICTIONNAIRE_Noeuds *DICTIONNAIRE_Dictionnaire;
 DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide();
 
 /**
- *\fn int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief renvoie le booléen vrai (1) si le dictionnaire est vide. 
- *
- *\param dictionnaire : Le dictionnaire qui sera testé
- *\return Un booléen vrai si le dictionnaire est vide
-*/
-int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire) ;
-
-
-/**
  *\fn int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
  *\brief Teste si un mot est présent dans un dictionnaire.
  *
@@ -55,7 +45,7 @@ int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire) ;
  *\param mot : Le mot dont on veut vérifier la présence dans le dictionnaire
  *\return Un booleen : 1 (Vrai) si le mot est présent dans le dictionnaire
 */
-int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot) ;
+int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot);
 
 /**
  *\fn void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot)
@@ -67,7 +57,6 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
  *\return Ne renvoie rien mais modifie l'état du dictionnaire
 */
 void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot);
-
 
 /**
  *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier)
@@ -111,11 +100,4 @@ void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNA
 */
 void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
-/**
- *\fn void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief Affiche un dictionnaire.
- *
- *\param dictionnaire : Le dictionnaire à afficher
-*/
-void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire);
 #endif

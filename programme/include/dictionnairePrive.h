@@ -176,41 +176,6 @@ void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire);
 */
 int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot);
 
-/**
- *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier)
- *\brief Remplit le dictionnaire à partir d'un fichier contenant des mots.
- *
- *\param *dictionnaire : DICTIONNAIRE_Dictionnaire
- *\param *nomFichier : char, chaine de caractère désignant le titre du fichier
-*/
-void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier);
-
-/**
- *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire)
- *\brief Charge un dictionnaire depuis un fichier texte.
- *
- *\param *nomdictionnaire : char, chaine de carctère désignant le nom du fichier contenant le dictionnaire à charger
- *\return dictionnaire
-*/
-DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire);
-
-/**
- *\fn void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief Enregistre un dictionnaire depuis un fichier texte.
- *
- *\param *nomFichierdictionnaire : char
- *\param dictionnaire : DICTIONNAIRE_Dictionnaire
- *\return un fichier
-*/
-void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire, DICTIONNAIRE_Dictionnaire dictionnaire);
-
-/**
- *\fn void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire)
- *\brief Supprime un dictionnaire.
- *
- *\param *dictionnaire : DICTIONNAIRE_Dictionnaire
-*/
-void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
 /**
  *\fn void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire)
@@ -220,4 +185,7 @@ void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
  *\return arbre
 */
 void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire);
+
+
+
 #endif
