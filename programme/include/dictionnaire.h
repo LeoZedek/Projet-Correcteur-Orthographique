@@ -11,7 +11,7 @@
 #include"mot.h"
 
 /**
- * \brief Le type noeuds est représenté par un mot (type MOT_Mot définie dans le fichier mot.h) et de deux pointeur filsGauche et filsDroit qui représente la suite de l'arbre que constitue le dictionnaire
+ * \brief Le type noeuds est représenté par un mot (type MOT_Mot défini dans le fichier mot.h) et de deux pointeurs filsGauche et filsDroit qui représentent la suite de l'arbre que constitue le dictionnaire.
  *
  */
 typedef struct DICTIONNAIRE_Noeuds{
@@ -23,14 +23,14 @@ typedef struct DICTIONNAIRE_Noeuds{
 
 
 /**
- * \brief Le type  Dictionnaire qui représentent un dictionnaire à partir d'un noeuds
+ * \brief Le type Dictionnaire qui représente un dictionnaire à partir d'un noeud.
  * 
  */
 typedef DICTIONNAIRE_Noeuds *DICTIONNAIRE_Dictionnaire;
 
 /**
  *\fn int DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide();
- *\brief Renvoie un Dictionnaire vide. Ça sera un pointeur vers NULL. 
+ *\brief Renvoie un Dictionnaire vide. Ce sera un pointeur vers NULL. 
  *
  *\return Le dictionnaire vide.
 */
@@ -39,39 +39,39 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaireVide();
 
 /**
  *\fn int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief renvoie le booleen vrai (1) si le dictionnaire est vide 
+ *\brief renvoie le booléen vrai (1) si le dictionnaire est vide. 
  *
- *\param dictionnaire : Le dictionnaire qui serra teste
- *\return Un boolen vrai si le dictionnaire est vide
+ *\param dictionnaire : Le dictionnaire qui sera testé
+ *\return Un booléen vrai si le dictionnaire est vide
 */
 int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire) ;
 
 
 /**
  *\fn int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
- *\brief Test si un mot est présent dans un dictionnaire
+ *\brief Teste si un mot est présent dans un dictionnaire.
  *
- *\param dictionnaire : Le dictionnaire dans lequelle on vérifi si le mot est présent
- *\param mot : Le mot que dont on veut vérifier la présence dans le dictionnaire
+ *\param dictionnaire : Le dictionnaire dans lequel on vérifie si le mot est présent
+ *\param mot : Le mot dont on veut vérifier la présence dans le dictionnaire
  *\return Un booleen : 1 (Vrai) si le mot est présent dans le dictionnaire
 */
 int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot) ;
 
 /**
  *\fn void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot)
- *\brief Ajoute un mot au dictionnaire
+ *\brief Ajoute un mot au dictionnaire.
  *\attention precondition : non(DICTIONNAIRE_estPresent(dictionnaire,mot))
  *
- *\param *dictionnaire : Le pointeur vers le dictionnaire dans lequelle on insère le mot
+ *\param *dictionnaire : Le pointeur vers le dictionnaire dans lequel on insère le mot
  *\param mot : Le mot que l'on insère
- *\return Ne renvoye rien mais modifie l'etat du dictionnaire
+ *\return Ne renvoie rien mais modifie l'état du dictionnaire
 */
 void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mot);
 
 
 /**
  *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier)
- *\brief ajoute le contenue d'un fichier dans le dictionnaire
+ *\brief ajoute le contenu d'un fichier dans le dictionnaire.
  *\attention precondition : Le fichier doit être accessible en lecture
  *
  *\param *dictionnaire : Le pointeur vers lequelle on insère les mots du fichier
@@ -95,7 +95,7 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire
 /**
  *\fn void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire)
  *\brief Enregistre le dictionnaire en paramètre dans un fichier dont le nom est passé en paramètre
- *\attention precondition : Le fichier doit être accessible en ecriture
+ *\attention precondition : Le fichier doit être accessible en écriture
  *
  *\param nomFichierDictionnaire : Le nom du fichier dans lequel on enregistre le dictionnaire
  *\param dictionnaire : Le dictionnaire que l'on enregistre dans le fichier
@@ -107,13 +107,13 @@ void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNA
  *\fn void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire)
  *\brief Supprime et désalloue entièrement un dictionnaire.
  *
- *\param *dictionnaire : Le pointeur sur le dictionnaire qui sera supprimer.
+ *\param *dictionnaire : Le pointeur sur le dictionnaire qui sera supprimé.
 */
 void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
 /**
  *\fn void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief Affiche un dictionnaire
+ *\brief Affiche un dictionnaire.
  *
  *\param dictionnaire : Le dictionnaire à afficher
 */
