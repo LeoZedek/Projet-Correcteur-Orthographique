@@ -11,7 +11,7 @@
 		{\booleen}
 	
 	\signatureFonction{estPrésent}%
-		{dictionnaire : Dictionnaire, motChercher : mot}%
+		{dictionnaire : Dictionnaire, motChercher : Mot}%
 		{\booleen}
 
 	\signatureFonction{hauteur}%
@@ -44,19 +44,17 @@
 		{\paramEntreeSortie{dictionnaire : Dictionnaire},\paramEntree{mot : Mot}}
 		{non(estPrésent(mot))}
 	\signatureProcedureAvecPreconditions{ajouterFichier}%
-		{\paramEntreeSortie{dictionnaire : Dictionnaire}, \paramEntree{fichier : FichierTexte}}%
-		{mode(fichierTexte) = lecture}
+		{\paramEntreeSortie{dictionnaire : Dictionnaire}, \paramEntree{nomFichier : \chaine}}%
+		{nomFichier != ""}
 
-	\signatureFonctionAvecPreconditions{chargerDico}%
+	\signatureFonctionAvecPreconditions{chargerDictionnaire}%
 		{nomFichier : \chaine}
 		{Dictionnaire}
 		{nomFichier != ""}
 
-	\signatureProcedureAvecPreconditions{enregistrerDico}%
+	\signatureProcedureAvecPreconditions{enregistrerDictionnaire}%
 		{\paramEntree{dictionnaire : Dictionnaire, nomFichier : \chaine}}%
 		{nomFichier != ""}
 
-	\signatureProcedureAvecPreconditions{ajouterFichier}%
-		{\paramEntreeSortie{dictionnaire : Dictionnaire}, \paramEntree{nomFichier : \chaine}}%
-		{nomFichier != ""}
+	
 \end{algorithme}
