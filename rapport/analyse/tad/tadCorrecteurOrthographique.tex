@@ -1,29 +1,8 @@
 \begin{tad}
 	\tadNom{CorrecteurOrthographique}
-	\tadParametres{TableauDeMots, TableauBooleens, TableauDEntiers, MotsDansPhrase, TableauPositions}
-	\tadDependances{Mot, Dictionnaire, \booleen, \naturel, \entier}
+	\tadParametres{}
+	\tadDependances{Mot, Dictionnaire, TableauDeMots, TableauBooleens, MotsDansPhrase, TableauPositions}
 	\begin{tadOperations}{CorrecteurOrthographique}
-		\tadOperation{tableauDEntiersVide}%
-			{\tadUnParam{            }}%
-			{\tadUnParam{TableauDEntiers}}
-		\tadOperation{obtenirLongueurTabEntiers}%
-			{\tadUnParam{TableauDEntiers}}%
-			{\tadUnParam{Naturel}}
-		\tadOperation{fixerLongueurTabEntiers}%
-			{\tadDeuxParams{TableauDEntiers}{\naturel}}%
-			{\tadUnParam{TableauDEntiers}}
-		\tadOperationAvecPreconditions{obtenirIemeEntier}%
-			{\tadDeuxParams{TableauDEntiers}{\naturel}}%
-			{\tadUnParam{\entier}}
-		\tadOperation{obtenirLesEntiers}%
-			{\tadUnParam{TableauDEntiers}}%
-			{\tadUnParam{\tableauUneDimension{Taille\_Max}{d'}{\entier}}}
-		\tadOperation{ajouterEntier}%
-			{\tadDeuxParams{TableauDEntiers}{\entier}}%
-			{\tadUnParam{TableauDEntiers}}
-		\tadOperation{supprimerTableauEntiers}%
-			{\tadUnParam{TableauDEntiers}}%
-			{\tadUnParam{TableauDEntiers}}
 		\tadOperation{motsEtPositionsVide}%
 			{\tadUnParam{           }}%
 			{\tadUnParam{MotsDansPhrase}}
@@ -45,17 +24,19 @@
 	\end{tadOperations}
 		
 	\begin{tadSemantiques}{CorrecteurOrthographique}
+		\tadSemantique{motsEtPositionsVide}%
+			{renvoie un tableau de mots vide et un tableau de positions vide.}
+		\tadSemantique{obtenirTabMots}%
+			{renvoie un tableau de mots à partir d'une structure.}
+		\tadSemantique{obtenirTabPositions}%
+			{renvoie un tableau de positions à partir d'une structure.}
 		\tadSemantique{sontPresents}%
-			{renvoie un tableau de Booléens indiquant la présence ou non des mots de la liste.}
+			{renvoie un tableau de Booléens indiquant la présence ou non des mots du tableau mis en entrée.}
 		\tadSemantique{proposerMots}%
 			{renvoie un tableau de mots correspondant aux corrections possibles d’un mot mal orthographi\'e.}
 		\tadSemantique{phraseEnMots}%
 			{renvoie un tableau contenant les mots de la phrase ainsi que leur position dans la phrase.}
 	\end{tadSemantiques}
 		
-	\begin{tadPreconditions}{obtenirIemeEntier}
-		\tadPrecondition{obtenirIemeEntier(tableauEntiers, position)}%
-			{0 $\leq$ position ET position < obtenirLongueurTabEntiers(tableauEntiers)}
-	\end{tadPreconditions}
 		
 \end{tad}

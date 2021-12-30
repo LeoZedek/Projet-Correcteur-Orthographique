@@ -29,7 +29,7 @@
 	{TableauBooleens}%
 	{i, longueur : \naturel \\ tabBool : TableauBooleens\\ mot : mot}%
 	{%
-	\affecter{tabBool}{}
+	\affecter{tabBool}{tableauDEntiersVide()}
 	\affecter{longueur}{obtenirLongueurTabMots(mots)}
 	\pour{i}{0}{longueur - 1}{}%
 	{	
@@ -150,6 +150,15 @@
 			
 			}
 		}
+	\sialors{dansUnMot}%
+		{
+		\affecter{mot}{creerMot(temp)}
+		\instruction{ajouterMot(tabMots, mot)}
+		\instruction{ajouterEntier(tabPos, pos)}
+		}
+		
+	\instruction{fixerLongueurTabEntiers(tabPos, obtenirLongueurTabEntiers(tabPos))}
+  \instruction{fixerLongueurTabMots(tabMots, obtenirLongueurTabMots(tabMots))}
 	\retourner{motsPhrase}
 	}
 \end{algorithme}
