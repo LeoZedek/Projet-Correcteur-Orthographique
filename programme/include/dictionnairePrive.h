@@ -106,6 +106,7 @@ void DICTIONNAIRE_fixerFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIO
 /**
  *\fn void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire)
  *\brief Faire une simple rotation à droite.
+ *\attention precondition : le dictionnaire ne doit pas être vide, tout comme son fils gauche.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\return dictionnaire
@@ -115,6 +116,7 @@ void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire);
 /**
  *\fn void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire)
  *\brief Faire une simple rotation à gauche.
+ *\attention precondition : le dictionnaire ne doit pas être vide, tout comme son fils droit.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\return dictionnaire
@@ -124,6 +126,7 @@ void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
 /**
  *\fn void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire)
  *\brief Faire une double rotation à droite.
+ *\attention precondition : le dictionnaire ne doit pas être vide, tout comme son fils gauche ainsi que le fils droit du même fils gauche.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\return dictionnaire
@@ -133,6 +136,7 @@ void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire);
 /**
  *\fn void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire)
  *\brief  Faire une double rotation à gauche.
+ *\attention precondition : le dictionnaire ne doit pas être vide, tout comme son fils droit ainsi que le fils gauche du même fils droit.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\return dictionnaire
@@ -155,6 +159,7 @@ void DICTIONNAIRE_fixerhauteur(DICTIONNAIRE_Dictionnaire *dictionnaire);
 /**
  *\fn void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire)
  *\brief Rééquilibre l'arbre dictionnaire.
+ *\attention precondition : le dictionnaire ne doit pas être vide, et la différence de hauteur entre le fils gauche et le fils droit doit être égale à 2.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on insère
  *\return dictionnaire
