@@ -1,35 +1,61 @@
 \begin{tad}
 	\tadNom{CorrecteurOrthographique}
 	%\tadParametres{}
-	\tadDependances{Mot, Dictionnaire, \booleen, NaturelNonNul }
+	\tadDependances{Mot, Dictionnaire, \booleen, \naturel, TableauDeMots, TableauBooleens, TableauDEntiers, \entier, MotsDansPhrase, TableauPositions}
 	\begin{tadOperations}{CorrecteurOrthographique}
-		\tadOperation{chainesEnMots}%
-			{\tadUnParam{\chaine}}%
-			{\tadDeuxParams{Liste <Mot>}{Liste <Naturel>}}
+		\tadOperation{tableauDEntiersVide}%
+			{}%
+			{\tadUnParam{TableauDEntiers}}
+		\tadOperation{obtenirLongueurTabEntiers}%
+			{\tadDeuxParams{}{}}%
+			{\tadUnParam{}}
+		\tadOperation{fixerLongueurTabEntiers}%
+			{\tadDeuxParams{}{}}%
+			{\tadUnParam{}}
+		\tadOperationAvecPreconditions{obtenirIemeEntier}%
+			{\tadDeuxParams{}{}}%
+			{\tadUnParam{}}
+		\tadOperation{obtenirLesEntiers}%
+			{\tadDeuxParams{}{}}%
+			{\tadUnParam{}}
+		\tadOperation{ajouterEntier}%
+			{\tadDeuxParams{}{}}%
+			{\tadUnParam{}}
+		\tadOperation{supprimerTableauEntiers}%
+			{\tadDeuxParams{}{}}%
+			{\tadUnParam{}}
+		\tadOperation{motsEtPositionsVide}%
+			{\tadDeuxParams{}{}}%
+			{\tadUnParam{}}
+		\tadOperation{obtenirTabMots}%
+			{\tadDeuxParams{}{}}%
+			{\tadUnParam{}}
+		\tadOperation{obtenirTabPositions}%
+			{\tadDeuxParams{}{}}%
+			{\tadUnParam{}}
 		\tadOperation{sontPresents}%
-			{\tadDeuxParams{Liste <Mot>}{Dictionnaire}}%
-			{\tadUnParam{Liste <\booleen>}}
+			{\tadDeuxParams{TableauDeMots}{Dictionnaire}}%
+			{\tadUnParam{TableauBooleens}}
 		\tadOperation{proposerMots}%
 			{\tadDeuxParams{Mot}{Dictionnaire}}%
-			{\tadUnParam{Ensemble <Mot>}}
-		\tadOperation{proposerMotsListe}%
-			{\tadDeuxParams{Liste <Mot>}{Dictionnaire}}%
-			{\tadDeuxParams{Liste <Ensemble <Mot>>}{Liste <\booleen>}}
+			{\tadUnParam{TableauDeMots}}
+		\tadOperation{phraseEnMots}%
+			{\tadUnParam{\chaine}}%
+			{\tadUnParam{MotsDansPhrase}}
 	\end{tadOperations}
 		
 	\begin{tadSemantiques}{CorrecteurOrthographique}
-		\tadSemantique{chainesEnMots}%
-			{transforme une cha\^ine de caract\`eres en une liste de Mot et renvoie aussi une liste de la position de chaque mot}
 		\tadSemantique{sontPresents}%
-			{renvoie une liste de Booleen indiquant la présence ou non des mots de la liste}
+			{renvoie un tableau de Booléens indiquant la présence ou non des mots de la liste.}
 		\tadSemantique{proposerMots}%
-			{donne un ensemble de Mot correspondant aux corrections possibles d’un mot mal orthographi\'e}
-		\tadSemantique{proposerMotsListe}%
-			{envoie la liste des ensembles de Mot corrig\'es possible pour les mots qui ne sont pas dans le dictionnaire}
+			{renvoie un tableau de mots correspondant aux corrections possibles d’un mot mal orthographi\'e.}
+		\tadSemantique{phraseEnMots}%
+			{renvoie un tableau contenant les mots de la phrase ainsi que leur position dans la phrase.}
 	\end{tadSemantiques}
 		
-		%\begin{tadAxiomes}
-			%\tadAxiome{CorrecteurOrthographique}
-		%\end{tadAxiomes}
+	\begin{tadPreconditions}{obtenirIemeEntier}
+		\tadPrecondition{obtenirIemeEntier(tableauEntiers, position)}%
+			{0 $\leq$ position ET position < obtenirLongueurTabEntiers(tableauEntiers)}
+	\end{tadPreconditions}
 		
 \end{tad}

@@ -7,9 +7,8 @@
 		{tableauEntiers : TableauDEntiers}%
 		{\naturel}
 	\smallskip	
-	\signatureProcedureAvecPreconditions{fixerLongueurTabEntiers}%
+	\signatureProcedure{fixerLongueurTabEntiers}%
 		{\paramEntreeSortie{pointeurTableauEntiers : \typePointeur{TableauDEntiers}}, \paramEntree{nouvelleLongueur : \naturel}}%
-		{obtenirLongueurTabEntiers(pointeurTableauEntiers) > 1}
 	\smallskip	
 	\signatureFonctionAvecPreconditions{obtenirIemeEntier}%
 		{tableauEntiers : TableauDEntiers, position : \naturel}%
@@ -38,11 +37,11 @@
 	\smallskip
 	\signatureFonction{obtenirTabPositions}%
 		{motsEtPosition : MotsDansPhrase}%
-		{TableauDePositions}
+		{TableauPositions}
 	\smallskip
 	\signatureFonction{sontPresents}%
 		{mots : TableauDeMots, dictionnaire : Dictionnaire}%
-		{TableauDeBooleens}
+		{TableauBooleens}
 	\smallskip
 	\signatureFonction{proposerMot}%
 		{m : Mot, dictionnaire : Dictionnaire}%

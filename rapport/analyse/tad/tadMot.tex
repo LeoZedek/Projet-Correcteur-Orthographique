@@ -1,6 +1,6 @@
 \begin{tad}
 	\tadNom{Mot}
-	\tadDependances{\chaine, NaturelNonNul, \caractere, \booleen}
+	\tadDependances{\chaine, \naturelNonNul, \caractere, \booleen}
 	\begin{tadOperations}{Mot}
 		\tadOperation{estUneLettre}%
 			{\tadUnParam{\caractere}}%
@@ -44,11 +44,11 @@
 		\tadSemantique{estUneLettre}%
 			{renvoie vrai si l'\'el\'ement pris en entr\'e est une lettre (minuscule ou majuscule)}
 		\tadSemantique{estUnMot}%
-			{Renvoie vrai si la chaine de caract\`ere est non vide et que touts ses caract\`eres sont des lettres.}
+			{renvoie vrai si la chaîne de caract\`eres est non vide et que tous ses caract\`eres sont des lettres.}
 		\tadSemantique{creerUnMot}%
-			{Cr\'e\'e un mot \`a partir d’une cha\^ine de caract\`eres.}
+			{cr\'e\'e un mot \`a partir d’une cha\^ine de caract\`eres.}
 		\tadSemantique{estAvantOrdreAlphabetique}%
-			{retourne vrai si le premier mot mis en param\`etre est avant dans l'ordre alphab\`etique.)}
+			{retourne vrai si le premier mot mis en param\`etre est avant le second dans l'ordre alphab\`etique.)}
 		\tadSemantique{sontEgaux}%
 			{retourne vrai si les mots sont identiques (non sensible à la casse)}
 		\tadSemantique{longueur}%
@@ -62,9 +62,9 @@
 		\tadSemantique{insererLettre}%
 			{ins\`ere une lettre \`a un certain indice du mot}
 		\tadSemantique{inverserLettre}%
-			{inverse deux lettres cons\'ecutifs du mot}
+			{inverse deux lettres cons\'ecutives du mot}
 		\tadSemantique{decomposerMot}%
-			{dcompose un mot en deux mots}
+			{décompose un mot en deux mots}
 	\end{tadSemantiques}
 	
 	\begin{tadPreconditions}{Mot}
