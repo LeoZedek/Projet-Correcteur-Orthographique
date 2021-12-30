@@ -4,35 +4,35 @@
 	\tadDependances{Mot, Dictionnaire, \booleen, \naturel, TableauDeMots, TableauBooleens, TableauDEntiers, \entier, MotsDansPhrase, TableauPositions}
 	\begin{tadOperations}{CorrecteurOrthographique}
 		\tadOperation{tableauDEntiersVide}%
-			{}%
+			{\tadUnParam{            }}%
 			{\tadUnParam{TableauDEntiers}}
 		\tadOperation{obtenirLongueurTabEntiers}%
-			{\tadDeuxParams{}{}}%
-			{\tadUnParam{}}
+			{\tadUnParam{TableauDEntiers}}%
+			{\tadUnParam{Naturel}}
 		\tadOperation{fixerLongueurTabEntiers}%
-			{\tadDeuxParams{}{}}%
-			{\tadUnParam{}}
+			{\tadDeuxParams{TableauDEntiers}{\naturel}}%
+			{\tadUnParam{TableauDEntiers}}
 		\tadOperationAvecPreconditions{obtenirIemeEntier}%
-			{\tadDeuxParams{}{}}%
-			{\tadUnParam{}}
+			{\tadDeuxParams{TableauDEntiers}{\naturel}}%
+			{\tadUnParam{\entier}}
 		\tadOperation{obtenirLesEntiers}%
-			{\tadDeuxParams{}{}}%
-			{\tadUnParam{}}
+			{\tadUnParam{TableauDEntiers}}%
+			{\tadUnParam{\tableauUneDimension{Taille\_Max}{d'}{\entier}}}
 		\tadOperation{ajouterEntier}%
-			{\tadDeuxParams{}{}}%
-			{\tadUnParam{}}
+			{\tadDeuxParams{TableauDEntiers}{\entier}}%
+			{\tadUnParam{TableauDEntiers}}
 		\tadOperation{supprimerTableauEntiers}%
-			{\tadDeuxParams{}{}}%
-			{\tadUnParam{}}
+			{\tadUnParam{TableauDEntiers}}%
+			{\tadUnParam{TableauDEntiers}}
 		\tadOperation{motsEtPositionsVide}%
-			{\tadDeuxParams{}{}}%
-			{\tadUnParam{}}
+			{\tadUnParam{           }}%
+			{\tadUnParam{MotsDansPhrase}}
 		\tadOperation{obtenirTabMots}%
-			{\tadDeuxParams{}{}}%
-			{\tadUnParam{}}
+			{\tadUnParam{MotsDansPhrase}}%
+			{\tadUnParam{TableauDeMots}}
 		\tadOperation{obtenirTabPositions}%
-			{\tadDeuxParams{}{}}%
-			{\tadUnParam{}}
+			{\tadUnParam{MotsDansPhrase}}%
+			{\tadUnParam{TableauPositions}}
 		\tadOperation{sontPresents}%
 			{\tadDeuxParams{TableauDeMots}{Dictionnaire}}%
 			{\tadUnParam{TableauBooleens}}
