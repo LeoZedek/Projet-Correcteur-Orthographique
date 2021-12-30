@@ -1,6 +1,6 @@
 /**
  * \file dictionnairePrive.h
- * \brief Fichier .h des fonctions privée du TAD Dictionnaire
+ * \brief Fichier .h des fonctions privées du TAD Dictionnaire
  * \version 1.0
  * \date 24/12/2021
  *
@@ -11,7 +11,7 @@
 
 /**
  *\fn int max(int a, int b)
- *\brief Renvoie le maximum des nombres a et de b
+ *\brief Renvoie le maximum entre a et b.
  *
  *\param a : entier
  *\param b : entier
@@ -21,7 +21,7 @@ int max(int a, int b);
 
 /**
  *\fn int abs(int a)
- *\brief Renvoie la valeur absolue du nombres a
+ *\brief Renvoie la valeur absolue du nombre a.
  *
  *\param a : entier
  *\return entier positif
@@ -30,7 +30,7 @@ int abs(int a);
 
 /**
  *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot)
- *\brief Crée un Dictionnaire ayant pour valeur le mot mot et pour fils droit et gauche des dictionnaire vide
+ *\brief Crée un Dictionnaire ayant pour valeur le mot mot et pour fils droit et gauche des dictionnaires vides.
  *
  *\param mot : MOT_Mot
  *\return dictionnaire
@@ -39,7 +39,7 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_dictionnaire(MOT_Mot mot);
 
 /**
  *\fn int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief verifie si le dictionnaire est vide
+ *\brief Verifie si le dictionnaire est vide.
  *
  *\param dictionnaire : DICTIONNAIRE_Dictionnaire
  *\return booléen (int) si vrai 1, sinon 0
@@ -48,7 +48,7 @@ int DICTIONNAIRE_estVide(DICTIONNAIRE_Dictionnaire dictionnaire);
 
 /**
  *\fn DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire)
- *\brief obtenir fils gauche de dictionnaire
+ *\brief Obtenir le fils gauche du dictionnaire.
  *
  *\param *dictionnaire : DICTIONNAIRE_Dictionnaire
  *\return *dictionnaire 
@@ -57,7 +57,7 @@ DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionna
 
 /**
  *\fn DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire)
- *\brief obtenir fils droit de dictionnaire
+ *\brief Obtenir le fils droit du dictionnaire.
  *
  *\param *dictionnaire : DICTIONNAIRE_Dictionnaire
  *\return *dictionnaire
@@ -66,7 +66,7 @@ DICTIONNAIRE_Dictionnaire *DICTIONNAIRE_obtenirFilsDroit(DICTIONNAIRE_Dictionnai
 
 /**
  *\fn MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief obtenir le mot du noeud racine de dictionnaire
+ *\brief Obtenir le mot du noeud racine de dictionnaire.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\return MOT_Mot
@@ -75,7 +75,7 @@ MOT_Mot DICTIONNAIRE_obtenirMot(DICTIONNAIRE_Dictionnaire dictionnaire);
 
 /**
  *\fn DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot)
- *\brief Insère un mot dans un dictionnaire
+ *\brief Insère un mot dans un dictionnaire.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\param mot : MOT_Mot
@@ -85,7 +85,7 @@ void DICTIONNAIRE_fixerMot(DICTIONNAIRE_Dictionnaire *dictionnaire,MOT_Mot mot);
 
 /**
  *\fn void DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsGauche)
- *\brief fixer fils Gauche dans le Dictionnaire
+ *\brief Fixer fils Gauche dans le Dictionnaire.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\param filsGauche : DICTIONNAIRE_Dictionnaire
@@ -95,7 +95,7 @@ void DICTIONNAIRE_fixerFilsGauche(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTI
 
 /**
  *\fn  void DICTIONNAIRE_fixerFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIONNAIRE_Dictionnaire filsDroit)
- *\brief fixer fils Droit dans le Dictionnaire
+ *\brief Fixer fils Droit dans le Dictionnaire.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\param filsDroit : DICTIONNAIRE_dictionnaire
@@ -105,7 +105,7 @@ void DICTIONNAIRE_fixerFilsDroit(DICTIONNAIRE_Dictionnaire *dictionnaire, DICTIO
 
 /**
  *\fn void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire)
- *\brief faire une simple rotation à droite
+ *\brief Faire une simple rotation à droite.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\return dictionnaire
@@ -114,7 +114,7 @@ void DICTIONNAIRE_simpleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
 /**
  *\fn void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire)
- *\brief faire une simple rotation à gauche
+ *\brief Faire une simple rotation à gauche.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\return dictionnaire
@@ -123,7 +123,7 @@ void DICTIONNAIRE_simpleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
 /**
  *\fn void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire)
- *\brief faire une double rotation à droite
+ *\brief Faire une double rotation à droite.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\return dictionnaire
@@ -132,7 +132,7 @@ void DICTIONNAIRE_doubleRotationDroite(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
 /**
  *\fn void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire)
- *\brief  faire une double rotation à gauche
+ *\brief  Faire une double rotation à gauche.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on agit
  *\return dictionnaire
@@ -141,7 +141,7 @@ void DICTIONNAIRE_doubleRotationGauche(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
 /**
  *\fn int DICTIONNAIRE_hauteur(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief calcul la hauteur de dictionnaire
+ *\brief Calcule la hauteur du dictionnaire.
  *
  *\param dictionnaire : le DICTIONNAIRE_Dictionnaire dont on souhaite calculer la hauteur
  *\return entier
@@ -154,7 +154,7 @@ void DICTIONNAIRE_fixerhauteur(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
 /**
  *\fn void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire)
- *\brief reequilibrer l'arbre dictionnaire
+ *\brief Rééquilibre l'arbre dictionnaire.
  *
  *\param *dictionnaire : le pointeur sur le DICTIONNAIRE_Dictionnaire dans lequel on insère
  *\return dictionnaire
@@ -163,7 +163,7 @@ void DICTIONNAIRE_reequilibrer(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
 /**
  *\fn int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
- *\brief Vérifier la présence d'un mot dans un dictionnaire
+ *\brief Vérifie la présence d'un mot dans un dictionnaire.
  *
  *\param dictionnaire : DICTIONNAIRE_Dictionnaire
  *\param mot : MOT_Mot
@@ -173,7 +173,7 @@ int DICTIONNAIRE_estPresent(DICTIONNAIRE_Dictionnaire dictionnaire, MOT_Mot mot)
 
 /**
  *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier)
- *\brief Rempli le dictionnaire à partir d'un fichier contenant des mots
+ *\brief Remplit le dictionnaire à partir d'un fichier contenant des mots.
  *
  *\param *dictionnaire : DICTIONNAIRE_Dictionnaire
  *\param *nomFichier : char, chaine de caractère désignant le titre du fichier
@@ -182,7 +182,7 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 
 /**
  *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire)
- *\brief Charger un dictionnaire depuis un fichier texte
+ *\brief Charge un dictionnaire depuis un fichier texte.
  *
  *\param *nomdictionnaire : char, chaine de carctère désignant le nom du fichier contenant le dictionnaire à charger
  *\return dictionnaire
@@ -191,17 +191,17 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire
 
 /**
  *\fn void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief enregistrer un dictionnaire depuis un fichier texte
+ *\brief Enregistre un dictionnaire depuis un fichier texte.
  *
  *\param *nomFichierdictionnaire : char
  *\param dictionnaire : DICTIONNAIRE_Dictionnaire
  *\return un fichier
 */
-void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire);
+void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire, DICTIONNAIRE_Dictionnaire dictionnaire);
 
 /**
  *\fn void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire)
- *\brief supprimer un dictionnaire 
+ *\brief Supprime un dictionnaire.
  *
  *\param *dictionnaire : DICTIONNAIRE_Dictionnaire
 */
@@ -209,7 +209,7 @@ void DICTIONNAIRE_supprimer(DICTIONNAIRE_Dictionnaire *dictionnaire);
 
 /**
  *\fn void DICTIONNAIRE_afficherArbre(DICTIONNAIRE_Dictionnaire dictionnaire)
- *\brief afficher un arbre d'un dictionnaire
+ *\brief Affiche l'arbre d'un dictionnaire.
  *
  *\param dictionnaire : DICTIONNAIRE_Dictionnaire
  *\return arbre
