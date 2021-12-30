@@ -45,16 +45,16 @@
 		{non(estPrésent(mot))}
 	\signatureProcedureAvecPreconditions{ajouterFichier}%
 		{\paramEntreeSortie{dictionnaire : Dictionnaire}, \paramEntree{nomFichier : \chaine}}%
-		{nomFichier != ""}
+		{mode = lecture(nomFichier)  ET nomFichier != ""}
 
 	\signatureFonctionAvecPreconditions{chargerDictionnaire}%
-		{nomFichier : \chaine}
+		{nomDictionnaire : \chaine}
 		{Dictionnaire}
-		{nomFichier != ""}
+		{mode = lecture(nomDictionnaire) ET nomFichier != ""}
 
 	\signatureProcedureAvecPreconditions{enregistrerDictionnaire}%
-		{\paramEntree{dictionnaire : Dictionnaire, nomFichier : \chaine}}%
-		{nomFichier != ""}
+		{\paramEntree{nomFichierDictionnaire : \chaine, dictionnaire : Dictionnaire}}%
+		{mode = ecriture(nomFichierDictionnaire) ET nomFichier != ""}
 
 	
 \end{algorithme}
