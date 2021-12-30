@@ -72,7 +72,7 @@ void DICTIONNAIRE_ajouterMot(DICTIONNAIRE_Dictionnaire *dictionnaire, MOT_Mot mo
 /**
  *\fn void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *nomFichier)
  *\brief ajoute le contenu d'un fichier dans le dictionnaire.
- *\attention precondition : Le fichier doit être accessible en lecture
+ *\attention precondition : Le fichier doit être accessible en lecture et nomFichier != ""
  *
  *\param *dictionnaire : Le pointeur vers lequelle on insère les mots du fichier
  *\param nomFichier : Le nom du fichier qui contient tous les mots à insérer
@@ -82,9 +82,9 @@ void DICTIONNAIRE_ajouterFichier(DICTIONNAIRE_Dictionnaire *dictionnaire, char *
 
 
 /**
- *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char nomDuDictionnaire)
+ *\fn DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char nomDictionnaire)
  *\brief Charge le dictionnaire du nom chaine 
- *\attention precondition : Le fichier doit être accessible en lecture
+ *\attention precondition : Le fichier doit être accessible en lecture et nomDictionnaire != ""
  *
  *\param nomDuDictionnaire : Le nom du fichier du dictionnaire à charger
  *\return Retourne le dictionnaire créé
@@ -95,7 +95,7 @@ DICTIONNAIRE_Dictionnaire DICTIONNAIRE_chargerDictionnaire(char *nomDictionnaire
 /**
  *\fn void DICTIONNAIRE_enregistrerDictionnaire(char *nomFichierDictionnaire,DICTIONNAIRE_Dictionnaire dictionnaire)
  *\brief Enregistre le dictionnaire en paramètre dans un fichier dont le nom est passé en paramètre
- *\attention precondition : Le fichier doit être accessible en écriture
+ *\attention precondition : Le fichier doit être accessible en écriture et nomFichierDictionnaire != ""
  *
  *\param nomFichierDictionnaire : Le nom du fichier dans lequel on enregistre le dictionnaire
  *\param dictionnaire : Le dictionnaire que l'on enregistre dans le fichier
