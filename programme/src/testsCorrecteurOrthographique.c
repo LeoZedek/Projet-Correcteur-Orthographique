@@ -3,6 +3,7 @@
 #include"mot.h"
 #include"dictionnaire.h"
 #include"correcteurOrthographique.h"
+#include"correcteurOrthographiquePrivee.h"
 #define TRUE 1
 #define FALSE 0
 

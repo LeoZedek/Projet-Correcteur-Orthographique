@@ -38,7 +38,7 @@ int main(int argc, char **argv){
 	CO_TableauPositions tableauPositions;
 	MOT_TableauDeMots tableauMotCorriger;
 	MOT_Mot motAcorriger;
-	int logueurTableau, entierCourant,i,j, longueurTableauMotCor,position;
+	int longueurTableau, entierCourant,i,j, longueurTableauMotCor,position;
 	if (argc>1){//appel avec option
 		if (strcmp(argv[1],"-h")==0){//utilisateur demande de l'aide envoie de SOS ! d'un terrien en detresse
 			afficherAide();
@@ -67,8 +67,8 @@ int main(int argc, char **argv){
 					tableauDeMot = CO_obtenirTabMots(tableauMotDansPhrase);
 					tableauBool = CO_sontPresents(tableauDeMot,dictionnaire);
 					tableauPositions = CO_obtenirTabPositions(tableauMotDansPhrase);
-					logueurTableau = CO_obtenirLongueurTabEntiers(tableauBool);
-					for (i = 0; i<logueurTableau;i++){
+					longueurTableau = CO_obtenirLongueurTabEntiers(tableauBool);
+					for (i = 0; i<longueurTableau;i++){
 						entierCourant = CO_obtenirIemeEntier(tableauBool,i);
 						if (entierCourant){
 							printf("*\n");

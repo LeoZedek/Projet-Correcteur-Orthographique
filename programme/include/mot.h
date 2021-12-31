@@ -1,6 +1,6 @@
 /**
  * \file mot.h
- * \brief Fichier .h des fonctions et structures poubliques du TAD Mot
+ * \brief Fichier .h des fonctions et structures publiques du TAD Mot
  * \version 1.0
  * \date 24/12/2021
  *
@@ -21,7 +21,7 @@ typedef struct {
 
 
 /**
- * \brief Le type DeuxMot qui contient 2 mots. Utiliser pour le renvoie de 2 mots de la fonction decomposerMot.
+ * \brief Le type DeuxMot qui contient 2 mots. Utilisé pour le renvoie de 2 mots de la fonction decomposerMot.
  *
  */
 typedef struct {
@@ -41,7 +41,7 @@ typedef struct {
 
 /**
  *\fn MOT_TableauDeMots MOT_tableauDeMotsVide()
- *\brief Fonction qui permet d'obtenir un tableau de mot vide. Sa longeur est fixé à 0 et le pointeur sera allouer sur CO_TailleMax
+ *\brief Fonction qui permet d'obtenir un tableau de mots vide. Sa longueur est fixée à 0 et le pointeur sera alloué sur CO_TailleMax
  *
  *\return Le tableau vide.
  */
@@ -49,21 +49,21 @@ typedef struct {
 MOT_TableauDeMots MOT_tableauDeMotsVide();
 
 /**
- *\fn int MOT_obtenirLongeurTabMots(MOT_TableauDeMots tableauMots)
- *\brief Fonction qui permet d'obtenir la longeur d'un tableau de mot
+ *\fn int MOT_obtenirLongueurTabMots(MOT_TableauDeMots tableauMots)
+ *\brief Fonction qui permet d'obtenir la longueur d'un tableau de mots.
  *
- *\param tableauMots : Est le tableau dont la longeur sera retourner
- *\return La longeur du tableau
+ *\param tableauMots : Est le tableau dont la longueur sera retournée
+ *\return La longueur du tableau
  */
 
 int MOT_obtenirLongueurTabMots(MOT_TableauDeMots tableauMots);
 
 /**
- *\fn void MOT_fixerLongeurTabMots(MOT_TableauDeMots *tableauMots, int nouvelleLongeur)
- *\brief Fonction qui permet de fixer la longeur d'un tableau de mots
+ *\fn void MOT_fixerLongueurTabMots(MOT_TableauDeMots *tableauMots, int nouvelleLongueur)
+ *\brief Fonction qui permet de fixer la longueur d'un tableau de mots.
  *
- *\param pointeurTableauMots : Est le poiteur du tableau dont la longeur sera modifé
- *\param nouvelleLongeur : La nouvelle longeur du tableau
+ *\param pointeurTableauMots : Est le pointeur du tableau dont la longueur sera modifée
+ *\param nouvelleLongeur : La nouvelle longueur du tableau
  *
  */
 

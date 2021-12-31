@@ -5,7 +5,8 @@
 #include "mot.h"
 #include "dictionnaire.h"
 #include "correcteurOrthographique.h"
-#define CO_TailleMax 1000
+#include "correcteurOrthographiquePrivee.h"
+#define CO_TailleMax 1000 //Taille maximale des tableaux utilisés
 #define TRUE 1
 #define FALSE 0
 
@@ -18,20 +19,9 @@ CO_TableauDEntiers CO_tableauDEntiersVide(){
 	return tab;
 }
 
-int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers){
-	return tableauEntiers.longueur;
-}
-
 void CO_fixerLongueurTabEntiers(CO_TableauDEntiers *pointeurTableauEntiers, int nouvelleLongueur){
 	//assert(CO_obtenirLongueurTabEntiers(*pointeurTableauEntiers) > 1);
 	(*pointeurTableauEntiers).longueur = nouvelleLongueur;
-}
-
-
-int CO_obtenirIemeEntier(CO_TableauDEntiers tableauEntiers, int position)
-{
-	assert(position>=0 && position < CO_obtenirLongueurTabEntiers(tableauEntiers));
-	return tableauEntiers.lesEntiers[position];
 }
 
 int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers){
@@ -56,6 +46,26 @@ CO_MotsDansPhrase CO_motsEtPositionsVide(){
 	return motPhrase; 
 }
 
+void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
+	MOT_TableauDeMots tabMots = CO_obtenirTabMots(*motsEtPosition); 
+	CO_TableauPositions tabPos = CO_obtenirTabPositions(*motsEtPosition);
+	MOT_supprimerTableauMots(&tabMots);
+	CO_supprimerTableauEntiers(&tabPos);
+}
+
+/*----------------------------------PARTIE PUBLIQUE---------------------------------------------*/
+
+
+int CO_obtenirLongueurTabEntiers(CO_TableauDEntiers tableauEntiers){
+	return tableauEntiers.longueur;
+}
+
+int CO_obtenirIemeEntier(CO_TableauDEntiers tableauEntiers, int position)
+{
+	assert(position>=0 && position < CO_obtenirLongueurTabEntiers(tableauEntiers));
+	return tableauEntiers.lesEntiers[position];
+}
+
 MOT_TableauDeMots CO_obtenirTabMots(CO_MotsDansPhrase motsEtPosition){
 	MOT_TableauDeMots tabMots; 
 	tabMots = motsEtPosition.mots;
@@ -67,16 +77,6 @@ CO_TableauPositions CO_obtenirTabPositions(CO_MotsDansPhrase motsEtPosition){
 	tabPos = motsEtPosition.positions;
 	return tabPos;
 }
-
-/*----------------------------------PARTIE PUBLIQUE---------------------------------------------*/
-
-void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition){
-	MOT_TableauDeMots tabMots = CO_obtenirTabMots(*motsEtPosition); 
-	CO_TableauPositions tabPos = CO_obtenirTabPositions(*motsEtPosition);
-	MOT_supprimerTableauMots(&tabMots);
-	CO_supprimerTableauEntiers(&tabPos);
-}
-
 
 CO_TableauBooleens CO_sontPresents(MOT_TableauDeMots mots, DICTIONNAIRE_Dictionnaire dictionnaire){
 	CO_TableauBooleens tabBool = CO_tableauDEntiersVide();
