@@ -1,4 +1,4 @@
-all : rapport.pdf rapport.tex
+all : clean rapport.pdf rapport.tex
 
 rapport.pdf : rapport.tex
 	pdflatex rapport.tex
