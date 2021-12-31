@@ -54,15 +54,7 @@ int *CO_obtenirLesEntiers(CO_TableauDEntiers tableauEntiers);
 
 void CO_ajouterEntier(CO_TableauDEntiers *tableauEntiers, int entierAAjouter);
 
-/**
- *\fn void CO_supprimerTableauEntiers(CO_TableauDEntiers tableau);
- *\brief Permet de désallouer le pointeur du tableau et fixe la longueur à -1. Le tableau n'est plus à vocation d'être utilisé.
- *
- *\param *tableau : Le pointeur sur tableau qui sera supprimer.
- */
 
-
-void CO_supprimerTableauEntiers(CO_TableauDEntiers *tableau);
 
 /**
  * \fn CO_MotsDansPhrase CO_motsEtPositionsVide();
@@ -73,13 +65,6 @@ void CO_supprimerTableauEntiers(CO_TableauDEntiers *tableau);
 
 CO_MotsDansPhrase CO_motsEtPositionsVide();
 
-/**
- * \fn void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition);
- * \brief Fonction qui supprime et désalloue la structure CO_MotsDansPhrase.
- * \param *motsEtPosition : Le pointeur sur la structure à désallouer.
- */
-
-void CO_supprimerMotsEtPositions(CO_MotsDansPhrase *motsEtPosition);
 
 
 #endif
