@@ -66,7 +66,7 @@
     {Mot : resultat}%
     {
     \affecter{resultat.chaine}{s}
-    \instructon{fixerLongueurMot(resultat, longueur(s))}
+    \instruction{fixerLongueurMot(resultat, longueur(s))}
     \retourner{resultat}
     }
 \end{algorithme}
@@ -146,14 +146,15 @@
 ***********************************************************************************
 \begin{algorithme}%
       \fonctionAvecPreconditions{remplacerLettre}
-       {position : NaturelNonNul,c : \caractere, mot : Mot}%
+       {position : \naturelNonNul,c : \caractere, m : Mot}%
        {Mot}%
-       {(pos $\leq$ longueur(mot))) ET (estUneLettre(c))}
-       {nouvelleChaine : \chaine}
+       {(0 $\leq$ pos) ET (pos $\leq$ longueurMot(m)) ET (estUneLettre(c))}
+       {nvChaine : \chaine \\ nvMot : Mot}
        {
-          \affecter{nouvelleChaine}{motEnChaine(mot)}
-          \affecter{nouvelleChaine[position]}{c}      
-          \retourner{creerMot(nouvelleChaine)}
+          \affecter{nvChaine}{motEnChaine(m)}
+          \affecter{nvChaine[position]}{c}
+          \affecter{nvMot}{creerMot(nvChaine)}
+          \retourner{nvMot}
        }
 \end{algorithme}
 
