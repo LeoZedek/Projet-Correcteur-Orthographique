@@ -106,19 +106,19 @@
 ***********************************************************************************
 \begin{algorithme}
       \fonctionAvecPreconditions{supprimerLettre}
-       {pos : NaturelNonNul, mot : Mot}
+       {pos : \naturelNonNul, m : Mot}
        {Mot}
-       {pos $\leq$ longueur(mot)}
-       {nouvelleChaine : \chaine, longueurMot : NaturelNonNul}
+       {pos $\leq$ longueurMot(m) ET 0 $\leq$ pos}
+       {nvChaine, chaine : \chaine \\ longueurMot : NaturelNonNul\\ nvMot : Mot}
        {
-       \affecter{longueurMot}{longueur(mot)}
-       \affecter{nouvelleChaine}{motEnChaine(mot)}
-       	\pour{i}{pos + 1}{longueurMot}{}
+       \affecter{nvChaine}{motEnChaine(m)}
+       \pour{i}{pos + 1}{longueurMot(m)}{}
              {
-               \affecter{nouvelleChaine[i - 1]}{chaine[i]}
+               \affecter{nvChaine[i - 1]}{chaine[i]}
              }
-        \retourner{creerMot(nouvelleChaine)}%    
-        }
+       \affecter{nvMot}{creerMot(nvChaine)}
+       \retourner{nvMot}%    
+       }
        
 \end{algorithme}
 
