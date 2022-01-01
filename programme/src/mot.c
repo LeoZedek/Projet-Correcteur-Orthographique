@@ -1,6 +1,6 @@
 /**
  * \file mot.c
- * \brief Implémantation du TAD Mot
+ * \brief Implémentation du TAD Mot
  * \version 1.0
  * \date 03/01/2022
  *
