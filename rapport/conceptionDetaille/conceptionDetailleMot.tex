@@ -146,30 +146,32 @@
 ***********************************************************************************
 \begin{algorithme}%
       \fonctionAvecPreconditions{remplacerLettre}
-       {position : NaturelNonNul,c : \caractere, mot : Mot}%
+       {position : \naturelNonNul,c : \caractere, m : Mot}%
        {Mot}%
-       {(pos $\leq$ longueur(mot))) ET (estUneLettre(c))}
-       {nouvelleChaine : \chaine}
+       {(0 $\leq$ pos) ET (pos $\leq$ longueurMot(m)) ET (estUneLettre(c))}
+       {nvChaine : \chaine \\ nvMot : Mot}
        {
-          \affecter{nouvelleChaine}{motEnChaine(mot)}
-          \affecter{nouvelleChaine[position]}{c}      
-          \retourner{creerMot(nouvelleChaine)}
+          \affecter{nvChaine}{motEnChaine(m)}
+          \affecter{nvChaine[position]}{c}
+          \affecter{nvMot}{creerMot(nvChaine)}
+          \retourner{nvMot}
        }
 \end{algorithme}
 
 ***********************************************************************************
 \begin{algorithme}%
       \fonctionAvecPreconditions{inverserLettre}
-      {mot : Mot, pos : NaturelNonNul}%
+      {m : Mot, pos : \naturelNonNul}%
       {Mot}%
-      {pos $<$ longueur(mot)}%
-      {nouvelleChaine : \chaine, temp: \caractere }%
+      {(0 $\leq$ pos) ET (pos $<$ longueurMot(m) - 1)}%
+      {nvChaine : \chaine \\ temp: \caractere \\ nvMot : Mot}%
       {
-        \affecter{nouvelleChaine}{motEnChaine(mot)}
-          \affecter{temp}{nouvelleChaine[pos]}%
-          \affecter{nouvelleChaine[pos]}{nouvelleChaine[pos+1]}%
-          \affecter{nouvelleChaine[pos+1]}{temp}%
-         \retourner{creerMot(nouvelleChaine)}
+        \affecter{nvChaine}{motEnChaine(m)}
+        \affecter{temp}{nvChaine[pos]}%
+        \affecter{nvChaine[pos]}{nvChaine[pos+1]}%
+        \affecter{nvChaine[pos+1]}{temp}%
+        \affecter{nvMot}{creerMot(nvChaine)}%
+        \retourner{nvMot}
       }
 \end{algorithme}
 
