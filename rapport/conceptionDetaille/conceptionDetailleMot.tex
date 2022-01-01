@@ -60,13 +60,13 @@
 ***********************************************************************************
 \begin{algorithme}
     \fonctionAvecPreconditions{creerMot}
-    {chaine : \chaine}%
+    {s : \chaine}%
     {Mot}%
-    {estUnMot(chaine)}%
+    {estUnMot(s)}%
     {Mot : resultat}%
     {
-    \affecter{resultat.chaine}{chaine}
-    \affecter{resultat.longueur}{longueur(chaine)}
+    \affecter{resultat.chaine}{s}
+    \instructon{fixerLongueurMot(resultat, longueur(s))}
     \retourner{resultat}
     }
 \end{algorithme}
@@ -74,20 +74,22 @@
 ***********************************************************************************
 \begin{algorithme}
     \fonction{sontEgaux}
-     {mot1,mot2 : Mot}%
+     {m1,m2 : Mot}%
      {\booleen}%
-     {res : \booleen, i : \entier }%
+     {res : \booleen \\ i : \entier \\ chaine1, chaine2 : \chaine}%
      {
-          \sialorssinon{longueur(mot1)$\neq$ longueur(mot2)}%
+     	  \affecter{res}{Vrai}
+     	  \affecter{i}{0}
+          \sialorssinon{longueurMot(m1)$\neq$ longueurMot(m2)}%
                   {
-                   \retourner{Faux}
+                   \affecter{res}{Faux}
                   }%
                   {
-                   \affecter{res}{Vrai}
-                   \affecter{i}{0}
-                   \tantque{(res = vrai) ET (i $\leq$ longueur(mot1))}%
+		   		   \affecter{chaine1}{motEnChaine(m1)}
+		           \affecter{chaine2}{motEnChaine(m2)}
+                   \tantque{(res = vrai) ET (i $\leq$ longueurMot(m1))}%
                     {
-                     \sialors{mot1[i] != mot2[i]}%
+                     \sialors{chaine1[i] != chaine2[i]}%
                        {
                         \affecter{res}{Faux}%
                        }
