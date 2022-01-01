@@ -1,9 +1,12 @@
 \section{Introdution}
 \subsection{Contexte}
-Ce projet a été réalisé par Alexis \textsc{Imbert}, Ruth \textsc{Lioté}, Amina \textsc{Sakouti} et Léo \textsc{Zedek} dans le cadre du cours d'algorithmie avancée et programmation C, suivi en ITI3 et dirigé par M DELESTRE, le projet a été supervisé par M GUERIAU.\\
+Ce projet a été réalisé par Alexis \textsc{Imbert}, Ruth \textsc{Lioté}, Amina \textsc{Sakouti} et Léo \textsc{Zedek} 
+dans le cadre du cours d'algorithmie avancée et programmation C, suivi en ITI3 et dirigé par M DELESTRE. 
+Le projet a été supervisé par M GUERIAU.\\
 \\
 \subsection{Cahiers des charges}
-L'objectif de ce projet est de développer un correcteur orthographique à l'image des programmes unix ispell et aspell 1. Les fonctionnalités attendues de ce programme sont les suivantes :\\
+L'objectif de ce projet est de développer un correcteur orthographique à l'image des programmes unix ispell et aspell 1. 
+Les fonctionnalités attendues de ce programme sont les suivantes :\\
 \\
 \paragraph{Aider}
 Lorsqu'il est lancé sans option, ou avec l'option -h, ou avec une option non reconnue, le programme doit afficher une aide.\\
@@ -33,7 +36,9 @@ L'exemple suivant ajoute les mots du fichier dico-ref\_asscii.txt (téléchargea
 . / a s i s p e l l -d f r a n c a i s . d i c o -f d i c o -r e f -a s c i i . t x t\\
 \\
 \paragraph{Corriger}
-A l'image du programme ispell, le programme doit pouvoir analyser (et proposer des corrections orthographiques si besoin) un texte qui lui est donné via l'entrée standard. Cette analyse est dépendante d'un dictionnnaire (option -d). Cette analyse sera produite sur la sortie standard avec un mot analysé par ligne. Deux cas de figure sont traités :\\
+A l'image du programme ispell, le programme doit pouvoir analyser (et proposer des corrections orthographiques si besoin) 
+un texte qui lui est donné via l'entrée standard. Cette analyse est dépendante d'un dictionnnaire (option -d). 
+Cette analyse sera produite sur la sortie standard avec un mot analysé par ligne. Deux cas de figure sont traités :\\
 \\
 1. un mot est bien orthographié (présent dans le dictionnaire), le programme produit une étoile ('*')
 pour ce mot ;\\
@@ -52,21 +57,8 @@ Voici un exemple d'utilisation :
 		keywordstyle=\color{black},
 		frame=none,
 		numbers=none,
-		showspaces=false,
-		literate=
-		{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
-		{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
-		{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
-		{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
-		{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
-		{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
-		{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
-		{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
-		{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
-		{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
-		{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
-		{€}{{\EUR}}1 {£}{{\pounds}}1%
-		]
+		showspaces=false
+	]
 e c h o " yn p e t t t s e t d e c o r e c t i o n o r t h o g r a p h y q u e a v e c q u e l q u e s
 f o t e s d ' o r t h o g r a p h e . " | . / a s i s p e l l -d f r a n c a i s . d i c o
 & yn 7 1 : y i n y e n un on i n e n a n
@@ -82,7 +74,9 @@ v o t e s r o t e s p o t e s n o t e s l o t e s d o t e s c o t e s b o t e s
 \end{lstlisting}
 
 \subsection{Comment corriger un mot ?}
-Pour proposer des corrections d'un mot mal orthographié (pour un dictionnnaire donné) le plus\\simple est de partir de celui-ci et de lui appliquer des transformations qui permettent d'obtenir des mots lui ressemblant. Si une transformation donne un mot bien orthographié alors ce mot est une correction possible. Voici quelques exemples de transformations :
+Pour proposer des corrections d'un mot mal orthographié (pour un dictionnnaire donné) le plus simple est de partir de celui-ci 
+et de lui appliquer des transformations qui permettent d'obtenir des mots lui ressemblant. 
+Si une transformation donne un mot bien orthographié alors ce mot est une correction possible. Voici quelques exemples de transformations :
 \begin{itemize}
 \item remplacement d'une lettre ;
 \item inversion de deux lettres consécutives ;
@@ -93,7 +87,8 @@ Pour proposer des corrections d'un mot mal orthographié (pour un dictionnnaire 
 \item etc.
 \end{itemize}
 
-Dans l'exemple précédent, ce sont ces trois premières stratégies qui sont utilisées (c'est pour cela que le programme n'arrive pas à proposer une correction valable pour le mot fote).\\
+Dans l'exemple précédent, ce sont ces trois premières stratégies qui sont utilisées 
+(c'est pour cela que le programme n'arrive pas à proposer une correction valable pour le mot fote).\\
 L'inconvénient de cette méthode est qu'elle génère beaucoup de mots. Par exemple pour un mot de 5 lettres, la première stratégie va générer $5 *(26 + 16) -5 = 205$ mots (26 lettres de l'alphabet et 16 versions accentuées). Il faut donc être capable de vérifier si un mot est présent dans un dictionnaire de manière efficace (le fichier dico-ref\_asscii.txt proposé contient 336531 mots)\\
 \\
 \subsection{Travail demandé}
@@ -103,15 +98,17 @@ On nous donne les types Mode, et le TAD Fichiertexte, dans le sujet.\\
 Nous avons du spécifier les TADs Mot, Dictionnaire et CorrecteurOrthographique.\\
 \paragraph{Conception}
 \subparagraph{Conception préliminaire}
-Nous avons donné les signatures des fonctions et procédures des TADs précédents ainsi que celles issues de l'analyse descendante (fonctions et procédures métiers).\\
+Nous avons donné les signatures des fonctions et procédures des TADs précédents ainsi que celles issues de l'analyse descendante 
+(fonctions et procédures métiers).\\
 
 \subparagraph{Conception détaillée}
 Nous avons donné les algorithmes des fonctions et procédures des TADs précédents les plus complexes. Ainsi que celle des fonctions et procédures métiers.\\
 
 \paragraph{Développement, tests unitaires et documentation}
-Nous avons développé le programme en C en testant au maximum nos fonctions à l'aide de l'API CUnit. Avec cela, nous avons générer une documentation de notre code à l'aide du logiciel Doxygen.\\
+Nous avons développé le programme en C en testant au maximum nos fonctions à l'aide de l'API CUnit. 
+Avec cela, nous avons générer une documentation de notre code à l'aide du logiciel Doxygen.\\
 
-\subsection{Ajout}
+\subsection{Ajouts}
 Le pdf du rapport peut être obtenu grâce à la compilation du fichier .tex (makefile inclus dans le dossier rapport).\\
 Le correcteur orthographique peut lui aussi être compilé grâce à un makefile inclus dans le dossier programme.\\
 Les options du makefile :
@@ -121,8 +118,3 @@ Les options du makefile :
 	\item \textbf{doc} compile uniquement la documentation Doxygen.\\
 \end{itemize}
 De plus, nous avons ajouté un script à la racine du projet permettant de compiler à la fois le rapport et le programme (option all) en copiant dans le dossier "resultat" le pdf du rapport, le programme et la documentation Doxygen au format pdf.\\
-
-
-
-
-
