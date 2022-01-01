@@ -178,18 +178,19 @@
 ***********************************************************************************
 \begin{algorithme}
          \fonctionAvecPreconditions{decomposerMot}
-         {pos : NaturelNonNul, mot : Mot}%
-         {Mot, Mot}%
-         {(pos $<$ longueur(unMot)) ET (pos $>$ 1)}%
-         {i : NaturelNonNul; nvChaine1, nvChaine2 : \chaine}%
+         {pos : \naturelNonNul, m : Mot}%
+         {DeuxMots}%
+         {(pos $<$ longueurMot(m)) ET (pos $>$ 0)}%
+         {i : \naturelNonNul \\ nvChaine1, nvChaine2, chaine : \chaine}%
          {
-           \pour{i}{1}{pos}{}%
+           \affecter{chaine}{motEnChaine(m)}
+           \pour{i}{0}{pos}{}%
             {
-             \affecter{nvChaine1[i]}{mot[i]}%
+             \affecter{nvChaine1[i]}{chaine[i]}%
             }
-           \pour{i}{pos+1}{longueur(unMot)}{}%
+           \pour{i}{pos}{longueurMot(m)}{}%
             {
-             \affecter{nvChaine2[i - pos]}{mot[i]}%
+             \affecter{nvChaine2[i - pos]}{chaine[i]}%
             }
            \retourner{creerMot(nvChaine1), creerMot(nvChaine2)}%  
           }
