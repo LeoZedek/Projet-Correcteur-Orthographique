@@ -161,16 +161,17 @@
 ***********************************************************************************
 \begin{algorithme}%
       \fonctionAvecPreconditions{inverserLettre}
-      {mot : Mot, pos : NaturelNonNul}%
+      {m : Mot, pos : \naturelNonNul}%
       {Mot}%
-      {pos $<$ longueur(mot)}%
-      {nouvelleChaine : \chaine, temp: \caractere }%
+      {(0 $\leq$ pos) ET (pos $<$ longueurMot(m) - 1)}%
+      {nvChaine : \chaine \\ temp: \caractere \\ nvMot : Mot}%
       {
-        \affecter{nouvelleChaine}{motEnChaine(mot)}
-          \affecter{temp}{nouvelleChaine[pos]}%
-          \affecter{nouvelleChaine[pos]}{nouvelleChaine[pos+1]}%
-          \affecter{nouvelleChaine[pos+1]}{temp}%
-         \retourner{creerMot(nouvelleChaine)}
+        \affecter{nvChaine}{motEnChaine(m)}
+        \affecter{temp}{nvChaine[pos]}%
+        \affecter{nvChaine[pos]}{nvChaine[pos+1]}%
+        \affecter{nvChaine[pos+1]}{temp}%
+        \affecter{nvMot}{creerMot(nvChaine)}%
+        \retourner{nvMot}
       }
 \end{algorithme}
 
