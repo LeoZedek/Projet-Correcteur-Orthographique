@@ -11,7 +11,7 @@ EXEC=asispell
 DOCDIR=doc
 
 
-all : clean dossier $(BINDIR)/$(EXEC) tests
+all : clean dossier $(BINDIR)/$(EXEC) tests doc
 
 tests : $(TESTDIR)/testsCorrecteurOrthographique $(TESTDIR)/testsDictionnaire $(TESTDIR)/testsMot
 
