@@ -1,0 +1,48 @@
+\begin{algorithme}
+	%Création de signature de focntion : 1 : nom de la fonction ou signatureFonctionAvecPreconditions avec un paramètre précondition en plus
+	\signatureFonction{estUneLettre}%
+		%2 Les paramètres
+		{c : \caractere}%
+		%3 Le type de retour
+		{\booleen}
+	\signatureFonction{longueur}%
+		{m : Mot}%
+		{\naturelNonNul}
+	\signatureFonction{estUnMot}%
+		{chaine : \chaine}%
+		{\booleen}
+	%Création de signature de procédure 1 : nom de la procédure
+	\signatureFonctionAvecPreconditions{creerMot}%
+		{chaine : \chaine}%
+		{Mot}%
+		{estUnMot(chaine)}
+	\signatureFonction{estAvantOrdreAlphabetique}%
+		{m1, m2 : Mot}%
+		{\booleen}
+	\signatureFonction{sontEgaux}%
+		{m1, m2 : Mot}%
+		{\booleen}
+	\signatureFonction{motEnChaine}%
+		{m : Mot}%
+		{\chaine}
+	\signatureFonctionAvecPreconditions{remplacerLettre}%
+		{m : Mot, pos : \naturelNonNul, c : \caractere}%
+		{Mot}%
+		{$pos \leq longueur(m)$}
+	\signatureFonctionAvecPreconditions{supprimerLettre}%
+		{m : mot, pos : NaturelNonNul}%
+		{Mot}%
+		{$pos \leq longueur(m)$}
+	\signatureFonctionAvecPreconditions{insererLettre}%
+		{m : Mot, c : \caractere, pos : \naturelNonNul}%
+		{Mot}%
+		{$pos \leq longueur(m) + 1$}
+	\signatureFonctionAvecPreconditions{inverserLettre}%
+		{m : Mot, pos : \naturelNonNul}%
+		{Mot}%
+		{$pos < longueur(m)$}
+	\signatureFonctionAvecPreconditions{decomposerMot}%
+		{m : Mot, pos : \naturelNonNul}%
+		{Mot, Mot}%
+		{$1 < pos < longueur(m)$}
+\end{algorithme}

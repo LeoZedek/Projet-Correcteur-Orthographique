@@ -1,0 +1,80 @@
+\begin{algorithme}
+	%Création de signature de focntion : 1 : nom de la focntion ou signatureFonctionAvecPreconditions avec un paramètre précondition en plus
+	\signatureFonction{fichierTexte}%
+		%2 Les paramètres
+		{chaine : \chaine}%
+		%3 Le type de retour
+		{FichierTexte}
+	
+	%Création de signature de procédure 1 : nom de la procédure
+	\signatureProcedureAvecPreconditions{ouvrir}%
+		%2 Les paramètres avec les commandes \paramEntree \paramSortie et \paramEntreeSortie
+		{%
+			\paramEntreeSortie{fichier : FichierTexte}, %
+			\paramEntree{mode : Mode}%
+		}%
+		{non (estOuvert(f))}
+		
+	\signatureProcedureAvecPreconditions{fermer}%
+		{%
+		\paramEntreeSortie{fichier ; FichierTexte}%
+		}%
+		{estOuvert(f)}
+		
+	\signatureFonctionAvecPreconditions{estOuvert}%
+		{fichier : fichierTexte}
+		{\booleen}
+		{}
+		
+	\signatureFonctionAvecPreconditions{Mode}%
+		{fichier : FichierTexte}%
+		{Mode}%
+		{}
+		
+	\signatureFonction{finFichier}%
+		{fichier : FichierTexte}%
+		{\booleen}%
+		{mode(fichier)=lecture}
+		
+	\signatureProcedureAvecPreconditions{ecrireChaine}%
+		{%
+			\paramEntreeSortie{fichier : FichierTexte}, %
+			\paramEntree{\chaine}%
+		}%
+		{%
+			estOuvert(fichier)\\%
+			mode(fichier)=ecriture%
+		}
+		
+	\signatureProcedureAvecPreconditions{lireChaine}%
+		{%
+			\paramEntreeSortie{fichier : FichierTexte}, %
+			\paramSortie{\chaine}%
+		}%
+		{%
+			estOuvert(fichier)\\%
+			mode(fichier)=lecture%
+		}
+		
+	\signatureProcedureAvecPreconditions{ecrireCaractere}%
+		{%
+			\paramEntreeSortie{fichier : FichierTexte}, %
+			\paramEntree{\caractere}%
+		}%
+		{%
+			estOuvert(fichier)\\%
+			mode(fichier)=ecriture%
+		}
+		
+	\signatureProcedureAvecPreconditions{lireChaine}%
+		{%
+			\paramEntreeSortie{fichier : FichierTexte}, %
+			\paramSortie{\caractere}%
+		}%
+		{%
+			estOuvert(fichier)\\%
+			mode(fichier)=lecture%
+		}
+		
+	
+\end{algorithme}

@@ -1,0 +1,53 @@
+\begin{algorithme}
+	\signatureFonction{tableauDEntiersVide}%
+		{}%
+		{TableauDEntiers}
+	\smallskip
+	\signatureFonction{obtenirLongueurTabEntiers}%
+		{tableauEntiers : TableauDEntiers}%
+		{\naturel}
+	\smallskip	
+	\signatureProcedure{fixerLongueurTabEntiers}%
+		{\paramEntreeSortie{pointeurTableauEntiers : \typePointeur{TableauDEntiers}}, \paramEntree{nouvelleLongueur : \naturel}}%
+	\smallskip	
+	\signatureFonctionAvecPreconditions{obtenirIemeEntier}%
+		{tableauEntiers : TableauDEntiers, position : \naturel}%
+		{\entier}%
+		{position$\geq$0 ET position < obtenirLongueurTabEntiers(tableauEntiers)}
+	\smallskip
+	\signatureFonction{obtenirLesEntiers}%
+		{tableauEntiers : TableauDEntiers}%
+		{\tableauUneDimension{Taille\_Max}{d'}{\entier}}
+	\smallskip	
+	\signatureProcedure{ajouterEntier}%
+		{\paramEntreeSortie{tableauEntiers : \typePointeur{TableauDEntiers}},  \paramEntree{entierAAjouter : \entier}}%
+		{}
+	\smallskip
+	\signatureProcedure{supprimerTableauEntiers}%
+		{\paramEntreeSortie{tableau : \typePointeur{TableauDEntiers}}}%
+		{}
+	\smallskip	
+	\signatureFonction{motsEtPositionsVide}%
+		{}%
+		{MotsDansPhrase}
+	\smallskip
+	\signatureFonction{obtenirTabMots}%
+		{motsEtPosition : MotsDansPhrase}%
+		{TableauDeMots}
+	\smallskip
+	\signatureFonction{obtenirTabPositions}%
+		{motsEtPosition : MotsDansPhrase}%
+		{TableauPositions}
+	\smallskip
+	\signatureFonction{sontPresents}%
+		{mots : TableauDeMots, dictionnaire : Dictionnaire}%
+		{TableauBooleens}
+	\smallskip
+	\signatureFonction{proposerMot}%
+		{m : Mot, dictionnaire : Dictionnaire}%
+		{TableauDeMots}
+	\smallskip
+	\signatureFonction{phraseEnMots}%
+		{phrase : \chaine}%
+		{MotsDansPhrase}
+\end{algorithme}

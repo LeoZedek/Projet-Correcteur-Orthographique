@@ -1,0 +1,164 @@
+\par Dans la conception d\'etaill\'ee pr\'esente, seules les fonctions n\'ecessitant un minimum de r\'eflexion ont \'et\'e mises, les getters et setters ne sont notamment pas inclus.\\
+
+
+\begin{algorithme}
+
+\constante{TailleMax}{1000}\\
+
+\begin{enregistrement}{TableauDEntiers}
+	\champEnregistrement{lesEntiers}{\tableauUneDimension{TailleMax}{d’}{\entier}}
+	\champEnregistrement{longueur}{\naturel}
+\end{enregistrement}\\
+
+\type{TableauPositions}{TableauDEntiers}\\
+
+\type{TableauBooleens}{TailleMax}{de }{\booleen}\\
+
+\begin{enregistrement}{MotsDansPhrase}
+	\champEnregistrement{mots}{TableauDeMots}
+	\champEnregistrement{positions}{TableauPositions}
+\end{enregistrement}\\
+
+\end{algorithme}
+
+***********************************************************************************
+
+\begin{algorithme}
+\fonction{sontPresents}%
+	{mots : TableauDeMots, dictionnaire : Dictionnaire}%
+	{TableauBooleens}%
+	{i, longueur : \naturel \\ tabBool : TableauBooleens\\ mot : mot}%
+	{%
+	\affecter{tabBool}{tableauDEntiersVide()}
+	\affecter{longueur}{obtenirLongueurTabMots(mots)}
+	\pour{i}{0}{longueur - 1}{}%
+	{	
+		\affecter{mot}{obtenirIemeMot(mots,i)}
+		\sialorssinon{estPresent(dictionnaire, mot)}%
+		{
+			\affecter{tabBool[i]}{VRAI)}
+		}%
+		{
+			\affecter{tabBool[i]}{FAUX)}%
+			}
+	}%
+	\retourner{tabBool}
+	}\\
+\end{algorithme}
+	
+***********************************************************************************
+\newpage
+\begin{algorithme}
+\fonction{proposerMots}%
+	{m : Mot, dictionnaire : Dictionnaire}%
+	{TableauDeMots}%
+	{resultatMots : TableauDeMots\\ motCorrige : Mot\\ motCorriges : MOTDeuxMot\\ lettre, tiret : \caractere \\ i : \naturel}%
+	{%
+	\pour{lettre}{'a'}{'z'}{}%
+		{\pour{i}{0}{longueurMot(m) - 1}{}%
+			{
+			\affecter{motCorrige}{remplacerLettre(m, i, lettre)}
+			\sialors{estPresent(dictionnaire, motCorrige)}%
+				{\instruction{ajouterMot(resultatMots, motCorrige)}}
+			}
+		\pour{i}{0}{longueurMot(m)}{}%
+			{\affecter{motCorrige}{insererLettre(m, i, lettre)}
+			\sialors{estPresent(dictionnaire, motCorrige)}%
+				{\instruction{ajouter(resultatMots, motCorrige)}}
+			}
+		}
+		
+	\affecter{tiret}{"-"}
+	{\pour{i}{0}{longueurMot(m) - 1}{}%
+		{
+		\affecter{motCorrige}{remplacerLettre(m, i, tiret)}
+		\sialors{estPresent(dictionnaire, motCorrige)}%
+			{\instruction{ajouterMot(resultatMots, motCorrige)}}
+		}
+	\pour{i}{0}{longueurMot(m)}{}%
+		{
+		\affecter{motCorrige}{insererLettre(m, i, tiret)}
+		\sialors{estPresent(dictionnaire, motCorrige)}%
+			{\instruction{ajouter(resultatMots, motCorrige)}}
+		}
+		}\\
+	
+	\pour{i}{0}{longueurMot(m) - 2}{}%
+		{\affecter{motCorrige}{inverserLettre(m, i)}
+		\sialors{estPresent(dictionnaire, motCorrige)}%
+			{\instruction{ajouter(resultatMots, motCorrige)}}
+		}
+	\pour{i}{0}{longueurMot(m) - 1}{}%
+		{\affecter{motCorrige}{supprimerLettre(m, i)}
+		\sialors{estPresent(dictionnaire, motCorrige)}%
+			{\instruction{ajouter(resultatMots, motCorrige)}}
+		}
+		
+	\pour{i}{1}{longueurMot(m) - 2}{}%
+		{\affecter{motCorriges}{decomposerMot(m, i)}
+		\sialors{estPresent(dictionnaire, motCorriges.mot1)}%
+			{\instruction{ajouter(resultatMots, motCorriges.mot1)}}
+		\sialors{estPresent(dictionnaire, motsCorriges.mot2)}%
+			{\instruction{ajouter(resultatMots, motCorriges.mot2)}}
+		}
+	
+	\retourner{resultatMots}
+	}\\
+\end{algorithme}
+
+***********************************************************************************
+
+\begin{algorithme}
+\fonction{phraseEnMots}%
+	{phrase : \chaine}%
+	{MotsDansPhrase}%
+	{i, pos, longueurPhrase : \naturel \\
+    	temp : \chaine \\
+    	mot : Mot\\
+   	motsPhrase : MotsDansPhrase\\
+	dansUnMot : \booleen \\
+	tabMots : TableauDeMots\\
+	tabPos : TableauPositions}%
+	{
+	\affecter{pos}{0}
+	\affecter{longueurPhrase}{longueur(phrase)}
+	\affecter{motsPhrase}{motsEtPositionsVide()}
+	\affecter{tabMots}{obtenirTabMots(motsPhrase)}
+	\affecter{tabPos}{obtenirTabPositions(motsPhrase)}
+	\affecter{dansUnMot}{FAUX}
+	
+	\pour{i}{0}{longueurPhrase}{}%
+		{
+		\sialorssinon{estUneLettre(phrase[i])}%
+			{
+			\sialors{NON(dansUnMot)}%
+			{
+				\affecter{pos}{i}
+				\affecter{dansUnMot}{VRAI}
+			}
+			
+			\affecter{temp[i - pos]}{phrase[i]}
+			}%
+			{
+			\sialors{dansUnMot}%
+				{
+				\affecter{dansUnMot}{FAUX}
+				\affecter{mot}{creerMot(temp)}
+				\instruction{ajouterMot(tabMots, mot)}
+				\instruction{ajouterEntier(tabPos, pos)}
+				}
+			
+			}
+		}
+	\sialors{dansUnMot}%
+		{
+		\affecter{mot}{creerMot(temp)}
+		\instruction{ajouterMot(tabMots, mot)}
+		\instruction{ajouterEntier(tabPos, pos)}
+		}
+		
+	\instruction{fixerLongueurTabEntiers(motsPhrase.positions, obtenirLongueurTabEntiers(tabPos))}
+  \instruction{fixerLongueurTabMots(motsPhrase.mots, obtenirLongueurTabMots(tabMots))}
+	\retourner{motsPhrase}
+	}
+\end{algorithme}

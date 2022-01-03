@@ -1,0 +1,120 @@
+\section{Introdution}
+\subsection{Contexte}
+Ce projet a été réalisé par Alexis \textsc{Imbert}, Ruth \textsc{Lioté}, Amina \textsc{Sakouti} et Léo \textsc{Zedek} 
+dans le cadre du cours d'algorithmie avancée et programmation C, suivi en ITI3 et dirigé par M DELESTRE. 
+Le projet a été supervisé par M GUERIAU.\\
+\\
+\subsection{Cahiers des charges}
+L'objectif de ce projet est de développer un correcteur orthographique à l'image des programmes unix ispell et aspell 1. 
+Les fonctionnalités attendues de ce programme sont les suivantes :\\
+\\
+\paragraph{Aider}
+Lorsqu'il est lancé sans option, ou avec l'option -h, ou avec une option non reconnue, le programme doit afficher une aide.\\
+Par exemple :
+\begin{lstlisting}[
+		language=bash,
+		breaklines=true,
+		stringstyle=\color{black},
+		keywordstyle=\color{black},
+		frame=none,
+		numbers=none,
+		showspaces=false,
+		]
+. / a s i s p e l l
+A i d e d e a s i s p e l l :
+	a s e s p e l l -h : c e t t e a i d e
+	a s i s p e l l	 d i c o : c o r r e c t i o n d e l ' e n t r e e s t a n d a r d a l ' a i d e du d i c t i o n n a i r e d i c o
+	a s i s p e l l -d d i c o -f f i c : c o m p l e t e r l e d i c t i o n n a i r e d i c o a l ' a i d e d e s m o t s du f i c h i e r f i c ( un mot p a r l i g n e )
+\end{lstlisting}
+\paragraph{Compléter un dictionnaire}
+Il doit être possible de compléter un dictionnaire à l'aide des mots d'un fichier texte (un mot par ligne). Les options sont alors :
+\begin{itemize}
+\item -d pour spécifier le nom du fichier correspondant au dictionnaire utilisé ;
+\item -f pour spécifier le nom du fichier contenant les mots à ajouter.
+\end{itemize}
+L'exemple suivant ajoute les mots du fichier dico-ref\_asscii.txt (téléchargeable sur moodle) au dictionnaire francais.dico :\\
+. / a s i s p e l l -d f r a n c a i s . d i c o -f d i c o -r e f -a s c i i . t x t\\
+\\
+\paragraph{Corriger}
+A l'image du programme ispell, le programme doit pouvoir analyser (et proposer des corrections orthographiques si besoin) 
+un texte qui lui est donné via l'entrée standard. Cette analyse est dépendante d'un dictionnnaire (option -d). 
+Cette analyse sera produite sur la sortie standard avec un mot analysé par ligne. Deux cas de figure sont traités :\\
+\\
+1. un mot est bien orthographié (présent dans le dictionnaire), le programme produit une étoile ('*')
+pour ce mot ;\\
+2. un mot est mal orthographié, le programme produit un et commercial (\&) suivi des informations suivantes :
+\begin{itemize}
+	\item le mot mal orthographié ;
+	\item le nombre de corrections proposées ;
+	\item le position du mot mal orthographié depuis le début du flux d'entrée, suivi de deux points ;
+	\item les corrections proposées séparées par un espace.
+\end{itemize}
+Voici un exemple d'utilisation :
+\begin{lstlisting}[
+		language=bash,
+		breaklines=true,
+		stringstyle=\color{black},
+		keywordstyle=\color{black},
+		frame=none,
+		numbers=none,
+		showspaces=false
+	]
+e c h o " yn p e t t t s e t d e c o r e c t i o n o r t h o g r a p h y q u e a v e c q u e l q u e s
+f o t e s d ' o r t h o g r a p h e . " | . / a s i s p e l l -d f r a n c a i s . d i c o
+& yn 7 1 : y i n y e n un on i n e n a n
+& p e t t 2 4 : p e t i t p e u t
+& t s e t 1 1 1 : t e s t
+*& c o r e c t i o n 1 1 9 : c o r r e c t i o n
+& o r t h o g r a p h y q u e 1 2 9 : o r t h o g r a p h i q u e
+*
+*& f o t e s 16 5 8 : f o u t e s f o r t e s f o n t e s f o r e s f o i e s f û t e s f î t e s f ê t e s
+v o t e s r o t e s p o t e s n o t e s l o t e s d o t e s c o t e s b o t e s
+& d 11 6 4 : d û d é du do dm d l dg d e à y a
+*
+\end{lstlisting}
+
+\subsection{Comment corriger un mot ?}
+Pour proposer des corrections d'un mot mal orthographié (pour un dictionnnaire donné) le plus simple est de partir de celui-ci 
+et de lui appliquer des transformations qui permettent d'obtenir des mots lui ressemblant. 
+Si une transformation donne un mot bien orthographié alors ce mot est une correction possible. Voici quelques exemples de transformations :
+\begin{itemize}
+\item remplacement d'une lettre ;
+\item inversion de deux lettres consécutives ;
+\item suppression d'une lettre ;
+\item insertion d'une lettre ;
+\item décomposition d'un mot en plusieurs mots ;
+\item proposition d'un mot phonétiquement proche ;
+\item etc.
+\end{itemize}
+
+Dans l'exemple précédent, ce sont ces trois premières stratégies qui sont utilisées 
+(c'est pour cela que le programme n'arrive pas à proposer une correction valable pour le mot fote).\\
+L'inconvénient de cette méthode est qu'elle génère beaucoup de mots. Par exemple pour un mot de 5 lettres, la première stratégie va générer $5 *(26 + 16) -5 = 205$ mots (26 lettres de l'alphabet et 16 versions accentuées). Il faut donc être capable de vérifier si un mot est présent dans un dictionnaire de manière efficace (le fichier dico-ref\_asscii.txt proposé contient 336531 mots)\\
+\\
+\subsection{Travail demandé}
+\paragraph{Analyse}
+On nous donne les types Mode, et le TAD Fichiertexte, dans le sujet.\\
+\\
+Nous avons du spécifier les TADs Mot, Dictionnaire et CorrecteurOrthographique.\\
+\paragraph{Conception}
+\subparagraph{Conception préliminaire}
+Nous avons donné les signatures des fonctions et procédures des TADs précédents ainsi que celles issues de l'analyse descendante 
+(fonctions et procédures métiers).\\
+
+\subparagraph{Conception détaillée}
+Nous avons donné les algorithmes des fonctions et procédures des TADs précédents les plus complexes. Ainsi que celle des fonctions et procédures métiers.\\
+
+\paragraph{Développement, tests unitaires et documentation}
+Nous avons développé le programme en C en testant au maximum nos fonctions à l'aide de l'API CUnit. 
+Avec cela, nous avons générer une documentation de notre code à l'aide du logiciel Doxygen.\\
+
+\subsection{Ajouts}
+Le pdf du rapport peut être obtenu grâce à la compilation du fichier .tex (makefile inclus dans le dossier rapport).\\
+Le correcteur orthographique peut lui aussi être compilé grâce à un makefile inclus dans le dossier programme.\\
+Les options du makefile :
+\begin{itemize}
+	\item \textbf{all} (make par défaut) compile le programme, les tests unitaires et la documentation,\\
+	\item \textbf{tests} compile seulement les tests unitaires,\\
+	\item \textbf{doc} compile uniquement la documentation Doxygen.\\
+\end{itemize}
+De plus, nous avons ajouté un script à la racine du projet permettant de compiler à la fois le rapport et le programme (option all) en copiant dans le dossier "resultat" le pdf du rapport, le programme et la documentation Doxygen au format pdf.\\

@@ -1,0 +1,197 @@
+\begin{algorithme}
+    
+    \begin{enregistrement}{Mot}%
+        \champEnregistrement{\chaine}{chaine}%
+        \champEnregistrement{NaturelNonNul}{longueur}
+    \end{enregistrement}
+
+     \fonction{estUneLettre}
+      {c : \caractere}%
+      {\booleen}%
+      {}%
+      {
+          \retourner{$('a' \leq$ c ET c $\leq 'z' )$ OU ('A' $\leq$ c ET c $\leq$ 'Z') OU c = '-'}
+      }
+\end{algorithme}
+
+***********************************************************************************
+\begin{algorithme}
+      \fonction{longueur}
+       {mot : Mot}%
+       {\entier}%
+       {}%
+       {
+         
+        \retourner{mot.longueur}
+
+        }
+\end{algorithme}
+
+***********************************************************************************
+\begin{algorithme}
+    \fonction{estUnMot}%
+     {chaine : \chaine}%
+     {\booleen}%
+     {i: \entier, res : \booleen, c: \caractere}%
+     {     
+
+         \sialorssinon{longueur(chaine) = 0}%
+        	{
+        		\retourner{Faux}
+        	}%
+        	{
+                \affecter{res}{Vrai}
+
+		    	\pour{i}{1}{longueur(chaine)}{}%
+			   {
+			      \affecter{c}{chaine[i]}%
+			      \sialors{non(estUneLettre(c))}%
+				  {
+				     \affecter{res}{faux}
+				  }%
+		           }%
+                }%
+        
+           \retourner{res}
+      }
+  
+\end{algorithme}
+
+***********************************************************************************
+\begin{algorithme}
+    \fonctionAvecPreconditions{creerMot}
+    {s : \chaine}%
+    {Mot}%
+    {estUnMot(s)}%
+    {Mot : resultat}%
+    {%
+    \affecter{resultat.chaine}{s}
+    \instruction{fixerLongueurMot(resultat, longueur(s))}
+    \retourner{resultat}
+    }
+\end{algorithme}
+
+***********************************************************************************
+\begin{algorithme}
+    \fonction{sontEgaux}
+     {m1,m2 : Mot}%
+     {\booleen}%
+     {res : \booleen \\ i : \entier \\ chaine1, chaine2 : \chaine}%
+     {
+     	  \affecter{res}{Vrai}
+     	  \affecter{i}{0}
+          \sialorssinon{longueurMot(m1)$\neq$ longueurMot(m2)}%
+                  {
+                   \affecter{res}{Faux}
+                  }%
+                  {
+		   		   \affecter{chaine1}{motEnChaine(m1)}
+		           \affecter{chaine2}{motEnChaine(m2)}
+                   \tantque{(res = vrai) ET (i $\leq$ longueurMot(m1))}%
+                    {
+                     \sialors{chaine1[i] != chaine2[i]}%
+                       {
+                        \affecter{res}{Faux}%
+                       }
+                       
+                       \affecter{i}{i + 1}
+                       
+                    }
+                   }%
+      
+         \retourner{res}
+      }
+\end{algorithme}
+
+***********************************************************************************
+\begin{algorithme}
+      \fonctionAvecPreconditions{supprimerLettre}
+       {pos : \naturelNonNul, m : Mot}
+       {Mot}
+       {pos $\leq$ longueurMot(m) ET 0 $\leq$ pos}
+       {nvChaine, chaine : \chaine \\ longueurMot, i : \naturelNonNul\\ nvMot : Mot}
+       {
+       \affecter{nvChaine}{motEnChaine(m)}
+       \pour{i}{pos + 1}{longueurMot(m)}{}
+             {
+               \affecter{nvChaine[i - 1]}{chaine[i]}
+             }
+       \affecter{nvMot}{creerMot(nvChaine)}
+       \retourner{nvMot}%    
+       }
+       
+\end{algorithme}
+
+***********************************************************************************
+\begin{algorithme}
+      \fonctionAvecPreconditions{insererLettre}%
+       {pos : \naturelNonNul, c : \caractere, m : Mot}%
+       {Mot}%
+       {(0 $\leq$ pos) ET (pos $\leq$ longueurMot(m)) ET (estUneLettre(c))}%
+       {chaine, nvChaine : \chaine \\ i : \naturelNonNul \\ nvMot : Mot}
+       {
+            \affecter{chaine}{motEnChaine(m)}
+            \affecter{nvChaine}{chaine}
+            \pour{i}{pos + 1}{longueurMot(m) + 1}{}%
+            {
+                \affecter{nvChaine[i]}{chaine[i - 1]}
+            }
+            \affecter{nvChaine[pos]}{c}
+			\affecter{nvMot}{creerMot(nvChaine)}
+            \retourner{nvMot}
+            
+       }
+\end{algorithme}
+
+***********************************************************************************
+\begin{algorithme}%
+      \fonctionAvecPreconditions{remplacerLettre}
+       {position : \naturelNonNul,c : \caractere, m : Mot}%
+       {Mot}%
+       {(0 $\leq$ pos) ET (pos $\leq$ longueurMot(m)) ET (estUneLettre(c))}
+       {nvChaine : \chaine \\ nvMot : Mot}
+       {
+          \affecter{nvChaine}{motEnChaine(m)}
+          \affecter{nvChaine[position]}{c}
+          \affecter{nvMot}{creerMot(nvChaine)}
+          \retourner{nvMot}
+       }
+\end{algorithme}
+
+***********************************************************************************
+\begin{algorithme}%
+      \fonctionAvecPreconditions{inverserLettre}
+      {m : Mot, pos : \naturelNonNul}%
+      {Mot}%
+      {(0 $\leq$ pos) ET (pos $<$ longueurMot(m) - 1)}%
+      {nvChaine : \chaine \\ temp: \caractere \\ nvMot : Mot}%
+      {
+        \affecter{nvChaine}{motEnChaine(m)}
+        \affecter{temp}{nvChaine[pos]}%
+        \affecter{nvChaine[pos]}{nvChaine[pos+1]}%
+        \affecter{nvChaine[pos+1]}{temp}%
+        \affecter{nvMot}{creerMot(nvChaine)}%
+        \retourner{nvMot}
+      }
+\end{algorithme}
+
+***********************************************************************************
+\begin{algorithme}
+         \fonctionAvecPreconditions{decomposerMot}
+         {pos : \naturelNonNul, m : Mot}%
+         {DeuxMots}%
+         {(pos $<$ longueurMot(m)) ET (pos $>$ 0)}%
+         {i : \naturelNonNul \\ nvChaine1, nvChaine2, chaine : \chaine}%
+         {
+           \affecter{chaine}{motEnChaine(m)}
+           \pour{i}{0}{pos}{}%
+            {
+             \affecter{nvChaine1[i]}{chaine[i]}%
+            }
+           \pour{i}{pos}{longueurMot(m)}{}%
+            {
+             \affecter{nvChaine2[i - pos]}{chaine[i]}%
+            }
+           \retourner{creerMot(nvChaine1), creerMot(nvChaine2)}%  
+          }
+\end{algorithme}

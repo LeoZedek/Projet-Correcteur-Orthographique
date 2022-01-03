@@ -1,0 +1,42 @@
+\begin{tad}
+	\tadNom{CorrecteurOrthographique}
+	\tadParametres{}
+	\tadDependances{Mot, Dictionnaire, TableauDeMots, TableauBooleens, MotsDansPhrase, TableauPositions}
+	\begin{tadOperations}{CorrecteurOrthographique}
+		\tadOperation{motsEtPositionsVide}%
+			{\tadUnParam{           }}%
+			{\tadUnParam{MotsDansPhrase}}
+		\tadOperation{obtenirTabMots}%
+			{\tadUnParam{MotsDansPhrase}}%
+			{\tadUnParam{TableauDeMots}}
+		\tadOperation{obtenirTabPositions}%
+			{\tadUnParam{MotsDansPhrase}}%
+			{\tadUnParam{TableauPositions}}
+		\tadOperation{sontPresents}%
+			{\tadDeuxParams{TableauDeMots}{Dictionnaire}}%
+			{\tadUnParam{TableauBooleens}}
+		\tadOperation{proposerMots}%
+			{\tadDeuxParams{Mot}{Dictionnaire}}%
+			{\tadUnParam{TableauDeMots}}
+		\tadOperation{phraseEnMots}%
+			{\tadUnParam{\chaine}}%
+			{\tadUnParam{MotsDansPhrase}}
+	\end{tadOperations}
+		
+	\begin{tadSemantiques}{CorrecteurOrthographique}
+		\tadSemantique{motsEtPositionsVide}%
+			{renvoie un tableau de mots vide et un tableau de positions vide.}
+		\tadSemantique{obtenirTabMots}%
+			{renvoie un tableau de mots à partir d'une structure.}
+		\tadSemantique{obtenirTabPositions}%
+			{renvoie un tableau de positions à partir d'une structure.}
+		\tadSemantique{sontPresents}%
+			{renvoie un tableau de Booléens indiquant la présence ou non des mots du tableau mis en entrée.}
+		\tadSemantique{proposerMots}%
+			{renvoie un tableau de mots correspondant aux corrections possibles d’un mot mal orthographi\'e.}
+		\tadSemantique{phraseEnMots}%
+			{renvoie un tableau contenant les mots de la phrase ainsi que leur position dans la phrase.}
+	\end{tadSemantiques}
+		
+		
+\end{tad}

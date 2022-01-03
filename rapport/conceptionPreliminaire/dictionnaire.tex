@@ -1,0 +1,60 @@
+\begin{algorithme}
+	%Création de signature de focntion : 1 : nom de la focntion ou signatureFonctionAvecPreconditions avec un paramètre précondition en plus
+	\signatureFonction{Dictionnaire}%
+		%2 Les paramètres
+		{}%
+		%3 Le type de retour
+		{Dictionnaire}
+	
+	\signatureFonction{estVide}%
+		{dictionnaire : Dictionnaire}%
+		{\booleen}
+	
+	\signatureFonction{estPrésent}%
+		{dictionnaire : Dictionnaire, motChercher : Mot}%
+		{\booleen}
+
+	\signatureFonction{hauteur}%
+		{dictionnaire : Dictionnaire}%
+		{\entier}
+
+	\signatureProcedureAvecPreconditions{faireSimpleRotationDroite}%
+		{\paramEntreeSortie{dictionnaire : Dictionnaire}}%
+		{non(estVide(dictionnaire) ET non(estVide(obtenirFilsGauche(dictionnaire))))}
+
+	\signatureProcedureAvecPreconditions{faireSimpleRotationGauche}%
+		{\paramEntreeSortie{dictionnaire : Dictionnaire}}%
+		{non(estVide(dictionnaire)) ET non(estVide(obtenirFilsDroit(dictionnaire)))}
+
+	\signatureProcedureAvecPreconditions{faireDoubleRotationDroite}%
+		{\paramEntreeSortie{dictionnaire : Dictionnaire}}
+		{non(estVide(dictionnaire) ET non(estVide(obtenirFilsGauche(dictionnaire))) ET non(estVide(obtenirFilsDroit(obtenirFilsGauche(dictionnaire)))))}
+	
+	\signatureProcedureAvecPreconditions{faireDoubleRotationGauche}%
+		{\paramEntreeSortie{dictionnaire : Dictionnaire}}%
+		{non(estVide(dictionnaire)) ET non(estVide(obtenirFilsDroit(dictionnaire)) ET non(estVide(obtenirFilsGauche(obtenirFilsDroit(dictionnaire)))))}
+
+	\signatureProcedureAvecPreconditions{reequilibrer}%
+		{\paramEntreeSortie{dictionnaire : Dictionnaire}}%
+		{non(estVide(dictionnaire)) ET abs(hauteur(obtenirFilsGauche(dictionnaire)) - hauteur(obtenirFilsDroit(dictionnaire))) = 2}
+
+	%Création de signature de procédure 1 : nom de la procédure
+	\signatureProcedureAvecPreconditions{ajouterMot}%
+		%2 Les paramètres avec les commandes \paramEntree \paramSortie et \paramEntreeSortie
+		{\paramEntreeSortie{dictionnaire : Dictionnaire},\paramEntree{mot : Mot}}
+		{non(estPrésent(mot))}
+	\signatureProcedureAvecPreconditions{ajouterFichier}%
+		{\paramEntreeSortie{dictionnaire : Dictionnaire}, \paramEntree{nomFichier : \chaine}}%
+		{mode = lecture(nomFichier)  ET nomFichier != ""}
+
+	\signatureFonctionAvecPreconditions{chargerDictionnaire}%
+		{nomDictionnaire : \chaine}
+		{Dictionnaire}
+		{mode = lecture(nomDictionnaire) ET nomFichier != ""}
+
+	\signatureProcedureAvecPreconditions{enregistrerDictionnaire}%
+		{\paramEntree{nomFichierDictionnaire : \chaine, dictionnaire : Dictionnaire}}%
+		{mode = ecriture(nomFichierDictionnaire) ET nomFichier != ""}
+
+	
+\end{algorithme}

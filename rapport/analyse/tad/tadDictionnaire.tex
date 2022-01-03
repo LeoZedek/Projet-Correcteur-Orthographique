@@ -1,0 +1,102 @@
+\begin{tad}
+	\tadNom{Dictionnaire}
+	\tadParametres{}
+	\tadDependances{fichierTexte, Dictionnaire, Mot, \booleen, mode, \entier}
+	\begin{tadOperations}{Dictionnaire}
+		\tadOperation{dictionnaire}%
+			{}%
+			{\tadUnParam{Dictionnaire}}
+		\tadOperation{estVide}%
+			{\tadUnParam{Dictionnaire}}%
+			{\tadUnParam{\booleen}}
+		\tadOperation{estPresent}%
+			{\tadDeuxParams{Dictionnaire}{Mot}}%
+			{\tadUnParam{\booleen}}
+		\tadOperation{hauteur}%
+			{\tadUnParam{Dictionnaire}}%
+			{\tadUnParam{\entier}}	
+		\tadOperationAvecPreconditions{faireSimpleRotationDroite}%
+			{\tadUnParam{Dictionnaire}}%
+			{\tadUnParam{Dictionnaire}}	
+		\tadOperationAvecPreconditions{faireSimpleRotationGauche}%
+			{\tadUnParam{Dictionnaire}}%
+			{\tadUnParam{Dictionnaire}}	
+		\tadOperationAvecPreconditions{faireDoubleRotationDroite}%
+			{\tadUnParam{Dictionnaire}}%
+			{\tadUnParam{Dictionnaire}}
+		\tadOperationAvecPreconditions{faireDoubleRotationGauche}%
+			{\tadUnParam{Dictionnaire}}%
+			{\tadUnParam{Dictionnaire}}
+		\tadOperationAvecPreconditions{reequilibrer}%
+			{\tadUnParam{Dictionnaire}}%
+			{\tadUnParam{Dictionnaire}}		
+		\tadOperationAvecPreconditions{ajouterMot}%
+			{\tadDeuxParams{Dictionnaire}{Mot}}%
+			{\tadUnParam{Dictionnaire}}
+		\tadOperationAvecPreconditions{ajouterFichier}%
+			{\tadDeuxParams{Dictionnaire}{\chaine}}%
+			{\tadUnParam{Dictionnaire}}
+		\tadOperationAvecPreconditions{chargerDictionnaire}%
+			{\tadUnParam{\chaine}}%
+			{\tadUnParam{Dictionnaire}}
+		\tadOperationAvecPreconditions{enregistrerDictionnaire}%
+			{\tadDeuxParams{Dictionnaire}{\chaine}}%
+			{\tadUnParam{}}
+		
+	\end{tadOperations}
+	
+	\begin{tadSemantiques}{Dictionnaire}
+		\tadSemantique{dictionnaire}%
+			{cr\'e\'e un dictionnaire vide.}
+		\tadSemantique{estVide}%
+			{retourne VRAI si le dictionnaire est vide.}
+		\tadSemantique{estPresent}%
+			{retourne VRAI si le mot est pr\'esent dans le dictionnaire.}
+		\tadSemantique{hauteur}%
+			{retourne la hauteur du dictionnaire.}
+		\tadSemantique{faireSimpleRotationDroite}%
+			{retourne le dictionnaire après lui avoir appliqué une simple rotation à droite.}
+		\tadSemantique{faireSimpleRotationGauche}%
+			{retourne le dictionnaire après lui avoir appliqué une simple rotation à gauche.}
+		\tadSemantique{faireDoubleRotationDroite}%
+			{retourne le dictionnaire après lui avoir appliqué une double rotation à droite.}
+		\tadSemantique{faireDoubleRotationGauche}%
+			{retourne le dictionnaire après lui avoir appliqué une double rotation à gauche.}
+		\tadSemantique{reequilibrer}%
+			{retourne le dictionnaire après avoir rééquilibré ses branches.}
+		\tadSemantique{ajouterMot}%
+			{ajoute un mot dans le dictionnaire.}
+		\tadSemantique{ajouterFichier}%
+			{ajoute les mots d’un fichier texte dans le dictionnaire.}
+		\tadSemantique{chargerDictionnaire}%
+			{charge un dictionnaire \`a partir d’un fichier texte.}
+		\tadSemantique{enregistrerDictionnaire}%
+			{cr\'e\'e un fichier texte contenant le dictionnaire mis en paramètre.}
+	\end{tadSemantiques}
+	
+	\begin{tadPreconditions}{Dictionnaire}
+		\tadPrecondition{faireSimpleRotationDroite(dictionnaire)}%
+			{non(estVide(dictionnaire)) ET non(estVide(obtenirFilsGauche(dictionnaire)))}
+		\tadPrecondition{faireSimpleRotationGauche(dictionnaire)}%
+			{non(estVide(dictionnaire)) ET non(estVide(obtenirFilsDroit(dictionnaire)))}
+		\tadPrecondition{faireDoubleRotationDroite(dictionnaire)}%
+			{non(estVide(dictionnaire) ET non(estVide(obtenirFilsGauche(dictionnaire))) ET
+non(estVide(obtenirFilsDroit(obtenirFilsGauche(dictionnaire))))}
+		\tadPrecondition{faireDoubleRotationGauche(dictionnaire)}%
+			{non(estVide(dictionnaire)) ET non(estVide(obtenirFilsDroit(dictionnaire)) ET non(estVide(obtenirFilsGauche(obtenirFilsDroit(dictionnaire))))}
+		\tadPrecondition{reequilibrer(dictionnaire)}%
+			{non(estVide(dictionnaire)) ET abs(hauteur(obtenirFilsGauche(dictionnaire)) - hauteur(obtenirFilsDroit(dictionnaire))) = 2}
+		\tadPrecondition{ajouterMot(dictionnaire, mot)}%
+			{non(estPresent(m))}
+		\tadPrecondition{ajouterFichier(dictionnaire, nomFichier)}%
+			{nomFichier != ""}
+		\tadPrecondition{chargerDictionnaire(nomFichier)}%
+			{nomFichier != ""}
+		\tadPrecondition{enregistrerDictionnaire(dictionnaire, nomFichier)}%
+			{nomFichier != ""}
+	\end{tadPreconditions}
+	
+	%\begin{tadAxiomes}
+		%\tadAxiome{dictionnaire()}
+	%\end{tadAxiomes}
+\end{tad}
